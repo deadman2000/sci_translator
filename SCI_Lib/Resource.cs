@@ -1,33 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using SCI_Translator.Decompression;
+﻿using SCI_Translator.Decompression;
 using SCI_Translator.Scripts;
-using SCI_Translator.Scripts.Sections;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace SCI_Translator
 {
     public class Resource
     {
-        private ResMapOffset _map;
-        private ushort _number;
-        private int _address;
-
-        private byte res_t;
-        private ushort res_nr;
-        private ushort comp_size;
-        private ushort decomp_size;
-        private ushort method;
+        private readonly byte res_t;
+        private readonly ushort res_nr;
+        private readonly ushort comp_size;
+        private readonly ushort decomp_size;
+        private readonly ushort method;
 
         public Resource(ResMapOffset map, ushort number, int address)
         {
-            _map = map;
-            _number = number;
-            _address = address;
+            Map = map;
+            Number = number;
+            Address = address;
 
-            using (FileStream fs = File.OpenRead(_map.Package.GameDirectory + "\\" + ResourceFileName))
+            using (FileStream fs = File.OpenRead(Path.Combine(Map.Package.GameDirectory, ResourceFileName)))
             {
                 fs.Position = Offset;
                 res_t = (byte)fs.ReadByte();
@@ -38,42 +31,40 @@ namespace SCI_Translator
             }
         }
 
-        public SCIPackage Package { get { return _map.Package; } }
+        public SCIPackage Package => Map.Package;
 
-        public ResMapOffset Map { get { return _map; } }
+        public ResMapOffset Map { get; }
 
-        public ushort Number { get { return _number; } }
+        public ushort Number { get; }
 
-        public int Address { get { return _address; } }
+        public int Address { get; }
 
-        public byte ResourceFileNumber { get { return (byte)((_address >> 28) & 0x0F); } }
+        public byte ResourceFileNumber => (byte)((Address >> 28) & 0x0F);
 
-        public string ResourceFileName { get { return String.Format("RESOURCE.{0:D3}", ResourceFileNumber); } }
+        public string ResourceFileName => $"RESOURCE.{ResourceFileNumber:D3}";
 
-        public int Offset { get { return _address & 0x0FFFFFFF; } }
+        public int Offset => Address & 0x0FFFFFFF;
 
 
-        public int ResT { get { return res_t; } }
+        public int ResT => res_t;
 
-        public int ResNr { get { return res_nr; } }
+        public int ResNr => res_nr;
 
-        public int CompSize { get { return comp_size; } }
+        public int CompSize => comp_size;
 
-        public int DecompSize { get { return decomp_size; } }
+        public int DecompSize => decomp_size;
 
-        public int Method { get { return method; } }
-        
-        public string FileName { get { return String.Format("{0}.{1}", _number, Extension); } }
-        
-        //public string FilePath { get { return String.Format("{0}\\{1}", _map.Package.Directory, FileName); } }
+        public int Method => method;
 
-        public string TranslateDir { get { return _map.Package.GameDirectory + "\\TRANSLATE"; } }
+        public string FileName => $"{Number}.{Extension}";
+
+        public string TranslateDir => Path.Combine(Map.Package.GameDirectory, "TRANSLATE");
 
         public string Extension
         {
             get
             {
-                switch (_map.Type)
+                switch (Map.Type)
                 {
                     case ResType.View: return "v56";
                     case ResType.Picture: return "p56";
@@ -97,12 +88,9 @@ namespace SCI_Translator
             }
         }
 
-        public ResType Type { get { return _map.Type; } }
+        public ResType Type { get { return Map.Type; } }
 
-        public override string ToString()
-        {
-            return String.Format("{0}.{1}", _number, Extension);
-        }
+        public override string ToString() => $"{Number}.{Extension}";
 
         public byte[] GetContent(bool translated)
         {
@@ -112,22 +100,21 @@ namespace SCI_Translator
             }
             else
             {
-                return GetContext(_map.Package.GameDirectory);
+                return GetContext(Map.Package.GameDirectory);
             }
         }
 
-        static DecompressorLZW dLWZ1 = new DecompressorLZW(LZWCompression.CompLZW1);
-
-        static DecompressorLZW dLWZ = new DecompressorLZW(LZWCompression.CompLZW);
-
-        static Decompressor dHuffman = new DecompressorHuffman();
+        private static DecompressorLZW dLWZ1 = new DecompressorLZW(LZWCompression.CompLZW1);
+        private static DecompressorLZW dLWZ = new DecompressorLZW(LZWCompression.CompLZW);
+        private static Decompressor dHuffman = new DecompressorHuffman();
 
 
         private byte[] GetContext(string dir)
         {
-            if (File.Exists(dir + "\\" + FileName)) // Если есть внешний файл, используем его
+            var path = Path.Combine(dir, FileName);
+            if (File.Exists(path)) // Если есть внешний файл, используем его
             {
-                using (FileStream fs = File.OpenRead(dir + "\\" + FileName))
+                using (FileStream fs = File.OpenRead(path))
                 {
                     byte[] data = new byte[fs.Length - 2];
                     fs.Position = 2;
@@ -139,7 +126,7 @@ namespace SCI_Translator
             if (method == 0)
             {
                 byte[] data = new byte[decomp_size];
-                using (FileStream fs = File.OpenRead(dir + "\\" + ResourceFileName))
+                using (FileStream fs = File.OpenRead(Path.Combine(dir, ResourceFileName)))
                 {
                     fs.Position = Offset + 9;
                     fs.Read(data, 0, data.Length);
@@ -155,7 +142,7 @@ namespace SCI_Translator
                 default: return null;
             }
 
-            using (FileStream fs = File.OpenRead(dir + "\\" + ResourceFileName))
+            using (FileStream fs = File.OpenRead(Path.Combine(dir, ResourceFileName)))
             {
                 fs.Position = Offset + 9;
                 return decomp.Unpack(fs, comp_size, decomp_size);
@@ -169,9 +156,9 @@ namespace SCI_Translator
 
         public void SaveTranslate(byte[] data)
         {
-            using (FileStream fs = File.Create(TranslateDir + "\\" + FileName))
+            using (FileStream fs = File.Create(Path.Combine(TranslateDir, FileName)))
             {
-                fs.WriteByte((byte)_map.Type);
+                fs.WriteByte((byte)Map.Type);
                 fs.WriteByte(0);
                 fs.Write(data, 0, data.Length);
             }

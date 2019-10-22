@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Xml;
+﻿using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Sections;
-using SCI_Translator.Scripts;
+using System.Collections.Generic;
+using System.IO;
 
 namespace SCI_Translator
 {
@@ -30,7 +26,7 @@ namespace SCI_Translator
             List<ResMapOffset> resourses = new List<ResMapOffset>();
             _dir = directory;
 
-            using (FileStream fs = File.OpenRead(_dir + "\\RESOURCE.MAP"))
+            using (FileStream fs = File.OpenRead(Path.Combine(_dir, "RESOURCE.MAP")))
             {
                 ResMapOffset res = null;
                 while (true)
