@@ -1,0 +1,176 @@
+\\prgName
+Sierra On-Line Game Setup/Install Program
+\\getDestDrive
+Please type the letter of the hard disk to which you want to install this game, or press ESC to cancel installation.
+\\getAnyDrive
+Please type the letter of the disk drive to which you want to install this game, or press ESC to cancel installation.
+\\reading
+Reading files...
+\\complete
+Installation complete
+\\noSupport
+Your system does not appear to support this choice:
+
+%s
+
+Do you wish to install it anyway?
+\\ynPrompt
+ (Y/N) 
+\\yn
+yn
+\\pressKeyToExit
+ Press any key to exit... 
+\\enterEsc
+ Press ENTER to continue or ESC to cancel... 
+\\redirErr
+Can't open redirection file for echo command
+\\pressKeyToContinue
+ Press any key to continue... 
+\\pauseMsg
+Press any key to continue...
+\\inputErr
+Can't find input file: %s
+\\outputErr
+Can't create output file: %s
+\\noMemCopy
+Not enough memory for copy
+\\copyingTo
+Copying %s to %s...
+\\copying
+Copying %s...
+\\dirFound
+Directory %s found with existing files!
+
+
+In order to ensure a proper install, please remove all the Sierra files from this directory
+
+Do you wish to continue with install?
+\\noHelp
+No help available for this item.
+\\enterConfirm
+ ENTER to confirm, ESC to re-select 
+\\confirmExit
+Do you wish to exit Install?
+\\copyright
+(C) 1991 Sierra On-Line, Inc. All rights reserved
+\\intro
+This program will let you specify what type of hardware is installed in your machine.
+
+You must run it once before playing your Sierra game.  You may want to run it again if you add new hardware to your system or if you are having problems with your first selections.
+\\acceptBegin
+    Accept these choices and begin installation    
+\\acceptSave
+    Accept these choices and save configuration    
+\\restore
+    Restore Sierra default choices    
+\\cancelInstall
+    Cancel installation and return to DOS    
+\\installTitle
+  Installation Choices  
+\\topPrompt
+
+If you want to change any of these choices, use %c and %c to highlight the selection, then press ENTER.
+\\botTitle
+  Use %c and %c to highlight your choice, then press ENTER to select  
+\\saveConfig
+Saving configuration...
+\\configErr
+Error creating configuration file
+\\driveLetter
+ Press a drive letter %c through %c, or press ESC to cancel 
+\\invalidDrive
+'%c' is not a valid drive letter.
+\\inpfld
+ ENTER to accept.  Ctrl-C to clear.  ESC to go back.  F1 for help. 
+\\joystickPrompt
+Select the type of joystick you have
+\\videoPrompt
+Select a graphics adapter from the choices below
+\\soundPrompt
+Select a music card from the choices below
+\\audioPrompt
+Select a speech/sound effects card from the choices below.
+NOTE:  Not all games support speech.
+\\keyboardPrompt
+Select which style of keyboard you have
+\\mousePrompt
+Select whether you will use a mouse
+\\memoryPrompt
+Do you want to use expanded, extended and/or XMS memory?
+\\video
+Graphics
+\\sound
+Sound
+\\audio
+Speech
+\\joystick
+Joystick
+\\keyboard
+Keyboard
+\\mouse
+Mouse
+\\memory
+Memory
+\\getMenuPrompt
+  Use %c, %c and ENTER to select.  ESC to go back.  F1 for help.  
+\\supported
+%c = supported by your system
+\\no
+No
+\\yes
+Yes
+\\useMouse
+Use Microsoft compatible mouse
+\\noUseMouse
+Don't use a mouse
+\\noUseJoystick
+Don't use a joystick
+\\useMemory
+Use your machine's extra memory
+\\noUseMemory
+Don't use extra memory
+\\memoryHelp
+Sierra games can use your machine's extra memory to speed up play.  
+\\memoryAppear
+Your system appears to have:
+
+
+\\expandedFree
+    %4uK Expanded memory free
+
+\\extendedFree
+    %4uK Extended memory free
+
+\\XMSFree
+    %4uK XMS memory free
+
+\\vRAMFree
+    %4uK VRAM memory free
+
+\\noExtraMemory
+Your system does not appear to have any extra memory.
+\\writeErr
+Write protect error
+\\mscErr
+Error
+\\notReadyErr
+Not ready error
+\\abortRetryMsg
+ Press R to retry, or A to abort 
+\\abortRetryKeys
+ra
+\\unknownErr
+Unknown critical error
+\\pressAbort
+ Press a key to abort 
+\\readMePrompt
+ Use cursor keys to scroll.  Press Esc or Enter to exit 
+\\viewReadMe
+    View documentation update in README file    
+\\docoUpdate
+ Documentation Update 
+\\warrantyInfo
+If you have not sent in your Sierra Warranty Registration card, please take a moment to fill it out and mail it.
+
+You will receive a free subscription to InterAction, the Sierra news magazine, which contains valuable coupons, contests, great articles, upgrade information, hints on playing Sierra games, handy techniques for using our products and much more!
+
