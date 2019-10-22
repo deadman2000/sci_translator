@@ -228,11 +228,13 @@ namespace SCI_Translator
         // SCRIPT
 
         private Script _script;
+        private bool _scriptTranslated;
 
         public Script GetScript(bool translate)
         {
-            if (_script != null) return _script;
+            if (_script != null && _scriptTranslated == translate) return _script;
 
+            _scriptTranslated = translate;
             byte[] data = GetContent(translate);
             return _script = new Script(this, data);
         }
