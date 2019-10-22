@@ -12,7 +12,7 @@ namespace Notabenoid
 {
     internal class Program
     {
-        private const string GAME_DIR = @"..\..\..\Conquest\";
+        private const string GAME_DIR = @"..\..\..\..\Conquest\";
         private static string Login;
         private static string Password;
         private const string BOOK_URL = "http://notabenoid.org/book/77921/";

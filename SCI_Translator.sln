@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCI_Tools", "SCI_Tools\SCI_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCI_Lib", "SCI_Lib\SCI_Lib.csproj", "{A636AA12-47FD-46E6-8AC9-008EE17621CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notabenoid_Patch", "Notabenoid_Patch\Notabenoid_Patch.csproj", "{2D742484-6A7E-420A-8189-98415B1F9490}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A636AA12-47FD-46E6-8AC9-008EE17621CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A636AA12-47FD-46E6-8AC9-008EE17621CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A636AA12-47FD-46E6-8AC9-008EE17621CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D742484-6A7E-420A-8189-98415B1F9490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D742484-6A7E-420A-8189-98415B1F9490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D742484-6A7E-420A-8189-98415B1F9490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D742484-6A7E-420A-8189-98415B1F9490}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

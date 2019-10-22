@@ -1,4 +1,5 @@
 ﻿using SCI_Translator;
+using System;
 using System.IO;
 
 namespace SCI_Tools
@@ -15,65 +16,70 @@ namespace SCI_Tools
             //ApplyTranslate();
 
             SCIPackage package = new SCIPackage(GAME_DIR);
-            ExportEnTex(package);
+            //ExportEnTex(package);
+
+            foreach (var r in package.Texts)
+            {
+                var enLines = r.GetText(false, false, false); // Оригинальный текст
+                var ruLines = r.GetText(true, false, false);  // Уже переведенный текст
+                if (enLines.Length != ruLines.Length)
+                    Console.WriteLine(r);
+            }
 
             //ExportRuTex(package);
             //package.ExportText("D:/longbow.txt");
             //package.ExtractTranslate("D:/translate_ru.ts");
+
+            Console.WriteLine("Completed");
+            Console.ReadLine();
         }
 
 
         private static void ExportRuTex(SCIPackage package)
         {
             Directory.CreateDirectory("ru");
-            package.Resources.FindAll(r => r.Type == ResType.Text).ForEach(res =>
+            foreach (var r in package.Texts)
             {
-                foreach (var r in res.Resources)
+                var file = "ru/" + r.ToString();
+                var hasTranslate = false;
+                using (StreamWriter stream = new StreamWriter(file))
                 {
-                    var file = "ru/" + r.ToString();
-                    var hasTranslate = false;
-                    using (StreamWriter stream = new StreamWriter(file))
+                    var enLines = r.GetText(false, false, false);
+                    var ruLines = r.GetText(true, false, false);
+
+                    for (int i = 0; i < enLines.Length; i++)
                     {
-                        var enLines = r.GetText(false, false, false);
-                        var ruLines = r.GetText(true, false, false);
+                        if (enLines[i].Trim().Length == 0) continue;
 
-                        for (int i = 0; i < enLines.Length; i++)
+                        if (!enLines[i].Equals(ruLines[i]))
                         {
-                            if (enLines[i].Trim().Length == 0) continue;
-
-                            if (!enLines[i].Equals(ruLines[i]))
-                            {
-                                stream.WriteLine(ruLines[i]);
-                                hasTranslate = true;
-                            }
-                            else
-                                stream.WriteLine('-');
-                            stream.WriteLine();
+                            stream.WriteLine(ruLines[i]);
+                            hasTranslate = true;
                         }
+                        else
+                            stream.WriteLine('-');
+                        stream.WriteLine();
                     }
-                    if (!hasTranslate)
-                        File.Delete(file);
                 }
-            });
+                if (!hasTranslate)
+                    File.Delete(file);
+            }
         }
 
         private static void ExportEnTex(SCIPackage package)
         {
             Directory.CreateDirectory("en");
-            package.Resources.FindAll(r => r.Type == ResType.Text).ForEach(res =>
+            foreach (var r in package.Texts)
             {
-                foreach (var r in res.Resources)
+                using (StreamWriter stream = new StreamWriter("en/" + r.ToString()))
                 {
-                    using (StreamWriter stream = new StreamWriter("en/" + r.ToString()))
+                    var lines = r.GetText(false, false, false);
+                    foreach (var line in lines)
                     {
-                        var lines = r.GetText(false, false, false);
-                        foreach (var line in lines)
-                        {
-                            stream.Write(line + "\n\n");
-                        }
+                        stream.Write(line + "\n\n");
                     }
                 }
-            });
+            }
         }
 
         private static void PrepareTranslate()

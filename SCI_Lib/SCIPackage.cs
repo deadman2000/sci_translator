@@ -2,6 +2,7 @@
 using SCI_Translator.Scripts.Sections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SCI_Translator
 {
@@ -17,16 +18,12 @@ namespace SCI_Translator
             return fs.ReadByte() | (fs.ReadByte() << 8) | (fs.ReadByte() << 16) | (fs.ReadByte() << 24);
         }
 
-        private List<ResMapOffset> _resources;
-        private string _dir;
-
-
         public SCIPackage(string directory)
         {
             List<ResMapOffset> resourses = new List<ResMapOffset>();
-            _dir = directory;
+            GameDirectory = directory;
 
-            using (FileStream fs = File.OpenRead(Path.Combine(_dir, "RESOURCE.MAP")))
+            using (FileStream fs = File.OpenRead(Path.Combine(GameDirectory, "RESOURCE.MAP")))
             {
                 ResMapOffset res = null;
                 while (true)
@@ -55,16 +52,16 @@ namespace SCI_Translator
                 }
             }
 
-            _resources = resourses;
+            Resources = resourses;
         }
 
-        public bool HasTranslate() => Directory.Exists(Path.Combine(_dir, "TRANSLATE"));
+        public bool HasTranslate() => Directory.Exists(Path.Combine(GameDirectory, "TRANSLATE"));
 
 
         public ClassSection GetClass(ushort id)
         {
             ClassSection cls;
-            foreach (ResMapOffset map in _resources)
+            foreach (ResMapOffset map in Resources)
             {
                 foreach (Resource res in map.Resources)
                 {
@@ -83,7 +80,7 @@ namespace SCI_Translator
         {
             Dictionary<string, string> translate = new Dictionary<string, string>();
 
-            foreach (var res in _resources)
+            foreach (var res in Resources)
             {
                 if (res.Type != ResType.Text) continue;
 
@@ -108,7 +105,7 @@ namespace SCI_Translator
         {
             using (StreamWriter stream = new StreamWriter(path))
             {
-                foreach (var res in _resources)
+                foreach (var res in Resources)
                 {
                     if (res.Type == ResType.Text)
                     {
@@ -126,9 +123,11 @@ namespace SCI_Translator
             }
         }
 
-        public List<ResMapOffset> Resources { get { return _resources; } }
+        public string GameDirectory { get; }
 
-        public string GameDirectory { get { return _dir; } }
+        public List<ResMapOffset> Resources { get; }
+
+        public IEnumerable<Resource> Texts => Resources.FindAll(r => r.Type == ResType.Text).SelectMany(r => r.Resources);
 
 
         private Dictionary<byte, OpCode> _opcodes;
@@ -137,7 +136,7 @@ namespace SCI_Translator
         {
             if (_opcodes != null) return _opcodes;
 
-            foreach (var res in _resources)
+            foreach (var res in Resources)
             {
                 if (res.Type == ResType.Vocabulary)
                 {
@@ -160,7 +159,7 @@ namespace SCI_Translator
         {
             if (_names != null) return _names[ind];
 
-            foreach (var res in _resources)
+            foreach (var res in Resources)
             {
                 if (res.Type == ResType.Vocabulary)
                 {
