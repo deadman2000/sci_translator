@@ -62,6 +62,9 @@ namespace SCI_Translator
             _resources = resourses;
         }
 
+        public bool HasTranslate() => Directory.Exists(Path.Combine(_dir, "TRANSLATE"));
+
+
         public ClassSection GetClass(ushort id)
         {
             ClassSection cls;
@@ -129,7 +132,7 @@ namespace SCI_Translator
 
         public List<ResMapOffset> Resources { get { return _resources; } }
 
-        public string Directory { get { return _dir; } }
+        public string GameDirectory { get { return _dir; } }
 
 
         private Dictionary<byte, OpCode> _opcodes;

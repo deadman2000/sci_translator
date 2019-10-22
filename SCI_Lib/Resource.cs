@@ -27,7 +27,7 @@ namespace SCI_Translator
             _number = number;
             _address = address;
 
-            using (FileStream fs = File.OpenRead(_map.Package.Directory + "\\" + ResourceFileName))
+            using (FileStream fs = File.OpenRead(_map.Package.GameDirectory + "\\" + ResourceFileName))
             {
                 fs.Position = Offset;
                 res_t = (byte)fs.ReadByte();
@@ -67,7 +67,7 @@ namespace SCI_Translator
         
         //public string FilePath { get { return String.Format("{0}\\{1}", _map.Package.Directory, FileName); } }
 
-        public string TranslateDir { get { return _map.Package.Directory + "\\TRANSLATE"; } }
+        public string TranslateDir { get { return _map.Package.GameDirectory + "\\TRANSLATE"; } }
 
         public string Extension
         {
@@ -112,7 +112,7 @@ namespace SCI_Translator
             }
             else
             {
-                return GetContext(_map.Package.Directory);
+                return GetContext(_map.Package.GameDirectory);
             }
         }
 

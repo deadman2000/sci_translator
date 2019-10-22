@@ -43,6 +43,13 @@ namespace SCI_Translator
                     tnRec.Tag = res;
                 }
             }
+
+            if (!_package.HasTranslate())
+            {
+                tsbTranslated.Checked = false;
+                tsbTranslated.Visible = false;
+                tsbSave.Visible = false;
+            }
         }
 
         private void tv_AfterSelect(object sender, TreeViewEventArgs e)
