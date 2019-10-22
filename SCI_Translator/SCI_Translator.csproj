@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{856149C8-0891-4561-96A5-E9D39C38D167}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SCI_Translator</RootNamespace>
+    <AssemblyName>SCI_Translator</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ByteBuilder.cs" />
+    <Compile Include="Decompression\Decompressor.cs" />
+    <Compile Include="Decompression\DecompressorHuffman.cs" />
+    <Compile Include="Decompression\DecompressorLZW.cs" />
+    <Compile Include="FormFind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFind.Designer.cs">
+      <DependentUpon>FormFind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers.cs" />
+    <Compile Include="ImageEditor\BaseInstrument.cs" />
+    <Compile Include="ImageEditor\EditAction.cs" />
+    <Compile Include="ImageEditor\InstrPencil.cs" />
+    <Compile Include="ImageEditor\NewSizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageEditor\NewSizeDialog.Designer.cs">
+      <DependentUpon>NewSizeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImageEditor\PaintAction.cs" />
+    <Compile Include="ImageEditor\PixelPalette.cs" />
+    <Compile Include="ImageEditor\PixelPictureViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ImageEditor\Sprite.cs" />
+    <Compile Include="ImageEditor\SpriteFrame.cs" />
+    <Compile Include="Linguist.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="OpCode.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResMapOffset.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="ResType.cs" />
+    <Compile Include="ResView\FontView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ResView\HexViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ResView\ResViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ResView\ScriptView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ResView\TextViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ResView\VocabView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SCIPackage.cs" />
+    <Compile Include="Scripts\Sections\ClassSection.cs" />
+    <Compile Include="Scripts\Elements\Code.cs" />
+    <Compile Include="Scripts\Sections\CodeSection.cs" />
+    <Compile Include="Scripts\Builders\CompanionBuilder.cs" />
+    <Compile Include="Scripts\Builders\HexBuilder.cs" />
+    <Compile Include="Scripts\Builders\IScriptBuilder.cs" />
+    <Compile Include="Scripts\Elements\LinkToExport.cs" />
+    <Compile Include="Scripts\Sections\LocalVariablesSection.cs" />
+    <Compile Include="Scripts\Sections\ObjectSection.cs" />
+    <Compile Include="Scripts\Sections\PreloadTextSection.cs" />
+    <Compile Include="Scripts\Elements\RefToElement.cs" />
+    <Compile Include="Scripts\Sections\ExportSection.cs" />
+    <Compile Include="Scripts\Elements\BaseElement.cs" />
+    <Compile Include="Scripts\Sections\RelocationSection.cs" />
+    <Compile Include="Scripts\Script.cs" />
+    <Compile Include="Scripts\Sections\Section.cs" />
+    <Compile Include="Scripts\Elements\Selector.cs" />
+    <Compile Include="Scripts\Elements\ShortElement.cs" />
+    <Compile Include="Scripts\Builders\SimpeScriptBuilder.cs" />
+    <Compile Include="Scripts\Elements\StringConst.cs" />
+    <Compile Include="Scripts\Sections\SectionType.cs" />
+    <Compile Include="Scripts\Sections\StringSection.cs" />
+    <Compile Include="Scripts\Elements\Argument.cs" />
+    <EmbeddedResource Include="FormFind.resx">
+      <DependentUpon>FormFind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageEditor\NewSizeDialog.resx">
+      <DependentUpon>NewSizeDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ResView\ScriptView.resx">
+      <DependentUpon>ScriptView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResView\TextViewer.resx">
+      <DependentUpon>TextViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_inout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy_edit.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_edit.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\find.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
