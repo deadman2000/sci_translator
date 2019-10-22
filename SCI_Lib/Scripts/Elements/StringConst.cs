@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SCI_Translator.Scripts.Elements
 {
-    class StringConst : BaseElement
+    public class StringConst : BaseElement
     {
         byte[] _value;
 

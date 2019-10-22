@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SCI_Translator.Scripts.Builders
 {
-    class SimpeScriptBuilder : IScriptBuilder
+    public class SimpeScriptBuilder : IScriptBuilder
     {
         StringBuilder sb = new StringBuilder();
 

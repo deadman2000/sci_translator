@@ -7,33 +7,38 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCI_Translator", "SCI_Trans
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{59C09726-E22A-494D-B987-4EDC7286180F}"
 	ProjectSection(SolutionItems) = preProject
+		export.py = export.py
 		TODO.txt = TODO.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notabenoid", "Notabenoid\Notabenoid.csproj", "{4946004A-3EFB-4502-8A27-A5F9A2380EBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCI_Tools", "SCI_Tools\SCI_Tools.csproj", "{48E18D4C-35B3-4739-A6A5-357A61659E2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCI_Lib", "SCI_Lib\SCI_Lib.csproj", "{A636AA12-47FD-46E6-8AC9-008EE17621CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{856149C8-0891-4561-96A5-E9D39C38D167}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{856149C8-0891-4561-96A5-E9D39C38D167}.Debug|x86.ActiveCfg = Debug|x86
-		{856149C8-0891-4561-96A5-E9D39C38D167}.Debug|x86.Build.0 = Debug|x86
-		{856149C8-0891-4561-96A5-E9D39C38D167}.Release|Any CPU.ActiveCfg = Release|x86
-		{856149C8-0891-4561-96A5-E9D39C38D167}.Release|x86.ActiveCfg = Release|x86
-		{856149C8-0891-4561-96A5-E9D39C38D167}.Release|x86.Build.0 = Release|x86
+		{856149C8-0891-4561-96A5-E9D39C38D167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{856149C8-0891-4561-96A5-E9D39C38D167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{856149C8-0891-4561-96A5-E9D39C38D167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{856149C8-0891-4561-96A5-E9D39C38D167}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4946004A-3EFB-4502-8A27-A5F9A2380EBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4946004A-3EFB-4502-8A27-A5F9A2380EBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4946004A-3EFB-4502-8A27-A5F9A2380EBB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4946004A-3EFB-4502-8A27-A5F9A2380EBB}.Debug|x86.Build.0 = Debug|Any CPU
 		{4946004A-3EFB-4502-8A27-A5F9A2380EBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4946004A-3EFB-4502-8A27-A5F9A2380EBB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4946004A-3EFB-4502-8A27-A5F9A2380EBB}.Release|x86.ActiveCfg = Release|Any CPU
-		{4946004A-3EFB-4502-8A27-A5F9A2380EBB}.Release|x86.Build.0 = Release|Any CPU
+		{48E18D4C-35B3-4739-A6A5-357A61659E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48E18D4C-35B3-4739-A6A5-357A61659E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48E18D4C-35B3-4739-A6A5-357A61659E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48E18D4C-35B3-4739-A6A5-357A61659E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A636AA12-47FD-46E6-8AC9-008EE17621CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A636AA12-47FD-46E6-8AC9-008EE17621CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A636AA12-47FD-46E6-8AC9-008EE17621CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A636AA12-47FD-46E6-8AC9-008EE17621CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

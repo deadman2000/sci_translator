@@ -11,11 +11,11 @@ def create_chapter(file):
                                'userFile': (file, open('en/' + file, 'rb'), 'application/octet-stream'),
                            },
                            data={
-                               'urlProject': 'http://notabenoid.org/book/77918/',
+                               'urlProject': 'http://notabenoid.org/book/77921/',
                                'chapterName': file,
                                'chapterPlacement': 1,
                                'chapterStatus': 0,
-                               'fileFormat': 1,
+                               'fileFormat': 2,
                                'userName': LOGIN,
                                'userPassword': PASSWORD,
                                'isAgree': 'on',
@@ -27,6 +27,15 @@ def create_chapter(file):
         print(bytes.decode(answer.content))
 
 
+
+files = []
+
 for r, d, f in os.walk('en/'):
     for file in f:
-        create_chapter(file)
+        files.append(int(file[:-4]))
+
+files.sort()
+
+for f in files:
+    print(f)
+    create_chapter(str(f) + ".tex")

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SCI_Translator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace SCI_Translator
+namespace SCI_Tools
 {
     public class Linguist
     {
@@ -109,7 +110,7 @@ namespace SCI_Translator
             }
         }
 
-        internal void Translate(Dictionary<string, string> tr)
+        public void Translate(Dictionary<string, string> tr)
         {
             foreach (var c in _contexts)
                 foreach (var m in c.Messages)
@@ -167,5 +168,107 @@ namespace SCI_Translator
             Unfinished,
             Completed
         }
+
+
+
+        public void FillSource(SCIPackage package)
+        {
+            HashSet<string> proceed = new HashSet<string>();
+
+            foreach (var res in package.Resources)
+            {
+                if (res.Type != ResType.Text) continue;
+
+                foreach (var r in res.Resources)
+                {
+                    if (proceed.Contains(r.FileName)) continue;
+                    proceed.Add(r.FileName);
+
+                    var context = GetContext(r.FileName);
+
+                    var en = r.GetText(false, false, false);
+
+                    for (int i = 0; i < en.Length; i++)
+                    {
+                        if (en[i].Length == 0) continue;
+
+                        Linguist.Message message = context.GetMessage(i);
+                        message.Source = en[i];
+                    }
+                }
+            }
+        }
+
+        public static void ExportTranslate(SCIPackage package, string path)
+        {
+            Linguist ling = new Linguist();
+
+            HashSet<string> proceed = new HashSet<string>();
+
+            foreach (var res in package.Resources)
+            {
+                if (res.Type == ResType.Text)
+                {
+                    foreach (var r in res.Resources)
+                    {
+                        if (proceed.Contains(r.FileName)) continue;
+                        proceed.Add(r.FileName);
+
+                        var context = ling.GetContext(r.FileName);
+
+                        var en = r.GetText(false, false, false);
+                        var ru = r.GetText(true, true, false);
+
+                        for (int i = 0; i < en.Length; i++)
+                        {
+                            if (en[i].Length == 0) continue;
+
+                            Linguist.Message message = context.GetMessage(i);
+                            message.Source = en[i];
+
+                            if (!en[i].Equals(ru[i]))
+                            {
+                                message.Translate = ru[i];
+                                message.Status = Linguist.TranslateStatus.Completed;
+                            }
+                        }
+                    }
+                }
+                else if (res.Type == ResType.Script)
+                {
+
+                }
+            }
+
+            ling.Save(path);
+        }
+
+        public void ApplyTranslate(SCIPackage package)
+        {
+            foreach (var res in package.Resources)
+            {
+                if (res.Type != ResType.Text) continue;
+
+                foreach (var r in res.Resources)
+                {
+                    bool modified = false;
+                    var context = GetContext(r.FileName);
+                    var ru = r.GetText(true, true, false);
+
+                    for (int i = 0; i < ru.Length; i++)
+                    {
+                        var msg = context.GetMessage(i);
+
+                        if (!String.IsNullOrEmpty(msg.Translate))
+                            ru[i] = msg.Translate;
+                        modified = true;
+                    }
+
+                    if (modified)
+                        r.SetText(ru, false);
+                }
+            }
+        }
+
     }
 }

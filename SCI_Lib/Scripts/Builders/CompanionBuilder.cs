@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SCI_Translator.Scripts.Builders
 {
-    class CompanionBuilder : IScriptBuilder
+    public class CompanionBuilder : IScriptBuilder
     {
         StringBuilder sb = new StringBuilder();
 

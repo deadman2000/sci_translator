@@ -1,12 +1,9 @@
-﻿using SCI_Translator.ResView;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Text;
 
 namespace SCI_Translator.Scripts.Builders
 {
-    class HexBuilder : IScriptBuilder
+    public class HexBuilder : IScriptBuilder
     {
         StringBuilder sb = new StringBuilder();
 

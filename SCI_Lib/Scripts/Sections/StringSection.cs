@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SCI_Translator.Scripts.Sections
 {
-    class StringSection : Section
+    public class StringSection : Section
     {
         private List<StringConst> _strings;
 

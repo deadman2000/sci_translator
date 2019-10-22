@@ -87,7 +87,7 @@ namespace SCI_Translator.Scripts
             return bb.GetArray();
         }
 
-        internal List<T> Get<T>() where T : Section
+        public List<T> Get<T>() where T : Section
         {
             List<T> list = new List<T>();
 

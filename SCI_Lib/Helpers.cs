@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SCI_Translator
 {
-    static class Helpers
+    public static class Helpers
     {
         static Helpers()
         {

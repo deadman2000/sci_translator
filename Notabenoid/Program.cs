@@ -1,6 +1,7 @@
 ﻿using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using AngleSharp.Io;
 using SCI_Translator;
 using System;
 using System.Collections.Generic;
@@ -11,24 +12,28 @@ namespace Notabenoid
 {
     internal class Program
     {
-        private const string GAME_DIR = @"D:\Dos\GAMES\Conquest\";
-        static string Login;
-        static string Password;
+        private const string GAME_DIR = @"..\..\..\Conquest\";
+        private static string Login;
+        private static string Password;
+        private const string BOOK_URL = "http://notabenoid.org/book/77921/";
 
         private static void Main(string[] args)
         {
             Login = args[0];
             Password = args[1];
 
-            Work().Wait();
+            ImportTranslate().Wait();
 
             Console.WriteLine("Completed");
             Console.ReadKey();
         }
 
-        private static async Task Test()
+        private static async Task<IBrowsingContext> CreateContext()
         {
-            var context = BrowsingContext.New(Configuration.Default.WithDefaultLoader().WithDefaultCookies());
+            var requester = new DefaultHttpRequester();
+            requester.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
+
+            var context = BrowsingContext.New(Configuration.Default.With(requester).WithDefaultLoader().WithDefaultCookies());
 
             // Login
             {
@@ -41,38 +46,108 @@ namespace Notabenoid
                 Console.WriteLine(resultDocument.StatusCode);
             }
 
+            return context;
+        }
+
+        private static async Task Test()
+        {
+            var context = await CreateContext();
+
             {
-                var url = "http://notabenoid.org/book/77918/453633/";
+                var url = "http://notabenoid.org/book/77921/453699/";
                 var document = await context.OpenAsync(url);
 
+
+                SCIPackage package = new SCIPackage(GAME_DIR);
+                var resources = package.Resources.FindAll(r => r.Type == ResType.Text).SelectMany(r => r.Resources);
+
+                var res = resources.First(r => r.ToString().Equals("0.tex"));
+
                 Dictionary<string, string> enIds = new Dictionary<string, string>();
+
                 foreach (var e in document.QuerySelectorAll("td.o p.text"))
                 {
                     var id = ((IHtmlElement)e.Parent.Parent.Parent).Id.TrimStart('o');
-                    enIds[e.Text()] = id;
+                    var en = e.Text();
+                    enIds[en] = id;
+
+                    var ruEl = document.QuerySelector($"tr#o{id} td.t p.text");
+                    var ru = ruEl?.Text() ?? "null";
+
+                    Console.WriteLine($"{id} - {en} - {ru}");
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("Checking...");
+                var lines = res.GetText(false, false, false);
+                foreach (var l in lines)
+                {
+                    var t = l.Trim();
+                    if (t.Length == 0) continue;
+
+                    if (!enIds.TryGetValue(t, out string id))
+                    {
+                        Console.WriteLine($"Not found for {l}");
+                    }
                 }
             }
         }
 
-        private static async Task Work()
+        /*private static async Task UploadPart(IBrowsingContext context, Resource r)
         {
-            var context = BrowsingContext.New(Configuration.Default.WithDefaultLoader().WithDefaultCookies());
+            var document = await context.OpenAsync(BOOK_URL);
 
-            // Login
+            var form = document.CreateElement<IHtmlFormElement>();
+            form.Method = "POST";
+            form.Action = "0/edit";
+            document.Body.AppendElement(form);
+
+            foreach (var n in new[] { "Chapter[title]", "Chapter[status]" })
             {
-                var queryDocument = await context.OpenAsync("http://notabenoid.org/");
-                var form = queryDocument.QuerySelector<IHtmlFormElement>("form");
-                var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
-                    { "login[login]", Login },
-                    { "login[pass]", Password },
-                });
+                var input = document.CreateElement("input") as IHtmlInputElement;
+                input.Name = n;
+                form.AppendElement(input);
+            }
+
+            var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
+                { "Chapter[title]", r.ToString() },
+                { "Chapter[status]", "0" }
+            });
+
+            if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+            {
                 Console.WriteLine(resultDocument.StatusCode);
             }
+
+            document = await context.OpenAsync(BOOK_URL);
+
+            var a = document.QuerySelectorAll("td.t a").First(e => e.Text().Equals(r.ToString())) as IHtmlAnchorElement;
+            if (a == null)
+                throw new Exception($"Part {r} create error");
+
+            //a.Href + "/import"
+        }
+
+        private static async Task UploadOriginal()
+        {
+            var context = await CreateContext();
+
+            SCIPackage package = new SCIPackage(GAME_DIR);
+            var resources = package.Resources.FindAll(r => r.Type == ResType.Text).SelectMany(r => r.Resources);
+
+            var res = resources.First(r => r.ToString().Equals("11.tex"));
+
+            await UploadPart(context, res);
+        }*/
+
+        private static async Task ImportTranslate()
+        {
+            var context = await CreateContext();
 
             // List
             Dictionary<string, string> partsLinks = new Dictionary<string, string>();
             {
-                var queryDocument = await context.OpenAsync("http://notabenoid.org/book/77918");
+                var queryDocument = await context.OpenAsync(BOOK_URL);
                 var parts = queryDocument.QuerySelectorAll("td.t>a");
                 foreach (IHtmlAnchorElement a in parts)
                 {
@@ -86,6 +161,8 @@ namespace Notabenoid
             var resources = package.Resources.FindAll(r => r.Type == ResType.Text).SelectMany(res => res.Resources);
             foreach (var r in resources)
             {
+                Console.WriteLine(r);
+
                 translate.Clear();
                 var enLines = r.GetText(false, false, false);
                 var ruLines = r.GetText(true, false, false);
@@ -106,10 +183,20 @@ namespace Notabenoid
                     var document = await context.OpenAsync(url + "/");
 
                     Dictionary<string, string> enIds = new Dictionary<string, string>();
-                    foreach (var e in document.QuerySelectorAll("td.o p.text"))
+
+                    while (true)
                     {
-                        var id = ((IHtmlElement)e.Parent.Parent.Parent).Id.TrimStart('o');
-                        enIds[e.Text()] = id;
+                        foreach (var e in document.QuerySelectorAll("td.o p.text"))
+                        {
+                            var id = ((IHtmlElement)e.Parent.Parent.Parent).Id.TrimStart('o');
+                            enIds[e.Text()] = id;
+                        }
+
+                        var a = document.QuerySelector("#pages-bottom p.n a") as IHtmlAnchorElement;
+                        if (a == null)
+                            break;
+
+                        document = await context.OpenAsync(a.Href);
                     }
 
                     foreach (var kv in translate)
@@ -120,22 +207,37 @@ namespace Notabenoid
                             continue;
                         }
 
-                        var form = document.CreateElement<IHtmlFormElement>();
-                        form.Method = "POST";
-                        form.Action = id + "/translate";
-                        document.Body.AppendElement(form);
+                        var ruEl = document.QuerySelector($"tr#o{id} td.t p.text");
+                        if (ruEl != null)
+                            continue; // Skipping translated
 
-                        var input = document.CreateElement("input") as IHtmlInputElement;
-                        input.Name = "Translation[body]";
-                        form.AppendElement(input);
-
-                        var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
-                            { "Translation[body]", kv.Value },
-                        });
-
-                        if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+                        while (true)
                         {
-                            Console.WriteLine(resultDocument.StatusCode);
+                            var form = document.CreateElement<IHtmlFormElement>();
+                            form.Method = "POST";
+                            form.Action = id + "/translate";
+                            document.Body.AppendElement(form);
+
+                            var input = document.CreateElement("input") as IHtmlInputElement;
+                            input.Name = "Translation[body]";
+                            form.AppendElement(input);
+
+                            try
+                            {
+                                var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
+                                    { "Translation[body]", kv.Value },
+                                });
+                                if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+                                {
+                                    Console.WriteLine(resultDocument.StatusCode);
+                                    continue;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex);
+                            }
+                            break;
                         }
                     }
                 }
