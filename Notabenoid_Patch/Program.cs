@@ -32,6 +32,8 @@ namespace Notabenoid_Patch
         {
             context = await CreateContext(login, password);
             var parts = await GetParts();
+            if (parts == null)
+                return;
 
             SCIPackage package = new SCIPackage(GAME_DIR);
 
@@ -91,11 +93,10 @@ namespace Notabenoid_Patch
             {
                 var queryDocument = await context.OpenAsync("http://notabenoid.org/");
                 var form = queryDocument.QuerySelector<IHtmlFormElement>("form");
-                var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
+                await form.SubmitAsync(new Dictionary<string, string> {
                     { "login[login]", login },
                     { "login[pass]", password },
                 });
-                Console.WriteLine($"Auth: {resultDocument.StatusCode}");
             }
 
             return context;
@@ -106,6 +107,12 @@ namespace Notabenoid_Patch
             var partsLinks = new Dictionary<string, string>();
 
             var document = await context.OpenAsync(BOOK_URL);
+            if (!document.BaseUri.Equals(BOOK_URL))
+            {
+                Console.WriteLine("Проблемы с авторизацией");
+                return null;
+            }
+
             var parts = document.QuerySelectorAll("td.t>a");
             foreach (IHtmlAnchorElement a in parts)
             {
