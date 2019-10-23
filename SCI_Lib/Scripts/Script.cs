@@ -43,7 +43,7 @@ namespace SCI_Translator.Scripts
 
         public void Register(BaseElement el)
         {
-            _elements.Add(el.Offset, el);
+            _elements.Add(el.Address, el);
         }
 
         public SCIPackage Package { get { return _resource.Package; } }

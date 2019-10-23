@@ -13,7 +13,7 @@ namespace SCI_Translator.Scripts.Elements
             : base(script)
         {
             _value = Helpers.GetBytes(data, offset, length);
-            _offset = offset;
+            _address = offset;
         }
 
         public string Value
@@ -37,12 +37,12 @@ namespace SCI_Translator.Scripts.Elements
 
         public override string ToString()
         {
-            return String.Format("string_{0:x4} = {1}", _offset, GetValue());
+            return String.Format("string_{0:x4} = {1}", _address, GetValue());
         }
 
         public override void Write(ByteBuilder bb)
         {
-            _offset = bb.Position;
+            _address = bb.Position;
             bb.AddBytes(_value);
             bb.AddByte(0);
         }

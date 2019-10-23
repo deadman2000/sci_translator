@@ -7,7 +7,7 @@ namespace SCI_Translator.Scripts.Elements
 {
     public abstract class BaseElement
     {
-        protected ushort _offset;
+        protected ushort _address;
         protected Script _script;
 
         public BaseElement(Script script)
@@ -15,16 +15,21 @@ namespace SCI_Translator.Scripts.Elements
             _script = script;
         }
 
-        public ushort Offset
+        public List<RefToElement> XRefs { get; } = new List<RefToElement>();
+
+        public ushort Address
         {
-            get { return _offset; }
-            set { _offset = value; }
+            get { return _address; }
+            set { _address = value; }
         }
+
+        public virtual string Label => $"{GetType().Name.ToLower()}_{_address:x4}";
 
         public virtual void SetupByOffset() { }
         
         public abstract void Write(ByteBuilder bb);
 
         public abstract void WriteOffset(ByteBuilder bb);
+
     }
 }

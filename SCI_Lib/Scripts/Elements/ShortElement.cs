@@ -12,7 +12,7 @@ namespace SCI_Translator.Scripts.Elements
         public ShortElement(Script script, ushort offset, ushort val)
             : base(script)
         {
-            _offset = offset;
+            _address = offset;
             _val = val;
         }
 
@@ -24,7 +24,7 @@ namespace SCI_Translator.Scripts.Elements
 
         public override void Write(ByteBuilder bb)
         {
-            _offset = bb.Position;
+            _address = bb.Position;
             bb.AddShortBE(_val);
         }
 
@@ -34,7 +34,7 @@ namespace SCI_Translator.Scripts.Elements
 
         public override string ToString()
         {
-            return String.Format("{0}; [0x{1:X4}]", _val, _offset);
+            return String.Format("{0}; [0x{1:X4}]", _val, _address);
         }
     }
 }

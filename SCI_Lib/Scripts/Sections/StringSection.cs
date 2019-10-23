@@ -48,7 +48,7 @@ namespace SCI_Translator.Scripts.Sections
             sb.Append(String.Format("[String section (0x{0:X4})]\r\n", _offset));
             foreach (StringConst s in _strings)
             {
-                sb.Append(String.Format("\tstring_{0:x4} = '{1}'\r\n", s.Offset, s.Value));
+                sb.Append(String.Format("\tstring_{0:x4} = '{1}'\r\n", s.Address, s.Value));
             }
             return sb.ToString();
         }

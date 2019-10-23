@@ -7,70 +7,63 @@ namespace SCI_Translator.Scripts.Elements
 {
     public class RefToElement : BaseElement
     {
-        private ushort _targetOffset;
-        private BaseElement _ref;
-        private bool _relative;
-        private byte _size;
-
-        public RefToElement(Script script, ushort pos, ushort offset, bool relative, byte size)
+        public RefToElement(Script script, ushort address, ushort value, ushort targetOffset, bool relative, byte size)
             : base(script)
         {
-            _offset = pos;
-            _targetOffset = offset;
-            _relative = relative;
-            _size = size;
+            _address = address;
+            Value = value;
+            TargetOffset = targetOffset;
+            Relative = relative;
+            Size = size;
         }
 
-        public RefToElement(Script script, ushort pos, ushort offset)
-            : this(script, pos, offset, false, 2)
+        public RefToElement(Script script, ushort address, ushort value)
+            : this(script, address, value, value, false, 2)
         {
         }
 
-        public ushort TargetOffset
-        {
-            get { return _targetOffset; }
-        }
+        public ushort Value { get; }
 
-        public bool Relative { get { return _relative; } }
+        public ushort TargetOffset { get; private set; }
 
-        public byte Size { get { return _size; } }
+        public bool Relative { get; }
+
+        public byte Size { get; }
 
         public int Index { get; set; }
 
-        public BaseElement Reference
-        {
-            get { return _ref; }
-        }
+        public BaseElement Reference { get; private set; }
 
         public override string ToString()
         {
             string type = "ref";
             string comment = "";
-            if (_ref != null)
+            if (Reference != null)
             {
-                if (_ref is Code)
+                if (Reference is Code c)
                 {
                     type = "code";
-                    comment = ";  " + ((Code)_ref).Name;
+                    comment = ";  " + c.Name;
                 }
-                else if (_ref is StringConst)
+                else if (Reference is StringConst s)
                 {
                     type = "string";
-                    comment = ";  '" + ((StringConst)_ref).Value + "'";
+                    comment = ";  '" + s.Value + "'";
                 }
-                else if (_ref is ShortElement)
+                else if (Reference is ShortElement)
                 {
                     type = "obj";
                 }
-                else if (_ref is RefToElement)
+                else if (Reference is RefToElement r)
                 {
-                    type = "ref_to";
-                    if (_ref == this)
+                    throw new Exception();
+                    /*type = "ref_to";
+                    if (Reference == this)
                         comment = "; self";
-                    else if (((RefToElement)_ref)._ref == this)
+                    else if (r.Reference == this)
                         comment = "; self.self";
                     else
-                        comment = "; " + _ref.ToString();
+                        comment = "; " + Reference.ToString();*/
                 }
                 else
                 {
@@ -78,18 +71,20 @@ namespace SCI_Translator.Scripts.Elements
                 }
             }
 
-            return String.Format("{0}_{1:X4}{2}", type, _targetOffset, comment);
+            return String.Format("{0}_{1:X4}{2}", type, TargetOffset, comment);
         }
 
         public override void SetupByOffset()
         {
-            _ref = _script.GetElement(_targetOffset);
+            Reference = _script.GetElement(TargetOffset);
+            if (Reference != null)
+                Reference.XRefs.Add(this);
         }
 
         public override void Write(ByteBuilder bb)
         {
-            _offset = bb.Position;
-            switch (_size)
+            _address = bb.Position;
+            switch (Size)
             {
                 case 1: bb.AddByte(0); break;
                 case 2: bb.AddShortBE(0); break;
@@ -104,19 +99,19 @@ namespace SCI_Translator.Scripts.Elements
 
         public void WriteOffset(int rel, ByteBuilder bb)
         {
-            if (_ref != null)
-                _targetOffset = (ushort)_ref.Offset;
+            if (Reference != null)
+                TargetOffset = Reference.Address;
 
             int val;
-            if (!_relative)
-                val = _targetOffset;
+            if (!Relative)
+                val = TargetOffset;
             else
-                val = _targetOffset - rel;
+                val = TargetOffset - rel;
 
-            switch (_size)
+            switch (Size)
             {
-                case 1: bb.SetByte(_offset, (byte)val); break;
-                case 2: bb.SetShortBE(_offset, (ushort)val); break;
+                case 1: bb.SetByte(_address, (byte)val); break;
+                case 2: bb.SetShortBE(_address, (ushort)val); break;
                 default: throw new NotImplementedException();
             }
         }

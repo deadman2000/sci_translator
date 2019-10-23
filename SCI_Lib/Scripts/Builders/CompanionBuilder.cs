@@ -31,7 +31,7 @@ namespace SCI_Translator.Scripts.Builders
             if (locals != null)
             {
                 foreach (var r in locals.Refs)
-                    sb.AppendFormat("    local_{0} = ${1:x4}", r.Index, r.TargetOffset).AppendLine();
+                    sb.AppendFormat("    local{0} = ${1:x4}", r.Index, r.TargetOffset).AppendLine();
             }
             sb.AppendLine(")");
             sb.AppendLine();
@@ -43,7 +43,7 @@ namespace SCI_Translator.Scripts.Builders
             if (section != null)
             {
                 foreach (var str in section.Strings)
-                    sb.AppendFormat("    string_{0:x4} \"{1}\"", str.Offset, str.GetValue(false)).AppendLine();
+                    sb.AppendFormat("    string_{0:x4} \"{1}\"", str.Address, str.GetValue(false)).AppendLine();
             }
             sb.AppendLine(")");
             sb.AppendLine();
@@ -73,12 +73,14 @@ namespace SCI_Translator.Scripts.Builders
                 Code code = s.Script.GetElement(s.FuncCode[i].TargetOffset) as Code;
                 while (code != null)
                 {
-                    sb.AppendFormat("  {0:x4}:{1:x2} {2,-13} {3,5} {4}", code.Offset, code.Type, ArgsHexToString(code), code.Name, ArgsToString(code)).AppendLine();
-                    if (code.Name == "super" || code.Name.Contains("call") || code.Name == "send")
+                    if (code.XRefs.Count > 0)
+                        sb.Append($"        {code.Label}").AppendLine();
+
+                    sb.AppendFormat("  {0:x4}:{1:x2} {2,-13} {3,5} {4}", code.Address, code.Type, ArgsHexToString(code), code.Name, ArgsToString(code)).AppendLine();
+                    
+                    if (code.IsReturn && code.Next != null)
                         sb.AppendLine();
 
-                    if (code.Name == "ret")
-                        break;
                     code = code.Next;
                 }
 
@@ -96,16 +98,13 @@ namespace SCI_Translator.Scripts.Builders
             {
                 object a = code.Arguments[i];
                 if (a is byte)
-                    sb.Append(String.Format("{0:x2}", a));
+                    sb.Append($"{a:x2}");
                 else if (a is ushort)
-                    sb.Append(String.Format("{0:x4}", a));
-                else if (a is RefToElement)
-                    sb.Append(String.Format("{0:x4}", ((RefToElement)a).TargetOffset));
-                else if (a is LinkToExport)
-                {
-                    LinkToExport l = (LinkToExport)a;
+                    sb.Append($"{a:x4}");
+                else if (a is RefToElement r)
+                    sb.Append($"{r.Value:x4}");
+                else if (a is LinkToExport l)
                     sb.AppendFormat("{0:x4} {1:x4}", l.ScriptNumber, l.ExportNumber);
-                }
                 else
                     sb.Append(a.ToString());
                 sb.Append(" ");
@@ -120,16 +119,18 @@ namespace SCI_Translator.Scripts.Builders
             {
                 object a = code.Arguments[i];
                 if (a is byte)
-                    sb.Append(String.Format("{0:x}", a));
+                    sb.Append($"{a:x}");
                 else if (a is ushort)
-                    sb.Append(String.Format("{0:x}", a));
-                else if (a is RefToElement)
-                    sb.Append(String.Format("{0:x}", ((RefToElement)a).TargetOffset));
-                else if (a is LinkToExport)
+                    sb.Append($"{a:x}");
+                else if (a is RefToElement r)
                 {
-                    LinkToExport l = (LinkToExport)a;
-                    sb.AppendFormat("{0:x} procedure_{1:x4}", l.ScriptNumber, l.ExportNumber);
+                    if (r.Reference != null)
+                        sb.Append(r.Reference.Label);
+                    else
+                        sb.Append($"ref_{r.TargetOffset:x4}");
                 }
+                else if (a is LinkToExport l)
+                    sb.AppendFormat("{0:x} procedure_{1:x4}", l.ScriptNumber, l.ExportNumber);
                 else
                     sb.Append(a.ToString());
                 sb.Append(" ");

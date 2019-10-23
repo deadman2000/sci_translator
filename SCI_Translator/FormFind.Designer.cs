@@ -45,14 +45,17 @@
             // 
             // tbPattern
             // 
+            this.tbPattern.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPattern.Location = new System.Drawing.Point(12, 25);
             this.tbPattern.Name = "tbPattern";
-            this.tbPattern.Size = new System.Drawing.Size(366, 20);
+            this.tbPattern.Size = new System.Drawing.Size(336, 20);
             this.tbPattern.TabIndex = 1;
             // 
             // btFind
             // 
-            this.btFind.Location = new System.Drawing.Point(384, 25);
+            this.btFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btFind.Location = new System.Drawing.Point(354, 25);
             this.btFind.Name = "btFind";
             this.btFind.Size = new System.Drawing.Size(75, 23);
             this.btFind.TabIndex = 2;
@@ -62,10 +65,13 @@
             // 
             // lbResults
             // 
+            this.lbResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbResults.FormattingEnabled = true;
             this.lbResults.Location = new System.Drawing.Point(12, 54);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(447, 355);
+            this.lbResults.Size = new System.Drawing.Size(417, 277);
             this.lbResults.TabIndex = 3;
             this.lbResults.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbResults_MouseDoubleClick);
             // 
@@ -74,7 +80,7 @@
             this.AcceptButton = this.btFind;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 422);
+            this.ClientSize = new System.Drawing.Size(441, 356);
             this.Controls.Add(this.lbResults);
             this.Controls.Add(this.btFind);
             this.Controls.Add(this.tbPattern);

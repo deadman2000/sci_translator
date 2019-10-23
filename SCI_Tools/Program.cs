@@ -1,5 +1,8 @@
 ﻿using SCI_Translator;
+using SCI_Translator.Scripts;
+using SCI_Translator.Scripts.Builders;
 using System;
+using System.Linq;
 using System.IO;
 
 namespace SCI_Tools
@@ -12,12 +15,22 @@ namespace SCI_Tools
         {
             GAME_DIR = args[0];
 
-            //PrepareTranslate();
-            //ApplyTranslate();
-
             SCIPackage package = new SCIPackage(GAME_DIR);
-            //ExportEnTex(package);
+            var scr = package.Resources
+                .SelectMany(r=>r.Resources)
+                .First(r => r.ToString().Equals("990.scr"));
 
+            var builder = new CompanionBuilder();
+            var text = builder.Decompile(scr.GetScript(false));
+
+            File.WriteAllText(@"..\..\..\Sandbox\990_en.comp", text);
+
+            Console.WriteLine("Completed");
+            //Console.ReadLine();
+        }
+
+        private static void CompareTexts(SCIPackage package)
+        {
             foreach (var r in package.Texts)
             {
                 var enLines = r.GetText(false, false, false); // Оригинальный текст
@@ -36,15 +49,7 @@ namespace SCI_Tools
                     }
                 }
             }
-
-            //ExportRuTex(package);
-            //package.ExportText("D:/longbow.txt");
-            //package.ExtractTranslate("D:/translate_ru.ts");
-
-            Console.WriteLine("Completed");
-            Console.ReadLine();
         }
-
 
         private static void ExportRuTex(SCIPackage package)
         {

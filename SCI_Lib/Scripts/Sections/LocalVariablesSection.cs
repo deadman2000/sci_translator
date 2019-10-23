@@ -18,7 +18,7 @@ namespace SCI_Translator.Scripts.Sections
                 ushort o = offset;
                 RefToElement r = new RefToElement(_script, offset, ReadShortBE(data, ref offset));
                 r.Index = i;
-                r.Offset = o;
+                r.Address = o;
                 refs.Add(r);
                 _script.Register(r);
             }
