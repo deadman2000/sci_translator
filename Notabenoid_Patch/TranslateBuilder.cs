@@ -16,6 +16,8 @@ namespace Notabenoid_Patch
     {
         private const string BOOK_URL = "http://notabenoid.org/book/77921/";
 
+        const string CACHE_FILE = "parts.cache";
+
         public static string GAME_DIR = Environment.GetEnvironmentVariable("GAME_DIR");
 
         public static string TRANSLATE_GAME_DIR => Path.Combine(GAME_DIR, "TRANSLATE");
@@ -37,9 +39,13 @@ namespace Notabenoid_Patch
                 if (parts == null)
                     return;
 
-                var cache = File.ReadAllLines("parts.cache")
-                    .Select(l => l.Split(':', 2))
-                    .ToDictionary(p => p[0], p => p[1]);
+                Dictionary<string, string> cache;
+                if (File.Exists(CACHE_FILE))
+                    cache = File.ReadAllLines(CACHE_FILE)
+                        .Select(l => l.Split(':', 2))
+                        .ToDictionary(p => p[0], p => p[1]);
+                else
+                    cache = new Dictionary<string, string>();
 
                 SCIPackage package = new SCIPackage(GAME_DIR);
                 var texts = package.Texts;
@@ -107,7 +113,7 @@ namespace Notabenoid_Patch
 
         private void SaveCache(IEnumerable<Part> parts)
         {
-            using (StreamWriter fs = new StreamWriter("parts.cache", false, Encoding.UTF8))
+            using (StreamWriter fs = new StreamWriter(CACHE_FILE, false, Encoding.UTF8))
             {
                 foreach (var p in parts)
                 {
