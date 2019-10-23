@@ -44,21 +44,6 @@ namespace RobinHoodWeb.Controllers
 
         public static string UPDATE_DATE = UpdateCreateDate();
 
-        private static string UpdateCreateDate()
-        {
-            if (!File.Exists(TRANSLATED_ZIP_PATH))
-                return null;
-            return UPDATE_DATE = new FileInfo(TRANSLATED_ZIP_PATH).CreationTimeUtc.ToString();
-        }
-
-        public void PackageZIP()
-        {
-            File.Delete(TRANSLATED_ZIP_PATH);
-            ZipFile.CreateFromDirectory(TranslateBuilder.TRANSLATE_GAME_DIR, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, true);
-            UpdateCreateDate();
-        }
-
-
         private readonly WebSocket webSocket;
 
         public TranslateConnection(WebSocket webSocket)
@@ -75,7 +60,6 @@ namespace RobinHoodWeb.Controllers
             });
 
             Builder.ReportProgress += ReportProgress;
-            Builder.Completed += Finished;
 
             try
             {
@@ -93,7 +77,6 @@ namespace RobinHoodWeb.Controllers
             finally
             {
                 Builder.ReportProgress -= ReportProgress;
-                Builder.Completed -= Finished;
             }
         }
 
@@ -117,8 +100,24 @@ namespace RobinHoodWeb.Controllers
         {
             if (Builder.IsBuild) return;
 
-            await Builder.Build();
-            PackageZIP();
+            if (await Builder.Build())
+                PackageZIP();
+
+            Finished();
+        }
+
+        public void PackageZIP()
+        {
+            File.Delete(TRANSLATED_ZIP_PATH);
+            ZipFile.CreateFromDirectory(TranslateBuilder.TRANSLATE_GAME_DIR, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, true);
+            UpdateCreateDate();
+        }
+
+        private static string UpdateCreateDate()
+        {
+            if (!File.Exists(TRANSLATED_ZIP_PATH))
+                return null;
+            return UPDATE_DATE = new FileInfo(TRANSLATED_ZIP_PATH).CreationTimeUtc.ToString();
         }
 
         private async void ReportProgress(int progress) => await Send(new { progress });

@@ -29,7 +29,7 @@ namespace Notabenoid_Patch
 
         public bool IsBuild { get; private set; }
 
-        public async Task Build()
+        public async Task<bool> Build()
         {
             IsBuild = true;
             try
@@ -37,7 +37,7 @@ namespace Notabenoid_Patch
                 context = await CreateContext();
                 var parts = await GetParts();
                 if (parts == null)
-                    return;
+                    return false;
 
                 Dictionary<string, string> cache;
                 if (File.Exists(CACHE_FILE))
@@ -51,6 +51,8 @@ namespace Notabenoid_Patch
                 var texts = package.Texts;
                 int total = texts.Count() + 2;
                 int progress = 0;
+
+                bool hasChanges = false;
 
                 foreach (var r in texts)
                 {
@@ -99,10 +101,15 @@ namespace Notabenoid_Patch
                     {
                         Console.WriteLine(r);
                         r.SetText(ruLines, false);
+                        hasChanges = true;
                     }
                 }
 
+                if (!hasChanges)
+                    return false;
+
                 SaveCache(parts.Values.AsEnumerable());
+                return true;
             }
             finally
             {
