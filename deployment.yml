@@ -61,6 +61,7 @@ spec:
   type: LoadBalancer
 
 ---
+# kubectl delete ingressroutes.traefik.containo.us web --namespace translate
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
@@ -69,9 +70,12 @@ metadata:
 spec:
   entryPoints:
     - web
+    - websecure
   routes:
   - match: Host(`translate.ml.ask-glonass.ru`)
     kind: Rule
     services:
     - name: web
       port: 80
+  tls:
+    certResolver: default

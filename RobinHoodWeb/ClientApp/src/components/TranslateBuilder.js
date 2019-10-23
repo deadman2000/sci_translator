@@ -1,10 +1,16 @@
 ﻿import React, { Component } from 'react';
 import { ButtonToolbar, Button, ProgressBar } from 'react-bootstrap';
 
+function ws_protocol() {
+    if (window.location.protocol == "https:")
+        return 'wss://';
+    return 'ws://';
+}
+
 export class TranslateBuilder extends Component {
     static displayName = TranslateBuilder.name;
 
-    URL = 'ws://' + window.location.host + '/translate';
+    URL = ws_protocol() + window.location.host + '/translate';
     client = new WebSocket(this.URL);
 
     state = {
