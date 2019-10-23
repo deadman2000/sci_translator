@@ -1,0 +1,76 @@
+# Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: translate
+  labels:
+    name: translate
+---
+
+# kubectl create secret generic nnsecret --from-literal=username=dead_man --from-literal=password='***' --namespace translate
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: translate
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web
+        image: docker.dev.ask-glonass.ru/sci_translator:latest
+        env:
+        - name: NN_LOGIN
+          valueFrom:
+            secretKeyRef:
+              name: nnsecret
+              key: username
+        - name: NN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nnsecret
+              key: password
+        ports:
+        - name: web
+          containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: translate
+  name: web
+
+spec:
+  ports:
+    - protocol: TCP
+      name: web
+      port: 80
+  selector:
+    app: web
+  type: LoadBalancer
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  namespace: translate
+  name: web
+spec:
+  entryPoints:
+    - web
+  routes:
+  - match: Host(`translate.ml.ask-glonass.ru`)
+    kind: Rule
+    services:
+    - name: web
+      port: 80

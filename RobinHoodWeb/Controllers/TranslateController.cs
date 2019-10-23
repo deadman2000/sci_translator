@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RobinHoodWeb.Tools;
+using Notabenoid_Patch;
 using System;
+using System.IO;
+using System.IO.Compression;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -23,7 +25,7 @@ namespace RobinHoodWeb.Controllers
             if (isSocketRequest)
             {
                 WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                var conn = new Connection(webSocket);
+                var conn = new TranslateConnection(webSocket);
                 await conn.ReadCycle();
             }
             else
@@ -33,11 +35,33 @@ namespace RobinHoodWeb.Controllers
         }
     }
 
-    internal class Connection
+    internal class TranslateConnection
     {
+        public static readonly string DOWNLOAD_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"downloads");
+        public static readonly string TRANSLATED_ZIP_PATH = Path.Combine(DOWNLOAD_DIR, "CONQUESTS.ZIP");
+
+        public static readonly TranslateBuilder Builder = new TranslateBuilder();
+
+        public static string UPDATE_DATE = UpdateCreateDate();
+
+        private static string UpdateCreateDate()
+        {
+            if (!File.Exists(TRANSLATED_ZIP_PATH))
+                return null;
+            return UPDATE_DATE = new FileInfo(TRANSLATED_ZIP_PATH).CreationTimeUtc.ToString();
+        }
+
+        public void PackageZIP()
+        {
+            File.Delete(TRANSLATED_ZIP_PATH);
+            ZipFile.CreateFromDirectory(TranslateBuilder.TRANSLATE_GAME_DIR, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, true);
+            UpdateCreateDate();
+        }
+
+
         private readonly WebSocket webSocket;
 
-        public Connection(WebSocket webSocket)
+        public TranslateConnection(WebSocket webSocket)
         {
             this.webSocket = webSocket;
         }
@@ -46,12 +70,12 @@ namespace RobinHoodWeb.Controllers
         {
             await Send(new
             {
-                update_date = TranslateBuilder.UPDATE_DATE,
-                building = TranslateBuilder.Inst.IsBuild
+                update_date = UPDATE_DATE,
+                building = Builder.IsBuild
             });
 
-            TranslateBuilder.Inst.ReportProgress += ReportProgress;
-            TranslateBuilder.Inst.Completed += Finished;
+            Builder.ReportProgress += ReportProgress;
+            Builder.Completed += Finished;
 
             try
             {
@@ -68,8 +92,8 @@ namespace RobinHoodWeb.Controllers
             }
             finally
             {
-                TranslateBuilder.Inst.ReportProgress -= ReportProgress;
-                TranslateBuilder.Inst.Completed -= Finished;
+                Builder.ReportProgress -= ReportProgress;
+                Builder.Completed -= Finished;
             }
         }
 
@@ -91,14 +115,15 @@ namespace RobinHoodWeb.Controllers
 
         private async Task Build()
         {
-            if (TranslateBuilder.Inst.IsBuild) return;
+            if (Builder.IsBuild) return;
 
-            await TranslateBuilder.Inst.Build();
+            await Builder.Build();
+            PackageZIP();
         }
 
         private async void ReportProgress(int progress) => await Send(new { progress });
 
-        private async void Finished() => await Send(new { building = false, update_date = TranslateBuilder.UPDATE_DATE });
+        private async void Finished() => await Send(new { building = false, update_date = UPDATE_DATE });
 
     }
 }

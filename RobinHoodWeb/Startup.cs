@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using RobinHoodWeb.Tools;
+using RobinHoodWeb.Controllers;
 using System.IO;
 
 namespace RobinHoodWeb
@@ -45,10 +45,10 @@ namespace RobinHoodWeb
                 app.UseExceptionHandler("/Error");
             }
 
-            Directory.CreateDirectory(TranslateBuilder.DOWNLOAD_DIR);
+            Directory.CreateDirectory(TranslateConnection.DOWNLOAD_DIR);
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(TranslateBuilder.DOWNLOAD_DIR),
+                FileProvider = new PhysicalFileProvider(TranslateConnection.DOWNLOAD_DIR),
                 RequestPath = new PathString("/download")
             });
 

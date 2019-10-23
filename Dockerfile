@@ -11,6 +11,7 @@ RUN apt-get install -y nodejs
 WORKDIR /src
 COPY ["RobinHoodWeb/*.csproj", "RobinHoodWeb/"]
 COPY ["SCI_Lib/*.csproj", "SCI_Lib/"]
+COPY ["Notabenoid_Patch/*.csproj", "Notabenoid_Patch/"]
 RUN dotnet restore "RobinHoodWeb/RobinHoodWeb.csproj"
 COPY . .
 WORKDIR "/src/RobinHoodWeb"

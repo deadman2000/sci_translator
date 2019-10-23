@@ -6,40 +6,21 @@ using SCI_Translator;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace RobinHoodWeb.Tools
+namespace Notabenoid_Patch
 {
     public class TranslateBuilder
     {
         private const string BOOK_URL = "http://notabenoid.org/book/77921/";
 
-        public static readonly string DOWNLOAD_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"downloads");
-        public static readonly string GAME_DIR = Environment.GetEnvironmentVariable("GAME_DIR");
-        public static readonly string TRANSLATE_GAME_DIR = Path.Combine(GAME_DIR, "TRANSLATE");
-        public static readonly string TRANSLATED_ZIP_PATH = Path.Combine(DOWNLOAD_DIR, "CONQUESTS.ZIP");
+        public static string GAME_DIR = Environment.GetEnvironmentVariable("GAME_DIR");
 
-        public static string UPDATE_DATE;
-
-        public static readonly TranslateBuilder Inst = new TranslateBuilder();
-
+        public static string TRANSLATE_GAME_DIR => Path.Combine(GAME_DIR, "TRANSLATE");
 
         private IBrowsingContext context;
-
-        private TranslateBuilder()
-        {
-            UpdateCreateDate();
-        }
-
-        private void UpdateCreateDate()
-        {
-            if (File.Exists(TRANSLATED_ZIP_PATH))
-            {
-                UPDATE_DATE = new FileInfo(TRANSLATED_ZIP_PATH).CreationTimeUtc.ToString();
-            }
-        }
 
         public event Action<int> ReportProgress;
         public event Action Completed;
@@ -56,6 +37,10 @@ namespace RobinHoodWeb.Tools
                 if (parts == null)
                     return;
 
+                var cache = File.ReadAllLines("parts.cache")
+                    .Select(l => l.Split(':', 2))
+                    .ToDictionary(p => p[0], p => p[1]);
+
                 SCIPackage package = new SCIPackage(GAME_DIR);
                 var texts = package.Texts;
                 int total = texts.Count() + 2;
@@ -66,7 +51,10 @@ namespace RobinHoodWeb.Tools
                     progress++;
                     ReportProgress?.Invoke(progress * 100 / total);
 
-                    if (!parts.TryGetValue(r.ToString(), out string url)) // Ресурс без перевода
+                    if (!parts.TryGetValue(r.ToString(), out Part part)) // Ресурс без перевода
+                        continue;
+
+                    if (cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange))
                         continue;
 
                     var enLines = r.GetText(false, false, false); // Оригинальный текст
@@ -78,7 +66,7 @@ namespace RobinHoodWeb.Tools
                         continue;
                     }
 
-                    var translates = await GetTranslates(url);
+                    var translates = await GetTranslates(part.URL);
                     bool hasTranslate = false;
 
                     for (int i = 0; i < enLines.Length; i++)
@@ -108,14 +96,23 @@ namespace RobinHoodWeb.Tools
                     }
                 }
 
-                File.Delete(TRANSLATED_ZIP_PATH);
-                ZipFile.CreateFromDirectory(TRANSLATE_GAME_DIR, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, true);
-                UpdateCreateDate();
+                SaveCache(parts.Values.AsEnumerable());
             }
             finally
             {
                 IsBuild = false;
                 Completed?.Invoke();
+            }
+        }
+
+        private void SaveCache(IEnumerable<Part> parts)
+        {
+            using (StreamWriter fs = new StreamWriter("parts.cache", false, Encoding.UTF8))
+            {
+                foreach (var p in parts)
+                {
+                    fs.WriteLine($"{p.Name}:{p.DateChange}");
+                }
             }
         }
 
@@ -139,9 +136,18 @@ namespace RobinHoodWeb.Tools
             return context;
         }
 
-        private async Task<Dictionary<string, string>> GetParts()
+        class Part
         {
-            var partsLinks = new Dictionary<string, string>();
+            public string Id;
+            public string Name;
+            public string URL;
+            public string DateChange;
+        }
+
+
+        private async Task<Dictionary<string, Part>> GetParts()
+        {
+            var partsLinks = new Dictionary<string, Part>();
 
             var document = await context.OpenAsync(BOOK_URL);
             if (!document.BaseUri.Equals(BOOK_URL))
@@ -150,7 +156,16 @@ namespace RobinHoodWeb.Tools
             var parts = document.QuerySelectorAll("td.t>a");
             foreach (IHtmlAnchorElement a in parts)
             {
-                partsLinks[a.Text] = a.Href;
+                var id = (a.Parent.Parent as IHtmlElement).Id;
+                var changed = (document.QuerySelector($"tr#{id} td:nth-child(3) span") as IHtmlElement).Title;
+
+                partsLinks[a.Text] = new Part
+                {
+                    Id = id,
+                    Name = a.Text,
+                    URL = a.Href,
+                    DateChange = changed
+                };
             }
 
             return partsLinks;
