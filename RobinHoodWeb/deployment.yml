@@ -28,6 +28,7 @@ spec:
       containers:
       - name: web
         image: docker.dev.ask-glonass.ru/sci_translator:latest
+        imagePullPolicy: Always
         env:
         - name: NN_LOGIN
           valueFrom:

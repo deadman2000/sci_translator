@@ -19,7 +19,6 @@ export class TranslateBuilder extends Component {
 
         this.client.onmessage = ({ data }) => {
             const state = JSON.parse(data);
-            console.log(state);
             this.setState(state);
         };
 
