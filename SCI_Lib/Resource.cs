@@ -96,11 +96,11 @@ namespace SCI_Translator
         {
             if (translated)
             {
-                return GetContext(TranslateDir);
+                return ReadContent(TranslateDir);
             }
             else
             {
-                return GetContext(Map.Package.GameDirectory);
+                return ReadContent(Map.Package.GameDirectory);
             }
         }
 
@@ -109,7 +109,7 @@ namespace SCI_Translator
         private static Decompressor dHuffman = new DecompressorHuffman();
 
 
-        private byte[] GetContext(string dir)
+        private byte[] ReadContent(string dir)
         {
             var path = Path.Combine(dir, FileName);
             if (File.Exists(path)) // Если есть внешний файл, используем его

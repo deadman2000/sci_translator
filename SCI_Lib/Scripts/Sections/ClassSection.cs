@@ -42,7 +42,7 @@ namespace SCI_Translator.Scripts.Sections
 
             funcCode = new RefToElement[fs];
             for (int i = 0; i < fs; i++)
-                funcCode[i] = new RefToElement(_script, o, ReadShortBE(data, ref o));
+                funcCode[i] = new RefToElement(_script, ReadShortBE(data, ref o));
         }
 
         public ushort Id => selectors[0];
@@ -92,6 +92,12 @@ namespace SCI_Translator.Scripts.Sections
 
             foreach (RefToElement r in funcCode)
                 r.Write(bb);
+        }
+
+        public override void WriteOffsets(ByteBuilder bb)
+        {
+            foreach (RefToElement r in funcCode)
+                r.WriteOffset(bb);
         }
 
         public override string ToString()

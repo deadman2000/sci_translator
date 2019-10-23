@@ -7,19 +7,31 @@ namespace SCI_Translator.Scripts.Elements
 {
     public class RefToElement : BaseElement
     {
-        public RefToElement(Script script, ushort address, ushort value, ushort targetOffset, bool relative, byte size)
+        /// <summary>
+        /// Конструктор для относительной ссылки
+        /// </summary>
+        /// <param name="script"></param>
+        /// <param name="value"></param>
+        /// <param name="targetOffset"></param>
+        /// <param name="size"></param>
+        public RefToElement(Script script, ushort value, ushort targetOffset, byte size)
             : base(script)
         {
-            _address = address;
             Value = value;
             TargetOffset = targetOffset;
-            Relative = relative;
             Size = size;
+            Relative = true;
         }
 
-        public RefToElement(Script script, ushort address, ushort value)
-            : this(script, address, value, value, false, 2)
+        /// <summary>
+        /// Конструктор для абсолютной ссылки
+        /// </summary>
+        /// <param name="script"></param>
+        /// <param name="value"></param>
+        public RefToElement(Script script, ushort value)
+            : this(script, value, value, 2)
         {
+            Relative = false;
         }
 
         public ushort Value { get; }

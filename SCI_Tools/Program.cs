@@ -9,7 +9,7 @@ namespace SCI_Tools
 {
     internal class Program
     {
-        private static string GAME_DIR;
+        private static string GAME_DIR = @"..\..\..\Conquest\";
 
         private static void Main(string[] args)
         {

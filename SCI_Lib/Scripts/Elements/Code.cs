@@ -181,7 +181,7 @@ namespace SCI_Translator.Scripts.Elements
 
                 case 0x33:
                     val = data[offset++];
-                    _arguments.Add(new RefToElement(_script, offset, val, (ushort)(offset + 1 + val), true, 1));
+                    _arguments.Add(new RefToElement(_script, val, (ushort)(offset + 1 + val), 1));
                     break;
 
                 // 3 bytes
@@ -211,16 +211,20 @@ namespace SCI_Translator.Scripts.Elements
                 // Relative offset
                 case 0x41: // call B
                     val = data[offset++];
-                    _arguments.Add(new RefToElement(_script, offset, val, (ushort)(offset + 1 + val), true, 1));
+                    _arguments.Add(new RefToElement(_script, val, (ushort)(offset + val), 1));
                     _arguments.Add(data[offset++]);
                     break;
 
 
-                case 0x30:
+                case 0x30: // bnt
                 case 0x32: // jmp
+                    val = (ushort)(data[offset++] + (data[offset++] << 8));
+                    _arguments.Add(new RefToElement(_script, val, (ushort)(offset + val), 2));
+                    break;
+
                 case 0x72: // lofsa
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
-                    _arguments.Add(new RefToElement(_script, offset, val, (ushort)(val + offset), false, 2));
+                    _arguments.Add(new RefToElement(_script, val));
                     break;
 
                 // Absolute offset
@@ -239,8 +243,9 @@ namespace SCI_Translator.Scripts.Elements
 
                 case 0x40: // call W
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
-                    _arguments.Add(new RefToElement(_script, offset, val, (ushort)(offset + 1 + val), true, 2));
-                    _arguments.Add(data[offset++]);
+                    var arg = data[offset++];
+                    _arguments.Add(new RefToElement(_script, val, (ushort)(offset + val), 2));
+                    _arguments.Add(arg);
                     break;
 
                 // 5 bytes
@@ -446,12 +451,18 @@ namespace SCI_Translator.Scripts.Elements
         {
             foreach (object arg in _arguments)
             {
-                if ((arg is byte) || (arg is ushort) || (arg is LinkToExport))
-                    continue;
-                else if (arg is RefToElement)
-                    ((RefToElement)arg).WriteOffset(_address + Size, bb);
-                else
-                    throw new NotImplementedException();
+                switch (arg)
+                {
+                    case byte _:
+                    case ushort _:
+                    case LinkToExport _:
+                        continue;
+                    case RefToElement r:
+                        r.WriteOffset(_address + Size, bb);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
             }
         }
     }
