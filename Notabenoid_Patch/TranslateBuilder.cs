@@ -62,6 +62,9 @@ namespace Notabenoid_Patch
                     if (!parts.TryGetValue(r.ToString(), out Part part)) // Ресурс без перевода
                         continue;
 
+                    if (String.IsNullOrEmpty(part.DateChange)) // Пропускаем части без перевода
+                        continue;
+
                     if (cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange))
                         continue;
 

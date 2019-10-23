@@ -22,8 +22,19 @@ namespace SCI_Tools
             {
                 var enLines = r.GetText(false, false, false); // Оригинальный текст
                 var ruLines = r.GetText(true, false, false);  // Уже переведенный текст
+
                 if (enLines.Length != ruLines.Length)
-                    Console.WriteLine(r);
+                    Console.WriteLine($"{r} line diff");
+
+                for (int i = 0; i < enLines.Length; i++)
+                {
+                    if (!enLines[i].Equals(ruLines[i]))
+                    {
+                        Console.WriteLine($"{r}: {i}");
+                        Console.WriteLine(ruLines[i]);
+                        Console.WriteLine();
+                    }
+                }
             }
 
             //ExportRuTex(package);
