@@ -83,6 +83,7 @@ namespace SCI_Translator.Scripts.Elements
                 return;
             }
 
+            ushort addr = offset;
             ushort val;
 
             switch (_type)
@@ -181,7 +182,7 @@ namespace SCI_Translator.Scripts.Elements
 
                 case 0x33:
                     val = data[offset++];
-                    _arguments.Add(new RefToElement(_script, val, (ushort)(offset + 1 + val), 1));
+                    _arguments.Add(new RefToElement(_script, addr, val, (ushort)(offset + 1 + val), 1));
                     break;
 
                 // 3 bytes
@@ -211,7 +212,7 @@ namespace SCI_Translator.Scripts.Elements
                 // Relative offset
                 case 0x41: // call B
                     val = data[offset++];
-                    _arguments.Add(new RefToElement(_script, val, (ushort)(offset + val), 1));
+                    _arguments.Add(new RefToElement(_script, addr, val, (ushort)(offset + val), 1));
                     _arguments.Add(data[offset++]);
                     break;
 
@@ -219,12 +220,12 @@ namespace SCI_Translator.Scripts.Elements
                 case 0x30: // bnt
                 case 0x32: // jmp
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
-                    _arguments.Add(new RefToElement(_script, val, (ushort)(offset + val), 2));
+                    _arguments.Add(new RefToElement(_script, addr, val, (ushort)(offset + val), 2));
                     break;
 
                 case 0x72: // lofsa
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
-                    _arguments.Add(new RefToElement(_script, val));
+                    _arguments.Add(new RefToElement(_script, addr, val));
                     break;
 
                 // Absolute offset
@@ -244,7 +245,7 @@ namespace SCI_Translator.Scripts.Elements
                 case 0x40: // call W
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
                     var arg = data[offset++];
-                    _arguments.Add(new RefToElement(_script, val, (ushort)(offset + val), 2));
+                    _arguments.Add(new RefToElement(_script, addr, val, (ushort)(offset + val), 2));
                     _arguments.Add(arg);
                     break;
 

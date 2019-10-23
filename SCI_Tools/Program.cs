@@ -4,6 +4,7 @@ using SCI_Translator.Scripts.Builders;
 using System;
 using System.Linq;
 using System.IO;
+using SCI_Translator.Scripts.Sections;
 
 namespace SCI_Tools
 {
@@ -13,20 +14,46 @@ namespace SCI_Tools
 
         private static void Main(string[] args)
         {
-            GAME_DIR = args[0];
+            if (args.Length> 0)
+                GAME_DIR = args[0];
 
-            SCIPackage package = new SCIPackage(GAME_DIR);
-            var scr = package.Resources
-                .SelectMany(r=>r.Resources)
-                .First(r => r.ToString().Equals("990.scr"));
+            File.Delete(Path.Combine(GAME_DIR, "TRANSLATE", "990.scr"));
 
-            var builder = new CompanionBuilder();
-            var text = builder.Decompile(scr.GetScript(false));
+            {
+                SCIPackage package = new SCIPackage(GAME_DIR);
+                var res = package.Resources
+                    .SelectMany(r => r.Resources)
+                    .First(r => r.ToString().Equals("990.scr"));
 
-            File.WriteAllText(@"..\..\..\Sandbox\990_en.comp", text);
+                var scr = res.GetScript(false);
+                var strings = scr.Sections.FindAll(s => s is StringSection).SelectMany(s => ((StringSection)s).Strings);
+                var save = strings.First(s => s.Value.Equals("  Save  "));
+                save.Value = "  Сохра  ";
+                res.SaveTranslate(scr.GetBytes());
+            }
+
+            {
+                SCIPackage package = new SCIPackage(GAME_DIR);
+                var scr = package.Resources
+                    .SelectMany(r => r.Resources)
+                    .First(r => r.ToString().Equals("990.scr"));
+
+                var text = new SimpeScriptBuilder().Decompile(scr.GetScript(false));
+                File.WriteAllText(@"..\..\..\Sandbox\990_en.scr", text);
+            }
+
+            {
+                SCIPackage package = new SCIPackage(GAME_DIR);
+                var scr = package.Resources
+                    .SelectMany(r => r.Resources)
+                    .First(r => r.ToString().Equals("990.scr"));
+
+                var text = new SimpeScriptBuilder().Decompile(scr.GetScript(true));
+                File.WriteAllText(@"..\..\..\Sandbox\990_ru.scr", text);
+            }
 
             Console.WriteLine("Completed");
-            //Console.ReadLine();
+            Console.ReadKey();
         }
 
         private static void CompareTexts(SCIPackage package)

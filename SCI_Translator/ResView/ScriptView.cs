@@ -122,6 +122,8 @@ namespace SCI_Translator.ResView
             int i = 0;
             foreach (StringConst sc in stringSection.Strings)
             {
+                if (sc.IsClassName) continue;
+
                 string str = sc.Value;
                 str = str.Replace("$0D", "\r").Replace("$0A", "\n");
                 string[] parts = str.Split(new string[] { "#G" }, StringSplitOptions.None);

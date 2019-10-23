@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SCI_Translator.Scripts.Elements
 {
@@ -14,13 +11,16 @@ namespace SCI_Translator.Scripts.Elements
         /// <param name="value"></param>
         /// <param name="targetOffset"></param>
         /// <param name="size"></param>
-        public RefToElement(Script script, ushort value, ushort targetOffset, byte size)
+        public RefToElement(Script script, ushort addr, ushort value, ushort targetOffset, byte size)
             : base(script)
         {
+            Address = addr;
             Value = value;
             TargetOffset = targetOffset;
             Size = size;
             Relative = true;
+
+            script.Register(this);
         }
 
         /// <summary>
@@ -28,8 +28,8 @@ namespace SCI_Translator.Scripts.Elements
         /// </summary>
         /// <param name="script"></param>
         /// <param name="value"></param>
-        public RefToElement(Script script, ushort value)
-            : this(script, value, value, 2)
+        public RefToElement(Script script, ushort addr, ushort value)
+            : this(script, addr, value, value, 2)
         {
             Relative = false;
         }
@@ -50,37 +50,30 @@ namespace SCI_Translator.Scripts.Elements
         {
             string type = "ref";
             string comment = "";
-            if (Reference != null)
+
+            switch (Reference)
             {
-                if (Reference is Code c)
-                {
+                case Code c:
                     type = "code";
                     comment = ";  " + c.Name;
-                }
-                else if (Reference is StringConst s)
-                {
+                    break;
+                case StringConst s:
                     type = "string";
                     comment = ";  '" + s.Value + "'";
-                }
-                else if (Reference is ShortElement)
-                {
+                    break;
+                case ShortElement _:
                     type = "obj";
-                }
-                else if (Reference is RefToElement r)
-                {
-                    throw new Exception();
-                    /*type = "ref_to";
-                    if (Reference == this)
-                        comment = "; self";
-                    else if (r.Reference == this)
-                        comment = "; self.self";
-                    else
-                        comment = "; " + Reference.ToString();*/
-                }
-                else
-                {
+                    break;
+                case RefToElement r:
+                    type = "ref_ref";
+                    comment = ";  " + r.ToString();
+                    break;
+                case null:
+                    break;
+                default:
                     type = "ref_el";
-                }
+                    break;
+
             }
 
             return String.Format("{0}_{1:X4}{2}", type, TargetOffset, comment);

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SCI_Translator.Scripts.Elements
 {
@@ -21,6 +18,8 @@ namespace SCI_Translator.Scripts.Elements
             get { return Helpers.GetString(_value); }
             set { _value = Helpers.GetBytes(value); }
         }
+
+        public bool IsClassName { get; set; } = false;
 
         public void SetValue(string val, bool escape = true)
         {

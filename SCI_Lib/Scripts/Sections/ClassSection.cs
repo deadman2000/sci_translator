@@ -1,6 +1,5 @@
 ﻿using SCI_Translator.Scripts.Elements;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace SCI_Translator.Scripts.Sections
@@ -8,12 +7,8 @@ namespace SCI_Translator.Scripts.Sections
     public class ClassSection : Section
     {
         ushort funcList;
-
-        ushort[] selectors;
         ushort[] varselectors;
-
-        ushort[] funcNames;
-        RefToElement[] funcCode;
+        RefToElement [] propRefs;
 
         public override void Read(byte[] data, ushort offset, int length)
         {
@@ -22,9 +17,15 @@ namespace SCI_Translator.Scripts.Sections
             funcList = ReadShortBE(data, ref o);
             int selectorsCount = ReadShortBE(data, ref o);
 
-            selectors = new ushort[selectorsCount];
+            Selectors = new ushort[selectorsCount];
+            propRefs = new RefToElement[selectorsCount];
             for (int i = 0; i < selectorsCount; i++)
-                selectors[i] = ReadShortBE(data, ref o);
+            {
+                var addr = o;
+                Selectors[i] = ReadShortBE(data, ref o);
+
+                propRefs[i] = new RefToElement(_script, addr, Selectors[i]);
+            }
 
             if (Type == SectionType.Class)
             {
@@ -34,28 +35,47 @@ namespace SCI_Translator.Scripts.Sections
             }
 
             int fs = ReadShortBE(data, ref o);
-            funcNames = new ushort[fs];
+            FuncNames = new ushort[fs];
             for (int i = 0; i < fs; i++)
-                funcNames[i] = ReadShortBE(data, ref o);
+                FuncNames[i] = ReadShortBE(data, ref o);
 
             o += 2;
 
-            funcCode = new RefToElement[fs];
+            FuncCode = new RefToElement[fs];
             for (int i = 0; i < fs; i++)
-                funcCode[i] = new RefToElement(_script, ReadShortBE(data, ref o));
+            {
+                var addr = o;
+                FuncCode[i] = new RefToElement(_script, addr, ReadShortBE(data, ref o));
+            }
         }
 
-        public ushort Id => selectors[0];
+        public override void SetupByOffset()
+        {
+            for (int i = 0; i < propRefs.Length; i++)
+            {
+                propRefs[i].SetupByOffset();
+                if (propRefs[i].Reference == null)
+                    propRefs[i] = null;
+            }
 
-        public string Name => _script.GetString(selectors[3]);
+            if (propRefs[3]?.Reference is StringConst str)
+                str.IsClassName = true;
 
-        public ushort[] Selectors => selectors;
+            foreach (var r in FuncCode)
+                r.SetupByOffset();
+        }
+
+        public ushort Id => Selectors[0];
+
+        public string Name => (propRefs[3]?.Reference as StringConst)?.Value;
+
+        public ushort[] Selectors { get; private set; }
 
         public ushort[] Varselectors => varselectors ?? SuperClass.Varselectors;
 
-        public ushort[] FuncNames => funcNames;
+        public ushort[] FuncNames { get; private set; }
 
-        public RefToElement[] FuncCode => funcCode;
+        public RefToElement[] FuncCode { get; private set; }
 
         private ClassSection _superClass;
 
@@ -64,7 +84,7 @@ namespace SCI_Translator.Scripts.Sections
             get
             {
                 if (_superClass != null) return _superClass;
-                return _superClass = Package.GetClass(selectors[1]);
+                return _superClass = Package.GetClass(Selectors[1]);
             }
         }
 
@@ -73,10 +93,10 @@ namespace SCI_Translator.Scripts.Sections
             bb.AddShortBE(0x1234);
             bb.AddShortBE(0);
             bb.AddShortBE(funcList);
-            bb.AddShortBE((ushort)(selectors.Length));
+            bb.AddShortBE((ushort)(Selectors.Length));
 
-            for (int i = 0; i < selectors.Length; i++)
-                bb.AddShortBE(selectors[i]);
+            for (int i = 0; i < Selectors.Length; i++)
+                bb.AddShortBE(Selectors[i]);
 
             if (Type == SectionType.Class)
             {
@@ -84,19 +104,22 @@ namespace SCI_Translator.Scripts.Sections
                     bb.AddShortBE(vs);
             }
 
-            bb.AddShortBE((ushort)funcNames.Length);
-            foreach (ushort val in funcNames)
+            bb.AddShortBE((ushort)FuncNames.Length);
+            foreach (ushort val in FuncNames)
                 bb.AddShortBE(val);
 
             bb.AddShortBE(0);
 
-            foreach (RefToElement r in funcCode)
+            foreach (RefToElement r in FuncCode)
                 r.Write(bb);
         }
 
         public override void WriteOffsets(ByteBuilder bb)
         {
-            foreach (RefToElement r in funcCode)
+            for (int i = 0; i < propRefs.Length; i++)
+                propRefs[i]?.WriteOffset(bb);
+
+            foreach (RefToElement r in FuncCode)
                 r.WriteOffset(bb);
         }
 
@@ -106,8 +129,8 @@ namespace SCI_Translator.Scripts.Sections
             sb.Append(String.Format("[{0} section (0x{1:X4})]\r\n", Type, _offset));
             sb.Append(String.Format("\tname = {0}\r\n", Name));
             sb.Append(String.Format("\tspecies = {0:x4}\r\n", Id));
-            for (int i = 0; i < selectors.Length; i++)
-                sb.Append(String.Format("\tsel[{0}] = {1:x}\r\n", i, selectors[i]));
+            for (int i = 0; i < Selectors.Length; i++)
+                sb.Append(String.Format("\tsel[{0}] = {1:x}\r\n", i, Selectors[i]));
 
             if (Type == SectionType.Class)
             {
@@ -116,11 +139,11 @@ namespace SCI_Translator.Scripts.Sections
                     sb.Append(String.Format("\tvarsel[{0}] = {1:x4}\t\r\n", i, varselectors[i]));
             }
 
-            if (funcNames.Length > 0)
+            if (FuncNames.Length > 0)
             {
                 sb.AppendLine();
-                for (int i = 0; i < funcNames.Length; i++)
-                    sb.Append(String.Format("\tfunc[{0}] = {1} {2:x4}\r\n", i, Package.GetName(funcNames[i]), funcCode[i]));
+                for (int i = 0; i < FuncNames.Length; i++)
+                    sb.Append(String.Format("\tfunc[{0}] = {1} {2:x4}\r\n", i, Package.GetName(FuncNames[i]), FuncCode[i]));
             }
 
             return sb.ToString();

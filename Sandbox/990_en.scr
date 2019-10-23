@@ -47,7 +47,7 @@
 	0x35    ldi      $00                      ; [0x0061]
 	0x48    ret                               ; [0x0063]
 	0x76    push0                             ; [0x0064]
-	0x40    call     ref_B800, $00            ; [0x0065]
+	0x40    call     code_05B3;  pushSelf, $00; [0x0065]
 	0xA3    sal      $05                      ; [0x0069]
 	0x36    push                              ; [0x006B]
 	0x35    ldi      $01                      ; [0x006C]
@@ -69,11 +69,11 @@
 	0x7A    push2                             ; [0x008A]
 	0x39    pushi    $04                      ; [0x008B]
 	0x3C    dup                               ; [0x008D]
-	0x72    lofsa    ref_0A1B                 ; [0x008E]
+	0x72    lofsa    ref_ref_098A;  ref_0010  ; [0x008E]
 	0x4A    send     $18                      ; [0x0091]
 	0x39    pushi    $73                      ; [0x0093]
 	0x78    push1                             ; [0x0095]
-	0x72    lofsa    ref_0A23                 ; [0x0096]
+	0x72    lofsa    ref_ref_098A;  ref_0010  ; [0x0096]
 	0x36    push                              ; [0x0099]
 	0x38    pushi    $00aa                    ; [0x009A]
 	0x76    push0                             ; [0x009D]
@@ -96,11 +96,11 @@
 	0x39    pushi    $20                      ; [0x00BA]
 	0x78    push1                             ; [0x00BC]
 	0x7A    push2                             ; [0x00BD]
-	0x72    lofsa    ref_0A13                 ; [0x00BE]
+	0x72    lofsa    ref_ref_0952;  ref_0011  ; [0x00BE]
 	0x4A    send     $1e                      ; [0x00C1]
 	0x39    pushi    $0c                      ; [0x00C3]
 	0x76    push0                             ; [0x00C5]
-	0x72    lofsa    ref_0A1B                 ; [0x00C6]
+	0x72    lofsa    ref_ref_0952;  ref_0011  ; [0x00C6]
 	0x4A    send     $04                      ; [0x00C9]
 	0x36    push                              ; [0x00CB]
 	0x35    ldi      $04                      ; [0x00CC]
@@ -117,7 +117,7 @@
 	0x8B    lsl      $02                      ; [0x00E0]
 	0x39    pushi    $09                      ; [0x00E2]
 	0x76    push0                             ; [0x00E4]
-	0x72    lofsa    ref_0A3A                 ; [0x00E5]
+	0x72    lofsa    ref_ref_0952;  ref_0011  ; [0x00E5]
 	0x4A    send     $04                      ; [0x00E8]
 	0x36    push                              ; [0x00EA]
 	0x39    pushi    $20                      ; [0x00EB]
@@ -137,7 +137,7 @@
 	0x32    jmp      code_010B;  push         ; [0x0106]
 	0x35    ldi      $03                      ; [0x0109]
 	0x36    push                              ; [0x010B]
-	0x72    lofsa    ref_0ACB                 ; [0x010C]
+	0x72    lofsa    ref_ref_09BC;  code_000F;  calle; [0x010C]
 	0x4A    send     $18                      ; [0x010F]
 	0x38    pushi    $00aa                    ; [0x0111]
 	0x76    push0                             ; [0x0114]
@@ -146,7 +146,7 @@
 	0x8B    lsl      $02                      ; [0x0119]
 	0x39    pushi    $0b                      ; [0x011B]
 	0x76    push0                             ; [0x011D]
-	0x72    lofsa    ref_0ADD                 ; [0x011E]
+	0x72    lofsa    ref_ref_09BC;  code_000F;  calle; [0x011E]
 	0x4A    send     $04                      ; [0x0121]
 	0x36    push                              ; [0x0123]
 	0x35    ldi      $04                      ; [0x0124]
@@ -161,7 +161,7 @@
 	0x32    jmp      code_0138;  push         ; [0x0133]
 	0x35    ldi      $03                      ; [0x0136]
 	0x36    push                              ; [0x0138]
-	0x72    lofsa    ref_0B82                 ; [0x0139]
+	0x72    lofsa    ref_ref_0A46;  code_000F;  calle; [0x0139]
 	0x4A    send     $12                      ; [0x013C]
 	0x38    pushi    $00aa                    ; [0x013E]
 	0x76    push0                             ; [0x0141]
@@ -170,7 +170,7 @@
 	0x8B    lsl      $02                      ; [0x0146]
 	0x39    pushi    $0b                      ; [0x0148]
 	0x76    push0                             ; [0x014A]
-	0x72    lofsa    ref_0B94                 ; [0x014B]
+	0x72    lofsa    ref_ref_0A46;  code_000F;  calle; [0x014B]
 	0x4A    send     $04                      ; [0x014E]
 	0x36    push                              ; [0x0150]
 	0x35    ldi      $04                      ; [0x0151]
@@ -180,13 +180,13 @@
 	0x78    push1                             ; [0x0157]
 	0x39    pushi    $20                      ; [0x0158]
 	0x76    push0                             ; [0x015A]
-	0x72    lofsa    ref_0B76                 ; [0x015B]
+	0x72    lofsa    ref_ref_0A18;  code_000F;  calle; [0x015B]
 	0x4A    send     $04                      ; [0x015E]
 	0x36    push                              ; [0x0160]
 	0x35    ldi      $f7                      ; [0x0161]
 	0x12    and                               ; [0x0163]
 	0x36    push                              ; [0x0164]
-	0x72    lofsa    ref_0B80                 ; [0x0165]
+	0x72    lofsa    ref_ref_0A18;  code_000F;  calle; [0x0165]
 	0x4A    send     $12                      ; [0x0168]
 	0x38    pushi    $00aa                    ; [0x016A]
 	0x76    push0                             ; [0x016D]
@@ -195,7 +195,7 @@
 	0x8B    lsl      $02                      ; [0x0172]
 	0x39    pushi    $0b                      ; [0x0174]
 	0x76    push0                             ; [0x0176]
-	0x72    lofsa    ref_0B92                 ; [0x0177]
+	0x72    lofsa    ref_ref_0A18;  code_000F;  calle; [0x0177]
 	0x4A    send     $04                      ; [0x017A]
 	0x36    push                              ; [0x017C]
 	0x35    ldi      $04                      ; [0x017D]
@@ -205,25 +205,25 @@
 	0x78    push1                             ; [0x0183]
 	0x39    pushi    $20                      ; [0x0184]
 	0x76    push0                             ; [0x0186]
-	0x72    lofsa    ref_0B74                 ; [0x0187]
+	0x72    lofsa    ref_ref_09EA;  code_000F;  calle; [0x0187]
 	0x4A    send     $04                      ; [0x018A]
 	0x36    push                              ; [0x018C]
 	0x35    ldi      $f7                      ; [0x018D]
 	0x12    and                               ; [0x018F]
 	0x36    push                              ; [0x0190]
-	0x72    lofsa    ref_0B7E                 ; [0x0191]
+	0x72    lofsa    ref_ref_09EA;  code_000F;  calle; [0x0191]
 	0x4A    send     $12                      ; [0x0194]
 	0x39    pushi    $73                      ; [0x0196]
 	0x39    pushi    $05                      ; [0x0198]
-	0x72    lofsa    ref_0AEF                 ; [0x019A]
+	0x72    lofsa    ref_ref_0952;  ref_0011  ; [0x019A]
 	0x36    push                              ; [0x019D]
-	0x72    lofsa    ref_0B5D                 ; [0x019E]
+	0x72    lofsa    ref_ref_09BC;  code_000F;  calle; [0x019E]
 	0x36    push                              ; [0x01A1]
-	0x72    lofsa    ref_0BEB                 ; [0x01A2]
+	0x72    lofsa    ref_ref_0A46;  code_000F;  calle; [0x01A2]
 	0x36    push                              ; [0x01A5]
-	0x72    lofsa    ref_0BC1                 ; [0x01A6]
+	0x72    lofsa    ref_ref_0A18;  code_000F;  calle; [0x01A6]
 	0x36    push                              ; [0x01A9]
-	0x72    lofsa    ref_0B97                 ; [0x01AA]
+	0x72    lofsa    ref_ref_09EA;  code_000F;  calle; [0x01AA]
 	0x36    push                              ; [0x01AD]
 	0x38    pushi    $00aa                    ; [0x01AE]
 	0x76    push0                             ; [0x01B1]
@@ -245,11 +245,11 @@
 	0x7A    push2                             ; [0x01CC]
 	0x39    pushi    $04                      ; [0x01CD]
 	0x3C    dup                               ; [0x01CF]
-	0x72    lofsa    ref_0C47                 ; [0x01D0]
+	0x72    lofsa    ref_ref_0A74;  ref_000D  ; [0x01D0]
 	0x4A    send     $14                      ; [0x01D3]
 	0x39    pushi    $0b                      ; [0x01D5]
 	0x76    push0                             ; [0x01D7]
-	0x72    lofsa    ref_0C4F                 ; [0x01D8]
+	0x72    lofsa    ref_ref_0A74;  ref_000D  ; [0x01D8]
 	0x4A    send     $04                      ; [0x01DB]
 	0x36    push                              ; [0x01DD]
 	0x35    ldi      $04                      ; [0x01DE]
@@ -263,7 +263,7 @@
 	0x54    self     $0a                      ; [0x01EC]
 	0x39    pushi    $73                      ; [0x01EE]
 	0x78    push1                             ; [0x01F0]
-	0x72    lofsa    ref_0C68                 ; [0x01F1]
+	0x72    lofsa    ref_ref_0A74;  ref_000D  ; [0x01F1]
 	0x36    push                              ; [0x01F4]
 	0x38    pushi    $00aa                    ; [0x01F5]
 	0x76    push0                             ; [0x01F8]
@@ -278,7 +278,7 @@
 	0x48    ret                               ; [0x0209]
 	0x3E    link     $0d, $02                 ; [0x020A]
 	0x7C    pushSelf                          ; [0x020D]
-	0x72    lofsa    ref_085B                 ; [0x020E]
+	0x72    lofsa    ref_ref_064A;  code_003B;  lag; [0x020E]
 	0x1A    eq?                               ; [0x0211]
 	0x30    bnt      code_024D;  pushi        ; [0x0212]
 	0x87    lap      $00                      ; [0x0215]
@@ -329,23 +329,23 @@
 	0x30    bnt      code_0280;  dup          ; [0x026C]
 	0x83    lal      $03                      ; [0x026F]
 	0x30    bnt      code_029D;  toss         ; [0x0271]
-	0x72    lofsa    ref_0C33                 ; [0x0274]
+	0x72    lofsa    ref_ref_09BC;  code_000F;  calle; [0x0274]
 	0x32    jmp      code_029D;  toss         ; [0x0277]
-	0x72    lofsa    ref_0C95                 ; [0x027A]
+	0x72    lofsa    ref_ref_0A18;  code_000F;  calle; [0x027A]
 	0x32    jmp      code_029D;  toss         ; [0x027D]
 	0x3C    dup                               ; [0x0280]
 	0x35    ldi      $01                      ; [0x0281]
 	0x1A    eq?                               ; [0x0283]
 	0x30    bnt      code_028D;  dup          ; [0x0284]
-	0x72    lofsa    ref_0C14                 ; [0x0287]
+	0x72    lofsa    ref_ref_098A;  ref_0010  ; [0x0287]
 	0x32    jmp      code_029D;  toss         ; [0x028A]
 	0x3C    dup                               ; [0x028D]
 	0x35    ldi      $02                      ; [0x028E]
 	0x1A    eq?                               ; [0x0290]
 	0x30    bnt      code_029A;  lofsa        ; [0x0291]
-	0x72    lofsa    ref_0C53                 ; [0x0294]
+	0x72    lofsa    ref_ref_09BC;  code_000F;  calle; [0x0294]
 	0x32    jmp      code_029D;  toss         ; [0x0297]
-	0x72    lofsa    ref_0CB5                 ; [0x029A]
+	0x72    lofsa    ref_ref_0A18;  code_000F;  calle; [0x029A]
 	0x3A    toss                              ; [0x029D]
 	0xA3    sal      $01                      ; [0x029E]
 	0x39    pushi    $3c                      ; [0x02A0]
@@ -357,10 +357,10 @@
 	0x78    push1                             ; [0x02AC]
 	0x39    pushi    $24                      ; [0x02AD]
 	0x76    push0                             ; [0x02AF]
-	0x72    lofsa    ref_0C05                 ; [0x02B0]
+	0x72    lofsa    ref_ref_0952;  ref_0011  ; [0x02B0]
 	0x4A    send     $04                      ; [0x02B3]
 	0x36    push                              ; [0x02B5]
-	0x72    lofsa    ref_0C0B                 ; [0x02B6]
+	0x72    lofsa    ref_ref_0952;  ref_0011  ; [0x02B6]
 	0x4A    send     $06                      ; [0x02B9]
 	0xA3    sal      $04                      ; [0x02BB]
 	0x36    push                              ; [0x02BD]
@@ -368,7 +368,7 @@
 	0x06    mul                               ; [0x02C0]
 	0xA5    sat      $02                      ; [0x02C1]
 	0x8B    lsl      $02                      ; [0x02C3]
-	0x72    lofsa    ref_0CE0                 ; [0x02C5]
+	0x72    lofsa    ref_ref_0A18;  code_000F;  calle; [0x02C5]
 	0x1A    eq?                               ; [0x02C8]
 	0x30    bnt      code_0317;  lsl          ; [0x02C9]
 	0x39    pushi    $6c                      ; [0x02CC]
@@ -376,7 +376,7 @@
 	0x54    self     $04                      ; [0x02CF]
 	0x78    push1                             ; [0x02D1]
 	0x89    lsg      $1d                      ; [0x02D2]
-	0x40    call     ref_8D00, $02            ; [0x02D4]
+	0x40    call     code_0888;  link, $02    ; [0x02D4]
 	0x30    bnt      code_0302;  pushi        ; [0x02D8]
 	0x39    pushi    $03                      ; [0x02DB]
 	0x39    pushi    $17                      ; [0x02DD]
@@ -411,7 +411,7 @@
 	0x1A    eq?                               ; [0x031B]
 	0x30    bnt      code_0364;  lsl          ; [0x031C]
 	0x8B    lsl      $02                      ; [0x031F]
-	0x72    lofsa    ref_0CE0                 ; [0x0321]
+	0x72    lofsa    ref_ref_09BC;  code_000F;  calle; [0x0321]
 	0x1A    eq?                               ; [0x0324]
 	0x30    bnt      code_0364;  lsl          ; [0x0325]
 	0x39    pushi    $6c                      ; [0x0328]
@@ -426,7 +426,7 @@
 	0x36    push                              ; [0x0338]
 	0x43    callk    $47, $04                 ; [0x0339]
 	0x36    push                              ; [0x033C]
-	0x72    lofsa    ref_0B98                 ; [0x033D]
+	0x72    lofsa    ref_ref_0858;  ref_0012  ; [0x033D]
 	0x4A    send     $06                      ; [0x0340]
 	0x30    bnt      code_034F;  pushi        ; [0x0342]
 	0x83    lal      $04                      ; [0x0345]
@@ -447,11 +447,11 @@
 	0x1A    eq?                               ; [0x0368]
 	0x30    bnt      code_0431;  lsl          ; [0x0369]
 	0x8B    lsl      $02                      ; [0x036C]
-	0x72    lofsa    ref_0D2D                 ; [0x036E]
+	0x72    lofsa    ref_ref_09BC;  code_000F;  calle; [0x036E]
 	0x1A    eq?                               ; [0x0371]
 	0x2E    bt       $06, $00                 ; [0x0372]
 	0x8B    lsl      $02                      ; [0x0375]
-	0x72    lofsa    ref_0D04                 ; [0x0377]
+	0x72    lofsa    ref_ref_098A;  ref_0010  ; [0x0377]
 	0x1A    eq?                               ; [0x037A]
 	0x30    bnt      code_0431;  lsl          ; [0x037B]
 	0x78    push1                             ; [0x037E]
@@ -465,7 +465,7 @@
 	0x76    push0                             ; [0x038D]
 	0x54    self     $04                      ; [0x038E]
 	0x76    push0                             ; [0x0390]
-	0x40    call     ref_3B00, $00            ; [0x0391]
+	0x40    call     code_0936;  pushi, $00   ; [0x0391]
 	0x39    pushi    $6b                      ; [0x0395]
 	0x39    pushi    $03                      ; [0x0397]
 	0x8F    lsp      $01                      ; [0x0399]
@@ -538,22 +538,22 @@
 	0x32    jmp      code_0596;  push1        ; [0x042B]
 	0x32    jmp      code_0266;  lsl          ; [0x042E]
 	0x8B    lsl      $02                      ; [0x0431]
-	0x72    lofsa    ref_0E7C                 ; [0x0433]
+	0x72    lofsa    ref_ref_0A46;  code_000F;  calle; [0x0433]
 	0x1A    eq?                               ; [0x0436]
 	0x30    bnt      code_053D;  lsl          ; [0x0437]
 	0x39    pushi    $6c                      ; [0x043A]
 	0x76    push0                             ; [0x043C]
 	0x54    self     $04                      ; [0x043D]
 	0x39    pushi    $08                      ; [0x043F]
-	0x72    lofsa    ref_110A                 ; [0x0441]
+	0x72    lofsa    string_0CC6;  'Are you sure you want to$0D$0Adelete this saved game?'; [0x0441]
 	0x36    push                              ; [0x0444]
 	0x39    pushi    $6a                      ; [0x0445]
 	0x39    pushi    $51                      ; [0x0447]
-	0x72    lofsa    ref_1144                 ; [0x0449]
+	0x72    lofsa    string_0CF8;  ' No '     ; [0x0449]
 	0x36    push                              ; [0x044C]
 	0x76    push0                             ; [0x044D]
 	0x39    pushi    $51                      ; [0x044E]
-	0x72    lofsa    ref_1150                 ; [0x0450]
+	0x72    lofsa    string_0CFD;  'Yes'      ; [0x0450]
 	0x36    push                              ; [0x0453]
 	0x78    push1                             ; [0x0454]
 	0x46    calle    export940_0, $10         ; [0x0455]
@@ -668,7 +668,7 @@
 	0x54    self     $0a                      ; [0x0538]
 	0x32    jmp      code_0266;  lsl          ; [0x053A]
 	0x8B    lsl      $02                      ; [0x053D]
-	0x72    lofsa    ref_0EFE                 ; [0x053F]
+	0x72    lofsa    ref_ref_09BC;  code_000F;  calle; [0x053F]
 	0x1A    eq?                               ; [0x0542]
 	0x30    bnt      code_0553;  lsl          ; [0x0543]
 	0x83    lal      $04                      ; [0x0546]
@@ -681,7 +681,7 @@
 	0x1A    eq?                               ; [0x0557]
 	0x2E    bt       $06, $00                 ; [0x0558]
 	0x8B    lsl      $02                      ; [0x055B]
-	0x72    lofsa    ref_0F4A                 ; [0x055D]
+	0x72    lofsa    ref_ref_09EA;  code_000F;  calle; [0x055D]
 	0x1A    eq?                               ; [0x0560]
 	0x30    bnt      code_056E;  lsl          ; [0x0561]
 	0x35    ldi      $ff                      ; [0x0564]
@@ -706,7 +706,7 @@
 	0x36    push                              ; [0x058A]
 	0x39    pushi    $53                      ; [0x058B]
 	0x76    push0                             ; [0x058D]
-	0x72    lofsa    ref_0F1B                 ; [0x058E]
+	0x72    lofsa    ref_ref_098A;  ref_0010  ; [0x058E]
 	0x4A    send     $0a                      ; [0x0591]
 	0x32    jmp      code_0266;  lsl          ; [0x0593]
 	0x78    push1                             ; [0x0596]
@@ -724,13 +724,13 @@
 	0x85    lat      $01                      ; [0x05B0]
 	0x48    ret                               ; [0x05B2]
 	0x7C    pushSelf                          ; [0x05B3]
-	0x72    lofsa    ref_0C01                 ; [0x05B4]
+	0x72    lofsa    ref_ref_064A;  code_003B;  lag; [0x05B4]
 	0x1A    eq?                               ; [0x05B7]
 	0x30    bnt      code_05C0;  push0        ; [0x05B8]
 	0x35    ldi      $00                      ; [0x05BB]
 	0x32    jmp      code_05D9;  ret          ; [0x05BD]
 	0x76    push0                             ; [0x05C0]
-	0x40    call     ref_2A00, $00            ; [0x05C1]
+	0x40    call     code_0927;  lsl, $00     ; [0x05C1]
 	0x30    bnt      code_05CD;  lal          ; [0x05C5]
 	0x35    ldi      $01                      ; [0x05C8]
 	0x32    jmp      code_05D9;  ret          ; [0x05CA]
@@ -782,9 +782,9 @@
 	varsel[16] = 0085	
 	varsel[17] = 0086	
 
-	func[0] = init ref_0027
-	func[1] = doit ref_020A
-	func[2] = dispose ref_000E
+	func[0] = init code_0027;  push0
+	func[1] = doit code_020A;  link
+	func[2] = dispose code_000E;  push0
 
 [Class section (0x0642)]
 	name = Restore
@@ -888,11 +888,11 @@
 	0x7A    push2                             ; [0x0710]
 	0x39    pushi    $04                      ; [0x0711]
 	0x3C    dup                               ; [0x0713]
-	0x72    lofsa    ref_11BB                 ; [0x0714]
+	0x72    lofsa    ref_ref_0AA4;  ref_000D  ; [0x0714]
 	0x4A    send     $0c                      ; [0x0717]
 	0x39    pushi    $73                      ; [0x0719]
 	0x78    push1                             ; [0x071B]
-	0x72    lofsa    ref_11C3                 ; [0x071C]
+	0x72    lofsa    ref_ref_0AA4;  ref_000D  ; [0x071C]
 	0x36    push                              ; [0x071F]
 	0x38    pushi    $00aa                    ; [0x0720]
 	0x76    push0                             ; [0x0723]
@@ -909,11 +909,11 @@
 	0x7A    push2                             ; [0x0737]
 	0x39    pushi    $04                      ; [0x0738]
 	0x67    pTos     $16                      ; [0x073A]
-	0x72    lofsa    ref_1243                 ; [0x073C]
+	0x72    lofsa    ref_ref_0B04;  ref_000D  ; [0x073C]
 	0x4A    send     $18                      ; [0x073F]
 	0x39    pushi    $73                      ; [0x0741]
 	0x78    push1                             ; [0x0743]
-	0x72    lofsa    ref_124B                 ; [0x0744]
+	0x72    lofsa    ref_ref_0B04;  ref_000D  ; [0x0744]
 	0x36    push                              ; [0x0747]
 	0x38    pushi    $00aa                    ; [0x0748]
 	0x76    push0                             ; [0x074B]
@@ -924,11 +924,11 @@
 	0x7A    push2                             ; [0x0755]
 	0x39    pushi    $04                      ; [0x0756]
 	0x67    pTos     $16                      ; [0x0758]
-	0x72    lofsa    ref_1231                 ; [0x075A]
+	0x72    lofsa    ref_ref_0AD4;  ref_000D  ; [0x075A]
 	0x4A    send     $0c                      ; [0x075D]
 	0x39    pushi    $73                      ; [0x075F]
 	0x78    push1                             ; [0x0761]
-	0x72    lofsa    ref_1239                 ; [0x0762]
+	0x72    lofsa    ref_ref_0AD4;  ref_000D  ; [0x0762]
 	0x36    push                              ; [0x0765]
 	0x38    pushi    $00aa                    ; [0x0766]
 	0x76    push0                             ; [0x0769]
@@ -945,11 +945,11 @@
 	0x7A    push2                             ; [0x077D]
 	0x39    pushi    $04                      ; [0x077E]
 	0x67    pTos     $16                      ; [0x0780]
-	0x72    lofsa    ref_12B9                 ; [0x0782]
+	0x72    lofsa    ref_ref_0B34;  ref_0010  ; [0x0782]
 	0x4A    send     $18                      ; [0x0785]
 	0x39    pushi    $73                      ; [0x0787]
 	0x78    push1                             ; [0x0789]
-	0x72    lofsa    ref_12C1                 ; [0x078A]
+	0x72    lofsa    ref_ref_0B34;  ref_0010  ; [0x078A]
 	0x36    push                              ; [0x078D]
 	0x38    pushi    $00aa                    ; [0x078E]
 	0x76    push0                             ; [0x0791]
@@ -962,7 +962,7 @@
 	0x76    push0                             ; [0x079B]
 	0x38    pushi    $00aa                    ; [0x079C]
 	0x76    push0                             ; [0x079F]
-	0x72    lofsa    ref_1309                 ; [0x07A0]
+	0x72    lofsa    ref_ref_0B66;  code_000F;  calle; [0x07A0]
 	0x4A    send     $10                      ; [0x07A3]
 	0x39    pushi    $0a                      ; [0x07A5]
 	0x78    push1                             ; [0x07A7]
@@ -972,14 +972,14 @@
 	0x76    push0                             ; [0x07AC]
 	0x38    pushi    $00aa                    ; [0x07AD]
 	0x76    push0                             ; [0x07B0]
-	0x72    lofsa    ref_1348                 ; [0x07B1]
+	0x72    lofsa    ref_ref_0B94;  code_000F;  calle; [0x07B1]
 	0x4A    send     $10                      ; [0x07B4]
 	0x38    pushi    $00ac                    ; [0x07B6]
 	0x7A    push2                             ; [0x07B9]
 	0x67    pTos     $18                      ; [0x07BA]
 	0x39    pushi    $0c                      ; [0x07BC]
 	0x76    push0                             ; [0x07BE]
-	0x72    lofsa    ref_1356                 ; [0x07BF]
+	0x72    lofsa    ref_ref_0B94;  code_000F;  calle; [0x07BF]
 	0x4A    send     $04                      ; [0x07C2]
 	0x36    push                              ; [0x07C4]
 	0x35    ldi      $04                      ; [0x07C5]
@@ -987,18 +987,18 @@
 	0x04    sub                               ; [0x07C8]
 	0x36    push                              ; [0x07C9]
 	0x67    pTos     $16                      ; [0x07CA]
-	0x72    lofsa    ref_1363                 ; [0x07CC]
+	0x72    lofsa    ref_ref_0B94;  code_000F;  calle; [0x07CC]
 	0x4A    send     $08                      ; [0x07CF]
 	0x38    pushi    $00ac                    ; [0x07D1]
 	0x7A    push2                             ; [0x07D4]
 	0x39    pushi    $0a                      ; [0x07D5]
 	0x76    push0                             ; [0x07D7]
-	0x72    lofsa    ref_136F                 ; [0x07D8]
+	0x72    lofsa    ref_ref_0B94;  code_000F;  calle; [0x07D8]
 	0x4A    send     $04                      ; [0x07DB]
 	0x36    push                              ; [0x07DD]
 	0x39    pushi    $0c                      ; [0x07DE]
 	0x76    push0                             ; [0x07E0]
-	0x72    lofsa    ref_134A                 ; [0x07E1]
+	0x72    lofsa    ref_ref_0B66;  code_000F;  calle; [0x07E1]
 	0x4A    send     $04                      ; [0x07E4]
 	0x36    push                              ; [0x07E6]
 	0x35    ldi      $04                      ; [0x07E7]
@@ -1006,13 +1006,13 @@
 	0x04    sub                               ; [0x07EA]
 	0x36    push                              ; [0x07EB]
 	0x67    pTos     $16                      ; [0x07EC]
-	0x72    lofsa    ref_1357                 ; [0x07EE]
+	0x72    lofsa    ref_ref_0B66;  code_000F;  calle; [0x07EE]
 	0x4A    send     $08                      ; [0x07F1]
 	0x39    pushi    $73                      ; [0x07F3]
 	0x7A    push2                             ; [0x07F5]
-	0x72    lofsa    ref_135F                 ; [0x07F6]
+	0x72    lofsa    ref_ref_0B66;  code_000F;  calle; [0x07F6]
 	0x36    push                              ; [0x07F9]
-	0x72    lofsa    ref_1391                 ; [0x07FA]
+	0x72    lofsa    ref_ref_0B94;  code_000F;  calle; [0x07FA]
 	0x36    push                              ; [0x07FD]
 	0x38    pushi    $00aa                    ; [0x07FE]
 	0x76    push0                             ; [0x0801]
@@ -1025,7 +1025,7 @@
 	0x54    self     $18                      ; [0x080D]
 	0x39    pushi    $3c                      ; [0x080F]
 	0x78    push1                             ; [0x0811]
-	0x72    lofsa    ref_1349                 ; [0x0812]
+	0x72    lofsa    ref_ref_0B34;  ref_0010  ; [0x0812]
 	0x36    push                              ; [0x0815]
 	0x57    super    $12, $06                 ; [0x0816]
 	0xA5    sat      $00                      ; [0x0819]
@@ -1038,7 +1038,7 @@
 	0x18    not                               ; [0x0826]
 	0x30    bnt      code_0833;  pushi        ; [0x0827]
 	0x76    push0                             ; [0x082A]
-	0x40    call     ref_3700, $00            ; [0x082B]
+	0x40    call     code_0936;  pushi, $00   ; [0x082B]
 	0x35    ldi      $00                      ; [0x082F]
 	0xA5    sat      $00                      ; [0x0831]
 	0x39    pushi    $56                      ; [0x0833]
@@ -1047,11 +1047,11 @@
 	0x81    lag      $01                      ; [0x0838]
 	0x4A    send     $06                      ; [0x083A]
 	0x8D    lst      $00                      ; [0x083C]
-	0x72    lofsa    ref_1375                 ; [0x083E]
+	0x72    lofsa    ref_ref_0B34;  ref_0010  ; [0x083E]
 	0x1A    eq?                               ; [0x0841]
 	0x2E    bt       $06, $00                 ; [0x0842]
 	0x8D    lst      $00                      ; [0x0845]
-	0x72    lofsa    ref_13B0                 ; [0x0847]
+	0x72    lofsa    ref_ref_0B66;  code_000F;  calle; [0x0847]
 	0x1A    eq?                               ; [0x084A]
 	0x48    ret                               ; [0x084B]
 
@@ -1077,7 +1077,7 @@
 	sel[16] = 0
 	sel[17] = 0
 
-	func[0] = doit ref_06F2
+	func[0] = doit code_06F2;  link
 
 [Code section (0x0888)]
 	0x3F    link     $87                      ; [0x0888]
@@ -1105,11 +1105,11 @@
 	0x36    push                              ; [0x08B0]
 	0x39    pushi    $1d                      ; [0x08B1]
 	0x39    pushi    $51                      ; [0x08B3]
-	0x72    lofsa    ref_15F1                 ; [0x08B5]
+	0x72    lofsa    string_0D39;  'OK'       ; [0x08B5]
 	0x36    push                              ; [0x08B8]
 	0x78    push1                             ; [0x08B9]
 	0x39    pushi    $51                      ; [0x08BA]
-	0x72    lofsa    ref_15FB                 ; [0x08BC]
+	0x72    lofsa    string_0D3C;  'Cancel'   ; [0x08BC]
 	0x36    push                              ; [0x08BF]
 	0x76    push0                             ; [0x08C0]
 	0x47    calle    $ff, $00, $1a            ; [0x08C1]
@@ -1493,102 +1493,102 @@
 	string_0C2C;  'This directory/disk can hold no more saved games. You must replace one of your saved games or use Change Directory to save on a different directory/disk.'
 
 [Relocation section (0x0DF6)]
-	pointer[0] = 143
-	pointer[1] = 151
-	pointer[2] = 191
-	pointer[3] = 199
-	pointer[4] = 230
-	pointer[5] = 269
-	pointer[6] = 287
-	pointer[7] = 314
-	pointer[8] = 332
-	pointer[9] = 348
-	pointer[10] = 358
-	pointer[11] = 376
-	pointer[12] = 392
-	pointer[13] = 402
-	pointer[14] = 411
-	pointer[15] = 415
-	pointer[16] = 419
-	pointer[17] = 423
-	pointer[18] = 427
-	pointer[19] = 465
-	pointer[20] = 473
-	pointer[21] = 498
-	pointer[22] = 527
-	pointer[23] = 629
-	pointer[24] = 635
-	pointer[25] = 648
-	pointer[26] = 661
-	pointer[27] = 667
-	pointer[28] = 689
-	pointer[29] = 695
-	pointer[30] = 710
-	pointer[31] = 802
-	pointer[32] = 830
-	pointer[33] = 879
-	pointer[34] = 888
-	pointer[35] = 1076
-	pointer[36] = 1090
-	pointer[37] = 1098
-	pointer[38] = 1105
-	pointer[39] = 1344
-	pointer[40] = 1374
-	pointer[41] = 1423
-	pointer[42] = 1461
-	pointer[43] = 1516
-	pointer[44] = 1616
-	pointer[45] = 1622
-	pointer[46] = 1704
-	pointer[47] = 1710
-	pointer[48] = 1813
-	pointer[49] = 1821
-	pointer[50] = 1853
-	pointer[51] = 1861
-	pointer[52] = 1883
-	pointer[53] = 1891
-	pointer[54] = 1923
-	pointer[55] = 1931
-	pointer[56] = 1953
-	pointer[57] = 1970
-	pointer[58] = 1984
-	pointer[59] = 1997
-	pointer[60] = 2009
-	pointer[61] = 2018
-	pointer[62] = 2031
-	pointer[63] = 2039
-	pointer[64] = 2043
-	pointer[65] = 2067
-	pointer[66] = 2111
-	pointer[67] = 2120
-	pointer[68] = 2142
-	pointer[69] = 2230
-	pointer[70] = 2237
-	pointer[71] = 2392
-	pointer[72] = 2448
-	pointer[73] = 2498
-	pointer[74] = 2544
-	pointer[75] = 2564
-	pointer[76] = 2590
-	pointer[77] = 2610
-	pointer[78] = 2636
-	pointer[79] = 2656
-	pointer[80] = 2682
-	pointer[81] = 2730
-	pointer[82] = 2750
-	pointer[83] = 2778
-	pointer[84] = 2798
-	pointer[85] = 2826
-	pointer[86] = 2874
-	pointer[87] = 2924
-	pointer[88] = 2944
-	pointer[89] = 2970
-	pointer[90] = 2990
-	pointer[91] = 3554
-	pointer[92] = 3556
-	pointer[93] = 3558
-	pointer[94] = 3560
-	pointer[95] = 3562
-	pointer[96] = 3564
-	pointer[97] = 3566
-	pointer[98] = 3568
+	pointer[0] = 008f; ref_ref_008F;  ref_ref_098A;  ref_0010
+	pointer[1] = 0097; ref_ref_0097;  ref_ref_098A;  ref_0010
+	pointer[2] = 00bf; ref_ref_00BF;  ref_ref_0952;  ref_0011
+	pointer[3] = 00c7; ref_ref_00C7;  ref_ref_0952;  ref_0011
+	pointer[4] = 00e6; ref_ref_00E6;  ref_ref_0952;  ref_0011
+	pointer[5] = 010d; ref_ref_010D;  ref_ref_09BC;  code_000F;  calle
+	pointer[6] = 011f; ref_ref_011F;  ref_ref_09BC;  code_000F;  calle
+	pointer[7] = 013a; ref_ref_013A;  ref_ref_0A46;  code_000F;  calle
+	pointer[8] = 014c; ref_ref_014C;  ref_ref_0A46;  code_000F;  calle
+	pointer[9] = 015c; ref_ref_015C;  ref_ref_0A18;  code_000F;  calle
+	pointer[10] = 0166; ref_ref_0166;  ref_ref_0A18;  code_000F;  calle
+	pointer[11] = 0178; ref_ref_0178;  ref_ref_0A18;  code_000F;  calle
+	pointer[12] = 0188; ref_ref_0188;  ref_ref_09EA;  code_000F;  calle
+	pointer[13] = 0192; ref_ref_0192;  ref_ref_09EA;  code_000F;  calle
+	pointer[14] = 019b; ref_ref_019B;  ref_ref_0952;  ref_0011
+	pointer[15] = 019f; ref_ref_019F;  ref_ref_09BC;  code_000F;  calle
+	pointer[16] = 01a3; ref_ref_01A3;  ref_ref_0A46;  code_000F;  calle
+	pointer[17] = 01a7; ref_ref_01A7;  ref_ref_0A18;  code_000F;  calle
+	pointer[18] = 01ab; ref_ref_01AB;  ref_ref_09EA;  code_000F;  calle
+	pointer[19] = 01d1; ref_ref_01D1;  ref_ref_0A74;  ref_000D
+	pointer[20] = 01d9; ref_ref_01D9;  ref_ref_0A74;  ref_000D
+	pointer[21] = 01f2; ref_ref_01F2;  ref_ref_0A74;  ref_000D
+	pointer[22] = 020f; ref_ref_020F;  ref_ref_064A;  code_003B;  lag
+	pointer[23] = 0275; ref_ref_0275;  ref_ref_09BC;  code_000F;  calle
+	pointer[24] = 027b; ref_ref_027B;  ref_ref_0A18;  code_000F;  calle
+	pointer[25] = 0288; ref_ref_0288;  ref_ref_098A;  ref_0010
+	pointer[26] = 0295; ref_ref_0295;  ref_ref_09BC;  code_000F;  calle
+	pointer[27] = 029b; ref_ref_029B;  ref_ref_0A18;  code_000F;  calle
+	pointer[28] = 02b1; ref_ref_02B1;  ref_ref_0952;  ref_0011
+	pointer[29] = 02b7; ref_ref_02B7;  ref_ref_0952;  ref_0011
+	pointer[30] = 02c6; ref_ref_02C6;  ref_ref_0A18;  code_000F;  calle
+	pointer[31] = 0322; ref_ref_0322;  ref_ref_09BC;  code_000F;  calle
+	pointer[32] = 033e; ref_ref_033E;  ref_ref_0858;  ref_0012
+	pointer[33] = 036f; ref_ref_036F;  ref_ref_09BC;  code_000F;  calle
+	pointer[34] = 0378; ref_ref_0378;  ref_ref_098A;  ref_0010
+	pointer[35] = 0434; ref_ref_0434;  ref_ref_0A46;  code_000F;  calle
+	pointer[36] = 0442; ref_ref_0442;  string_0CC6;  'Are you sure you want to$0D$0Adelete this saved game?'
+	pointer[37] = 044a; ref_ref_044A;  string_0CF8;  ' No '
+	pointer[38] = 0451; ref_ref_0451;  string_0CFD;  'Yes'
+	pointer[39] = 0540; ref_ref_0540;  ref_ref_09BC;  code_000F;  calle
+	pointer[40] = 055e; ref_ref_055E;  ref_ref_09EA;  code_000F;  calle
+	pointer[41] = 058f; ref_ref_058F;  ref_ref_098A;  ref_0010
+	pointer[42] = 05b5; ref_ref_05B5;  ref_ref_064A;  code_003B;  lag
+	pointer[43] = 05ec; ref_ref_05EC;  string_0D01;  'SRDialog'
+	pointer[44] = 0650; ref_ref_0650;  string_0BBA;  'Restore'
+	pointer[45] = 0656; ref_ref_0656;  string_0D0A;  'Restore a Game'
+	pointer[46] = 06a8; ref_ref_06A8;  string_0D25;  'Save'
+	pointer[47] = 06ae; ref_ref_06AE;  string_0D19;  'Save a Game'
+	pointer[48] = 0715; ref_ref_0715;  ref_ref_0AA4;  ref_000D
+	pointer[49] = 071d; ref_ref_071D;  ref_ref_0AA4;  ref_000D
+	pointer[50] = 073d; ref_ref_073D;  ref_ref_0B04;  ref_000D
+	pointer[51] = 0745; ref_ref_0745;  ref_ref_0B04;  ref_000D
+	pointer[52] = 075b; ref_ref_075B;  ref_ref_0AD4;  ref_000D
+	pointer[53] = 0763; ref_ref_0763;  ref_ref_0AD4;  ref_000D
+	pointer[54] = 0783; ref_ref_0783;  ref_ref_0B34;  ref_0010
+	pointer[55] = 078b; ref_ref_078B;  ref_ref_0B34;  ref_0010
+	pointer[56] = 07a1; ref_ref_07A1;  ref_ref_0B66;  code_000F;  calle
+	pointer[57] = 07b2; ref_ref_07B2;  ref_ref_0B94;  code_000F;  calle
+	pointer[58] = 07c0; ref_ref_07C0;  ref_ref_0B94;  code_000F;  calle
+	pointer[59] = 07cd; ref_ref_07CD;  ref_ref_0B94;  code_000F;  calle
+	pointer[60] = 07d9; ref_ref_07D9;  ref_ref_0B94;  code_000F;  calle
+	pointer[61] = 07e2; ref_ref_07E2;  ref_ref_0B66;  code_000F;  calle
+	pointer[62] = 07ef; ref_ref_07EF;  ref_ref_0B66;  code_000F;  calle
+	pointer[63] = 07f7; ref_ref_07F7;  ref_ref_0B66;  code_000F;  calle
+	pointer[64] = 07fb; ref_ref_07FB;  ref_ref_0B94;  code_000F;  calle
+	pointer[65] = 0813; ref_ref_0813;  ref_ref_0B34;  ref_0010
+	pointer[66] = 083f; ref_ref_083F;  ref_ref_0B34;  ref_0010
+	pointer[67] = 0848; ref_ref_0848;  ref_ref_0B66;  code_000F;  calle
+	pointer[68] = 085e; ref_ref_085E;  string_0D2A;  'GetReplaceName'
+	pointer[69] = 08b6; ref_ref_08B6;  string_0D39;  'OK'
+	pointer[70] = 08bd; ref_ref_08BD;  string_0D3C;  'Cancel'
+	pointer[71] = 0958; ref_ref_0958;  string_0D43;  'selectorI'
+	pointer[72] = 0990; ref_ref_0990;  string_0D4D;  'editI'
+	pointer[73] = 09c2; ref_ref_09C2;  string_0D53;  'okI'
+	pointer[74] = 09f0; ref_ref_09F0;  string_0D60;  'cancelI'
+	pointer[75] = 0a04; ref_ref_0A04;  string_0D57;  ' Cancel '
+	pointer[76] = 0a1e; ref_ref_0A1E;  string_0D7A;  'changeDirI'
+	pointer[77] = 0a32; ref_ref_0A32;  string_0D68;  'Change$0D$0ADirectory'
+	pointer[78] = 0a4c; ref_ref_0A4C;  string_0D8E;  'deleteI'
+	pointer[79] = 0a60; ref_ref_0A60;  string_0D85;  ' Delete '
+	pointer[80] = 0a7a; ref_ref_0A7A;  string_0D96;  'textI'
+	pointer[81] = 0aaa; ref_ref_0AAA;  string_0D9C;  'text1'
+	pointer[82] = 0abe; ref_ref_0ABE;  string_0BCB;  'Replace'
+	pointer[83] = 0ada; ref_ref_0ADA;  string_0DA8;  'text2'
+	pointer[84] = 0aee; ref_ref_0AEE;  string_0DA2;  'with:'
+	pointer[85] = 0b0a; ref_ref_0B0A;  string_0DAE;  'oldName'
+	pointer[86] = 0b3a; ref_ref_0B3A;  string_0DB6;  'newName'
+	pointer[87] = 0b6c; ref_ref_0B6C;  string_0DBE;  'button1'
+	pointer[88] = 0b80; ref_ref_0B80;  string_0BCB;  'Replace'
+	pointer[89] = 0b9a; ref_ref_0B9A;  string_0DC6;  'button2'
+	pointer[90] = 0bae; ref_ref_0BAE;  string_0D3C;  'Cancel'
+	pointer[91] = 0de2; ref_ref_0DE2;  string_0BBA;  'Restore'
+	pointer[92] = 0de4; ref_ref_0DE4;  string_0BC2;  '  Save  '
+	pointer[93] = 0de6; ref_ref_0DE6;  string_0BCB;  'Replace'
+	pointer[94] = 0de8; ref_ref_0DE8;  string_0BCB;  'Replace'
+	pointer[95] = 0dea; ref_ref_0DEA;  string_0BD3;  'Select the game that you would like to restore.'
+	pointer[96] = 0dec; ref_ref_0DEC;  string_0C03;  'Type the description of this saved game.'
+	pointer[97] = 0dee; ref_ref_0DEE;  string_0C2C;  'This directory/disk can hold no more saved games. You must replace one of your saved games or use Change Directory to save on a different directory/disk.'
+	pointer[98] = 0df0; ref_ref_0DF0;  string_0C2C;  'This directory/disk can hold no more saved games. You must replace one of your saved games or use Change Directory to save on a different directory/disk.'

@@ -15,7 +15,8 @@ namespace SCI_Translator.Scripts.Sections
             exports = new RefToElement[cnt];
             for (int i = 0; i < cnt; i++)
             {
-                exports[i] = new RefToElement(_script, ReadShortBE(data, ref offset)); // Helpers.GetShortBE(data, offset + 2 + i * 4)
+                var addr = offset;
+                exports[i] = new RefToElement(_script, addr, ReadShortBE(data, ref offset)); // Helpers.GetShortBE(data, offset + 2 + i * 4)
                 offset += 2;
             }
         }

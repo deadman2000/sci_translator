@@ -128,7 +128,7 @@ namespace SCI_Translator
                         else
                         {
                             string hex = String.Concat((char)str866[c + 1], (char)str866[c + 2]);
-                            bb.Add(Convert.ToByte(hex));
+                            bb.Add(Convert.ToByte(hex, 16));
                             c += 2;
                         }
                     }

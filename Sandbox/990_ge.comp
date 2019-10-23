@@ -79,6 +79,7 @@ wechseln"
         lastSeconds $0
     )
     (method (init) // method_0027
+        code_0027
   0027:76               push0 
   0028:46 03a4 0003 00  calle 3a4 procedure_0003 0
 
@@ -90,7 +91,9 @@ wechseln"
   0035:a3 00              sal 0
   0037:39 56            pushi 56
   0039:78               push1 
+        code_003a
   003a:78               push1 
+        code_003b
   003b:81 01              lag 1
   003d:4a 06             send 6
 
@@ -141,12 +144,12 @@ wechseln"
   008a:7a               push2 
   008b:39 04            pushi 4
   008d:3c                 dup 
-  008e:72 098e          lofsa ref_0a1f
+  008e:72 098e          lofsa ref_098e
   0091:4a 18             send 18
 
   0093:39 73            pushi 73
   0095:78               push1 
-  0096:72 098e          lofsa ref_0a27
+  0096:72 098e          lofsa ref_098e
   0099:36                push 
   009a:38 00aa          pushi aa
   009d:76               push0 
@@ -171,12 +174,12 @@ wechseln"
   00ba:39 20            pushi 20
   00bc:78               push1 
   00bd:7a               push2 
-  00be:72 0956          lofsa ref_0a17
+  00be:72 0956          lofsa ref_0956
   00c1:4a 1e             send 1e
 
   00c3:39 0c            pushi c
   00c5:76               push0 
-  00c6:72 0956          lofsa ref_0a1f
+  00c6:72 0956          lofsa ref_0956
   00c9:4a 04             send 4
 
   00cb:36                push 
@@ -194,7 +197,7 @@ wechseln"
   00e0:8b 02              lsl 2
   00e2:39 09            pushi 9
   00e4:76               push0 
-  00e5:72 0956          lofsa ref_0a3e
+  00e5:72 0956          lofsa ref_0956
   00e8:4a 04             send 4
 
   00ea:36                push 
@@ -218,7 +221,7 @@ wechseln"
   0109:35 03              ldi 3
         code_010b
   010b:36                push 
-  010c:72 09c0          lofsa ref_0acf
+  010c:72 09c0          lofsa ref_09c0
   010f:4a 18             send 18
 
   0111:38 00aa          pushi aa
@@ -228,7 +231,7 @@ wechseln"
   0119:8b 02              lsl 2
   011b:39 0b            pushi b
   011d:76               push0 
-  011e:72 09c0          lofsa ref_0ae1
+  011e:72 09c0          lofsa ref_09c0
   0121:4a 04             send 4
 
   0123:36                push 
@@ -246,7 +249,7 @@ wechseln"
   0136:35 03              ldi 3
         code_0138
   0138:36                push 
-  0139:72 0a4a          lofsa ref_0b86
+  0139:72 0a4a          lofsa ref_0a4a
   013c:4a 12             send 12
 
   013e:38 00aa          pushi aa
@@ -256,7 +259,7 @@ wechseln"
   0146:8b 02              lsl 2
   0148:39 0b            pushi b
   014a:76               push0 
-  014b:72 0a4a          lofsa ref_0b98
+  014b:72 0a4a          lofsa ref_0a4a
   014e:4a 04             send 4
 
   0150:36                push 
@@ -267,14 +270,14 @@ wechseln"
   0157:78               push1 
   0158:39 20            pushi 20
   015a:76               push0 
-  015b:72 0a1c          lofsa ref_0b7a
+  015b:72 0a1c          lofsa ref_0a1c
   015e:4a 04             send 4
 
   0160:36                push 
   0161:35 f7              ldi f7
   0163:12                 and 
   0164:36                push 
-  0165:72 0a1c          lofsa ref_0b84
+  0165:72 0a1c          lofsa ref_0a1c
   0168:4a 12             send 12
 
   016a:38 00aa          pushi aa
@@ -284,7 +287,7 @@ wechseln"
   0172:8b 02              lsl 2
   0174:39 0b            pushi b
   0176:76               push0 
-  0177:72 0a1c          lofsa ref_0b96
+  0177:72 0a1c          lofsa ref_0a1c
   017a:4a 04             send 4
 
   017c:36                push 
@@ -295,27 +298,27 @@ wechseln"
   0183:78               push1 
   0184:39 20            pushi 20
   0186:76               push0 
-  0187:72 09ee          lofsa ref_0b78
+  0187:72 09ee          lofsa ref_09ee
   018a:4a 04             send 4
 
   018c:36                push 
   018d:35 f7              ldi f7
   018f:12                 and 
   0190:36                push 
-  0191:72 09ee          lofsa ref_0b82
+  0191:72 09ee          lofsa ref_09ee
   0194:4a 12             send 12
 
   0196:39 73            pushi 73
   0198:39 05            pushi 5
-  019a:72 0956          lofsa ref_0af3
+  019a:72 0956          lofsa ref_0956
   019d:36                push 
-  019e:72 09c0          lofsa ref_0b61
+  019e:72 09c0          lofsa ref_09c0
   01a1:36                push 
-  01a2:72 0a4a          lofsa stringconst_0bef
+  01a2:72 0a4a          lofsa ref_0a4a
   01a5:36                push 
-  01a6:72 0a1c          lofsa ref_0bc5
+  01a6:72 0a1c          lofsa ref_0a1c
   01a9:36                push 
-  01aa:72 09ee          lofsa ref_0b9b
+  01aa:72 09ee          lofsa ref_09ee
   01ad:36                push 
   01ae:38 00aa          pushi aa
   01b1:76               push0 
@@ -338,12 +341,12 @@ wechseln"
   01cc:7a               push2 
   01cd:39 04            pushi 4
   01cf:3c                 dup 
-  01d0:72 0a78          lofsa ref_0c4b
+  01d0:72 0a78          lofsa ref_0a78
   01d3:4a 14             send 14
 
   01d5:39 0b            pushi b
   01d7:76               push0 
-  01d8:72 0a78          lofsa ref_0c53
+  01d8:72 0a78          lofsa ref_0a78
   01db:4a 04             send 4
 
   01dd:36                push 
@@ -359,7 +362,7 @@ wechseln"
 
   01ee:39 73            pushi 73
   01f0:78               push1 
-  01f1:72 0a78          lofsa ref_0c6c
+  01f1:72 0a78          lofsa ref_0a78
   01f4:36                push 
   01f5:38 00aa          pushi aa
   01f8:76               push0 
@@ -374,9 +377,10 @@ wechseln"
   0207:35 01              ldi 1
   0209:48                 ret 
 
+        code_020a
   020a:3e 0d 02          link d 2
   020d:7c               pushSelf 
-  020e:72 064a          lofsa ref_085b
+  020e:72 064a          lofsa ref_064a
   0211:1a                 eq? 
   0212:30 0038            bnt code_024d
   0215:87 00              lap 0
@@ -434,26 +438,26 @@ wechseln"
   026c:30 0011            bnt code_0280
   026f:83 03              lal 3
   0271:30 0029            bnt code_029d
-  0274:72 09c0          lofsa ref_0c37
+  0274:72 09c0          lofsa ref_09c0
   0277:32 0023            jmp code_029d
-  027a:72 0a1c          lofsa ref_0c99
+  027a:72 0a1c          lofsa ref_0a1c
   027d:32 001d            jmp code_029d
         code_0280
   0280:3c                 dup 
   0281:35 01              ldi 1
   0283:1a                 eq? 
   0284:30 0006            bnt code_028d
-  0287:72 098e          lofsa ref_0c18
+  0287:72 098e          lofsa ref_098e
   028a:32 0010            jmp code_029d
         code_028d
   028d:3c                 dup 
   028e:35 02              ldi 2
   0290:1a                 eq? 
   0291:30 0006            bnt code_029a
-  0294:72 09c0          lofsa ref_0c57
+  0294:72 09c0          lofsa ref_09c0
   0297:32 0003            jmp code_029d
         code_029a
-  029a:72 0a1c          lofsa ref_0cb9
+  029a:72 0a1c          lofsa ref_0a1c
         code_029d
   029d:3a                toss 
   029e:a3 01              sal 1
@@ -467,11 +471,11 @@ wechseln"
   02ac:78               push1 
   02ad:39 24            pushi 24
   02af:76               push0 
-  02b0:72 0956          lofsa ref_0c09
+  02b0:72 0956          lofsa ref_0956
   02b3:4a 04             send 4
 
   02b5:36                push 
-  02b6:72 0956          lofsa ref_0c0f
+  02b6:72 0956          lofsa ref_0956
   02b9:4a 06             send 6
 
   02bb:a3 04              sal 4
@@ -480,7 +484,7 @@ wechseln"
   02c0:06                 mul 
   02c1:a5 02              sat 2
   02c3:8b 02              lsl 2
-  02c5:72 0a1c          lofsa ref_0ce4
+  02c5:72 0a1c          lofsa ref_0a1c
   02c8:1a                 eq? 
   02c9:30 004b            bnt code_0317
   02cc:39 6c            pushi 6c
@@ -529,7 +533,7 @@ wechseln"
   031b:1a                 eq? 
   031c:30 0045            bnt code_0364
   031f:8b 02              lsl 2
-  0321:72 09c0          lofsa ref_0ce4
+  0321:72 09c0          lofsa ref_09c0
   0324:1a                 eq? 
   0325:30 003c            bnt code_0364
   0328:39 6c            pushi 6c
@@ -545,7 +549,7 @@ wechseln"
   0338:36                push 
   0339:43 47 04         callk 47 4
   033c:36                push 
-  033d:72 0858          lofsa ref_0b98
+  033d:72 0858          lofsa ref_0858
   0340:4a 06             send 6
 
   0342:30 000a            bnt code_034f
@@ -570,11 +574,11 @@ wechseln"
   0368:1a                 eq? 
   0369:30 00c5            bnt code_0431
   036c:8b 02              lsl 2
-  036e:72 09c0          lofsa ref_0d31
+  036e:72 09c0          lofsa ref_09c0
   0371:1a                 eq? 
   0372:2e 06 00            bt 6 0
   0375:8b 02              lsl 2
-  0377:72 098e          lofsa ref_0d08
+  0377:72 098e          lofsa ref_098e
   037a:1a                 eq? 
   037b:30 00b3            bnt code_0431
   037e:78               push1 
@@ -674,7 +678,7 @@ wechseln"
   042e:32 fe35            jmp code_0266
         code_0431
   0431:8b 02              lsl 2
-  0433:72 0a4a          lofsa ref_0e80
+  0433:72 0a4a          lofsa ref_0a4a
   0436:1a                 eq? 
   0437:30 0103            bnt code_053d
   043a:39 6c            pushi 6c
@@ -682,15 +686,15 @@ wechseln"
   043d:54 04             self 4
 
   043f:39 08            pushi 8
-  0441:72 0e4d          lofsa ref_1291
+  0441:72 0e4d          lofsa stringconst_0e4d
   0444:36                push 
   0445:39 6a            pushi 6a
   0447:39 51            pushi 51
-  0449:72 0ecb          lofsa ref_1317
+  0449:72 0ecb          lofsa stringconst_0ecb
   044c:36                push 
   044d:76               push0 
   044e:39 51            pushi 51
-  0450:72 0ed6          lofsa ref_1329
+  0450:72 0ed6          lofsa stringconst_0ed6
   0453:36                push 
   0454:78               push1 
   0455:46 03ac 0000 10  calle 3ac procedure_0000 10
@@ -821,7 +825,7 @@ wechseln"
   053a:32 fd29            jmp code_0266
         code_053d
   053d:8b 02              lsl 2
-  053f:72 09c0          lofsa ref_0f02
+  053f:72 09c0          lofsa ref_09c0
   0542:1a                 eq? 
   0543:30 000d            bnt code_0553
   0546:83 04              lal 4
@@ -835,7 +839,7 @@ wechseln"
   0557:1a                 eq? 
   0558:2e 06 00            bt 6 0
   055b:8b 02              lsl 2
-  055d:72 09ee          lofsa ref_0f4e
+  055d:72 09ee          lofsa ref_09ee
   0560:1a                 eq? 
   0561:30 000a            bnt code_056e
   0564:35 ff              ldi ff
@@ -861,7 +865,7 @@ wechseln"
   058a:36                push 
   058b:39 53            pushi 53
   058d:76               push0 
-  058e:72 098e          lofsa ref_0f1f
+  058e:72 098e          lofsa ref_098e
   0591:4a 0a             send a
 
   0593:32 fcd0            jmp code_0266
@@ -884,7 +888,7 @@ wechseln"
 
         code_05b3
   05b3:7c               pushSelf 
-  05b4:72 064a          lofsa stringconst_0c01
+  05b4:72 064a          lofsa ref_064a
   05b7:1a                 eq? 
   05b8:30 0005            bnt code_05c0
   05bb:35 00              ldi 0
@@ -907,9 +911,10 @@ wechseln"
   05d9:48                 ret 
     )
     (method (doit) // method_020a
+        code_020a
   020a:3e 0d 02          link d 2
   020d:7c               pushSelf 
-  020e:72 064a          lofsa ref_085b
+  020e:72 064a          lofsa ref_064a
   0211:1a                 eq? 
   0212:30 0038            bnt code_024d
   0215:87 00              lap 0
@@ -967,26 +972,26 @@ wechseln"
   026c:30 0011            bnt code_0280
   026f:83 03              lal 3
   0271:30 0029            bnt code_029d
-  0274:72 09c0          lofsa ref_0c37
+  0274:72 09c0          lofsa ref_09c0
   0277:32 0023            jmp code_029d
-  027a:72 0a1c          lofsa ref_0c99
+  027a:72 0a1c          lofsa ref_0a1c
   027d:32 001d            jmp code_029d
         code_0280
   0280:3c                 dup 
   0281:35 01              ldi 1
   0283:1a                 eq? 
   0284:30 0006            bnt code_028d
-  0287:72 098e          lofsa ref_0c18
+  0287:72 098e          lofsa ref_098e
   028a:32 0010            jmp code_029d
         code_028d
   028d:3c                 dup 
   028e:35 02              ldi 2
   0290:1a                 eq? 
   0291:30 0006            bnt code_029a
-  0294:72 09c0          lofsa ref_0c57
+  0294:72 09c0          lofsa ref_09c0
   0297:32 0003            jmp code_029d
         code_029a
-  029a:72 0a1c          lofsa ref_0cb9
+  029a:72 0a1c          lofsa ref_0a1c
         code_029d
   029d:3a                toss 
   029e:a3 01              sal 1
@@ -1000,11 +1005,11 @@ wechseln"
   02ac:78               push1 
   02ad:39 24            pushi 24
   02af:76               push0 
-  02b0:72 0956          lofsa ref_0c09
+  02b0:72 0956          lofsa ref_0956
   02b3:4a 04             send 4
 
   02b5:36                push 
-  02b6:72 0956          lofsa ref_0c0f
+  02b6:72 0956          lofsa ref_0956
   02b9:4a 06             send 6
 
   02bb:a3 04              sal 4
@@ -1013,7 +1018,7 @@ wechseln"
   02c0:06                 mul 
   02c1:a5 02              sat 2
   02c3:8b 02              lsl 2
-  02c5:72 0a1c          lofsa ref_0ce4
+  02c5:72 0a1c          lofsa ref_0a1c
   02c8:1a                 eq? 
   02c9:30 004b            bnt code_0317
   02cc:39 6c            pushi 6c
@@ -1062,7 +1067,7 @@ wechseln"
   031b:1a                 eq? 
   031c:30 0045            bnt code_0364
   031f:8b 02              lsl 2
-  0321:72 09c0          lofsa ref_0ce4
+  0321:72 09c0          lofsa ref_09c0
   0324:1a                 eq? 
   0325:30 003c            bnt code_0364
   0328:39 6c            pushi 6c
@@ -1078,7 +1083,7 @@ wechseln"
   0338:36                push 
   0339:43 47 04         callk 47 4
   033c:36                push 
-  033d:72 0858          lofsa ref_0b98
+  033d:72 0858          lofsa ref_0858
   0340:4a 06             send 6
 
   0342:30 000a            bnt code_034f
@@ -1103,11 +1108,11 @@ wechseln"
   0368:1a                 eq? 
   0369:30 00c5            bnt code_0431
   036c:8b 02              lsl 2
-  036e:72 09c0          lofsa ref_0d31
+  036e:72 09c0          lofsa ref_09c0
   0371:1a                 eq? 
   0372:2e 06 00            bt 6 0
   0375:8b 02              lsl 2
-  0377:72 098e          lofsa ref_0d08
+  0377:72 098e          lofsa ref_098e
   037a:1a                 eq? 
   037b:30 00b3            bnt code_0431
   037e:78               push1 
@@ -1207,7 +1212,7 @@ wechseln"
   042e:32 fe35            jmp code_0266
         code_0431
   0431:8b 02              lsl 2
-  0433:72 0a4a          lofsa ref_0e80
+  0433:72 0a4a          lofsa ref_0a4a
   0436:1a                 eq? 
   0437:30 0103            bnt code_053d
   043a:39 6c            pushi 6c
@@ -1215,15 +1220,15 @@ wechseln"
   043d:54 04             self 4
 
   043f:39 08            pushi 8
-  0441:72 0e4d          lofsa ref_1291
+  0441:72 0e4d          lofsa stringconst_0e4d
   0444:36                push 
   0445:39 6a            pushi 6a
   0447:39 51            pushi 51
-  0449:72 0ecb          lofsa ref_1317
+  0449:72 0ecb          lofsa stringconst_0ecb
   044c:36                push 
   044d:76               push0 
   044e:39 51            pushi 51
-  0450:72 0ed6          lofsa ref_1329
+  0450:72 0ed6          lofsa stringconst_0ed6
   0453:36                push 
   0454:78               push1 
   0455:46 03ac 0000 10  calle 3ac procedure_0000 10
@@ -1354,7 +1359,7 @@ wechseln"
   053a:32 fd29            jmp code_0266
         code_053d
   053d:8b 02              lsl 2
-  053f:72 09c0          lofsa ref_0f02
+  053f:72 09c0          lofsa ref_09c0
   0542:1a                 eq? 
   0543:30 000d            bnt code_0553
   0546:83 04              lal 4
@@ -1368,7 +1373,7 @@ wechseln"
   0557:1a                 eq? 
   0558:2e 06 00            bt 6 0
   055b:8b 02              lsl 2
-  055d:72 09ee          lofsa ref_0f4e
+  055d:72 09ee          lofsa ref_09ee
   0560:1a                 eq? 
   0561:30 000a            bnt code_056e
   0564:35 ff              ldi ff
@@ -1394,7 +1399,7 @@ wechseln"
   058a:36                push 
   058b:39 53            pushi 53
   058d:76               push0 
-  058e:72 098e          lofsa ref_0f1f
+  058e:72 098e          lofsa ref_098e
   0591:4a 0a             send a
 
   0593:32 fcd0            jmp code_0266
@@ -1417,7 +1422,7 @@ wechseln"
 
         code_05b3
   05b3:7c               pushSelf 
-  05b4:72 064a          lofsa stringconst_0c01
+  05b4:72 064a          lofsa ref_064a
   05b7:1a                 eq? 
   05b8:30 0005            bnt code_05c0
   05bb:35 00              ldi 0
@@ -1440,7 +1445,9 @@ wechseln"
   05d9:48                 ret 
     )
     (method (dispose) // method_000e
+        code_000e
   000e:76               push0 
+        code_000f
   000f:46 03a4 0004 00  calle 3a4 procedure_0004 0
 
   0015:39 56            pushi 56
@@ -1452,10 +1459,12 @@ wechseln"
   001e:39 6c            pushi 6c
   0020:76               push0 
   0021:59 01            &rest 1
+        code_0023
   0023:57 12 04         super 12 4
 
   0026:48                 ret 
 
+        code_0027
   0027:76               push0 
   0028:46 03a4 0003 00  calle 3a4 procedure_0003 0
 
@@ -1467,7 +1476,9 @@ wechseln"
   0035:a3 00              sal 0
   0037:39 56            pushi 56
   0039:78               push1 
+        code_003a
   003a:78               push1 
+        code_003b
   003b:81 01              lag 1
   003d:4a 06             send 6
 
@@ -1518,12 +1529,12 @@ wechseln"
   008a:7a               push2 
   008b:39 04            pushi 4
   008d:3c                 dup 
-  008e:72 098e          lofsa ref_0a1f
+  008e:72 098e          lofsa ref_098e
   0091:4a 18             send 18
 
   0093:39 73            pushi 73
   0095:78               push1 
-  0096:72 098e          lofsa ref_0a27
+  0096:72 098e          lofsa ref_098e
   0099:36                push 
   009a:38 00aa          pushi aa
   009d:76               push0 
@@ -1548,12 +1559,12 @@ wechseln"
   00ba:39 20            pushi 20
   00bc:78               push1 
   00bd:7a               push2 
-  00be:72 0956          lofsa ref_0a17
+  00be:72 0956          lofsa ref_0956
   00c1:4a 1e             send 1e
 
   00c3:39 0c            pushi c
   00c5:76               push0 
-  00c6:72 0956          lofsa ref_0a1f
+  00c6:72 0956          lofsa ref_0956
   00c9:4a 04             send 4
 
   00cb:36                push 
@@ -1571,7 +1582,7 @@ wechseln"
   00e0:8b 02              lsl 2
   00e2:39 09            pushi 9
   00e4:76               push0 
-  00e5:72 0956          lofsa ref_0a3e
+  00e5:72 0956          lofsa ref_0956
   00e8:4a 04             send 4
 
   00ea:36                push 
@@ -1595,7 +1606,7 @@ wechseln"
   0109:35 03              ldi 3
         code_010b
   010b:36                push 
-  010c:72 09c0          lofsa ref_0acf
+  010c:72 09c0          lofsa ref_09c0
   010f:4a 18             send 18
 
   0111:38 00aa          pushi aa
@@ -1605,7 +1616,7 @@ wechseln"
   0119:8b 02              lsl 2
   011b:39 0b            pushi b
   011d:76               push0 
-  011e:72 09c0          lofsa ref_0ae1
+  011e:72 09c0          lofsa ref_09c0
   0121:4a 04             send 4
 
   0123:36                push 
@@ -1623,7 +1634,7 @@ wechseln"
   0136:35 03              ldi 3
         code_0138
   0138:36                push 
-  0139:72 0a4a          lofsa ref_0b86
+  0139:72 0a4a          lofsa ref_0a4a
   013c:4a 12             send 12
 
   013e:38 00aa          pushi aa
@@ -1633,7 +1644,7 @@ wechseln"
   0146:8b 02              lsl 2
   0148:39 0b            pushi b
   014a:76               push0 
-  014b:72 0a4a          lofsa ref_0b98
+  014b:72 0a4a          lofsa ref_0a4a
   014e:4a 04             send 4
 
   0150:36                push 
@@ -1644,14 +1655,14 @@ wechseln"
   0157:78               push1 
   0158:39 20            pushi 20
   015a:76               push0 
-  015b:72 0a1c          lofsa ref_0b7a
+  015b:72 0a1c          lofsa ref_0a1c
   015e:4a 04             send 4
 
   0160:36                push 
   0161:35 f7              ldi f7
   0163:12                 and 
   0164:36                push 
-  0165:72 0a1c          lofsa ref_0b84
+  0165:72 0a1c          lofsa ref_0a1c
   0168:4a 12             send 12
 
   016a:38 00aa          pushi aa
@@ -1661,7 +1672,7 @@ wechseln"
   0172:8b 02              lsl 2
   0174:39 0b            pushi b
   0176:76               push0 
-  0177:72 0a1c          lofsa ref_0b96
+  0177:72 0a1c          lofsa ref_0a1c
   017a:4a 04             send 4
 
   017c:36                push 
@@ -1672,27 +1683,27 @@ wechseln"
   0183:78               push1 
   0184:39 20            pushi 20
   0186:76               push0 
-  0187:72 09ee          lofsa ref_0b78
+  0187:72 09ee          lofsa ref_09ee
   018a:4a 04             send 4
 
   018c:36                push 
   018d:35 f7              ldi f7
   018f:12                 and 
   0190:36                push 
-  0191:72 09ee          lofsa ref_0b82
+  0191:72 09ee          lofsa ref_09ee
   0194:4a 12             send 12
 
   0196:39 73            pushi 73
   0198:39 05            pushi 5
-  019a:72 0956          lofsa ref_0af3
+  019a:72 0956          lofsa ref_0956
   019d:36                push 
-  019e:72 09c0          lofsa ref_0b61
+  019e:72 09c0          lofsa ref_09c0
   01a1:36                push 
-  01a2:72 0a4a          lofsa stringconst_0bef
+  01a2:72 0a4a          lofsa ref_0a4a
   01a5:36                push 
-  01a6:72 0a1c          lofsa ref_0bc5
+  01a6:72 0a1c          lofsa ref_0a1c
   01a9:36                push 
-  01aa:72 09ee          lofsa ref_0b9b
+  01aa:72 09ee          lofsa ref_09ee
   01ad:36                push 
   01ae:38 00aa          pushi aa
   01b1:76               push0 
@@ -1715,12 +1726,12 @@ wechseln"
   01cc:7a               push2 
   01cd:39 04            pushi 4
   01cf:3c                 dup 
-  01d0:72 0a78          lofsa ref_0c4b
+  01d0:72 0a78          lofsa ref_0a78
   01d3:4a 14             send 14
 
   01d5:39 0b            pushi b
   01d7:76               push0 
-  01d8:72 0a78          lofsa ref_0c53
+  01d8:72 0a78          lofsa ref_0a78
   01db:4a 04             send 4
 
   01dd:36                push 
@@ -1736,7 +1747,7 @@ wechseln"
 
   01ee:39 73            pushi 73
   01f0:78               push1 
-  01f1:72 0a78          lofsa ref_0c6c
+  01f1:72 0a78          lofsa ref_0a78
   01f4:36                push 
   01f5:38 00aa          pushi aa
   01f8:76               push0 
@@ -1751,9 +1762,10 @@ wechseln"
   0207:35 01              ldi 1
   0209:48                 ret 
 
+        code_020a
   020a:3e 0d 02          link d 2
   020d:7c               pushSelf 
-  020e:72 064a          lofsa ref_085b
+  020e:72 064a          lofsa ref_064a
   0211:1a                 eq? 
   0212:30 0038            bnt code_024d
   0215:87 00              lap 0
@@ -1811,26 +1823,26 @@ wechseln"
   026c:30 0011            bnt code_0280
   026f:83 03              lal 3
   0271:30 0029            bnt code_029d
-  0274:72 09c0          lofsa ref_0c37
+  0274:72 09c0          lofsa ref_09c0
   0277:32 0023            jmp code_029d
-  027a:72 0a1c          lofsa ref_0c99
+  027a:72 0a1c          lofsa ref_0a1c
   027d:32 001d            jmp code_029d
         code_0280
   0280:3c                 dup 
   0281:35 01              ldi 1
   0283:1a                 eq? 
   0284:30 0006            bnt code_028d
-  0287:72 098e          lofsa ref_0c18
+  0287:72 098e          lofsa ref_098e
   028a:32 0010            jmp code_029d
         code_028d
   028d:3c                 dup 
   028e:35 02              ldi 2
   0290:1a                 eq? 
   0291:30 0006            bnt code_029a
-  0294:72 09c0          lofsa ref_0c57
+  0294:72 09c0          lofsa ref_09c0
   0297:32 0003            jmp code_029d
         code_029a
-  029a:72 0a1c          lofsa ref_0cb9
+  029a:72 0a1c          lofsa ref_0a1c
         code_029d
   029d:3a                toss 
   029e:a3 01              sal 1
@@ -1844,11 +1856,11 @@ wechseln"
   02ac:78               push1 
   02ad:39 24            pushi 24
   02af:76               push0 
-  02b0:72 0956          lofsa ref_0c09
+  02b0:72 0956          lofsa ref_0956
   02b3:4a 04             send 4
 
   02b5:36                push 
-  02b6:72 0956          lofsa ref_0c0f
+  02b6:72 0956          lofsa ref_0956
   02b9:4a 06             send 6
 
   02bb:a3 04              sal 4
@@ -1857,7 +1869,7 @@ wechseln"
   02c0:06                 mul 
   02c1:a5 02              sat 2
   02c3:8b 02              lsl 2
-  02c5:72 0a1c          lofsa ref_0ce4
+  02c5:72 0a1c          lofsa ref_0a1c
   02c8:1a                 eq? 
   02c9:30 004b            bnt code_0317
   02cc:39 6c            pushi 6c
@@ -1906,7 +1918,7 @@ wechseln"
   031b:1a                 eq? 
   031c:30 0045            bnt code_0364
   031f:8b 02              lsl 2
-  0321:72 09c0          lofsa ref_0ce4
+  0321:72 09c0          lofsa ref_09c0
   0324:1a                 eq? 
   0325:30 003c            bnt code_0364
   0328:39 6c            pushi 6c
@@ -1922,7 +1934,7 @@ wechseln"
   0338:36                push 
   0339:43 47 04         callk 47 4
   033c:36                push 
-  033d:72 0858          lofsa ref_0b98
+  033d:72 0858          lofsa ref_0858
   0340:4a 06             send 6
 
   0342:30 000a            bnt code_034f
@@ -1947,11 +1959,11 @@ wechseln"
   0368:1a                 eq? 
   0369:30 00c5            bnt code_0431
   036c:8b 02              lsl 2
-  036e:72 09c0          lofsa ref_0d31
+  036e:72 09c0          lofsa ref_09c0
   0371:1a                 eq? 
   0372:2e 06 00            bt 6 0
   0375:8b 02              lsl 2
-  0377:72 098e          lofsa ref_0d08
+  0377:72 098e          lofsa ref_098e
   037a:1a                 eq? 
   037b:30 00b3            bnt code_0431
   037e:78               push1 
@@ -2051,7 +2063,7 @@ wechseln"
   042e:32 fe35            jmp code_0266
         code_0431
   0431:8b 02              lsl 2
-  0433:72 0a4a          lofsa ref_0e80
+  0433:72 0a4a          lofsa ref_0a4a
   0436:1a                 eq? 
   0437:30 0103            bnt code_053d
   043a:39 6c            pushi 6c
@@ -2059,15 +2071,15 @@ wechseln"
   043d:54 04             self 4
 
   043f:39 08            pushi 8
-  0441:72 0e4d          lofsa ref_1291
+  0441:72 0e4d          lofsa stringconst_0e4d
   0444:36                push 
   0445:39 6a            pushi 6a
   0447:39 51            pushi 51
-  0449:72 0ecb          lofsa ref_1317
+  0449:72 0ecb          lofsa stringconst_0ecb
   044c:36                push 
   044d:76               push0 
   044e:39 51            pushi 51
-  0450:72 0ed6          lofsa ref_1329
+  0450:72 0ed6          lofsa stringconst_0ed6
   0453:36                push 
   0454:78               push1 
   0455:46 03ac 0000 10  calle 3ac procedure_0000 10
@@ -2198,7 +2210,7 @@ wechseln"
   053a:32 fd29            jmp code_0266
         code_053d
   053d:8b 02              lsl 2
-  053f:72 09c0          lofsa ref_0f02
+  053f:72 09c0          lofsa ref_09c0
   0542:1a                 eq? 
   0543:30 000d            bnt code_0553
   0546:83 04              lal 4
@@ -2212,7 +2224,7 @@ wechseln"
   0557:1a                 eq? 
   0558:2e 06 00            bt 6 0
   055b:8b 02              lsl 2
-  055d:72 09ee          lofsa ref_0f4e
+  055d:72 09ee          lofsa ref_09ee
   0560:1a                 eq? 
   0561:30 000a            bnt code_056e
   0564:35 ff              ldi ff
@@ -2238,7 +2250,7 @@ wechseln"
   058a:36                push 
   058b:39 53            pushi 53
   058d:76               push0 
-  058e:72 098e          lofsa ref_0f1f
+  058e:72 098e          lofsa ref_098e
   0591:4a 0a             send a
 
   0593:32 fcd0            jmp code_0266
@@ -2261,7 +2273,7 @@ wechseln"
 
         code_05b3
   05b3:7c               pushSelf 
-  05b4:72 064a          lofsa stringconst_0c01
+  05b4:72 064a          lofsa ref_064a
   05b7:1a                 eq? 
   05b8:30 0005            bnt code_05c0
   05bb:35 00              ldi 0
@@ -2344,6 +2356,7 @@ wechseln"
         lastSeconds $0
     )
     (method (doit) // method_06f2
+        code_06f2
   06f2:3f 02             link 2
   06f4:39 56            pushi 56
   06f6:76               push0 
@@ -2365,12 +2378,12 @@ wechseln"
   0710:7a               push2 
   0711:39 04            pushi 4
   0713:3c                 dup 
-  0714:72 0aa8          lofsa ref_11bf
+  0714:72 0aa8          lofsa ref_0aa8
   0717:4a 0c             send c
 
   0719:39 73            pushi 73
   071b:78               push1 
-  071c:72 0aa8          lofsa ref_11c7
+  071c:72 0aa8          lofsa ref_0aa8
   071f:36                push 
   0720:38 00aa          pushi aa
   0723:76               push0 
@@ -2388,12 +2401,12 @@ wechseln"
   0737:7a               push2 
   0738:39 04            pushi 4
   073a:67 16             pTos 16
-  073c:72 0b08          lofsa ref_1247
+  073c:72 0b08          lofsa ref_0b08
   073f:4a 18             send 18
 
   0741:39 73            pushi 73
   0743:78               push1 
-  0744:72 0b08          lofsa ref_124f
+  0744:72 0b08          lofsa ref_0b08
   0747:36                push 
   0748:38 00aa          pushi aa
   074b:76               push0 
@@ -2405,12 +2418,12 @@ wechseln"
   0755:7a               push2 
   0756:39 04            pushi 4
   0758:67 16             pTos 16
-  075a:72 0ad8          lofsa ref_1235
+  075a:72 0ad8          lofsa ref_0ad8
   075d:4a 0c             send c
 
   075f:39 73            pushi 73
   0761:78               push1 
-  0762:72 0ad8          lofsa ref_123d
+  0762:72 0ad8          lofsa ref_0ad8
   0765:36                push 
   0766:38 00aa          pushi aa
   0769:76               push0 
@@ -2428,12 +2441,12 @@ wechseln"
   077d:7a               push2 
   077e:39 04            pushi 4
   0780:67 16             pTos 16
-  0782:72 0b38          lofsa ref_12bd
+  0782:72 0b38          lofsa ref_0b38
   0785:4a 18             send 18
 
   0787:39 73            pushi 73
   0789:78               push1 
-  078a:72 0b38          lofsa ref_12c5
+  078a:72 0b38          lofsa ref_0b38
   078d:36                push 
   078e:38 00aa          pushi aa
   0791:76               push0 
@@ -2447,7 +2460,7 @@ wechseln"
   079b:76               push0 
   079c:38 00aa          pushi aa
   079f:76               push0 
-  07a0:72 0b6a          lofsa ref_130d
+  07a0:72 0b6a          lofsa ref_0b6a
   07a3:4a 10             send 10
 
   07a5:39 0a            pushi a
@@ -2458,7 +2471,7 @@ wechseln"
   07ac:76               push0 
   07ad:38 00aa          pushi aa
   07b0:76               push0 
-  07b1:72 0b98          lofsa ref_134c
+  07b1:72 0b98          lofsa ref_0b98
   07b4:4a 10             send 10
 
   07b6:38 00ac          pushi ac
@@ -2466,7 +2479,7 @@ wechseln"
   07ba:67 18             pTos 18
   07bc:39 0c            pushi c
   07be:76               push0 
-  07bf:72 0b98          lofsa ref_135a
+  07bf:72 0b98          lofsa ref_0b98
   07c2:4a 04             send 4
 
   07c4:36                push 
@@ -2475,20 +2488,20 @@ wechseln"
   07c8:04                 sub 
   07c9:36                push 
   07ca:67 16             pTos 16
-  07cc:72 0b98          lofsa ref_1367
+  07cc:72 0b98          lofsa ref_0b98
   07cf:4a 08             send 8
 
   07d1:38 00ac          pushi ac
   07d4:7a               push2 
   07d5:39 0a            pushi a
   07d7:76               push0 
-  07d8:72 0b98          lofsa ref_1373
+  07d8:72 0b98          lofsa ref_0b98
   07db:4a 04             send 4
 
   07dd:36                push 
   07de:39 0c            pushi c
   07e0:76               push0 
-  07e1:72 0b6a          lofsa ref_134e
+  07e1:72 0b6a          lofsa ref_0b6a
   07e4:4a 04             send 4
 
   07e6:36                push 
@@ -2497,14 +2510,14 @@ wechseln"
   07ea:04                 sub 
   07eb:36                push 
   07ec:67 16             pTos 16
-  07ee:72 0b6a          lofsa ref_135b
+  07ee:72 0b6a          lofsa ref_0b6a
   07f1:4a 08             send 8
 
   07f3:39 73            pushi 73
   07f5:7a               push2 
-  07f6:72 0b6a          lofsa ref_1363
+  07f6:72 0b6a          lofsa ref_0b6a
   07f9:36                push 
-  07fa:72 0b98          lofsa ref_1395
+  07fa:72 0b98          lofsa ref_0b98
   07fd:36                push 
   07fe:38 00aa          pushi aa
   0801:76               push0 
@@ -2518,7 +2531,7 @@ wechseln"
 
   080f:39 3c            pushi 3c
   0811:78               push1 
-  0812:72 0b38          lofsa ref_134d
+  0812:72 0b38          lofsa ref_0b38
   0815:36                push 
   0816:57 12 06         super 12 6
 
@@ -2545,11 +2558,11 @@ wechseln"
   083a:4a 06             send 6
 
   083c:8d 00              lst 0
-  083e:72 0b38          lofsa ref_1379
+  083e:72 0b38          lofsa ref_0b38
   0841:1a                 eq? 
   0842:2e 06 00            bt 6 0
   0845:8d 00              lst 0
-  0847:72 0b6a          lofsa ref_13b4
+  0847:72 0b6a          lofsa ref_0b6a
   084a:1a                 eq? 
   084b:48                 ret 
     )
