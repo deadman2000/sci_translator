@@ -1,0 +1,17 @@
+build:
+  stage: build
+  only:
+    - master
+  tags: 
+    - docker
+  variables:
+    DOCKER_REGISTRY: docker.dev.ask-glonass.ru
+    DOCKER_IMAGE: $DOCKER_REGISTRY/sci_translator
+  before_script:
+    - docker login -u $NEXUS_LOGIN -p $NEXUS_PASSWORD $DOCKER_REGISTRY
+  script:
+    - docker pull $DOCKER_IMAGE:latest || true
+    - docker build --cache-from $DOCKER_IMAGE:latest --tag $DOCKER_IMAGE:latest .
+    - docker push $DOCKER_IMAGE:latest
+  after_script:
+    - docker logout $DOCKER_REGISTRY
