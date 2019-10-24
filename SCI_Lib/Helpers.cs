@@ -52,33 +52,31 @@ namespace SCI_Translator
 
         private static Escaper escaper = new DollarEscaper();
 
-        public static byte[] GetBytes(string text, bool unescape = true)
-        {
-            byte[] str866 = enc866.GetBytes(text);
-            if (unescape)
-                return escaper.Unescape(str866);
-            return str866;
-        }
+        public static byte[] Unescape(byte[] data) => escaper.Unescape(data);
 
-        public static string GetString(byte[] data)
+        public static byte[] GetBytes(string text) => enc866.GetBytes(text);
+
+        public static byte[] GetBytesUnescape(string text) => escaper.Unescape(enc866.GetBytes(text));
+
+        public static string GetStringEscape(byte[] data)
         {
             char[] str866 = enc866.GetChars(data);
             return escaper.Escape(str866);
         }
 
-        public static string GetString(byte[] data, int from, int length)
+        public static string GetStringEscape(byte[] data, int from, int length)
         {
             char[] str866 = enc866.GetChars(data, from, length);
             return escaper.Escape(str866);
         }
 
-        public static string GetStringUnescape(byte[] data)
+        public static string GetString(byte[] data)
         {
             char[] str866 = enc866.GetChars(data);
             return new string(str866);
         }
 
-        public static string GetStringUnescape(byte[] data, int from, int length)
+        public static string GetString(byte[] data, int from, int length)
         {
             char[] str866 = enc866.GetChars(data, from, length);
             return new string(str866);

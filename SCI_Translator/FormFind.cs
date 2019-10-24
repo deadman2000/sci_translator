@@ -59,7 +59,7 @@ namespace SCI_Translator
             {
                 if (data[i] == 0x00)
                 {
-                    string str = Helpers.GetString(data, s, i - s);
+                    string str = Helpers.GetStringEscape(data, s, i - s);
                     if (str.ToLower().Contains(pattern))
                     {
                         lbResults.Items.Add(new SearchResult(res.FileName, ind, str));

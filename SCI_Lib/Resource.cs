@@ -178,7 +178,7 @@ namespace SCI_Translator
             {
                 if (data[i] == 0x00)
                 {
-                    string strRes = escape ? Helpers.GetString(data, s, i - s) : Helpers.GetStringUnescape(data, s, i - s);
+                    string strRes = escape ? Helpers.GetStringEscape(data, s, i - s) : Helpers.GetString(data, s, i - s);
                     string str = strRes;
                     string[] parts = str.Split(new string[] { "#G" }, StringSplitOptions.None);
                     if (parts.Length > 1)
@@ -205,7 +205,10 @@ namespace SCI_Translator
 
             for (int r = 0; r < lines.Length; r++)
             {
-                bb.AddBytes(Helpers.GetBytes(lines[r], unescape));
+                var bytes = Helpers.GetBytes(lines[r]);
+                if (unescape) bytes = Helpers.Unescape(bytes);
+
+                bb.AddBytes(bytes);
                 bb.AddByte(0);
             }
 
@@ -241,7 +244,7 @@ namespace SCI_Translator
             {
                 ushort addr = Helpers.GetShortBE(data, i * 2 + 2);
                 ushort len = Helpers.GetShortBE(data, addr);
-                string name = Helpers.GetString(data, addr + 2, len);
+                string name = Helpers.GetStringEscape(data, addr + 2, len);
                 names[i] = name;
             }
 
@@ -263,7 +266,7 @@ namespace SCI_Translator
                 ushort addr = Helpers.GetShortBE(data, i * 2 + 2);
                 ushort len = Helpers.GetShortBE(data, addr);
                 ushort type = Helpers.GetShortBE(data, addr + 2);
-                string name = Helpers.GetString(data, addr + 4, len - 2);
+                string name = Helpers.GetStringEscape(data, addr + 4, len - 2);
                 opcodes.Add(i, new OpCode(type, name));
             }
 

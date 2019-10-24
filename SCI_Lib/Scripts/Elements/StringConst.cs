@@ -21,23 +21,11 @@ namespace SCI_Translator.Scripts.Elements
 
         public bool IsClassName { get; set; } = false;
 
-        public void SetValue(string val, bool escape = true)
-        {
-            _value = Helpers.GetBytes(val, !escape);
-        }
+        public void SetValueUnescape(string val) => _value = Helpers.Unescape(Helpers.GetBytes(val));
 
-        public string GetValue(bool escape = true)
-        {
-            if (escape)
-                return Helpers.GetString(_value);
-            else
-                return Helpers.GetStringUnescape(_value);
-        }
+        public string GetStringEscape() => Helpers.GetStringEscape(_value);
 
-        public override string ToString()
-        {
-            return String.Format("string_{0:x4} = {1}", _address, GetValue());
-        }
+        public override string ToString() => $"string_{_address:x4} = {Value}";
 
         public override void Write(ByteBuilder bb)
         {

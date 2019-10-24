@@ -124,15 +124,15 @@ namespace SCI_Translator.ResView
             {
                 if (sc.IsClassName) continue;
 
-                string str = sc.Value;
-                str = str.Replace("$0D", "\r").Replace("$0A", "\n");
+                string str = sc.GetStringEscape();
+                //str = str.Replace("$0D", "\r").Replace("$0A", "\n");
                 string[] parts = str.Split(new string[] { "#G" }, StringSplitOptions.None);
 
                 int row;
                 if (parts.Length > 1)
                     row = dgvStrings.Rows.Add(i++, parts[0], parts[1]);
                 else
-                    row = dgvStrings.Rows.Add(i++, sc.Value);
+                    row = dgvStrings.Rows.Add(i++, str);
 
                 dgvStrings.Rows[row].Tag = sc;
             }
@@ -152,7 +152,7 @@ namespace SCI_Translator.ResView
                 else
                     val = s1;
 
-                ((StringConst)row.Tag).Value = val;
+                ((StringConst)row.Tag).SetValueUnescape(val);
             }
         }
 

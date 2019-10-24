@@ -57,6 +57,7 @@ namespace SCI_Translator.Scripts.Sections
                 if (propRefs[i].Reference == null)
                     propRefs[i] = null;
             }
+            Name = (propRefs[3]?.Reference as StringConst)?.Value;
 
             if (propRefs[3]?.Reference is StringConst str)
                 str.IsClassName = true;
@@ -67,7 +68,7 @@ namespace SCI_Translator.Scripts.Sections
 
         public ushort Id => Selectors[0];
 
-        public string Name => (propRefs[3]?.Reference as StringConst)?.Value;
+        public string Name { get; private set; }
 
         public ushort[] Selectors { get; private set; }
 

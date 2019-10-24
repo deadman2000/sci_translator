@@ -52,11 +52,6 @@ namespace SCI_Translator.Scripts
 
         public IEnumerable<StringConst> AllStrings => Sections.Where(s => s.Type == SectionType.String).SelectMany(s => ((StringSection)s).Strings).Where(s => !s.IsClassName);
 
-        public string GetString(ushort offset)
-        {
-            return ((StringConst) _elements[offset]).Value;
-        }
-
         public BaseElement GetElement(ushort offset)
         {
             BaseElement el;

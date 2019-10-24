@@ -59,7 +59,7 @@ namespace SCI_Translator.Scripts.Elements
                     break;
                 case StringConst s:
                     type = "string";
-                    comment = ";  '" + s.Value + "'";
+                    comment = ";  '" + s.GetStringEscape() + "'";
                     break;
                 case ShortElement _:
                     type = "obj";

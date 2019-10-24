@@ -1,11 +1,9 @@
 ﻿using SCI_Translator;
-using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Builders;
-using System;
-using System.Linq;
-using System.IO;
 using SCI_Translator.Scripts.Sections;
-using System.Text;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace SCI_Tools
 {

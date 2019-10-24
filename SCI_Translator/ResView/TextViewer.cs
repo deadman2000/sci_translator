@@ -56,7 +56,7 @@ namespace SCI_Translator.ResView
             {
                 if (data[i] == 0x00)
                 {
-                    string strRes = Helpers.GetString(data, s, i - s);
+                    string strRes = Helpers.GetStringEscape(data, s, i - s);
                     string str = strRes;
                     //string str = str.Replace("$0D", "\r").Replace("$0A", "\n");
                     string[] parts = str.Split(new string[] {"#G"}, StringSplitOptions.None);
