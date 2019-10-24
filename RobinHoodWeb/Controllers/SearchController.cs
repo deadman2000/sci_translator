@@ -10,14 +10,16 @@ namespace RobinHoodWeb.Controllers
 
     {
         [HttpGet]
-        public IActionResult Get(string q)
+        public IActionResult Get(string q, string lang)
         {
             if (q == null)
                 return Ok();
 
+            bool isRu = "ru".Equals(lang);
+
             var query_low = q.ToLower();
             return Ok(Global.AllStrings
-                .Where(s => s.Text.ToLower().Contains(query_low))
+                .Where(s => (lang == null || s.Ru == isRu) && s.Text.ToLower().Contains(query_low))
                 .Take(100)
                 .Select(s=> new {
                     ru = s.Ru,
