@@ -15,7 +15,8 @@ export class TranslateBuilder extends Component {
 
     state = {
         connecting: true,
-        building: false
+        building: false,
+        progress: 0
     };
 
     componentWillMount() {
@@ -43,9 +44,8 @@ export class TranslateBuilder extends Component {
         const { connecting, building, progress, update_date } = this.state;
         return (
             <div>
-                <h1>Conquests of the Longbow: The Legend of Robin Hood</h1>
                 <p>Текущий перевод: {update_date || "нет"} {update_date && <a href="/download/CONQUESTS.ZIP">Скачать</a> }</p>
-                {building && <p><ProgressBar now={progress} /></p>}
+                {building && <div><ProgressBar now={progress} /></div>}
                 <ButtonToolbar>
                     <Button variant="primary"
                         disabled={connecting || building}

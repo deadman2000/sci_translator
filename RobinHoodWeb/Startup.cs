@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using RobinHoodWeb.Controllers;
 using System.IO;
 
 namespace RobinHoodWeb
@@ -23,7 +22,6 @@ namespace RobinHoodWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
@@ -45,10 +43,10 @@ namespace RobinHoodWeb
                 app.UseExceptionHandler("/Error");
             }
 
-            Directory.CreateDirectory(TranslateConnection.DOWNLOAD_DIR);
+            Directory.CreateDirectory(Global.DOWNLOAD_DIR);
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(TranslateConnection.DOWNLOAD_DIR),
+                FileProvider = new PhysicalFileProvider(Global.DOWNLOAD_DIR),
                 RequestPath = new PathString("/download")
             });
 

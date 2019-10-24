@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { TranslateBuilder } from './components/TranslateBuilder';
 
 import './custom.css'
+
+import { TranslateBuilder } from './components/TranslateBuilder';
+import { Search } from './components/Search';
+import { Container } from 'react-bootstrap';
 
 export default class App extends Component {
     static displayName = App.name;
 
     render() {
         return (
-            <Layout>
-                <Route exact path='/' component={TranslateBuilder} />
-            </Layout>
+            <Container>
+                <h1>Conquests of the Longbow: The Legend of Robin Hood</h1>
+                <TranslateBuilder />
+                <hr />
+                <Search />
+            </Container>
         );
     }
 }

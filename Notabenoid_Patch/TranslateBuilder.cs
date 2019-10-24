@@ -18,7 +18,7 @@ namespace Notabenoid_Patch
 
         const string CACHE_FILE = "parts.cache";
 
-        public static string GAME_DIR = Environment.GetEnvironmentVariable("GAME_DIR");
+        public static string GAME_DIR = Environment.GetEnvironmentVariable("GAME_DIR") ?? "../Conquest/";
 
         public static string TRANSLATE_GAME_DIR => Path.Combine(GAME_DIR, "TRANSLATE");
 
@@ -158,6 +158,11 @@ namespace Notabenoid_Patch
 
                 SaveCache(parts.Values.AsEnumerable());
                 return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw ex;
             }
             finally
             {

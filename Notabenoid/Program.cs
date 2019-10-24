@@ -57,7 +57,6 @@ namespace Notabenoid
                 var url = "http://notabenoid.org/book/77921/453699/";
                 var document = await context.OpenAsync(url);
 
-
                 SCIPackage package = new SCIPackage(GAME_DIR);
                 var resources = package.Resources.FindAll(r => r.Type == ResType.Text).SelectMany(r => r.Resources);
 

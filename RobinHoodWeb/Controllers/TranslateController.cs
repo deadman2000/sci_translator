@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Notabenoid_Patch;
 using System;
-using System.IO;
-using System.IO.Compression;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -37,13 +34,6 @@ namespace RobinHoodWeb.Controllers
 
     internal class TranslateConnection
     {
-        public static readonly string DOWNLOAD_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"downloads");
-        public static readonly string TRANSLATED_ZIP_PATH = Path.Combine(DOWNLOAD_DIR, "CONQUESTS.ZIP");
-
-        public static readonly TranslateBuilder Builder = new TranslateBuilder();
-
-        public static string UPDATE_DATE = UpdateCreateDate();
-
         private readonly WebSocket webSocket;
 
         public TranslateConnection(WebSocket webSocket)
@@ -55,11 +45,11 @@ namespace RobinHoodWeb.Controllers
         {
             await Send(new
             {
-                update_date = UPDATE_DATE,
-                building = Builder.IsBuild
+                update_date = Global.UPDATE_DATE,
+                building = Global.Builder.IsBuild
             });
 
-            Builder.ReportProgress += ReportProgress;
+            Global.Builder.ReportProgress += ReportProgress;
 
             try
             {
@@ -74,9 +64,10 @@ namespace RobinHoodWeb.Controllers
                 }
                 await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
             }
+            catch { }
             finally
             {
-                Builder.ReportProgress -= ReportProgress;
+                Global.Builder.ReportProgress -= ReportProgress;
             }
         }
 
@@ -98,31 +89,20 @@ namespace RobinHoodWeb.Controllers
 
         private async Task Build()
         {
-            if (Builder.IsBuild) return;
+            if (Global.Builder.IsBuild) return;
 
-            if (await Builder.Build())
-                PackageZIP();
+            if (await Global.Builder.Build())
+            {
+                Global.UpdateStrings();
+                Global.PackageZIP();
+            }
 
             Finished();
         }
 
-        public void PackageZIP()
-        {
-            File.Delete(TRANSLATED_ZIP_PATH);
-            ZipFile.CreateFromDirectory(TranslateBuilder.TRANSLATE_GAME_DIR, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, true);
-            UpdateCreateDate();
-        }
-
-        private static string UpdateCreateDate()
-        {
-            if (!File.Exists(TRANSLATED_ZIP_PATH))
-                return null;
-            return UPDATE_DATE = new FileInfo(TRANSLATED_ZIP_PATH).CreationTimeUtc.ToString();
-        }
-
         private async void ReportProgress(int progress) => await Send(new { progress });
 
-        private async void Finished() => await Send(new { building = false, update_date = UPDATE_DATE });
+        private async void Finished() => await Send(new { building = false, update_date = Global.UPDATE_DATE });
 
     }
 }

@@ -4,7 +4,6 @@ using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
 using System.Linq;
-using System.Text;
 
 namespace Tests
 {
@@ -15,7 +14,6 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
         
         private void CheckPackage(SCIPackage package, bool translate)
@@ -69,7 +67,6 @@ namespace Tests
                 var bytes = res.GetContent(false);
                 var scr = new Script(res, bytes);
                 var newbytes = scr.GetBytes();
-                var newscr = new Script(res, newbytes);
                 CollectionAssert.AreEqual(bytes, newbytes);
             }
         }

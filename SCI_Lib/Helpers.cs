@@ -8,10 +8,16 @@ namespace SCI_Translator
     {
         static Helpers()
         {
+#if NETSTANDARD
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+#endif
+
+            enc866 = Encoding.GetEncoding(866);
+
             byte[] bytes = new byte[256];
             for (int i = 0; i < 256; i++)
                 bytes[i] = (byte)i;
-            chars866 = enc866.GetChars(bytes);
+            Chars866 = enc866.GetChars(bytes);
         }
 
         public static byte[] GetBytes(byte[] data, int offset, int length)
@@ -31,10 +37,9 @@ namespace SCI_Translator
             return (ushort)(data[offset] | (data[offset + 1] << 8));
         }
 
-        public static Encoding enc866 = Encoding.GetEncoding(866);
-        static char[] chars866;
+        public static readonly Encoding enc866;
 
-        public static char[] Chars866 { get { return chars866; } }
+        public static char[] Chars866 { get; private set; }
 
         public static Encoding Enc866 { get { return enc866; } }
 
