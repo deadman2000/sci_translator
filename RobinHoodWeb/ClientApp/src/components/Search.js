@@ -31,7 +31,7 @@ export class Search extends Component {
                     </Form.Row>
                     <Form.Row>
                         <Form.Check
-                            custom inline checked
+                            custom inline
                             type="radio"
                             id="lang-all"
                             name="lang"
