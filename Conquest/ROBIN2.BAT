@@ -1,3 +1,0 @@
-cd robin
-scidhuv
-
