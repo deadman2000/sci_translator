@@ -16,7 +16,7 @@ namespace SCI_Tools
             if (args.Length > 0)
                 GAME_DIR = args[0];
 
-            ExportEnScr();
+            //ExportEnScr();
 
             Console.WriteLine("Completed");
             Console.ReadKey();
