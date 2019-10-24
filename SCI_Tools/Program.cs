@@ -5,63 +5,136 @@ using System;
 using System.Linq;
 using System.IO;
 using SCI_Translator.Scripts.Sections;
+using System.Text;
 
 namespace SCI_Tools
 {
     internal class Program
     {
-        private static string GAME_DIR = @"..\..\..\Conquest\";
+        public static string GAME_DIR = @"..\..\..\Conquest\";
 
         private static void Main(string[] args)
         {
-            if (args.Length> 0)
+            if (args.Length > 0)
                 GAME_DIR = args[0];
 
-            File.Delete(Path.Combine(GAME_DIR, "TRANSLATE", "990.scr"));
-
-            {
-                SCIPackage package = new SCIPackage(GAME_DIR);
-                var res = package.Resources
-                    .SelectMany(r => r.Resources)
-                    .First(r => r.ToString().Equals("990.scr"));
-
-                var scr = res.GetScript(false);
-                var strings = scr.Sections.FindAll(s => s is StringSection).SelectMany(s => ((StringSection)s).Strings);
-                var save = strings.First(s => s.Value.Equals("  Save  "));
-                save.Value = "  Сохра  ";
-                res.SaveTranslate(scr.GetBytes());
-            }
-
-            {
-                SCIPackage package = new SCIPackage(GAME_DIR);
-                var scr = package.Resources
-                    .SelectMany(r => r.Resources)
-                    .First(r => r.ToString().Equals("990.scr"));
-
-                var text = new SimpeScriptBuilder().Decompile(scr.GetScript(false));
-                File.WriteAllText(@"..\..\..\Sandbox\990_en.scr", text);
-            }
-
-            {
-                SCIPackage package = new SCIPackage(GAME_DIR);
-                var scr = package.Resources
-                    .SelectMany(r => r.Resources)
-                    .First(r => r.ToString().Equals("990.scr"));
-
-                var text = new SimpeScriptBuilder().Decompile(scr.GetScript(true));
-                File.WriteAllText(@"..\..\..\Sandbox\990_ru.scr", text);
-            }
+            ExportEnScr();
 
             Console.WriteLine("Completed");
             Console.ReadKey();
         }
 
-        private static void CompareTexts(SCIPackage package)
+        static void FindSpaces()
         {
+            SCIPackage package = new SCIPackage(GAME_DIR);
+            Directory.CreateDirectory("en");
+
+            foreach (var t in package.Texts)
+            {
+                var lines = t.GetText(false);
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i].StartsWith(" ") || lines[i].EndsWith(" "))
+                    {
+                        Console.WriteLine(t);
+
+                        using (StreamWriter stream = new StreamWriter("en/" + t.ToString()))
+                        {
+                            foreach (var line in lines)
+                            {
+                                if (lines[i].StartsWith(" ") || lines[i].EndsWith(" "))
+                                {
+                                    var line_strip = ReplaceSpaces(line);
+                                    stream.Write(line_strip + "\n\n");
+                                }
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            /*foreach (var r in package.Scripts)
+            {
+                var scr = r.GetScript(false);
+                foreach (var s in scr.Strings)
+                {
+                    if (s.Value.StartsWith(" ") || s.Value.EndsWith(" "))
+                    {
+                        Console.WriteLine(r);
+
+                        using (StreamWriter stream = new StreamWriter("en/" + r.ToString()))
+                        {
+                            foreach (var line in lines)
+                            {
+                                var line_strip = ReplaceSpaces(line);
+                                stream.Write(line_strip + "\n\n");
+                            }
+                        }
+
+                        break;
+                    }
+                }
+            }*/
+        }
+
+        private static string ReplaceSpaces(string str)
+        {
+            var chars = str.ToCharArray();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (chars[i] == ' ')
+                    chars[i] = '_';
+                else
+                    break;
+            }
+
+            for (int i = chars.Length - 1; i >= 0; i--)
+            {
+                if (chars[i] == ' ')
+                    chars[i] = '_';
+                else
+                    break;
+            }
+
+            return new string(chars);
+        }
+
+        static void TranslateOne()
+        {
+            SCIPackage package = new SCIPackage(GAME_DIR);
+            var res = package.Resources
+                .SelectMany(r => r.Resources)
+                .First(r => r.ToString().Equals("990.scr"));
+
+            var scr = res.GetScript(false);
+            var strings = scr.Sections.FindAll(s => s is StringSection).SelectMany(s => ((StringSection)s).Strings);
+            var save = strings.First(s => s.Value.Equals("  Save  "));
+            save.Value = "  Сохра  ";
+            res.SaveTranslate(scr.GetBytes());
+        }
+
+        // ExportScript<SimpeScriptBuilder>(false)
+        static void ExportScript<T>(bool translate) where T : IScriptBuilder, new()
+        {
+            SCIPackage package = new SCIPackage(GAME_DIR);
+            var scr = package.Resources
+                .SelectMany(r => r.Resources)
+                .First(r => r.ToString().Equals("990.scr"));
+
+            var text = new T().Decompile(scr.GetScript(translate));
+            var suffix = translate ? "ru" : "en";
+            File.WriteAllText($@"..\..\..\Sandbox\990_{suffix}.scr", text);
+        }
+
+        private static void FindTranslates()
+        {
+            SCIPackage package = new SCIPackage(GAME_DIR);
             foreach (var r in package.Texts)
             {
-                var enLines = r.GetText(false, false, false); // Оригинальный текст
-                var ruLines = r.GetText(true, false, false);  // Уже переведенный текст
+                var enLines = r.GetText(false); // Оригинальный текст
+                var ruLines = r.GetText(true);  // Уже переведенный текст
 
                 if (enLines.Length != ruLines.Length)
                     Console.WriteLine($"{r} line diff");
@@ -78,8 +151,9 @@ namespace SCI_Tools
             }
         }
 
-        private static void ExportRuTex(SCIPackage package)
+        private static void ExportRuTex()
         {
+            SCIPackage package = new SCIPackage(GAME_DIR);
             Directory.CreateDirectory("ru");
             foreach (var r in package.Texts)
             {
@@ -87,8 +161,8 @@ namespace SCI_Tools
                 var hasTranslate = false;
                 using (StreamWriter stream = new StreamWriter(file))
                 {
-                    var enLines = r.GetText(false, false, false);
-                    var ruLines = r.GetText(true, false, false);
+                    var enLines = r.GetText(false);
+                    var ruLines = r.GetText(true);
 
                     for (int i = 0; i < enLines.Length; i++)
                     {
@@ -109,43 +183,39 @@ namespace SCI_Tools
             }
         }
 
-        private static void ExportEnTex(SCIPackage package)
+        private static void ExportEnTex()
         {
+            SCIPackage package = new SCIPackage(GAME_DIR);
             Directory.CreateDirectory("en");
             foreach (var r in package.Texts)
             {
                 using (StreamWriter stream = new StreamWriter("en/" + r.ToString()))
                 {
-                    var lines = r.GetText(false, false, false);
+                    var lines = r.GetText(false);
                     foreach (var line in lines)
-                    {
                         stream.Write(line + "\n\n");
-                    }
                 }
             }
         }
 
-        private static void PrepareTranslate()
+        private static void ExportEnScr()
         {
-            Linguist l = new Linguist();
+            SCIPackage package = new SCIPackage(GAME_DIR);
+            Directory.CreateDirectory("en");
+            foreach (var r in package.Scripts)
+            {
+                var strings = r.GetScript(false).AllStrings.Where(s => s.Value.Length > 0);
+                if (strings.Count() == 0)
+                    continue;
 
-            SCIPackage pEn = new SCIPackage(GAME_DIR);
-            l.FillSource(pEn);
-
-            SCIPackage pGer = new SCIPackage(@"../../../ConquestG/");
-            var tr = pGer.ExtractTranslate();
-            //pGer.FillTranslate(l);
-
-            l.Translate(tr);
-
-            l.Save("D:/translate_ru.ts");
+                Console.WriteLine(r);
+                using (StreamWriter stream = new StreamWriter("en/" + r.ToString()))
+                {
+                    foreach (var s in strings)
+                        stream.Write(ReplaceSpaces(s.Value) + "\n\n");
+                }
+            }
         }
 
-        private static void ApplyTranslate()
-        {
-            SCIPackage pEn = new SCIPackage(GAME_DIR);
-            Linguist l = new Linguist("translate_ru.ts");
-            l.ApplyTranslate(pEn);
-        }
     }
 }

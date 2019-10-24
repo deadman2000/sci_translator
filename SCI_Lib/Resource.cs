@@ -167,7 +167,7 @@ namespace SCI_Translator
         // TODO В отдельные классы
         // TEXT
 
-        public string[] GetText(bool translateDir, bool translatePart, bool escape)
+        public string[] GetText(bool translateDir, bool translatePart = false, bool escape = false)
         {
             List<string> lines = new List<string>();
             var data = GetContent(translateDir);

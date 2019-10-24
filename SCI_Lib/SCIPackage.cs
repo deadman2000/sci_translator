@@ -76,31 +76,6 @@ namespace SCI_Translator
             return null;
         }
 
-        public Dictionary<string, string> ExtractTranslate()
-        {
-            Dictionary<string, string> translate = new Dictionary<string, string>();
-
-            foreach (var res in Resources)
-            {
-                if (res.Type != ResType.Text) continue;
-
-                foreach (var r in res.Resources)
-                {
-                    var en = r.GetText(false, false, false);
-                    var ge = r.GetText(false, true, false);
-                    var ru = r.GetText(true, true, false);
-
-                    for (int i = 0; i < en.Length; i++)
-                    {
-                        if (ge[i].Equals(ru[i])) continue;
-
-                        translate[en[i]] = ru[i];
-                    }
-                }
-            }
-            return translate;
-        }
-
         public void ExportText(string path)
         {
             using (StreamWriter stream = new StreamWriter(path))
@@ -111,7 +86,7 @@ namespace SCI_Translator
                     {
                         foreach (var r in res.Resources)
                         {
-                            var lines = r.GetText(false, false, false);
+                            var lines = r.GetText(false);
                             foreach (var line in lines)
                             {
                                 stream.WriteLine(line);
@@ -128,6 +103,8 @@ namespace SCI_Translator
         public List<ResMapOffset> Resources { get; }
 
         public IEnumerable<Resource> Texts => Resources.FindAll(r => r.Type == ResType.Text).SelectMany(r => r.Resources);
+
+        public IEnumerable<Resource> Scripts => Resources.FindAll(r => r.Type == ResType.Script).SelectMany(r => r.Resources);
 
 
         private Dictionary<byte, OpCode> _opcodes;

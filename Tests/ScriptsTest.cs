@@ -17,6 +17,36 @@ namespace Tests
         }
 
         [Test]
+        public void DisassembleAll()
+        {
+            SCIPackage package = new SCIPackage(GAME_DIR);
+            var scripts = package.Resources
+                .SelectMany(r => r.Resources)
+                .Where(r => r.Type == ResType.Script);
+
+            foreach (var res in scripts)
+            {
+                Assert.IsNotNull(
+                    res.GetScript(false));
+            }
+        }
+
+        [Test]
+        public void DisassembleAllRus()
+        {
+            SCIPackage package = new SCIPackage(GAME_DIR);
+            var scripts = package.Resources
+                .SelectMany(r => r.Resources)
+                .Where(r => r.Type == ResType.Script);
+
+            foreach (var res in scripts)
+            {
+                Assert.IsNotNull(
+                    res.GetScript(true));
+            }
+        }
+
+        [Test]
         public void ParseAndBack()
         {
             SCIPackage package = new SCIPackage(GAME_DIR);

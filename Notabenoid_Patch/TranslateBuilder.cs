@@ -49,7 +49,9 @@ namespace Notabenoid_Patch
 
                 SCIPackage package = new SCIPackage(GAME_DIR);
                 var texts = package.Texts;
-                int total = texts.Count() + 2;
+                var scripts = package.Scripts;
+
+                int total = texts.Count() + scripts.Count() + 2;
                 int progress = 0;
 
                 bool hasChanges = false;
@@ -68,8 +70,8 @@ namespace Notabenoid_Patch
                     if (cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange))
                         continue;
 
-                    var enLines = r.GetText(false, false, false); // Оригинальный текст
-                    var ruLines = r.GetText(true, false, false);  // Уже переведенный текст
+                    var enLines = r.GetText(false); // Оригинальный текст
+                    var ruLines = r.GetText(true);  // Уже переведенный текст
 
                     if (enLines.Length != ruLines.Length)
                     {
@@ -85,25 +87,68 @@ namespace Notabenoid_Patch
                         var en = enLines[i];
                         var ru = ruLines[i];
 
-                        if (!translates.TryGetValue(en.Trim(), out string tr))
+                        if (!translates.TryGetValue(en, out string tr))
                             continue;
 
-                        if (tr.Trim().Equals(ru.Trim())) // Пропускаем старый перевод
+                        if (tr.Equals(ru)) // Пропускаем старый перевод
                             continue;
 
                         hasTranslate = true;
 
-                        // Восстанавливаем пробелы
-                        var leftSpaces = en.Length - en.TrimStart(' ').Length;
-                        var rightSpaces = en.Length - en.TrimEnd(' ').Length;
-
-                        ruLines[i] = new string(' ', leftSpaces) + tr + new string(' ', rightSpaces);
+                        ruLines[i] = tr;
                     }
 
                     if (hasTranslate)
                     {
                         Console.WriteLine(r);
                         r.SetText(ruLines, false);
+                        hasChanges = true;
+                    }
+                }
+
+                foreach (var r in scripts)
+                {
+                    progress++;
+                    ReportProgress?.Invoke(progress * 100 / total);
+
+                    if (!parts.TryGetValue(r.ToString(), out Part part)) // Ресурс без перевода
+                        continue;
+
+                    if (String.IsNullOrEmpty(part.DateChange)) // Пропускаем части без перевода
+                        continue;
+
+                    if (cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange))
+                        continue;
+
+                    var enScr = r.GetScript(false);
+                    var ruScr = r.GetScript(true);
+
+                    var enStrings = enScr.AllStrings.ToArray();
+                    var ruStrings = ruScr.AllStrings.ToArray();
+
+                    var translates = await GetTranslates(part.URL);
+                    bool hasTranslate = false;
+
+                    for (int i = 0; i < enStrings.Length; i++)
+                    {
+                        var en = enStrings[i].Value;
+                        var ru = ruStrings[i].Value;
+
+                        if (!translates.TryGetValue(en, out string tr))
+                            continue;
+
+                        if (tr.Equals(ru)) // Пропускаем старый перевод
+                            continue;
+
+                        hasTranslate = true;
+
+                        ruStrings[i].Value = tr;
+                    }
+
+                    if (hasTranslate)
+                    {
+                        Console.WriteLine(r);
+                        r.SaveTranslate(ruScr.GetBytes());
                         hasChanges = true;
                     }
                 }
@@ -203,7 +248,10 @@ namespace Notabenoid_Patch
                     if (ruEl == null)
                         continue;
 
-                    translates[e.Text()] = ruEl.Text();
+                    var en = e.Text().Replace('_', ' ');
+                    var ru = ruEl.Text().Replace('_', ' ');
+
+                    translates[en] = ru;
                 }
 
                 var a = document.QuerySelector("#pages-bottom p.n a") as IHtmlAnchorElement;

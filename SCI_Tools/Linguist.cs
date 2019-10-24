@@ -186,7 +186,7 @@ namespace SCI_Tools
 
                     var context = GetContext(r.FileName);
 
-                    var en = r.GetText(false, false, false);
+                    var en = r.GetText(false);
 
                     for (int i = 0; i < en.Length; i++)
                     {
@@ -197,6 +197,27 @@ namespace SCI_Tools
                     }
                 }
             }
+        }
+
+        static Dictionary<string, string> ExtractTranslate(SCIPackage package)
+        {
+            Dictionary<string, string> translate = new Dictionary<string, string>();
+
+            foreach (var r in package.Texts)
+            {
+                var en = r.GetText(false, false, false);
+                var ge = r.GetText(false, true, false);
+                var ru = r.GetText(true, true, false);
+
+                for (int i = 0; i < en.Length; i++)
+                {
+                    if (ge[i].Equals(ru[i])) continue;
+
+                    translate[en[i]] = ru[i];
+                }
+            }
+
+            return translate;
         }
 
         public static void ExportTranslate(SCIPackage package, string path)
@@ -270,5 +291,28 @@ namespace SCI_Tools
             }
         }
 
+
+        public static void PrepareTranslate()
+        {
+            Linguist l = new Linguist();
+
+            SCIPackage pEn = new SCIPackage(Program.GAME_DIR);
+            l.FillSource(pEn);
+
+            SCIPackage pGer = new SCIPackage(@"../../../ConquestG/");
+            var tr = ExtractTranslate(pGer);
+            //pGer.FillTranslate(l);
+
+            l.Translate(tr);
+
+            l.Save("D:/translate_ru.ts");
+        }
+
+        public static void ApplyTranslate()
+        {
+            SCIPackage pEn = new SCIPackage(Program.GAME_DIR);
+            Linguist l = new Linguist("translate_ru.ts");
+            l.ApplyTranslate(pEn);
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SCI_Translator.Scripts.Builders
 {
-    interface IScriptBuilder
+    public interface IScriptBuilder
     {
         string Decompile(Script script);
     }

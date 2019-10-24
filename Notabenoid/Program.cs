@@ -79,7 +79,7 @@ namespace Notabenoid
 
                 Console.WriteLine();
                 Console.WriteLine("Checking...");
-                var lines = res.GetText(false, false, false);
+                var lines = res.GetText(false);
                 foreach (var l in lines)
                 {
                     var t = l.Trim();
@@ -164,8 +164,8 @@ namespace Notabenoid
                 Console.WriteLine(r);
 
                 translate.Clear();
-                var enLines = r.GetText(false, false, false);
-                var ruLines = r.GetText(true, false, false);
+                var enLines = r.GetText(false);
+                var ruLines = r.GetText(true);
 
                 for (int i = 0; i < enLines.Length; i++)
                 {

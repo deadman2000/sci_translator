@@ -2,23 +2,19 @@
 using SCI_Translator.Scripts.Sections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace SCI_Translator.Scripts
 {
     public class Script
     {
-        private List<Section> _sections = new List<Section>();
         private Dictionary<ushort, BaseElement> _elements = new Dictionary<ushort, BaseElement>();
-        private byte[] _sourceData;
-
-        private Resource _resource;
-
-        private StringSection _strings;
+        private readonly StringSection _strings;
 
         public Script(Resource res, byte[] data)
         {
-            _resource = res;
-            _sourceData = data;
+            Resource = res;
+            SourceData = data;
 
             ushort i = 0;
             while (i < data.Length)
@@ -30,14 +26,14 @@ namespace SCI_Translator.Scripts
                 i += 4;
 
                 Section sec = Section.Create(this, (SectionType)type, data, i, size);
-                _sections.Add(sec);
+                Sections.Add(sec);
                 i += size;
 
                 if (sec is StringSection)
                     _strings = (StringSection)sec;
             }
 
-            foreach (var sec in _sections)
+            foreach (var sec in Sections)
                 sec.SetupByOffset();
         }
 
@@ -46,13 +42,15 @@ namespace SCI_Translator.Scripts
             _elements.Add(el.Address, el);
         }
 
-        public SCIPackage Package { get { return _resource.Package; } }
+        public SCIPackage Package { get { return Resource.Package; } }
 
-        public Resource Resource { get { return _resource; } }
+        public Resource Resource { get; }
 
-        public byte[] SourceData { get { return _sourceData; } }
+        public byte[] SourceData { get; }
 
-        public List<Section> Sections { get { return _sections; } }
+        public List<Section> Sections { get; } = new List<Section>();
+
+        public IEnumerable<StringConst> AllStrings => Sections.Where(s => s.Type == SectionType.String).SelectMany(s => ((StringSection)s).Strings).Where(s => !s.IsClassName);
 
         public string GetString(ushort offset)
         {
@@ -70,7 +68,7 @@ namespace SCI_Translator.Scripts
         {
             ByteBuilder bb = new ByteBuilder();
 
-            foreach (Section sec in _sections)
+            foreach (Section sec in Sections)
             {
                 bb.AddShortBE((ushort)sec.Type);
                 int sizePos = bb.Position;
@@ -80,7 +78,7 @@ namespace SCI_Translator.Scripts
                 bb.SetShortBE(sizePos, (ushort)(endPos - sizePos + 2));
             }
 
-            foreach (Section sec in _sections)
+            foreach (Section sec in Sections)
                 sec.WriteOffsets(bb);
 
             bb.AddShortBE(0);
@@ -91,7 +89,7 @@ namespace SCI_Translator.Scripts
         {
             List<T> list = new List<T>();
 
-            foreach (Section sec in _sections)
+            foreach (Section sec in Sections)
             {
                 if (sec is T)
                     list.Add((T)sec);
@@ -104,7 +102,7 @@ namespace SCI_Translator.Scripts
         {
             List<T> list = new List<T>();
 
-            foreach (Section sec in _sections)
+            foreach (Section sec in Sections)
             {
                 if (sec.Type == type && sec is T)
                     list.Add((T)sec);
