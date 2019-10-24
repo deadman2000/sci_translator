@@ -10,6 +10,7 @@ build:
   before_script:
     - docker login -u $NEXUS_LOGIN -p $NEXUS_PASSWORD $DOCKER_REGISTRY
   script:
+    - git check-attr -a Conquest/TRANSLATE/INTERP.ERR
     - docker pull $DOCKER_IMAGE:latest || true
     - docker build --cache-from $DOCKER_IMAGE:latest --tag $DOCKER_IMAGE:latest .
     - docker push $DOCKER_IMAGE:latest
