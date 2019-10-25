@@ -13,6 +13,7 @@ namespace SCI_Translator.ResView
     {
 
         protected Resource _res;
+        private bool _translated;
 
         public Resource Resource { get { return _res; } }
 
@@ -30,7 +31,13 @@ namespace SCI_Translator.ResView
         public void Activate(Resource res, bool translated)
         {
             _res = res;
-            ShowResource(res, translated);
+            _translated = translated;
+            Reload();
+        }
+
+        protected void Reload()
+        {
+            ShowResource(_res, _translated);
         }
 
         protected virtual void ShowResource(Resource res, bool translated)

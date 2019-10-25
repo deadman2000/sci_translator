@@ -7,29 +7,45 @@ namespace SCI_Translator.Scripts.Elements
 {
     public abstract class BaseElement
     {
-        protected ushort _address;
-        protected Script _script;
-
-        public BaseElement(Script script)
+        private ushort address;
+        
+        public BaseElement(Script script, ushort address)
         {
-            _script = script;
+            Script = script;
+            Address = address;
+
+            Script.Register(this);
         }
+
+        public Script Script { get; private set; }
 
         public List<RefToElement> XRefs { get; } = new List<RefToElement>();
 
         public ushort Address
         {
-            get { return _address; }
-            set { _address = value; }
+            get => address; set
+            {
+                address = value;
+                IsAddressSet = true;
+            }
         }
 
-        public virtual string Label => $"{GetType().Name.ToLower()}_{_address:x4}";
+        public bool IsAddressSet { get; set; }
+
+        public virtual string Label => $"{GetType().Name.ToLower()}_{Address:x4}";
 
         public virtual void SetupByOffset() { }
-        
+
         public abstract void Write(ByteBuilder bb);
 
         public abstract void WriteOffset(ByteBuilder bb);
 
+        public void ReplaceBy(BaseElement el)
+        {
+            foreach (var r in XRefs)
+                r.Reference = el;
+
+            el.XRefs.AddRange(XRefs);
+        }
     }
 }

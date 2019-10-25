@@ -15,7 +15,7 @@ namespace SCI_Translator.Scripts.Sections
             {
                 var addr = offset;
                 ushort val = ReadShortBE(data, ref offset);
-                Refs[i] = new RefToElement(_script, addr, val);
+                Refs[i] = new RefToElement(_script, addr, val) { Source = this };
             }
         }
 

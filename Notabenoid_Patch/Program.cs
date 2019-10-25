@@ -17,6 +17,7 @@ namespace Notabenoid_Patch
             builder.Build().Wait();
 
             Console.WriteLine("Completed");
+            Console.ReadKey();
         }
     }
 }

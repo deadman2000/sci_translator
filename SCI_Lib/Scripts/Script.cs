@@ -1,7 +1,6 @@
 ﻿using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 
 namespace SCI_Translator.Scripts
@@ -37,10 +36,9 @@ namespace SCI_Translator.Scripts
                 sec.SetupByOffset();
         }
 
-        public void Register(BaseElement el)
-        {
-            _elements.Add(el.Address, el);
-        }
+        public void Register(BaseElement el) => _elements[el.Address] = el;
+
+        public void Unregister(BaseElement el) => _elements.Remove(el.Address);
 
         public SCIPackage Package { get { return Resource.Package; } }
 
@@ -50,7 +48,11 @@ namespace SCI_Translator.Scripts
 
         public List<Section> Sections { get; } = new List<Section>();
 
-        public IEnumerable<StringConst> AllStrings => Sections.Where(s => s.Type == SectionType.String).SelectMany(s => ((StringSection)s).Strings).Where(s => !s.IsClassName);
+        public IEnumerable<StringConst> AllStrings => Sections.OfType<StringSection>().SelectMany(s => s.Strings);
+
+        public IEnumerable<BaseElement> AllElements => _elements.Values;
+
+        public IEnumerable<RefToElement> AllRefs => _elements.Values.OfType<RefToElement>();
 
         public BaseElement GetElement(ushort offset)
         {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Windows.Forms;
-using SCI_Translator.Scripts;
-using SCI_Translator.Scripts.Sections;
+﻿using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Builders;
 using SCI_Translator.Scripts.Elements;
+using System;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace SCI_Translator.ResView
 {
@@ -21,7 +20,12 @@ namespace SCI_Translator.ResView
         private DataGridViewTextBoxColumn colInd;
         private DataGridViewTextBoxColumn colString;
         private DataGridViewTextBoxColumn colTranslate;
+        private ContextMenuStrip cmsStrings;
+        private System.ComponentModel.IContainer components;
+        private ToolStripMenuItem tsmiRevert;
+
         private Script script;
+        private StringConst[] orig = null;
 
         public ScriptView()
         {
@@ -43,13 +47,26 @@ namespace SCI_Translator.ResView
             dgvStrings.Rows.Clear();
             tbASM.Clear();
             tbHex.Clear();
-            
-            foreach (var sec in script.Sections)
+
+            if (translated)
+                orig = res.GetScript(false).AllStrings.ToArray();
+
+            int i = 0;
+            foreach (StringConst sc in script.AllStrings)
             {
-                if (sec is StringSection)
-                {
-                    ShowStrings((StringSection)sec);
-                }
+                int rowInd = dgvStrings.Rows.Add(new object[] { i });
+                var row = dgvStrings.Rows[rowInd];
+
+                FillRow(row, sc);
+
+                row.Tag = sc;
+                if (sc.IsClassName)
+                    row.DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
+
+                if (orig != null && !orig[i].Value.Equals(sc.Value))
+                    row.DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+
+                i++;
             }
 
             tbHex.Text = new HexBuilder().Decompile(script);
@@ -60,25 +77,20 @@ namespace SCI_Translator.ResView
             this.PerformLayout();
         }
 
-        private void ShowStrings(StringSection stringSection)
+        private void FillRow(DataGridViewRow row, StringConst sc)
         {
-            int i = 0;
-            foreach (StringConst sc in stringSection.Strings)
+            string str = sc.GetStringEscape();
+            //str = str.Replace("$0D", "\r").Replace("$0A", "\n");
+            string[] parts = str.Split(new string[] { "#G" }, StringSplitOptions.None);
+
+            if (parts.Length > 1)
             {
-                string str = sc.GetStringEscape();
-                //str = str.Replace("$0D", "\r").Replace("$0A", "\n");
-                string[] parts = str.Split(new string[] { "#G" }, StringSplitOptions.None);
-
-                int row;
-                if (parts.Length > 1)
-                    row = dgvStrings.Rows.Add(i++, parts[0], parts[1]);
-                else
-                    row = dgvStrings.Rows.Add(i++, str);
-
-                dgvStrings.Rows[row].Tag = sc;
-                if (sc.IsClassName)
-                    dgvStrings.Rows[row].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
+                row.Cells[1].Value = parts[0];
+                row.Cells[2].Value = parts[1];
             }
+            else
+                row.Cells[1].Value = str;
+
         }
 
         private void CommitStrings()
@@ -95,21 +107,47 @@ namespace SCI_Translator.ResView
                 else
                     val = s1;
 
-                ((StringConst)row.Tag).SetValueUnescape(val);
+                var sc = (StringConst)row.Tag;
+                sc.SetValueUnescape(val);
+
+                var en = orig[(int)row.Cells[0].Value];
+                if (!en.Value.Equals(sc.Value))
+                    row.DefaultCellStyle.ForeColor = System.Drawing.Color.Red;
+                else
+                    row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             }
         }
 
         public override void Save()
         {
-            //_res.SaveTranslate(); return;
             CommitStrings();
 
             byte[] bytes = script.GetBytes();
             _res.SaveTranslate(bytes);
         }
 
+        private void tsmiRevert_Click(object sender, EventArgs e)
+        {
+            if (orig == null) return;
+
+            foreach (var r in dgvStrings.SelectedCells.OfType<DataGridViewCell>())
+            {
+                var row = r.OwningRow;
+
+                var str = (StringConst)row.Tag;
+                var en = orig[(int)row.Cells[0].Value];
+                
+                str.Value = en.Value;
+
+                FillRow(row, str);
+
+                row.DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tc = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -117,6 +155,8 @@ namespace SCI_Translator.ResView
             this.colInd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTranslate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cmsStrings = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiRevert = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tbASM = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -126,6 +166,7 @@ namespace SCI_Translator.ResView
             this.tc.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStrings)).BeginInit();
+            this.cmsStrings.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -141,7 +182,7 @@ namespace SCI_Translator.ResView
             this.tc.Location = new System.Drawing.Point(0, 0);
             this.tc.Name = "tc";
             this.tc.SelectedIndex = 0;
-            this.tc.Size = new System.Drawing.Size(849, 932);
+            this.tc.Size = new System.Drawing.Size(1514, 849);
             this.tc.TabIndex = 0;
             // 
             // tabPage1
@@ -149,7 +190,7 @@ namespace SCI_Translator.ResView
             this.tabPage1.Controls.Add(this.dgvStrings);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(841, 906);
+            this.tabPage1.Size = new System.Drawing.Size(1506, 823);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Strings";
             this.tabPage1.Visible = false;
@@ -163,6 +204,7 @@ namespace SCI_Translator.ResView
             this.colInd,
             this.colString,
             this.colTranslate});
+            this.dgvStrings.ContextMenuStrip = this.cmsStrings;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -175,7 +217,7 @@ namespace SCI_Translator.ResView
             this.dgvStrings.Location = new System.Drawing.Point(0, 0);
             this.dgvStrings.Name = "dgvStrings";
             this.dgvStrings.RowHeadersVisible = false;
-            this.dgvStrings.Size = new System.Drawing.Size(841, 906);
+            this.dgvStrings.Size = new System.Drawing.Size(1506, 823);
             this.dgvStrings.TabIndex = 0;
             // 
             // colInd
@@ -201,12 +243,26 @@ namespace SCI_Translator.ResView
             this.colTranslate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colTranslate.Width = 300;
             // 
+            // cmsStrings
+            // 
+            this.cmsStrings.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiRevert});
+            this.cmsStrings.Name = "cmsStrings";
+            this.cmsStrings.Size = new System.Drawing.Size(108, 26);
+            // 
+            // tsmiRevert
+            // 
+            this.tsmiRevert.Name = "tsmiRevert";
+            this.tsmiRevert.Size = new System.Drawing.Size(107, 22);
+            this.tsmiRevert.Text = "Revert";
+            this.tsmiRevert.Click += new System.EventHandler(this.tsmiRevert_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tbASM);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(841, 906);
+            this.tabPage2.Size = new System.Drawing.Size(921, 823);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "ASM";
             this.tabPage2.Visible = false;
@@ -221,7 +277,7 @@ namespace SCI_Translator.ResView
             this.tbASM.Name = "tbASM";
             this.tbASM.ReadOnly = true;
             this.tbASM.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbASM.Size = new System.Drawing.Size(841, 906);
+            this.tbASM.Size = new System.Drawing.Size(921, 823);
             this.tbASM.TabIndex = 0;
             this.tbASM.WordWrap = false;
             // 
@@ -230,7 +286,7 @@ namespace SCI_Translator.ResView
             this.tabPage3.Controls.Add(this.tbASMC);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(841, 906);
+            this.tabPage3.Size = new System.Drawing.Size(921, 823);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ASM Comp";
             this.tabPage3.Visible = false;
@@ -245,7 +301,7 @@ namespace SCI_Translator.ResView
             this.tbASMC.Name = "tbASMC";
             this.tbASMC.ReadOnly = true;
             this.tbASMC.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbASMC.Size = new System.Drawing.Size(841, 906);
+            this.tbASMC.Size = new System.Drawing.Size(921, 823);
             this.tbASMC.TabIndex = 0;
             this.tbASMC.WordWrap = false;
             // 
@@ -254,7 +310,7 @@ namespace SCI_Translator.ResView
             this.tabPage4.Controls.Add(this.tbHex);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(841, 906);
+            this.tabPage4.Size = new System.Drawing.Size(921, 823);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "HEX";
             this.tabPage4.Visible = false;
@@ -269,7 +325,7 @@ namespace SCI_Translator.ResView
             this.tbHex.Name = "tbHex";
             this.tbHex.ReadOnly = true;
             this.tbHex.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbHex.Size = new System.Drawing.Size(841, 906);
+            this.tbHex.Size = new System.Drawing.Size(921, 823);
             this.tbHex.TabIndex = 0;
             this.tbHex.WordWrap = false;
             // 
@@ -278,10 +334,11 @@ namespace SCI_Translator.ResView
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Controls.Add(this.tc);
             this.Name = "ScriptView";
-            this.Size = new System.Drawing.Size(849, 932);
+            this.Size = new System.Drawing.Size(1514, 849);
             this.tc.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvStrings)).EndInit();
+            this.cmsStrings.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -289,8 +346,6 @@ namespace SCI_Translator.ResView
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
-
         }
-
     }
 }

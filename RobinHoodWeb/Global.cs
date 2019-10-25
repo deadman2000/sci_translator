@@ -43,12 +43,26 @@ namespace RobinHoodWeb
 
         static IEnumerable<StringRes> ExtractStringsText(IEnumerable<Resource> texts, bool translate)
         {
-            return texts.SelectMany(s => s.GetText(translate).Select(l => new StringRes { Ru = translate, Resource = s.ToString(), Text = l }));
+            return texts.SelectMany(s => s.GetText(translate)
+                                          .Select(l => new StringRes { 
+                                              Ru = translate, 
+                                              Resource = s.ToString(), 
+                                              Text = l 
+                                          })
+            );
         }
 
         static IEnumerable<StringRes> ExtractStringsScript(IEnumerable<Resource> scripts, bool translate)
         {
-            return scripts.SelectMany(s => s.GetScript(translate).AllStrings.Select(c => new StringRes { Ru = translate, Resource = s.ToString(), Text = c.Value }));
+            return scripts.SelectMany(s => s.GetScript(translate)
+                                            .AllStrings
+                                            .Where(s => !s.IsClassName)
+                                            .Select(c => new StringRes {
+                                                Ru = translate,
+                                                Resource = s.ToString(), 
+                                                Text = c.Value 
+                                            })
+            );
         }
 
         public static void UpdateStrings()

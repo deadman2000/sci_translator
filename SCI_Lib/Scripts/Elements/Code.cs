@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SCI_Translator.Scripts.Elements
@@ -15,8 +14,8 @@ namespace SCI_Translator.Scripts.Elements
         private Code _prev;
         private Code _next;
 
-        public Code(Script script, Code prev)
-            : base(script)
+        public Code(Script script, ushort address, Code prev)
+            : base(script, address)
         {
             _prev = prev;
             if (prev != null)
@@ -33,7 +32,7 @@ namespace SCI_Translator.Scripts.Elements
             get
             {
                 if (_name != null) return _name;
-                return _name = _script.GetOpCodeName((byte)(_type >> 1));
+                return _name = Script.GetOpCodeName((byte)(_type >> 1));
             }
         }
 
@@ -60,12 +59,11 @@ namespace SCI_Translator.Scripts.Elements
 
         public override string ToString()
         {
-            return String.Format("0x{0,-5:X2} {1,-8} {2,-25}; [0x{3:X4}]", _type, Name, ArgsToString(), _address);
+            return String.Format("0x{0,-5:X2} {1,-8} {2,-25}; [0x{3:X4}]", _type, Name, ArgsToString(), Address);
         }
 
         public void Read(byte[] data, ref ushort offset)
         {
-            _address = offset;
             _arguments = new List<object>();
             _type = data[offset++];
 
@@ -182,7 +180,7 @@ namespace SCI_Translator.Scripts.Elements
 
                 case 0x33:
                     val = data[offset++];
-                    _arguments.Add(new RefToElement(_script, addr, val, (ushort)(offset + 1 + val), 1));
+                    _arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + 1 + val), 1) { Source = this });
                     break;
 
                 // 3 bytes
@@ -212,7 +210,7 @@ namespace SCI_Translator.Scripts.Elements
                 // Relative offset
                 case 0x41: // call B
                     val = data[offset++];
-                    _arguments.Add(new RefToElement(_script, addr, val, (ushort)(offset + val), 1));
+                    _arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + val), 1) { Source = this });
                     _arguments.Add(data[offset++]);
                     break;
 
@@ -220,12 +218,12 @@ namespace SCI_Translator.Scripts.Elements
                 case 0x30: // bnt
                 case 0x32: // jmp
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
-                    _arguments.Add(new RefToElement(_script, addr, val, (ushort)(offset + val), 2));
+                    _arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + val), 2) { Source = this });
                     break;
 
                 case 0x72: // lofsa
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
-                    _arguments.Add(new RefToElement(_script, addr, val));
+                    _arguments.Add(new RefToElement(Script, addr, val) { Source = this });
                     break;
 
                 // Absolute offset
@@ -245,7 +243,7 @@ namespace SCI_Translator.Scripts.Elements
                 case 0x40: // call W
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
                     var arg = data[offset++];
-                    _arguments.Add(new RefToElement(_script, addr, val, (ushort)(offset + val), 2));
+                    _arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + val), 2) { Source = this });
                     _arguments.Add(arg);
                     break;
 
@@ -431,7 +429,7 @@ namespace SCI_Translator.Scripts.Elements
 
         public override void Write(ByteBuilder bb)
         {
-            _address = bb.Position;
+            Address = bb.Position;
             bb.AddByte(_type);
             foreach (object arg in _arguments)
             {
@@ -459,7 +457,7 @@ namespace SCI_Translator.Scripts.Elements
                     case LinkToExport _:
                         continue;
                     case RefToElement r:
-                        r.WriteOffset(_address + Size, bb);
+                        r.WriteOffset(Address + Size, bb);
                         break;
                     default:
                         throw new NotImplementedException();

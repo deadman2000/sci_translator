@@ -123,8 +123,8 @@ namespace Notabenoid_Patch
                     var enScr = r.GetScript(false);
                     var ruScr = r.GetScript(true);
 
-                    var enStrings = enScr.AllStrings.ToArray();
-                    var ruStrings = ruScr.AllStrings.ToArray();
+                    var enStrings = enScr.AllStrings.Where(s => !s.IsClassName).ToArray();
+                    var ruStrings = ruScr.AllStrings.Where(s => !s.IsClassName).ToArray();
 
                     var translates = await GetTranslates(part.URL);
                     bool hasTranslate = false;

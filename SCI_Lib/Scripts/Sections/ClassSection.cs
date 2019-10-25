@@ -8,7 +8,6 @@ namespace SCI_Translator.Scripts.Sections
     {
         ushort funcList;
         ushort[] varselectors;
-        RefToElement [] propRefs;
 
         public override void Read(byte[] data, ushort offset, int length)
         {
@@ -17,14 +16,12 @@ namespace SCI_Translator.Scripts.Sections
             funcList = ReadShortBE(data, ref o);
             int selectorsCount = ReadShortBE(data, ref o);
 
-            Selectors = new ushort[selectorsCount];
-            propRefs = new RefToElement[selectorsCount];
+            Selectors = new BaseElement[selectorsCount];
             for (int i = 0; i < selectorsCount; i++)
             {
                 var addr = o;
-                Selectors[i] = ReadShortBE(data, ref o);
-
-                propRefs[i] = new RefToElement(_script, addr, Selectors[i]);
+                var val = ReadShortBE(data, ref o);
+                Selectors[i] = new ShortElement(_script, addr, val);
             }
 
             if (Type == SectionType.Class)
@@ -45,32 +42,43 @@ namespace SCI_Translator.Scripts.Sections
             for (int i = 0; i < fs; i++)
             {
                 var addr = o;
-                FuncCode[i] = new RefToElement(_script, addr, ReadShortBE(data, ref o));
+                FuncCode[i] = new RefToElement(_script, addr, ReadShortBE(data, ref o)) { Source = this };
             }
         }
 
         public override void SetupByOffset()
         {
-            for (int i = 0; i < propRefs.Length; i++)
+            for (int i = 0; i < Selectors.Length; i++)
             {
-                propRefs[i].SetupByOffset();
-                if (propRefs[i].Reference == null)
-                    propRefs[i] = null;
-            }
-            Name = (propRefs[3]?.Reference as StringConst)?.Value;
+                ShortElement c = (ShortElement)Selectors[i];
+                var val = c.Value;
 
-            if (propRefs[3]?.Reference is StringConst str)
-                str.IsClassName = true;
+                var target = _script.GetElement(val);
+                if (target != null && target is StringConst)
+                {
+                    var r = new RefToElement(_script, c.Address, c.Value) { Source = this };
+                    c.ReplaceBy(r);
+                    Selectors[i] = r;
+                    r.SetupByOffset();
+                }
+            }
+
+            var nameStr = (StringConst)(Selectors[3] as RefToElement)?.Reference;
+            if (nameStr != null)
+            {
+                Name = nameStr.Value;
+                nameStr.IsClassName = true;
+            }
 
             foreach (var r in FuncCode)
                 r.SetupByOffset();
         }
 
-        public ushort Id => Selectors[0];
+        public ushort Id => ((ShortElement)Selectors[0]).Value;
 
         public string Name { get; private set; }
 
-        public ushort[] Selectors { get; private set; }
+        public BaseElement[] Selectors { get; private set; }
 
         public ushort[] Varselectors => varselectors ?? SuperClass.Varselectors;
 
@@ -85,7 +93,7 @@ namespace SCI_Translator.Scripts.Sections
             get
             {
                 if (_superClass != null) return _superClass;
-                return _superClass = Package.GetClass(Selectors[1]);
+                return _superClass = Package.GetClass(((ShortElement)Selectors[1]).Value);
             }
         }
 
@@ -94,10 +102,10 @@ namespace SCI_Translator.Scripts.Sections
             bb.AddShortBE(0x1234);
             bb.AddShortBE(0);
             bb.AddShortBE(funcList);
-            bb.AddShortBE((ushort)(Selectors.Length));
+            bb.AddShortBE((ushort)Selectors.Length);
 
             for (int i = 0; i < Selectors.Length; i++)
-                bb.AddShortBE(Selectors[i]);
+                Selectors[i].Write(bb);
 
             if (Type == SectionType.Class)
             {
@@ -117,8 +125,8 @@ namespace SCI_Translator.Scripts.Sections
 
         public override void WriteOffsets(ByteBuilder bb)
         {
-            for (int i = 0; i < propRefs.Length; i++)
-                propRefs[i]?.WriteOffset(bb);
+            for (int i = 0; i < Selectors.Length; i++)
+                Selectors[i].WriteOffset(bb);
 
             foreach (RefToElement r in FuncCode)
                 r.WriteOffset(bb);

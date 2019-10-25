@@ -1,8 +1,5 @@
 ﻿using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SCI_Translator.Scripts.Builders
@@ -30,8 +27,11 @@ namespace SCI_Translator.Scripts.Builders
             sb.AppendLine("(local");
             if (locals != null)
             {
-                foreach (var r in locals.Refs)
-                    sb.AppendFormat("    local{0} = ${1:x4}", r.Index, r.TargetOffset).AppendLine();
+                for (int i = 0; i < locals.Refs.Length; i++)
+                {
+                    var offset = locals.Refs[i]?.TargetOffset ?? 0;
+                    sb.Append($"    local{i} = ${offset:x4}" ).AppendLine();
+                }
             }
             sb.AppendLine(")");
             sb.AppendLine();

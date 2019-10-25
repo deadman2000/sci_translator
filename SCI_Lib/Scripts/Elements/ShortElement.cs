@@ -5,27 +5,20 @@ using System.Text;
 
 namespace SCI_Translator.Scripts.Elements
 {
-    class ShortElement : BaseElement
+    public class ShortElement : BaseElement
     {
-        private ushort _val;
-
-        public ShortElement(Script script, ushort offset, ushort val)
-            : base(script)
+        public ShortElement(Script script, ushort address, ushort val)
+            : base(script, address)
         {
-            _address = offset;
-            _val = val;
+            Value = val;
         }
 
-        public ushort Value
-        {
-            get { return _val; }
-            set { _val = value; }
-        }
+        public ushort Value { get; set; }
 
         public override void Write(ByteBuilder bb)
         {
-            _address = bb.Position;
-            bb.AddShortBE(_val);
+            Address = bb.Position;
+            bb.AddShortBE(Value);
         }
 
         public override void WriteOffset(ByteBuilder bb)
@@ -34,7 +27,7 @@ namespace SCI_Translator.Scripts.Elements
 
         public override string ToString()
         {
-            return String.Format("{0}; [0x{1:X4}]", _val, _address);
+            return String.Format("{0}; [0x{1:X4}]", Value, Address);
         }
     }
 }

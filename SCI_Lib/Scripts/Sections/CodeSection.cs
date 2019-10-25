@@ -16,9 +16,8 @@ namespace SCI_Translator.Scripts.Sections
 
             while (i < offset + length)
             {
-                Code c = new Code(_script, prev);
+                Code c = new Code(_script, i, prev);
                 c.Read(data, ref i);
-                _script.Register(c);
                 Operators.Add(c);
                 prev = c;
             }

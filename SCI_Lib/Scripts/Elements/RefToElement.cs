@@ -12,15 +12,12 @@ namespace SCI_Translator.Scripts.Elements
         /// <param name="targetOffset"></param>
         /// <param name="size"></param>
         public RefToElement(Script script, ushort addr, ushort value, ushort targetOffset, byte size)
-            : base(script)
+            : base(script, addr)
         {
-            Address = addr;
             Value = value;
             TargetOffset = targetOffset;
             Size = size;
             Relative = true;
-
-            script.Register(this);
         }
 
         /// <summary>
@@ -44,7 +41,15 @@ namespace SCI_Translator.Scripts.Elements
 
         public int Index { get; set; }
 
-        public BaseElement Reference { get; private set; }
+        public BaseElement Reference { get; set; }
+
+        public bool IsSetup { get; private set; }
+
+        public bool IsWrited { get; private set; }
+
+        public bool IsOffsetWrited { get; private set; }
+
+        public object Source { get; set; }
 
         public override string ToString()
         {
@@ -66,7 +71,10 @@ namespace SCI_Translator.Scripts.Elements
                     break;
                 case RefToElement r:
                     type = "ref_ref";
-                    comment = ";  " + r.ToString();
+                    if (r == this)
+                        comment = ";  self";
+                    else
+                        comment = ";  " + r.Address;
                     break;
                 case null:
                     break;
@@ -81,14 +89,16 @@ namespace SCI_Translator.Scripts.Elements
 
         public override void SetupByOffset()
         {
-            Reference = _script.GetElement(TargetOffset);
+            IsSetup = true;
+            Reference = Script.GetElement(TargetOffset);
             if (Reference != null)
                 Reference.XRefs.Add(this);
         }
 
         public override void Write(ByteBuilder bb)
         {
-            _address = bb.Position;
+            IsWrited = true;
+            Address = bb.Position;
             switch (Size)
             {
                 case 1: bb.AddByte(0); break;
@@ -104,6 +114,8 @@ namespace SCI_Translator.Scripts.Elements
 
         public void WriteOffset(int rel, ByteBuilder bb)
         {
+            IsOffsetWrited = true;
+
             if (Reference != null)
                 TargetOffset = Reference.Address;
 
@@ -115,8 +127,8 @@ namespace SCI_Translator.Scripts.Elements
 
             switch (Size)
             {
-                case 1: bb.SetByte(_address, (byte)val); break;
-                case 2: bb.SetShortBE(_address, (ushort)val); break;
+                case 1: bb.SetByte(Address, (byte)val); break;
+                case 2: bb.SetShortBE(Address, (ushort)val); break;
                 default: throw new NotImplementedException();
             }
         }

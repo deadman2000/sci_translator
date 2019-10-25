@@ -1,5 +1,7 @@
 ﻿using SCI_Translator;
+using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Builders;
+using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
 using System;
 using System.IO;
@@ -17,7 +19,20 @@ namespace SCI_Tools
                 GAME_DIR = args[0];
 
             //ExportEnScr();
+            ExportScript<SimpeScriptBuilder>("0.scr", false);
+            ExportScript<SimpeScriptBuilder>("0.scr", true);
 
+
+            /*SCIPackage package = new SCIPackage(GAME_DIR);
+
+            foreach (var res in package.Scripts.Where(s => s.ToString().Equals("0.scr")))
+            {
+                foreach (var r in res.GetScript(false).AllRefs.Where(r => r.Reference == null))
+                {
+                    Console.WriteLine($"{r.Source?.GetType().Name} : {r}");
+                }
+            }
+            */
             Console.WriteLine("Completed");
             Console.ReadKey();
         }
@@ -113,17 +128,17 @@ namespace SCI_Tools
             res.SaveTranslate(scr.GetBytes());
         }
 
-        // ExportScript<SimpeScriptBuilder>(false)
-        static void ExportScript<T>(bool translate) where T : IScriptBuilder, new()
+        // ExportScript<SimpeScriptBuilder>("990.scr", false)
+        static void ExportScript<T>(string name, bool translate) where T : IScriptBuilder, new()
         {
             SCIPackage package = new SCIPackage(GAME_DIR);
             var scr = package.Resources
                 .SelectMany(r => r.Resources)
-                .First(r => r.ToString().Equals("990.scr"));
+                .First(r => r.ToString().Equals(name));
 
             var text = new T().Decompile(scr.GetScript(translate));
             var suffix = translate ? "ru" : "en";
-            File.WriteAllText($@"..\..\..\Sandbox\990_{suffix}.scr", text);
+            File.WriteAllText($@"..\..\..\Sandbox\{suffix}_{name}", text);
         }
 
         private static void FindTranslates()
@@ -202,7 +217,7 @@ namespace SCI_Tools
             Directory.CreateDirectory("en");
             foreach (var r in package.Scripts)
             {
-                var strings = r.GetScript(false).AllStrings.Where(s => s.Value.Length > 0);
+                var strings = r.GetScript(false).AllStrings.Where(s => !s.IsClassName).Where(s => s.Value.Length > 0);
                 if (strings.Count() == 0)
                     continue;
 
