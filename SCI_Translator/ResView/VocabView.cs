@@ -64,6 +64,14 @@ namespace SCI_Translator.ResView
                     sb.AppendFormat("{0:x2}: {1} {2}", kv.Key, kv.Value.Type, kv.Value.Name).AppendLine();
                 tbVocab.Text = sb.ToString();
             }
+            else if (res.Number == 999)
+            {
+                var lines = res.GetText(translated);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < lines.Length; i++)
+                    sb.AppendLine($"{i,-3}: {lines[i]}");
+                tbVocab.Text = sb.ToString();
+            }
             else
             {
                 tbVocab.Text = "";

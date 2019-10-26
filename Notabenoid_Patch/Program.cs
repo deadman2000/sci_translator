@@ -6,12 +6,16 @@ namespace Notabenoid_Patch
     {
         private static void Main(string[] args)
         {
-            TranslateBuilder.GAME_DIR = @"./Conquest/";
             if (args.Length > 2)
                 TranslateBuilder.GAME_DIR = args[2];
 
-            Environment.SetEnvironmentVariable("NN_LOGIN", args[0]);
-            Environment.SetEnvironmentVariable("NN_PASSWORD", args[1]);
+            if (args.Length > 1)
+            {
+                Environment.SetEnvironmentVariable("NN_LOGIN", args[0]);
+                Environment.SetEnvironmentVariable("NN_PASSWORD", args[1]);
+            }
+
+            TranslateBuilder.NO_CACHE = Environment.GetEnvironmentVariable("NN_NOCACHE") != null;
 
             var builder = new TranslateBuilder();
             builder.Build().Wait();

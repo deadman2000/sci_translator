@@ -1,5 +1,6 @@
 ﻿using SCI_Translator.Decompression;
 using SCI_Translator.Scripts;
+using SCI_Translator.Scripts.Elements;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -1,6 +1,4 @@
 ﻿using SCI_Translator.Scripts.Elements;
-using System;
-using System.Text;
 
 namespace SCI_Translator.Scripts.Sections
 {
@@ -8,56 +6,74 @@ namespace SCI_Translator.Scripts.Sections
     {
         public override void Read(byte[] data, ushort offset, int length)
         {
-            Refs = new RefToElement[length / 2];
+            Vars = new object[length / 2];
 
-            for (int i = 0; i < Refs.Length; i++)
+            for (int i = 0; i < Vars.Length; i++)
             {
-                ushort addr = offset;
-                var val = ReadShortBE(data, ref offset);
+                Vars[i] = ReadShortBE(data, ref offset);
+            }
+        }
 
-                if (val != 0)
+        public object[] Vars { get; private set; }
+
+        public override void SetupByOffset()
+        {
+            for (int i = 0; i < Vars.Length; i++)
+            {
+                ushort val = (ushort)Vars[i];
+                var el = _script.GetElement(val);
+                if (el is StringConst)
                 {
-                    Refs[i] = new RefToElement(_script, addr, val)
-                    {
-                        Index = i,
-                        Source = this,
-                    };
+                    var r = new RefToElement(_script, (ushort)(Address + i * 2), val) { Source = this };
+                    r.SetupByOffset();
+                    Vars[i] = r;
                 }
             }
         }
 
-        public RefToElement[] Refs { get; private set; }
-
-        public override void SetupByOffset()
-        {
-            foreach (RefToElement r in Refs)
-                r?.SetupByOffset();
-        }
-
         public override void Write(ByteBuilder bb)
         {
-            foreach (RefToElement r in Refs)
+            foreach (object v in Vars)
             {
-                if (r != null)
-                    r.Write(bb);
-                else
-                    bb.AddShortBE(0);
+                switch (v)
+                {
+                    case ushort s:
+                        bb.AddShortBE(s);
+                        break;
+                    case RefToElement r:
+                        r.Write(bb);
+                        break;
+                }
             }
         }
 
         public override void WriteOffsets(ByteBuilder bb)
         {
-            foreach (RefToElement r in Refs)
-                r?.WriteOffset(bb);
+            foreach (var v in Vars)
+                (v as RefToElement)?.WriteOffset(bb);
+        }
+    }
+
+    class LocalVariablesSection2 : Section
+    {
+        public override void Read(byte[] data, ushort offset, int length)
+        {
+            Refs = new ushort[length / 2];
+
+            for (int i = 0; i < Refs.Length; i++)
+            {
+                Refs[i] = ReadShortBE(data, ref offset);
+            }
         }
 
-        public override string ToString()
+        public ushort[] Refs { get; private set; }
+
+        public override void Write(ByteBuilder bb)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(String.Format("[Local variables (0x{0:X4})]\r\n", _offset));
-            foreach (RefToElement r in Refs)
-                sb.Append(String.Format("\t{0}\r\n", r));
-            return sb.ToString();
+            foreach (var r in Refs)
+            {
+                bb.AddShortBE(r);
+            }
         }
     }
 }

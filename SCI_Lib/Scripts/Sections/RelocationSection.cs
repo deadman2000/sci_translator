@@ -1,5 +1,4 @@
 ﻿using SCI_Translator.Scripts.Elements;
-using System.Text;
 
 namespace SCI_Translator.Scripts.Sections
 {
@@ -40,15 +39,6 @@ namespace SCI_Translator.Scripts.Sections
         {
             foreach (var r in Refs)
                 r.WriteOffset(bb);
-        }
-
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"[Relocation section (0x{_offset:X4})]");
-            for (int i = 0; i < Refs.Length; i++)
-                sb.AppendLine($"\tpointer[{i}] = {Refs[i].Value:x4}; {Refs[i]}");
-            return sb.ToString();
         }
     }
 }

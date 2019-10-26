@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using SCI_Translator;
 using SCI_Translator.Scripts;
+using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
 using System.Linq;
 
@@ -33,7 +34,9 @@ namespace Tests
             {
                 foreach (var r in rel.Refs)
                 {
-                    Assert.IsNotNull(r.Reference);
+                    var descr = $"Res: {scr.Resource} Ref at {r.Address:x4} Target: {r.TargetOffset:x4} Source: {r.Source}";
+                    Assert.IsNotNull(r.Reference, descr);
+                    Assert.IsInstanceOf<RefToElement>(r.Reference, descr);
                 }
             }
         }
@@ -79,7 +82,7 @@ namespace Tests
                 scr.GetBytes();
 
                 foreach (var e in scr.AllElements)
-                    Assert.IsTrue(e.IsAddressSet);
+                    Assert.IsTrue(e.IsAddressSet, $"{e}");
             }
         }
 
@@ -96,9 +99,10 @@ namespace Tests
 
                 foreach (var r in scr.AllRefs)
                 {
-                    Assert.IsTrue(r.IsSetup);
-                    Assert.IsTrue(r.IsWrited);
-                    Assert.IsTrue(r.IsOffsetWrited);
+                    var descr = $"{res} {r.Address:x4} {r.Source}";
+                    Assert.IsTrue(r.IsSetup, descr);
+                    Assert.IsTrue(r.IsWrited, descr);
+                    Assert.IsTrue(r.IsOffsetWrited, descr);
                 }
             }
         }

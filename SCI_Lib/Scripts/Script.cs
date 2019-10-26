@@ -1,5 +1,6 @@
 ﻿using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,7 +51,7 @@ namespace SCI_Translator.Scripts
 
         public IEnumerable<StringConst> AllStrings => Sections.OfType<StringSection>().SelectMany(s => s.Strings);
 
-        public IEnumerable<BaseElement> AllElements => _elements.Values;
+        public IEnumerable<BaseElement> AllElements => _elements.Values.Where(e => !(e is StringPart));
 
         public IEnumerable<RefToElement> AllRefs => _elements.Values.OfType<RefToElement>();
 
@@ -80,6 +81,16 @@ namespace SCI_Translator.Scripts
 
             bb.AddShortBE(0);
             return bb.GetArray();
+        }
+
+        public StringPart GetStringPart(ushort value)
+        {
+            if (_strings == null) return null;
+
+            foreach (var s in _strings.Strings)
+                if (s.Address < value && value < s.Address + s.Bytes.Length)
+                    return new StringPart(s, s.Address - value);
+            return null;
         }
 
         public List<T> Get<T>() where T : Section
@@ -113,14 +124,6 @@ namespace SCI_Translator.Scripts
             return Get<ClassSection>(SectionType.Class).Find(c => c.Id == id);
         }
 
-        private Dictionary<byte, OpCode> _opcodes;
-
-        public string GetOpCodeName(byte type)
-        {
-            if (_opcodes == null)
-                _opcodes = Package.GetOpCodes();
-
-            return _opcodes[type].Name;
-        }
+        public string GetOpCodeName(byte type) => Package.GetOpCodeName(type);
     }
 }

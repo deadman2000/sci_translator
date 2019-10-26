@@ -1,17 +1,13 @@
 ﻿using SCI_Translator.Scripts.Elements;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SCI_Translator.Scripts.Sections
 {
     public class StringSection : Section
     {
-        private List<StringConst> _strings;
-
         public override void Read(byte[] data, ushort offset, int length)
         {
-            _strings = new List<StringConst>();
+            Strings = new List<StringConst>();
 
             ushort s = offset;
             ushort e;
@@ -19,38 +15,32 @@ namespace SCI_Translator.Scripts.Sections
             {
                 e = s;
                 while (data[e] != 0x00) e++;
-                
+
                 StringConst str = new StringConst(_script, data, s, e - s);
                 _script.Register(str);
-                _strings.Add(str);
+                Strings.Add(str);
+
+                /*if (s != e && (data[s] == '.' || data[s] == 7))
+                {
+                    _script.Register(new StringPart(str, 1));
+                }*/
 
                 s = (ushort)(e + 1);
             }
         }
 
-        public List<StringConst> Strings { get { return _strings; } }
+        public List<StringConst> Strings { get; private set; }
 
         public override void Write(ByteBuilder bb)
         {
-            foreach (StringConst str in _strings)
+            foreach (StringConst str in Strings)
                 str.Write(bb);
         }
 
         public override void WriteOffsets(ByteBuilder bb)
         {
-            foreach (StringConst str in _strings)
+            foreach (StringConst str in Strings)
                 str.WriteOffset(bb);
-        }
-
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(String.Format("[String section (0x{0:X4})]\r\n", _offset));
-            foreach (StringConst s in _strings)
-            {
-                sb.Append(String.Format("\tstring_{0:x4} = '{1}'\r\n", s.Address, s.GetStringEscape()));
-            }
-            return sb.ToString();
         }
     }
 }

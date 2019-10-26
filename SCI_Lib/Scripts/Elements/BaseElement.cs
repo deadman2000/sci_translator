@@ -13,6 +13,7 @@ namespace SCI_Translator.Scripts.Elements
         {
             Script = script;
             Address = address;
+            //if (Address == 0x14e)                Console.WriteLine();
 
             Script.Register(this);
         }
@@ -21,7 +22,7 @@ namespace SCI_Translator.Scripts.Elements
 
         public List<RefToElement> XRefs { get; } = new List<RefToElement>();
 
-        public ushort Address
+        public virtual ushort Address
         {
             get => address; set
             {

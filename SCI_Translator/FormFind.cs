@@ -16,14 +16,16 @@ namespace SCI_Translator
     {
         SCIPackage _package;
         FormMain _main;
+        bool _translate;
 
         string pattern;
 
-        public FormFind(FormMain main, SCIPackage package)
+        public FormFind(FormMain main, SCIPackage package, bool translate)
         {
             InitializeComponent();
             _package = package;
             _main = main;
+            _translate = translate;
         }
 
         private void btFind_Click(object sender, EventArgs e)
@@ -49,7 +51,7 @@ namespace SCI_Translator
 
         void FindText(Resource res)
         {
-            byte[] data = res.GetContent(false);
+            byte[] data = res.GetContent(_translate);
             if (data == null) return;
 
             int s = 0;
@@ -73,7 +75,7 @@ namespace SCI_Translator
 
         private void FindScript(Resource res)
         {
-            var script = res.GetScript(false);
+            var script = res.GetScript(_translate);
 
             var sections = script.Get<StringSection>();
 
@@ -88,38 +90,20 @@ namespace SCI_Translator
 
         class SearchResult
         {
-            private string _fileName;
+            public string FileName { get; }
 
-            public string FileName
-            {
-                get { return _fileName; }
-            }
+            public int Index { get; }
 
-            private int _index;
-
-            public int Index
-            {
-                get { return _index; }
-            }
-
-            private string _value;
-
-            public string Value
-            {
-                get { return _value; }
-            }
+            public string Value { get; }
 
             public SearchResult(string fileName, int index, string value)
             {
-                _fileName = fileName;
-                _index = index;
-                _value = value;
+                FileName = fileName;
+                Index = index;
+                Value = value;
             }
 
-            public override string ToString()
-            {
-                return String.Format("{0}\t{1}\t{2}", _fileName, _index, _value);
-            }
+            public override string ToString() => $"{FileName}\t{Index}\t{Value}";
         }
 
         private void lbResults_MouseDoubleClick(object sender, MouseEventArgs e)

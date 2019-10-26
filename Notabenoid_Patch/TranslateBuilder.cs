@@ -23,6 +23,7 @@ namespace Notabenoid_Patch
         public static string TRANSLATE_GAME_DIR => Path.Combine(GAME_DIR, "TRANSLATE");
 
         private IBrowsingContext context;
+        internal static bool NO_CACHE;
 
         public event Action<int> ReportProgress;
         public event Action Completed;
@@ -40,7 +41,7 @@ namespace Notabenoid_Patch
                     return false;
 
                 Dictionary<string, string> cache;
-                if (File.Exists(CACHE_FILE))
+                if (File.Exists(CACHE_FILE) && !NO_CACHE)
                     cache = File.ReadAllLines(CACHE_FILE)
                         .Select(l => l.Split(':', 2))
                         .ToDictionary(p => p[0], p => p[1]);
@@ -85,11 +86,19 @@ namespace Notabenoid_Patch
                     for (int i = 0; i < enLines.Length; i++)
                     {
                         var en = enLines[i];
-                        var ru = ruLines[i];
+                        if (String.IsNullOrEmpty(en)) continue;
 
                         if (!translates.TryGetValue(en, out string tr))
-                            continue;
+                            en = en.Replace("\n", "\r\n");
 
+                        if (!translates.TryGetValue(en, out tr))
+                        {
+                            //Console.WriteLine($"Missing tex {r} - {en}");
+                            continue;
+                        }
+                        if (tr == null) continue;
+
+                        var ru = ruLines[i];
                         if (tr.Equals(ru)) // Пропускаем старый перевод
                             continue;
 
@@ -132,11 +141,16 @@ namespace Notabenoid_Patch
                     for (int i = 0; i < enStrings.Length; i++)
                     {
                         var en = enStrings[i].Value;
-                        var ru = ruStrings[i].Value;
+                        if (String.IsNullOrEmpty(en)) continue;
 
                         if (!translates.TryGetValue(en, out string tr))
+                        {
+                            //Console.WriteLine($"Missing scr {r} - {en}");
                             continue;
-
+                        }
+                        if (tr == null) continue;
+                        
+                        var ru = ruStrings[i].Value;
                         if (tr.Equals(ru)) // Пропускаем старый перевод
                             continue;
 
@@ -248,13 +262,15 @@ namespace Notabenoid_Patch
                 foreach (var e in document.QuerySelectorAll("td.o p.text"))
                 {
                     var id = ((IHtmlElement)e.Parent.Parent.Parent).Id;
-
                     var ruEl = document.QuerySelectorAll($"tr#{id} td.t p.text").LastOrDefault();
                     if (ruEl == null)
+                    {
+                        //translates[en] = null;
                         continue;
+                    }
 
-                    var en = e.Text().Replace('_', ' ');
-                    var ru = ruEl.Text().Replace('_', ' ');
+                    var en = e.Text().Replace('_', ' ').Replace("\n", "\r\n");
+                    var ru = ruEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
 
                     translates[en] = ru;
                 }

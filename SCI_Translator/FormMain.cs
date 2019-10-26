@@ -97,7 +97,7 @@ namespace SCI_Translator
 
         private void tsbFind_Click(object sender, EventArgs e)
         {
-            FormFind fmFind = new FormFind(this, _package);
+            FormFind fmFind = new FormFind(this, _package, tsbTranslated.Checked);
             fmFind.Show();
         }
 

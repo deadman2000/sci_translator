@@ -4,33 +4,71 @@ namespace SCI_Translator.Scripts.Elements
 {
     public class StringConst : BaseElement
     {
-        byte[] _value;
-
         public StringConst(Script script, byte[] data, ushort offset, int length)
             : base(script, offset)
         {
-            _value = Helpers.GetBytes(data, offset, length);
+            Bytes = Helpers.GetBytes(data, offset, length);
         }
+
+        public byte[] Bytes { get; private set; }
 
         public string Value
         {
-            get { return Helpers.GetString(_value); }
-            set { _value = Helpers.GetBytes(value); }
+            get { return Helpers.GetString(Bytes); }
+            set { Bytes = Helpers.GetBytes(value); }
         }
 
         public bool IsClassName { get; set; } = false;
 
-        public void SetValueUnescape(string val) => _value = Helpers.Unescape(Helpers.GetBytes(val));
+        public void SetValueUnescape(string val) => Bytes = Helpers.Unescape(Helpers.GetBytes(val));
 
-        public string GetStringEscape() => Helpers.GetStringEscape(_value);
+        public string GetStringEscape() => Helpers.GetStringEscape(Bytes);
 
         public override string ToString() => $"string_{Address:x4} = {Value}";
 
         public override void Write(ByteBuilder bb)
         {
             Address = bb.Position;
-            bb.AddBytes(_value);
+            bb.AddBytes(Bytes);
             bb.AddByte(0);
+        }
+
+        public override void WriteOffset(ByteBuilder bb)
+        {
+        }
+    }
+
+    public class StringPart : BaseElement
+    {
+        private int _offset;
+
+        public StringPart(StringConst str, int offset)
+            : base(str.Script, (ushort)(str.Address + offset))
+        {
+            if (offset >= str.Bytes.Length)
+                throw new ArgumentException();
+
+            _offset = offset;
+            OrigString = str;
+        }
+
+        public override ushort Address
+        {
+            get
+            {
+                if (OrigString == null) return base.Address;
+
+                return (ushort)(OrigString.Address + _offset);
+            }
+            set => base.Address = value;
+        }
+
+        public StringConst OrigString { get; private set; }
+
+        public string String => OrigString.Value.Substring(_offset);
+
+        public override void Write(ByteBuilder bb)
+        {
         }
 
         public override void WriteOffset(ByteBuilder bb)

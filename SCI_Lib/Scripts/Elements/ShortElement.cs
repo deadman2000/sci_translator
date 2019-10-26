@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SCI_Translator.Scripts.Elements
+﻿namespace SCI_Translator.Scripts.Elements
 {
     public class ShortElement : BaseElement
     {
@@ -25,9 +20,6 @@ namespace SCI_Translator.Scripts.Elements
         {
         }
 
-        public override string ToString()
-        {
-            return String.Format("{0}; [0x{1:X4}]", Value, Address);
-        }
+        public override string ToString() => $"${Value:x}";
     }
 }

@@ -44,7 +44,7 @@ namespace SCI_Translator.Scripts.Sections
 
         public SectionType Type => _type;
 
-        public int Offset => _offset;
+        public int Address => _offset;
 
         public int Size => _size;
 
@@ -60,7 +60,7 @@ namespace SCI_Translator.Scripts.Sections
 
         public override string ToString()
         {
-            return String.Format("[Section {0} (0x{1:X4})]\r\n\r\n", _type, _offset);
+            return $"{_offset:x4}: {Type}";
         }
 
         protected static ushort ReadShortBE(byte[] data, ref ushort offset)

@@ -6,52 +6,93 @@ namespace SCI_Translator.Scripts.Elements
 {
     // https://wiki.scummvm.org/index.php?title=SCI/Specifications/SCI_virtual_machine/The_Sierra_PMachine#The_instruction_set
 
-    class Code : BaseElement
+    public class Code : BaseElement
     {
-        private byte _type;
         private string _name;
-        private List<object> _arguments;
-        private Code _prev;
-        private Code _next;
 
         public Code(Script script, ushort address, Code prev)
             : base(script, address)
         {
-            _prev = prev;
             if (prev != null)
-                prev._next = this;
+                prev.Next = this;
         }
 
 
-        public byte Type => _type;
+        public byte Type { get; private set; }
 
-        public Code Next => _next;
+        public List<object> Arguments { get; private set; }
+
+        public Code Next { get; private set; }
 
         public string Name
         {
             get
             {
                 if (_name != null) return _name;
-                return _name = Script.GetOpCodeName((byte)(_type >> 1));
+                return _name = Script.GetOpCodeName((byte)(Type >> 1));
             }
         }
 
-        private string ArgsToString()
+        public string ArgsToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < _arguments.Count; i++)
+            for (int i = 0; i < Arguments.Count; i++)
             {
-                object a = _arguments[i];
-                if (a is byte)
-                    sb.Append(String.Format("${0:x2}", a));
-                else if (a is ushort)
-                    sb.Append(String.Format("${0:x4}", a));
+                if (Type == 0x43 && i == 0)
+                {
+                    sb.Append(Script.Package.GetFuncName((byte)Arguments[i]));
+                }
                 else
-                    sb.Append(a.ToString());
+                {
+                    object a = Arguments[i];
+                    switch (a)
+                    {
+                        case byte b:
+                            sb.Append($"${b:x2}");
+                            break;
+                        case ushort s:
+                            sb.Append($"${s:x4}");
+                            break;
+                        default:
+                            sb.Append(a.ToString());
+                            break;
+                    }
+                }
 
-                if (i != _arguments.Count - 1)
+                if (i != Arguments.Count - 1)
                     sb.Append(", ");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        public string ArgsToHex()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < Arguments.Count; i++)
+            {
+                object a = Arguments[i];
+                switch (a)
+                {
+                    case byte b:
+                        sb.Append($"{a:x2}");
+                        break;
+                    case ushort s:
+                        sb.Append($"{s:x4}");
+                        break;
+                    case RefToElement r:
+                        sb.Append(r.ToHex(Address + Size));
+                        break;
+
+                    default:
+                        sb.Append(a.ToString());
+                        break;
+                }
+
+                if (i != Arguments.Count - 1)
+                    sb.Append(" ");
             }
 
             return sb.ToString();
@@ -59,24 +100,24 @@ namespace SCI_Translator.Scripts.Elements
 
         public override string ToString()
         {
-            return String.Format("0x{0,-5:X2} {1,-8} {2,-25}; [0x{3:X4}]", _type, Name, ArgsToString(), Address);
+            return $"{Address:x4}: {Name} {ArgsToString(),-25}";
         }
 
         public void Read(byte[] data, ref ushort offset)
         {
-            _arguments = new List<object>();
-            _type = data[offset++];
+            Arguments = new List<object>();
+            Type = data[offset++];
 
-            if (_type > 0x7F)
+            if (Type > 0x7F)
             {
-                if ((_type & 0x01) == 0)
+                if ((Type & 0x01) == 0)
                 {
-                    _arguments.Add(data[offset++]);
-                    _arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
                 }
                 else
                 {
-                    _arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
                 }
                 return;
             }
@@ -84,7 +125,7 @@ namespace SCI_Translator.Scripts.Elements
             ushort addr = offset;
             ushort val;
 
-            switch (_type)
+            switch (Type)
             {
                 // 1 byte
                 case 0x00:
@@ -175,19 +216,19 @@ namespace SCI_Translator.Scripts.Elements
                 case 0x6d:
                 case 0x73:
                 case 0x75:
-                    _arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
                     break;
 
                 case 0x33:
                     val = data[offset++];
-                    _arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + 1 + val), 1) { Source = this });
+                    Arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + 1 + val), 1) { Source = this });
                     break;
 
                 // 3 bytes
                 case 0x2e:
                 case 0x34:
                 case 0x3e:
-                case 0x43:
+                case 0x43: // callk
                 case 0x45:
                 case 0x50:
                 case 0x57: // ???  super B class, B stackframe (3 bytes)
@@ -199,68 +240,62 @@ namespace SCI_Translator.Scripts.Elements
                 case 0x6a:
                 case 0x6c:
                 case 0x74:
-                    _arguments.Add(data[offset++]);
-                    _arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
                     break;
 
                 case 0x38:
-                    _arguments.Add((ushort)(data[offset++] + (data[offset++] << 8)));
+                    Arguments.Add((ushort)(data[offset++] + (data[offset++] << 8)));
                     break;
 
                 // Relative offset
                 case 0x41: // call B
                     val = data[offset++];
-                    _arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + val), 1) { Source = this });
-                    _arguments.Add(data[offset++]);
+                    Arguments.Add(new CodeRef(this, addr, val, (ushort)(offset + val), 1));
+                    Arguments.Add(data[offset++]);
                     break;
 
 
                 case 0x30: // bnt
                 case 0x32: // jmp
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
-                    _arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + val), 2) { Source = this });
+                    Arguments.Add(new CodeRef(this, addr, val, (ushort)(offset + val), 2));
                     break;
 
                 case 0x72: // lofsa
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
-                    _arguments.Add(new RefToElement(Script, addr, val) { Source = this });
+                    Arguments.Add(new RefToElement(Script, addr, val) { Source = this });
                     break;
-
-                // Absolute offset
-                //_arguments.Add(new RefToElement(data[offset++] + data[offset++] * 256));
-                //break;
 
                 // 4 bytes
                 case 0x42:
                 case 0x44:
                 case 0x47:
                 case 0x56: // ???  super W class, B stackframe (4 bytes)
-                    _arguments.Add(data[offset++]);
-                    _arguments.Add(data[offset++]);
-                    _arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
+                    Arguments.Add(data[offset++]);
                     break;
 
                 case 0x40: // call W
                     val = (ushort)(data[offset++] + (data[offset++] << 8));
                     var arg = data[offset++];
-                    _arguments.Add(new RefToElement(Script, addr, val, (ushort)(offset + val), 2) { Source = this });
-                    _arguments.Add(arg);
+                    Arguments.Add(new CodeRef(this, addr, val, (ushort)(offset + val), 2));
+                    Arguments.Add(arg);
                     break;
 
                 // 5 bytes
-                case 0x5a:
-                    _arguments.Add(data[offset++]);
-                    _arguments.Add(data[offset++]);
-                    _arguments.Add(data[offset++]);
-                    _arguments.Add(data[offset++]);
+                case 0x5a: // lea W W
+                    Arguments.Add((ushort)(data[offset++] + (data[offset++] << 8)));
+                    Arguments.Add((ushort)(data[offset++] + (data[offset++] << 8)));
                     break;
 
                 // 6 bytes
                 case 0x46:
                     ushort a1 = (ushort)(data[offset++] + data[offset++] * 256);
                     ushort a2 = (ushort)(data[offset++] + data[offset++] * 256);
-                    _arguments.Add(new LinkToExport(a1, a2));
-                    _arguments.Add(data[offset++]);
+                    Arguments.Add(new LinkToExport(a1, a2));
+                    Arguments.Add(data[offset++]);
                     break;
 
 
@@ -284,17 +319,17 @@ namespace SCI_Translator.Scripts.Elements
         {
             get
             {
-                if (_type > 0x7F)
+                if (Type > 0x7F)
                 {
-                    if ((_type & 0x01) == 0)
+                    if ((Type & 0x01) == 0)
                         return 3;
                     else
                         return 2;
                 }
 
-                if (_type <= 0x2e) return 1;
+                if (Type <= 0x2e) return 1;
 
-                switch (_type)
+                switch (Type)
                 {
                     case 0x36:
                     case 0x37:
@@ -397,9 +432,22 @@ namespace SCI_Translator.Scripts.Elements
             }
         }
 
-        public List<object> Arguments
+        public bool IsCall
         {
-            get { return _arguments; }
+            get
+            {
+                switch (Name)
+                {
+                    case "self":
+                    case "send":
+                    case "super":
+                    case "call":
+                    case "calle":
+                        return true;
+                    default:
+                        return false;
+                }
+            }
         }
 
         public bool IsReturn
@@ -409,20 +457,16 @@ namespace SCI_Translator.Scripts.Elements
                 switch (Name)
                 {
                     case "ret":
-                    case "self":
-                    case "send":
-                    case "super":
-                    case "call":
-                    case "calle":
                         return true;
+                    default:
+                        return false;
                 }
-                return false;
             }
         }
 
         public override void SetupByOffset()
         {
-            foreach (object a in _arguments)
+            foreach (object a in Arguments)
                 if (a is RefToElement)
                     ((RefToElement)a).SetupByOffset();
         }
@@ -430,25 +474,32 @@ namespace SCI_Translator.Scripts.Elements
         public override void Write(ByteBuilder bb)
         {
             Address = bb.Position;
-            bb.AddByte(_type);
-            foreach (object arg in _arguments)
+            bb.AddByte(Type);
+            foreach (object arg in Arguments)
             {
-                if (arg is byte)
-                    bb.AddByte((byte)arg);
-                else if (arg is ushort)
-                    bb.AddShortBE((ushort)arg);
-                else if (arg is RefToElement)
-                    ((RefToElement)arg).Write(bb);
-                else if (arg is LinkToExport)
-                    ((LinkToExport)arg).Write(bb);
-                else
-                    throw new NotImplementedException();
+                switch (arg)
+                {
+                    case byte b:
+                        bb.AddByte(b);
+                        break;
+                    case ushort s:
+                        bb.AddShortBE(s);
+                        break;
+                    case RefToElement r:
+                        r.Write(bb);
+                        break;
+                    case LinkToExport l:
+                        l.Write(bb);
+                        break;
+                    default:
+                        throw new NotImplementedException();
+                }
             }
         }
 
         public override void WriteOffset(ByteBuilder bb)
         {
-            foreach (object arg in _arguments)
+            foreach (object arg in Arguments)
             {
                 switch (arg)
                 {

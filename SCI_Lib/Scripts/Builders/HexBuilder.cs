@@ -12,7 +12,7 @@ namespace SCI_Translator.Scripts.Builders
             foreach (var sec in script.Sections)
             {
                 sb.Append(String.Format("Type: {0} Size: {1}\r\n", sec.Type, sec.Size));
-                AddHex(script.SourceData, sec.Offset, sec.Size);
+                AddHex(script.SourceData, sec.Address, sec.Size);
                 sb.Append("\r\n");
             }
 

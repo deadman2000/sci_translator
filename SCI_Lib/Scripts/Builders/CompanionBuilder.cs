@@ -1,5 +1,6 @@
 ﻿using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
+using System.Linq;
 using System.Text;
 
 namespace SCI_Translator.Scripts.Builders
@@ -14,7 +15,7 @@ namespace SCI_Translator.Scripts.Builders
             sb.AppendLine();
 
             script.Get<StringSection>().ForEach(s => WriteStrings(s));
-            // TODO said
+            script.Get<PreloadTextSection>().ForEach(s => sb.AppendLine("(said").AppendLine(")").AppendLine());
             script.Get<LocalVariablesSection>().ForEach(s => WriteLocals(s));
             script.Get<ClassSection>(SectionType.Class).ForEach(s => WriteClass(s));
             script.Get<ObjectSection>().ForEach(s => WriteClass(s));
@@ -27,10 +28,12 @@ namespace SCI_Translator.Scripts.Builders
             sb.AppendLine("(local");
             if (locals != null)
             {
-                for (int i = 0; i < locals.Refs.Length; i++)
+                for (int i = 0; i < locals.Vars.Length; i++)
                 {
-                    var offset = locals.Refs[i]?.TargetOffset ?? 0;
-                    sb.Append($"    local{i} = ${offset:x4}" ).AppendLine();
+                    //var offset = locals.Refs[i]?.TargetOffset ?? 0;
+                    //sb.Append($"    local{i} = ${offset:x4}" ).AppendLine();
+
+                    sb.Append($"    local{i} = ${locals.Vars[i]:x4}").AppendLine();
                 }
             }
             sb.AppendLine(")");
@@ -51,7 +54,7 @@ namespace SCI_Translator.Scripts.Builders
 
         private void WriteClass(ClassSection s)
         {
-            sb.AppendFormat("// {0:x4}", s.Offset + 2).AppendLine();
+            sb.AppendFormat("// {0:x4}", s.Address + 2).AppendLine();
             var super = s.SuperClass;
             sb.AppendFormat("({0} {1} of {2}",
                 s.Type == SectionType.Class ? "class" : "instance",
@@ -61,24 +64,30 @@ namespace SCI_Translator.Scripts.Builders
             sb.AppendLine("    (properties");
             var pack = s.Package;
             for (int i = 4; i < s.Selectors.Length; i++)
-                sb.AppendFormat("        {0} ${1:x}", pack.GetName(s.Varselectors[i]), s.Selectors[i]).AppendLine();
+            {
+                if (i < s.Varselectors.Length)
+                    sb.AppendFormat("        {0} {1:x}", pack.GetName(s.Varselectors[i]), s.Selectors[i]).AppendLine();
+                else
+                    sb.AppendFormat("        !!out of range!! {0:x}", s.Selectors[i]).AppendLine();
+            }
             sb.AppendLine("    )");
 
             for (int i = 0; i < s.FuncNames.Length; i++)
             {
-                sb.AppendFormat("    (method ({0}) // method_{1:x4}",
-                    pack.GetName(s.FuncNames[i]),
-                    s.FuncCode[i].TargetOffset).AppendLine();
+                sb.AppendLine($"    (method ({pack.GetName(s.FuncNames[i])}) // method_{s.FuncCode[i].TargetOffset:x4}");
 
                 Code code = s.Script.GetElement(s.FuncCode[i].TargetOffset) as Code;
                 while (code != null)
                 {
-                    if (code.XRefs.Count > 0)
-                        sb.Append($"        {code.Label}").AppendLine();
+                    if (code.XRefs.Any(r => !(r is FuncRef)))
+                        sb.AppendLine($"        {code.Label}");
 
-                    sb.AppendFormat("  {0:x4}:{1:x2} {2,-13} {3,5} {4}", code.Address, code.Type, ArgsHexToString(code), code.Name, ArgsToString(code)).AppendLine();
-                    
-                    if (code.IsReturn && code.Next != null)
+                    sb.AppendLine($"  {code.Address:x4}:{code.Type:x2} {ArgsHexToString(code),-13} {code.Name,5} {ArgsToString(code)}");
+
+                    if (code.IsReturn)
+                        break;
+
+                    if (code.IsCall)
                         sb.AppendLine();
 
                     code = code.Next;

@@ -53,7 +53,7 @@ namespace SCI_Translator.Scripts.Elements
 
         public override string ToString()
         {
-            string type = "ref";
+            string type;
             string comment = "";
 
             switch (Reference)
@@ -66,17 +66,16 @@ namespace SCI_Translator.Scripts.Elements
                     type = "string";
                     comment = ";  '" + s.GetStringEscape() + "'";
                     break;
-                case ShortElement _:
-                    type = "obj";
+                case ShortElement s:
+                    type = "short";
+                    comment = $";  ${s.Value:x4}";
                     break;
                 case RefToElement r:
                     type = "ref_ref";
-                    if (r == this)
-                        comment = ";  self";
-                    else
-                        comment = ";  " + r.Address;
+                    comment = $";  {r.Address:x4}";
                     break;
                 case null:
+                    type = "null";
                     break;
                 default:
                     type = "ref_el";
@@ -84,7 +83,7 @@ namespace SCI_Translator.Scripts.Elements
 
             }
 
-            return String.Format("{0}_{1:X4}{2}", type, TargetOffset, comment);
+            return $"{type}_{TargetOffset:x4}{comment}";
         }
 
         public override void SetupByOffset()
@@ -119,11 +118,9 @@ namespace SCI_Translator.Scripts.Elements
             if (Reference != null)
                 TargetOffset = Reference.Address;
 
-            int val;
-            if (!Relative)
-                val = TargetOffset;
-            else
-                val = TargetOffset - rel;
+            int val = TargetOffset;
+            if (Relative)
+                val -= rel;
 
             switch (Size)
             {
@@ -131,6 +128,61 @@ namespace SCI_Translator.Scripts.Elements
                 case 2: bb.SetShortBE(Address, (ushort)val); break;
                 default: throw new NotImplementedException();
             }
+        }
+
+        public string ToHex(int rel)
+        {
+            int val;
+
+            if (Reference != null)
+                val = Reference.Address;
+            else
+                val = TargetOffset;
+
+            if (Relative)
+                val -= rel;
+
+            switch (Size)
+            {
+                case 1: return $"{val:x2}";
+                case 2: return $"{val:x4}";
+                default: throw new NotImplementedException();
+            }
+        }
+    }
+
+    public class ExportRef : RefToElement
+    {
+        public ExportRef(Script script, ushort addr, ushort value) 
+            : base(script, addr, value)
+        {
+        }
+    }
+
+
+    public class FuncRef : RefToElement
+    {
+        public FuncRef(Script script, ushort addr, ushort value)
+            : base(script, addr, value)
+        {
+        }
+    }
+
+    public class CodeRef : RefToElement
+    {
+        private Code _code;
+
+        public CodeRef(Code code, ushort addr, ushort value, ushort targetOffset, byte size) 
+            : base(code.Script, addr, value, targetOffset, size)
+        {
+            Source = _code = code;
+        }
+
+        public override void SetupByOffset()
+        {
+            base.SetupByOffset();
+            /*if (!(Reference is Code))
+                throw new Exception($"{_code.Script.Resource} {_code}");*/
         }
     }
 }

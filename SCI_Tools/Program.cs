@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace SCI_Tools
 {
-    internal class Program
+    static class Program
     {
         public static string GAME_DIR = @"..\..\..\Conquest\";
 
@@ -18,23 +18,56 @@ namespace SCI_Tools
             if (args.Length > 0)
                 GAME_DIR = args[0];
 
-            //ExportEnScr();
-            ExportScript<SimpeScriptBuilder>("0.scr", false);
-            ExportScript<SimpeScriptBuilder>("0.scr", true);
+            SCIPackage package = new SCIPackage(GAME_DIR);
+            //ExportAll(package, 0);
 
+            /*ushort number = 0;
+            package = new SCIPackage(@"..\..\..\ConquestG\");
+            package.ExportScript<CompanionBuilder>(number, false, $@"mycompnion\ge_{number}.scr");
+            package.ExportScript<SimpeScriptBuilder>(number, false, $@"simple\ge_{number}.scr");*/
 
-            /*SCIPackage package = new SCIPackage(GAME_DIR);
-
-            foreach (var res in package.Scripts.Where(s => s.ToString().Equals("0.scr")))
+            foreach (var res in package.Texts)
             {
-                foreach (var r in res.GetScript(false).AllRefs.Where(r => r.Reference == null))
+                Console.WriteLine(res);
+                var en = res.GetText(false);
+                var ru = res.GetText(true);
+                for (int i = 0; i < en.Length; i++)
                 {
-                    Console.WriteLine($"{r.Source?.GetType().Name} : {r}");
+                    if (en[i].Contains("\r\n") && !ru[i].Contains("\r\n") && ru[i].Contains("\n"))
+                    {
+                        Console.WriteLine(ru[i]);
+                    }
+
+
+                    if (ru[i].Contains("\r\n") && !en[i].Contains("\r\n") && en[i].Contains("\n"))
+                    {
+                        Console.WriteLine(ru[i]);
+                    }
                 }
             }
-            */
+
+            /*var scr = package.GetResouce(ResType.Script, 0).GetScript(false);
+            var rel = scr.Get<RelocationSection>().First();
+            foreach (var r in scr.AllRefs)
+            {
+                if (r.Reference is Code) continue;
+
+                if (!rel.Refs.Any(rr => rr.Reference == r))
+                {
+                    Console.WriteLine($"{r.Source}: {r} => {r.Reference}");
+                }
+            }*/
+
             Console.WriteLine("Completed");
             Console.ReadKey();
+        }
+
+        private static void ExportAll(SCIPackage package, ushort number)
+        {
+            package.ExportScript<CompanionBuilder>(number, false, $@"mycompnion\en_{number}.scr");
+            package.ExportScript<CompanionBuilder>(number, true, $@"mycompnion\ru_{number}.scr");
+            package.ExportScript<SimpeScriptBuilder>(number, false, $@"simple\en_{number}.scr");
+            package.ExportScript<SimpeScriptBuilder>(number, true, $@"simple\ru_{number}.scr");
         }
 
         static void FindSpaces()
@@ -128,17 +161,13 @@ namespace SCI_Tools
             res.SaveTranslate(scr.GetBytes());
         }
 
-        // ExportScript<SimpeScriptBuilder>("990.scr", false)
-        static void ExportScript<T>(string name, bool translate) where T : IScriptBuilder, new()
+        // ExportScript<SimpeScriptBuilder>(990, false, "990.scr")
+        static void ExportScript<T>(this SCIPackage package, ushort number, bool translate, string filename)
+            where T : IScriptBuilder, new()
         {
-            SCIPackage package = new SCIPackage(GAME_DIR);
-            var scr = package.Resources
-                .SelectMany(r => r.Resources)
-                .First(r => r.ToString().Equals(name));
-
+            var scr = package.GetResouce(ResType.Script, number);
             var text = new T().Decompile(scr.GetScript(translate));
-            var suffix = translate ? "ru" : "en";
-            File.WriteAllText($@"..\..\..\Sandbox\{suffix}_{name}", text);
+            File.WriteAllText(@"..\..\..\Sandbox\" + filename, text);
         }
 
         private static void FindTranslates()

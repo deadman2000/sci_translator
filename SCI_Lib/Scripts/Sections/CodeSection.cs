@@ -42,14 +42,5 @@ namespace SCI_Translator.Scripts.Sections
             foreach (Code c in Operators) 
                 c.WriteOffset(bb);
         }
-
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(String.Format("[Code section (0x{0:X4})]\r\n", _offset));
-            foreach (Code c in Operators) 
-                sb.Append(String.Format("\t{0}\r\n", c));
-            return sb.ToString();
-        }
     }
 }

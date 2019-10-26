@@ -1,5 +1,3 @@
-Не загружается игра после перевода 0.scr
-
 Разбор кода как в SCICompanion
 	700.scr
 
@@ -15,3 +13,13 @@ Unit-тесты
 Упаковка ресурсов
 
 http://wiki.scummvm.org/index.php/SCI/Specifications
+
+
+Судя по всему кривой скрипт 172.scr
+	Problem with properties. Species has 2b but instance has 2c.
+	Переход по неправильному адресу
+		1626:30 d9d7            bnt code_f000 
+
+
+Patching 621.tex failed - resource type mismatch
+Patching 213.tex failed - resource type mismatch

@@ -1,5 +1,7 @@
 ﻿using SCI_Translator.Scripts;
+using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,21 +59,17 @@ namespace SCI_Translator
 
         public bool HasTranslate() => Directory.Exists(Path.Combine(GameDirectory, "TRANSLATE"));
 
+        private IEnumerable<Script> _scriptsCache;
 
         public ClassSection GetClass(ushort id)
         {
-            ClassSection cls;
-            foreach (ResMapOffset map in Resources)
+            if (_scriptsCache == null)
+                _scriptsCache = Scripts.Select(r => r.GetScript(false));
+
+            foreach (var s in _scriptsCache)
             {
-                foreach (Resource res in map.Resources)
-                {
-                    if (res.Type == ResType.Script)
-                    {
-                        Script s = res.GetScript(false);
-                        cls = s.GetClass(id);
-                        if (cls != null) return cls;
-                    }
-                }
+                var cls = s.GetClass(id);
+                if (cls != null) return cls;
             }
             return null;
         }
@@ -109,48 +107,47 @@ namespace SCI_Translator
 
         private Dictionary<byte, OpCode> _opcodes;
 
-        public Dictionary<byte, OpCode> GetOpCodes()
+        public string GetOpCodeName(byte type)
         {
-            if (_opcodes != null) return _opcodes;
+            if (_opcodes == null) _opcodes = LoadOpCodes();
+            return _opcodes[type]?.Name;
+        }
 
-            foreach (var res in Resources)
-            {
-                if (res.Type == ResType.Vocabulary)
-                {
-                    foreach (var r in res.Resources)
-                    {
-                        if (r.Number == 998)
-                        {
-                            return _opcodes = r.GetVocabOpcodes();
-                        }
-                    }
-                }
-            }
+        private Dictionary<byte, OpCode> LoadOpCodes()
+        {
+            return GetResouce(ResType.Vocabulary, 998).GetVocabOpcodes();
+        }
 
-            return null;
+        private string[] _funcNames;
+
+        public string GetFuncName(int ind)
+        {
+            if (_funcNames == null) _funcNames = LoadFuncs();
+            if (ind >= _funcNames.Length) return $"kernel_{ind}";
+            return _funcNames[ind];
+        }
+
+        private string[] LoadFuncs()
+        {
+            return GetResouce(ResType.Vocabulary, 999).GetText(false);
         }
 
         private string[] _names;
 
-        public object GetName(int ind)
+        public string GetName(int ind)
         {
-            if (_names != null) return _names[ind];
-
-            foreach (var res in Resources)
-            {
-                if (res.Type == ResType.Vocabulary)
-                {
-                    foreach (var r in res.Resources)
-                    {
-                        if (r.Number == 997)
-                        {
-                            _names = r.GetVocabNames();
-                        }
-                    }
-                }
-            }
-
+            if (_names == null) _names = LoadNames();
             return _names[ind];
+        }
+
+        private string[] LoadNames()
+        {
+            return GetResouce(ResType.Vocabulary, 997).GetVocabNames();
+        }
+
+        public Resource GetResouce(ResType type, ushort number)
+        {
+            return Resources.Where(r => r.Type == type).SelectMany(r => r.Resources).FirstOrDefault(r => r.Number == number);
         }
     }
 }
