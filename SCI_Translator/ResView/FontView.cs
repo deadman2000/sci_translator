@@ -25,7 +25,6 @@ namespace SCI_Translator.ResView
         private ToolStripButton tsbRedo;
         private ToolStrip tsInstruments;
         private ToolStripButton tsbExchange;
-        private ToolStripLabel tslChar;
         private ToolStripComboBox tscbChar;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripButton tsbResize;
@@ -39,6 +38,9 @@ namespace SCI_Translator.ResView
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripButton tsbCopy;
         private ToolStripButton tsbPaste;
+        private SplitContainer splitContainer1;
+        private ToolStrip tsControls;
+        private ToolStripSeparator toolStripSeparator1;
         private System.ComponentModel.IContainer components;
 
         public FontView()
@@ -130,7 +132,7 @@ namespace SCI_Translator.ResView
             UpdateView();
         }
 
-        public override void Save()
+        protected override void SaveContent()
         {
             ushort cnt = (ushort)(spr.Frames.Count & 0xFFFF);
 
@@ -407,7 +409,7 @@ namespace SCI_Translator.ResView
         void UpdateView()
         {
             if (viewer.CurrentFrame != null)
-                tslChar.Text = String.Format("{0}x{1}", viewer.CurrentFrame.Width, viewer.CurrentFrame.Height);
+                tsbResize.Text = String.Format("{0}x{1}", viewer.CurrentFrame.Width, viewer.CurrentFrame.Height);
             viewer.Redraw();
             Centering();
         }
@@ -493,20 +495,19 @@ namespace SCI_Translator.ResView
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.SplitContainer splitContainer1;
-            System.Windows.Forms.ToolStrip tsControls;
-            System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lvChars = new System.Windows.Forms.ListView();
             this.ilChars = new System.Windows.Forms.ImageList(this.components);
             this.plPic = new System.Windows.Forms.Panel();
             this.tsInstruments = new System.Windows.Forms.ToolStrip();
+            this.tsControls = new System.Windows.Forms.ToolStrip();
             this.tscbChar = new System.Windows.Forms.ToolStripComboBox();
-            this.tslChar = new System.Windows.Forms.ToolStripLabel();
+            this.tsbResize = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbUndo = new System.Windows.Forms.ToolStripButton();
             this.tsbRedo = new System.Windows.Forms.ToolStripButton();
             this.tsbExchange = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbResize = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tscbScale = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -517,42 +518,43 @@ namespace SCI_Translator.ResView
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbCopy = new System.Windows.Forms.ToolStripButton();
             this.tsbPaste = new System.Windows.Forms.ToolStripButton();
-            splitContainer1 = new System.Windows.Forms.SplitContainer();
-            tsControls = new System.Windows.Forms.ToolStrip();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            splitContainer1.Panel1.SuspendLayout();
-            splitContainer1.Panel2.SuspendLayout();
-            splitContainer1.SuspendLayout();
-            tsControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.tsControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
-            splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer1.Location = new System.Drawing.Point(0, 0);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(this.lvChars);
+            this.splitContainer1.Panel1.Controls.Add(this.lvChars);
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(this.plPic);
-            splitContainer1.Panel2.Controls.Add(this.tsInstruments);
-            splitContainer1.Panel2.Controls.Add(tsControls);
-            splitContainer1.Size = new System.Drawing.Size(1293, 789);
-            splitContainer1.SplitterDistance = 401;
-            splitContainer1.TabIndex = 0;
+            this.splitContainer1.Panel2.Controls.Add(this.plPic);
+            this.splitContainer1.Panel2.Controls.Add(this.tsInstruments);
+            this.splitContainer1.Panel2.Controls.Add(this.tsControls);
+            this.splitContainer1.Size = new System.Drawing.Size(1644, 1125);
+            this.splitContainer1.SplitterDistance = 571;
+            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.TabIndex = 0;
             // 
             // lvChars
             // 
             this.lvChars.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvChars.LargeImageList = this.ilChars;
             this.lvChars.Location = new System.Drawing.Point(0, 0);
+            this.lvChars.Margin = new System.Windows.Forms.Padding(4);
             this.lvChars.Name = "lvChars";
-            this.lvChars.Size = new System.Drawing.Size(1293, 401);
+            this.lvChars.Size = new System.Drawing.Size(1644, 571);
             this.lvChars.TabIndex = 0;
             this.lvChars.UseCompatibleStateImageBehavior = false;
             this.lvChars.ItemActivate += new System.EventHandler(this.lvChars_ItemActivate);
@@ -568,32 +570,34 @@ namespace SCI_Translator.ResView
             this.plPic.AutoScroll = true;
             this.plPic.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.plPic.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plPic.Location = new System.Drawing.Point(0, 50);
+            this.plPic.Location = new System.Drawing.Point(0, 53);
+            this.plPic.Margin = new System.Windows.Forms.Padding(4);
             this.plPic.Name = "plPic";
-            this.plPic.Size = new System.Drawing.Size(1293, 334);
+            this.plPic.Size = new System.Drawing.Size(1644, 496);
             this.plPic.TabIndex = 0;
             // 
             // tsInstruments
             // 
             this.tsInstruments.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tsInstruments.Location = new System.Drawing.Point(0, 25);
+            this.tsInstruments.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.tsInstruments.Location = new System.Drawing.Point(0, 28);
             this.tsInstruments.Name = "tsInstruments";
-            this.tsInstruments.Size = new System.Drawing.Size(1293, 25);
+            this.tsInstruments.Size = new System.Drawing.Size(1644, 25);
             this.tsInstruments.TabIndex = 0;
             this.tsInstruments.Text = "toolStrip1";
             // 
             // tsControls
             // 
-            tsControls.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            tsControls.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsControls.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsControls.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.tsControls.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tscbChar,
-            this.tslChar,
-            toolStripSeparator1,
+            this.tsbResize,
+            this.toolStripSeparator1,
             this.tsbUndo,
             this.tsbRedo,
             this.tsbExchange,
             this.toolStripSeparator3,
-            this.tsbResize,
             this.toolStripSeparator2,
             this.tscbScale,
             this.toolStripSeparator4,
@@ -604,28 +608,31 @@ namespace SCI_Translator.ResView
             this.toolStripSeparator5,
             this.tsbCopy,
             this.tsbPaste});
-            tsControls.Location = new System.Drawing.Point(0, 0);
-            tsControls.Name = "tsControls";
-            tsControls.Size = new System.Drawing.Size(1293, 25);
-            tsControls.TabIndex = 0;
-            tsControls.Text = "toolStrip1";
+            this.tsControls.Location = new System.Drawing.Point(0, 0);
+            this.tsControls.Name = "tsControls";
+            this.tsControls.Size = new System.Drawing.Size(1644, 28);
+            this.tsControls.TabIndex = 0;
+            this.tsControls.Text = "toolStrip1";
             // 
             // tscbChar
             // 
             this.tscbChar.Name = "tscbChar";
-            this.tscbChar.Size = new System.Drawing.Size(75, 25);
+            this.tscbChar.Size = new System.Drawing.Size(99, 28);
             this.tscbChar.SelectedIndexChanged += new System.EventHandler(this.tscbChar_SelectedIndexChanged);
             // 
-            // tslChar
+            // tsbResize
             // 
-            this.tslChar.Name = "tslChar";
-            this.tslChar.Size = new System.Drawing.Size(17, 22);
-            this.tslChar.Text = "--";
+            this.tsbResize.Image = global::SCI_Translator.Properties.Resources.arrow_inout;
+            this.tsbResize.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbResize.Name = "tsbResize";
+            this.tsbResize.Size = new System.Drawing.Size(75, 25);
+            this.tsbResize.Text = "Resize";
+            this.tsbResize.Click += new System.EventHandler(this.tsbResize_Click);
             // 
             // toolStripSeparator1
             // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 28);
             // 
             // tsbUndo
             // 
@@ -633,7 +640,7 @@ namespace SCI_Translator.ResView
             this.tsbUndo.Image = global::SCI_Translator.Properties.Resources.arrow_undo;
             this.tsbUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbUndo.Name = "tsbUndo";
-            this.tsbUndo.Size = new System.Drawing.Size(23, 22);
+            this.tsbUndo.Size = new System.Drawing.Size(29, 25);
             this.tsbUndo.Text = "Undo";
             this.tsbUndo.Click += new System.EventHandler(this.tsbUndo_Click);
             // 
@@ -643,7 +650,7 @@ namespace SCI_Translator.ResView
             this.tsbRedo.Image = global::SCI_Translator.Properties.Resources.arrow_redo;
             this.tsbRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRedo.Name = "tsbRedo";
-            this.tsbRedo.Size = new System.Drawing.Size(23, 22);
+            this.tsbRedo.Size = new System.Drawing.Size(29, 25);
             this.tsbRedo.Text = "Redo";
             this.tsbRedo.Click += new System.EventHandler(this.tsbRedo_Click);
             // 
@@ -653,39 +660,30 @@ namespace SCI_Translator.ResView
             this.tsbExchange.Image = global::SCI_Translator.Properties.Resources.arrow_out;
             this.tsbExchange.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExchange.Name = "tsbExchange";
-            this.tsbExchange.Size = new System.Drawing.Size(108, 22);
+            this.tsbExchange.Size = new System.Drawing.Size(134, 25);
             this.tsbExchange.Text = "Exchange chars";
             this.tsbExchange.Click += new System.EventHandler(this.tsbExchange_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsbResize
-            // 
-            this.tsbResize.Image = global::SCI_Translator.Properties.Resources.arrow_inout;
-            this.tsbResize.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbResize.Name = "tsbResize";
-            this.tsbResize.Size = new System.Drawing.Size(59, 22);
-            this.tsbResize.Text = "Resize";
-            this.tsbResize.Click += new System.EventHandler(this.tsbResize_Click);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 28);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 28);
             // 
             // tscbScale
             // 
             this.tscbScale.Name = "tscbScale";
-            this.tscbScale.Size = new System.Drawing.Size(75, 25);
+            this.tscbScale.Size = new System.Drawing.Size(99, 28);
             this.tscbScale.TextChanged += new System.EventHandler(this.tscbScale_TextChanged);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 28);
             // 
             // tsbShiftLeft
             // 
@@ -693,7 +691,7 @@ namespace SCI_Translator.ResView
             this.tsbShiftLeft.Image = global::SCI_Translator.Properties.Resources.arrow_left;
             this.tsbShiftLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbShiftLeft.Name = "tsbShiftLeft";
-            this.tsbShiftLeft.Size = new System.Drawing.Size(23, 22);
+            this.tsbShiftLeft.Size = new System.Drawing.Size(29, 25);
             this.tsbShiftLeft.Text = "Shift left";
             this.tsbShiftLeft.Click += new System.EventHandler(this.tsbShiftLeft_Click);
             // 
@@ -703,7 +701,7 @@ namespace SCI_Translator.ResView
             this.tsbShiftRight.Image = global::SCI_Translator.Properties.Resources.arrow_right;
             this.tsbShiftRight.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbShiftRight.Name = "tsbShiftRight";
-            this.tsbShiftRight.Size = new System.Drawing.Size(23, 22);
+            this.tsbShiftRight.Size = new System.Drawing.Size(29, 25);
             this.tsbShiftRight.Text = "Shift right";
             this.tsbShiftRight.Click += new System.EventHandler(this.tsbShiftRight_Click);
             // 
@@ -713,7 +711,7 @@ namespace SCI_Translator.ResView
             this.tsbShiftUp.Image = global::SCI_Translator.Properties.Resources.arrow_up;
             this.tsbShiftUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbShiftUp.Name = "tsbShiftUp";
-            this.tsbShiftUp.Size = new System.Drawing.Size(23, 22);
+            this.tsbShiftUp.Size = new System.Drawing.Size(29, 25);
             this.tsbShiftUp.Text = "Shift up";
             this.tsbShiftUp.Click += new System.EventHandler(this.tsbShiftUp_Click);
             // 
@@ -723,14 +721,14 @@ namespace SCI_Translator.ResView
             this.tsbShiftDown.Image = global::SCI_Translator.Properties.Resources.arrow_down;
             this.tsbShiftDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbShiftDown.Name = "tsbShiftDown";
-            this.tsbShiftDown.Size = new System.Drawing.Size(23, 22);
+            this.tsbShiftDown.Size = new System.Drawing.Size(29, 25);
             this.tsbShiftDown.Text = "Shift down";
             this.tsbShiftDown.Click += new System.EventHandler(this.tsbShiftDown_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 28);
             // 
             // tsbCopy
             // 
@@ -738,7 +736,7 @@ namespace SCI_Translator.ResView
             this.tsbCopy.Image = global::SCI_Translator.Properties.Resources.copy_edit;
             this.tsbCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbCopy.Name = "tsbCopy";
-            this.tsbCopy.Size = new System.Drawing.Size(23, 22);
+            this.tsbCopy.Size = new System.Drawing.Size(29, 25);
             this.tsbCopy.Text = "toolStripButton1";
             this.tsbCopy.Click += new System.EventHandler(this.tsbCopy_Click);
             // 
@@ -748,22 +746,24 @@ namespace SCI_Translator.ResView
             this.tsbPaste.Image = global::SCI_Translator.Properties.Resources.paste_edit;
             this.tsbPaste.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPaste.Name = "tsbPaste";
-            this.tsbPaste.Size = new System.Drawing.Size(23, 22);
+            this.tsbPaste.Size = new System.Drawing.Size(29, 25);
             this.tsbPaste.Text = "Paste character";
             this.tsbPaste.Click += new System.EventHandler(this.tsbPaste_Click);
             // 
             // FontView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.Controls.Add(splitContainer1);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.Controls.Add(this.splitContainer1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FontView";
-            this.Size = new System.Drawing.Size(1293, 789);
-            splitContainer1.Panel1.ResumeLayout(false);
-            splitContainer1.Panel2.ResumeLayout(false);
-            splitContainer1.Panel2.PerformLayout();
-            splitContainer1.ResumeLayout(false);
-            tsControls.ResumeLayout(false);
-            tsControls.PerformLayout();
+            this.Size = new System.Drawing.Size(1644, 1125);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.tsControls.ResumeLayout(false);
+            this.tsControls.PerformLayout();
             this.ResumeLayout(false);
 
         }

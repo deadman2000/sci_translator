@@ -56,7 +56,7 @@ namespace SCI_Translator
         {
             if (e.Node.Tag is Resource)
             {
-                ShowResource((Resource)e.Node.Tag);
+                ShowResource((Resource)e.Node.Tag, tsbTranslated.Checked);
             }
             else
             {
@@ -65,7 +65,7 @@ namespace SCI_Translator
         }
 
         ResViewer _currentViewer;
-        private void ShowResource(Resource res)
+        private void ShowResource(Resource res, bool translated)
         {
             tsslResourceInfo.Text = String.Format("{0}  {1} ({2:X8}h)  res_t:{3:X2} res_nr:{4} comp_size:{5} decomp_size:{6} method:{7}", res.Map.Type, res.ResourceFileName, res.Offset, res.ResT, res.ResNr, res.CompSize, res.DecompSize, res.Method);
 
@@ -78,7 +78,7 @@ namespace SCI_Translator
                 default: _currentViewer = hexViewer; break;
             }
 
-            _currentViewer.Activate(res, tsbTranslated.Checked);
+            _currentViewer.Activate(res, translated);
             _currentViewer.BringToFront();
         }
 
@@ -90,9 +90,13 @@ namespace SCI_Translator
 
         private void tsbTranslated_CheckedChanged(object sender, EventArgs e)
         {
-            tsbSave.Enabled = tsbTranslated.Checked;
             if (_currentViewer != null)
-                ShowResource(_currentViewer.Resource);
+            {
+                _currentViewer.Save();
+                ShowResource(_currentViewer.Resource, tsbTranslated.Checked);
+            }
+
+            tsbSave.Enabled = tsbTranslated.Checked;
         }
 
         private void tsbFind_Click(object sender, EventArgs e)
@@ -115,7 +119,7 @@ namespace SCI_Translator
                 }
             }
         }
-        
+
         private void tcmiExportToFile_Click(object sender, EventArgs e)
         {
             if (tv.SelectedNode == null) return;

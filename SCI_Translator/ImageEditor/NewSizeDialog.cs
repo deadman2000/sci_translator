@@ -17,6 +17,14 @@ namespace SCI_Translator.ImageEditor
 
             nudWidth.Value = w;
             nudHeight.Value = h;
+            SelectAll(nudWidth);
+            SelectAll(nudHeight);
+            nudWidth.Focus();
+        }
+
+        private void SelectAll(NumericUpDown nud)
+        {
+            nud.Select(0, nud.Text.Length);
         }
 
         public int SWidth { get { return (int)nudWidth.Value; } }

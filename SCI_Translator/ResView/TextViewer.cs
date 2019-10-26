@@ -18,7 +18,7 @@ namespace SCI_Translator.ResView
             InitializeComponent();
         }
 
-        public override void Save()
+        protected override void SaveContent()
         {
             dgvText.CommitEdit(DataGridViewDataErrorContexts.Commit);
 

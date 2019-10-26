@@ -17,11 +17,17 @@ namespace SCI_Translator.ResView
 
         public Resource Resource { get { return _res; } }
 
-        public virtual void Save()
+        public void Save()
+        {
+            if (_translated)
+                SaveContent();
+        }
+
+        protected virtual void SaveContent()
         {
             _res.SaveTranslate();
         }
-        
+
         public ResViewer()
         {
             InitializeComponent();

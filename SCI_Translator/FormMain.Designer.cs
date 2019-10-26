@@ -41,6 +41,7 @@
             this.tsbFind = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslResourceInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            ((System.ComponentModel.ISupportInitialize)(this.sc)).BeginInit();
             this.sc.Panel1.SuspendLayout();
             this.sc.SuspendLayout();
             this.cmsResource.SuspendLayout();
@@ -101,12 +102,12 @@
             this.cmsResource.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tcmiExportToFile});
             this.cmsResource.Name = "cmsTree";
-            this.cmsResource.Size = new System.Drawing.Size(182, 58);
+            this.cmsResource.Size = new System.Drawing.Size(174, 28);
             // 
             // tcmiExportToFile
             // 
             this.tcmiExportToFile.Name = "tcmiExportToFile";
-            this.tcmiExportToFile.Size = new System.Drawing.Size(181, 26);
+            this.tcmiExportToFile.Size = new System.Drawing.Size(173, 24);
             this.tcmiExportToFile.Text = "Export to file...";
             this.tcmiExportToFile.Click += new System.EventHandler(this.tcmiExportToFile_Click);
             // 
@@ -130,7 +131,7 @@
             this.tsbSave.Image = global::SCI_Translator.Properties.Resources.disk;
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(24, 24);
+            this.tsbSave.Size = new System.Drawing.Size(29, 24);
             this.tsbSave.Text = "Save";
             this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
@@ -152,7 +153,7 @@
             this.tsbFind.Image = global::SCI_Translator.Properties.Resources.find;
             this.tsbFind.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbFind.Name = "tsbFind";
-            this.tsbFind.Size = new System.Drawing.Size(24, 24);
+            this.tsbFind.Size = new System.Drawing.Size(29, 24);
             this.tsbFind.Text = "Find";
             this.tsbFind.Click += new System.EventHandler(this.tsbFind_Click);
             // 
@@ -171,7 +172,7 @@
             // tsslResourceInfo
             // 
             this.tsslResourceInfo.Name = "tsslResourceInfo";
-            this.tsslResourceInfo.Size = new System.Drawing.Size(0, 17);
+            this.tsslResourceInfo.Size = new System.Drawing.Size(0, 16);
             // 
             // FormMain
             // 
@@ -185,6 +186,7 @@
             this.Name = "FormMain";
             this.Text = "SCI Translator";
             this.sc.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sc)).EndInit();
             this.sc.ResumeLayout(false);
             this.cmsResource.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);

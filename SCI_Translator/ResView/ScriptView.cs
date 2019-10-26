@@ -118,7 +118,7 @@ namespace SCI_Translator.ResView
             }
         }
 
-        public override void Save()
+        protected override void SaveContent()
         {
             CommitStrings();
 
