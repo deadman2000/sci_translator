@@ -1,0 +1,3138 @@
+0004: [Exports section]
+	export_0 = short_0372
+
+000e: [Code section]
+
+code_000e:
+000e: 7a           push2                             
+000f: 38 0081      pushi    $0081                    
+0012: 39 6e        pushi    $6e                      
+0014: 43 00 04     callk    $00, $04                 
+0017: 39 07        pushi    $07                      
+0019: 38 0080      pushi    $0080                    
+001c: 39 05        pushi    $05                      
+001e: 39 0a        pushi    $0a                      
+0020: 39 50        pushi    $50                      
+0022: 39 6f        pushi    $6f                      
+0024: 39 72        pushi    $72                      
+0026: 39 73        pushi    $73                      
+0028: 46 export958_0 0e  calle    export958_0, $0e         
+002e: 39 03        pushi    $03                      
+0030: 38 0084      pushi    $0084                    
+0033: 39 78        pushi    $78                      
+0035: 39 7b        pushi    $7b                      
+0037: 46 export958_0 06  calle    export958_0, $06         
+003d: 39 6b        pushi    $6b                      
+003f: 76           push0                             
+0040: 72 0444      lofsa    short_0444               
+0043: 4a 04        send     $04                      
+0045: 39 6b        pushi    $6b                      
+0047: 76           push0                             
+0048: 72 0606      lofsa    short_0606               
+004b: 4a 04        send     $04                      
+004d: 39 04        pushi    $04                      
+004f: 78           push1                             
+0050: 38 01e0      pushi    $01e0                    
+0053: 39 03        pushi    $03                      
+0055: 78           push1                             
+0056: 38 01e0      pushi    $01e0                    
+0059: 39 07        pushi    $07                      
+005b: 78           push1                             
+005c: 39 04        pushi    $04                      
+005e: 39 6b        pushi    $6b                      
+0060: 76           push0                             
+0061: 72 066e      lofsa    short_066e               
+0064: 4a 16        send     $16                      
+0066: 38 00db      pushi    $00db                    
+0069: 78           push1                             
+006a: 39 06        pushi    $06                      
+006c: 39 6b        pushi    $6b                      
+006e: 76           push0                             
+006f: 72 07d2      lofsa    short_07d2               
+0072: 4a 0a        send     $0a                      
+0074: 39 04        pushi    $04                      
+0076: 78           push1                             
+0077: 38 01cc      pushi    $01cc                    
+007a: 39 03        pushi    $03                      
+007c: 78           push1                             
+007d: 38 01cc      pushi    $01cc                    
+0080: 39 06        pushi    $06                      
+0082: 78           push1                             
+0083: 39 03        pushi    $03                      
+0085: 39 07        pushi    $07                      
+0087: 78           push1                             
+0088: 7a           push2                             
+0089: 38 00db      pushi    $00db                    
+008c: 78           push1                             
+008d: 39 0c        pushi    $0c                      
+008f: 39 6b        pushi    $6b                      
+0091: 76           push0                             
+0092: 72 083a      lofsa    short_083a               
+0095: 4a 22        send     $22                      
+0097: 39 04        pushi    $04                      
+0099: 78           push1                             
+009a: 38 01c2      pushi    $01c2                    
+009d: 39 03        pushi    $03                      
+009f: 78           push1                             
+00a0: 38 01c2      pushi    $01c2                    
+00a3: 39 06        pushi    $06                      
+00a5: 78           push1                             
+00a6: 78           push1                             
+00a7: 39 07        pushi    $07                      
+00a9: 78           push1                             
+00aa: 39 04        pushi    $04                      
+00ac: 38 0096      pushi    $0096                    
+00af: 78           push1                             
+00b0: 51 17        class    $17                      
+00b2: 36           push                              
+00b3: 38 00db      pushi    $00db                    
+00b6: 78           push1                             
+00b7: 39 06        pushi    $06                      
+00b9: 39 6b        pushi    $6b                      
+00bb: 76           push0                             
+00bc: 72 08a2      lofsa    short_08a2               
+00bf: 4a 28        send     $28                      
+00c1: 39 04        pushi    $04                      
+00c3: 78           push1                             
+00c4: 38 01b8      pushi    $01b8                    
+00c7: 39 03        pushi    $03                      
+00c9: 78           push1                             
+00ca: 38 01b8      pushi    $01b8                    
+00cd: 39 07        pushi    $07                      
+00cf: 78           push1                             
+00d0: 39 04        pushi    $04                      
+00d2: 39 6b        pushi    $6b                      
+00d4: 76           push0                             
+00d5: 38 011d      pushi    $011d                    
+00d8: 76           push0                             
+00d9: 72 0754      lofsa    short_0754               
+00dc: 4a 1a        send     $1a                      
+00de: 39 05        pushi    $05                      
+00e0: 78           push1                             
+00e1: 39 72        pushi    $72                      
+00e3: 39 06        pushi    $06                      
+00e5: 78           push1                             
+00e6: 78           push1                             
+00e7: 39 04        pushi    $04                      
+00e9: 78           push1                             
+00ea: 38 01fe      pushi    $01fe                    
+00ed: 39 03        pushi    $03                      
+00ef: 78           push1                             
+00f0: 38 01fe      pushi    $01fe                    
+00f3: 38 00db      pushi    $00db                    
+00f6: 78           push1                             
+00f7: 39 0c        pushi    $0c                      
+00f9: 39 6b        pushi    $6b                      
+00fb: 76           push0                             
+00fc: 72 0510      lofsa    short_0510               
+00ff: 4a 22        send     $22                      
+0101: 38 008e      pushi    $008e                    
+0104: 78           push1                             
+0105: 72 11aa      lofsa    short_11aa               
+0108: 36           push                              
+0109: 72 0606      lofsa    short_0606               
+010c: 4a 06        send     $06                      
+010e: 38 008e      pushi    $008e                    
+0111: 78           push1                             
+0112: 72 123a      lofsa    short_123a               
+0115: 36           push                              
+0116: 72 066e      lofsa    short_066e               
+0119: 4a 06        send     $06                      
+011b: 38 008e      pushi    $008e                    
+011e: 78           push1                             
+011f: 72 12ca      lofsa    short_12ca               
+0122: 36           push                              
+0123: 72 0444      lofsa    short_0444               
+0126: 4a 06        send     $06                      
+0128: 38 008e      pushi    $008e                    
+012b: 78           push1                             
+012c: 72 1368      lofsa    short_1368               
+012f: 36           push                              
+0130: 72 07d2      lofsa    short_07d2               
+0133: 4a 06        send     $06                      
+0135: 38 008e      pushi    $008e                    
+0138: 78           push1                             
+0139: 72 13f8      lofsa    short_13f8               
+013c: 36           push                              
+013d: 72 083a      lofsa    short_083a               
+0140: 4a 06        send     $06                      
+0142: 38 008e      pushi    $008e                    
+0145: 78           push1                             
+0146: 72 1488      lofsa    short_1488               
+0149: 36           push                              
+014a: 72 08a2      lofsa    short_08a2               
+014d: 4a 06        send     $06                      
+014f: 38 008e      pushi    $008e                    
+0152: 78           push1                             
+0153: 72 1518      lofsa    short_1518               
+0156: 36           push                              
+0157: 72 0510      lofsa    short_0510               
+015a: 4a 06        send     $06                      
+015c: 35 20        ldi      $20                      
+015e: a3 01        sal      $01                      
+0160: 39 6b        pushi    $6b                      
+0162: 76           push0                             
+0163: 57 43 04     super    $43, $04                 
+0166: 38 00a7      pushi    $00a7                    
+0169: 76           push0                             
+016a: 81 45        lag      $45                      
+016c: 4a 04        send     $04                      
+016e: 39 2b        pushi    $2b                      
+0170: 78           push1                             
+0171: 39 78        pushi    $78                      
+0173: 39 06        pushi    $06                      
+0175: 78           push1                             
+0176: 78           push1                             
+0177: 39 6b        pushi    $6b                      
+0179: 76           push0                             
+017a: 39 2a        pushi    $2a                      
+017c: 78           push1                             
+017d: 72 1638      lofsa    short_1638               
+0180: 36           push                              
+0181: 39 66        pushi    $66                      
+0183: 78           push1                             
+0184: 39 66        pushi    $66                      
+0186: 76           push0                             
+0187: 81 64        lag      $64                      
+0189: 4a 04        send     $04                      
+018b: 36           push                              
+018c: 35 fe        ldi      $fe                      
+018e: 12           and                               
+018f: 36           push                              
+0190: 81 64        lag      $64                      
+0192: 4a 1c        send     $1c                      
+0194: 38 018c      pushi    $018c                    
+0197: 7a           push2                             
+0198: 39 6e        pushi    $6e                      
+019a: 39 06        pushi    $06                      
+019c: 81 02        lag      $02                      
+019e: 4a 08        send     $08                      
+01a0: 39 04        pushi    $04                      
+01a2: 78           push1                             
+01a3: 38 00d2      pushi    $00d2                    
+01a6: 39 03        pushi    $03                      
+01a8: 78           push1                             
+01a9: 39 6e        pushi    $6e                      
+01ab: 72 0576      lofsa    short_0576               
+01ae: 4a 0c        send     $0c                      
+01b0: 39 04        pushi    $04                      
+01b2: 78           push1                             
+01b3: 38 00e1      pushi    $00e1                    
+01b6: 39 03        pushi    $03                      
+01b8: 78           push1                             
+01b9: 39 64        pushi    $64                      
+01bb: 72 05be      lofsa    short_05be               
+01be: 4a 0c        send     $0c                      
+01c0: 39 06        pushi    $06                      
+01c2: 78           push1                             
+01c3: 78           push1                             
+01c4: 39 07        pushi    $07                      
+01c6: 78           push1                             
+01c7: 39 06        pushi    $06                      
+01c9: 39 04        pushi    $04                      
+01cb: 78           push1                             
+01cc: 7a           push2                             
+01cd: 38 00dc      pushi    $00dc                    
+01d0: 38 00e6      pushi    $00e6                    
+01d3: 43 3c 04     callk    $3c, $04                 
+01d6: 36           push                              
+01d7: 39 03        pushi    $03                      
+01d9: 78           push1                             
+01da: 7a           push2                             
+01db: 39 6d        pushi    $6d                      
+01dd: 39 77        pushi    $77                      
+01df: 43 3c 04     callk    $3c, $04                 
+01e2: 36           push                              
+01e3: 72 0a84      lofsa    short_0a84               
+01e6: 4a 18        send     $18                      
+01e8: 39 06        pushi    $06                      
+01ea: 78           push1                             
+01eb: 78           push1                             
+01ec: 39 07        pushi    $07                      
+01ee: 78           push1                             
+01ef: 39 06        pushi    $06                      
+01f1: 39 04        pushi    $04                      
+01f3: 78           push1                             
+01f4: 7a           push2                             
+01f5: 38 009f      pushi    $009f                    
+01f8: 38 00a9      pushi    $00a9                    
+01fb: 43 3c 04     callk    $3c, $04                 
+01fe: 36           push                              
+01ff: 39 03        pushi    $03                      
+0201: 78           push1                             
+0202: 7a           push2                             
+0203: 39 6a        pushi    $6a                      
+0205: 39 74        pushi    $74                      
+0207: 43 3c 04     callk    $3c, $04                 
+020a: 36           push                              
+020b: 72 0ae2      lofsa    short_0ae2               
+020e: 4a 18        send     $18                      
+0210: 39 06        pushi    $06                      
+0212: 78           push1                             
+0213: 78           push1                             
+0214: 39 07        pushi    $07                      
+0216: 78           push1                             
+0217: 39 06        pushi    $06                      
+0219: 39 04        pushi    $04                      
+021b: 78           push1                             
+021c: 7a           push2                             
+021d: 38 00fa      pushi    $00fa                    
+0220: 38 0104      pushi    $0104                    
+0223: 43 3c 04     callk    $3c, $04                 
+0226: 36           push                              
+0227: 39 03        pushi    $03                      
+0229: 78           push1                             
+022a: 7a           push2                             
+022b: 39 6a        pushi    $6a                      
+022d: 39 74        pushi    $74                      
+022f: 43 3c 04     callk    $3c, $04                 
+0232: 36           push                              
+0233: 72 0b40      lofsa    short_0b40               
+0236: 4a 18        send     $18                      
+0238: 39 06        pushi    $06                      
+023a: 78           push1                             
+023b: 78           push1                             
+023c: 39 07        pushi    $07                      
+023e: 78           push1                             
+023f: 39 06        pushi    $06                      
+0241: 39 04        pushi    $04                      
+0243: 78           push1                             
+0244: 7a           push2                             
+0245: 38 0088      pushi    $0088                    
+0248: 38 0092      pushi    $0092                    
+024b: 43 3c 04     callk    $3c, $04                 
+024e: 36           push                              
+024f: 39 03        pushi    $03                      
+0251: 78           push1                             
+0252: 7a           push2                             
+0253: 39 7b        pushi    $7b                      
+0255: 38 0085      pushi    $0085                    
+0258: 43 3c 04     callk    $3c, $04                 
+025b: 36           push                              
+025c: 72 0b9e      lofsa    short_0b9e               
+025f: 4a 18        send     $18                      
+0261: 39 73        pushi    $73                      
+0263: 39 08        pushi    $08                      
+0265: 72 0a84      lofsa    short_0a84               
+0268: 36           push                              
+0269: 72 0ae2      lofsa    short_0ae2               
+026c: 36           push                              
+026d: 72 0b40      lofsa    short_0b40               
+0270: 36           push                              
+0271: 72 0b9e      lofsa    short_0b9e               
+0274: 36           push                              
+0275: 72 0576      lofsa    short_0576               
+0278: 36           push                              
+0279: 72 05be      lofsa    short_05be               
+027c: 36           push                              
+027d: 72 03b4      lofsa    short_03b4               
+0280: 36           push                              
+0281: 72 03fc      lofsa    short_03fc               
+0284: 36           push                              
+0285: 39 74        pushi    $74                      
+0287: 78           push1                             
+0288: 39 6b        pushi    $6b                      
+028a: 39 3c        pushi    $3c                      
+028c: 76           push0                             
+028d: 81 0a        lag      $0a                      
+028f: 4a 1e        send     $1e                      
+0291: 39 04        pushi    $04                      
+0293: 78           push1                             
+0294: 38 0082      pushi    $0082                    
+0297: 39 03        pushi    $03                      
+0299: 78           push1                             
+029a: 38 00bd      pushi    $00bd                    
+029d: 72 0444      lofsa    short_0444               
+02a0: 4a 0c        send     $0c                      
+02a2: 39 04        pushi    $04                      
+02a4: 78           push1                             
+02a5: 39 4e        pushi    $4e                      
+02a7: 39 03        pushi    $03                      
+02a9: 78           push1                             
+02aa: 38 0092      pushi    $0092                    
+02ad: 72 0606      lofsa    short_0606               
+02b0: 4a 0c        send     $0c                      
+02b2: 39 04        pushi    $04                      
+02b4: 78           push1                             
+02b5: 7a           push2                             
+02b6: 39 55        pushi    $55                      
+02b8: 39 5f        pushi    $5f                      
+02ba: 43 3c 04     callk    $3c, $04                 
+02bd: 36           push                              
+02be: 39 03        pushi    $03                      
+02c0: 78           push1                             
+02c1: 7a           push2                             
+02c2: 38 00a5      pushi    $00a5                    
+02c5: 38 00af      pushi    $00af                    
+02c8: 43 3c 04     callk    $3c, $04                 
+02cb: 36           push                              
+02cc: 72 066e      lofsa    short_066e               
+02cf: 4a 0c        send     $0c                      
+02d1: 39 04        pushi    $04                      
+02d3: 78           push1                             
+02d4: 39 7d        pushi    $7d                      
+02d6: 39 03        pushi    $03                      
+02d8: 78           push1                             
+02d9: 38 0080      pushi    $0080                    
+02dc: 72 07d2      lofsa    short_07d2               
+02df: 4a 0c        send     $0c                      
+02e1: 39 04        pushi    $04                      
+02e3: 78           push1                             
+02e4: 38 00c8      pushi    $00c8                    
+02e7: 39 03        pushi    $03                      
+02e9: 78           push1                             
+02ea: 39 64        pushi    $64                      
+02ec: 72 083a      lofsa    short_083a               
+02ef: 4a 0c        send     $0c                      
+02f1: 39 04        pushi    $04                      
+02f3: 78           push1                             
+02f4: 7a           push2                             
+02f5: 38 00ac      pushi    $00ac                    
+02f8: 38 00b6      pushi    $00b6                    
+02fb: 43 3c 04     callk    $3c, $04                 
+02fe: 36           push                              
+02ff: 39 03        pushi    $03                      
+0301: 78           push1                             
+0302: 7a           push2                             
+0303: 39 73        pushi    $73                      
+0305: 39 7d        pushi    $7d                      
+0307: 43 3c 04     callk    $3c, $04                 
+030a: 36           push                              
+030b: 72 08a2      lofsa    short_08a2               
+030e: 4a 0c        send     $0c                      
+0310: 39 04        pushi    $04                      
+0312: 78           push1                             
+0313: 39 07        pushi    $07                      
+0315: 39 03        pushi    $03                      
+0317: 78           push1                             
+0318: 39 6c        pushi    $6c                      
+031a: 72 0754      lofsa    short_0754               
+031d: 4a 0c        send     $0c                      
+031f: 39 04        pushi    $04                      
+0321: 78           push1                             
+0322: 38 00d2      pushi    $00d2                    
+0325: 39 03        pushi    $03                      
+0327: 78           push1                             
+0328: 39 78        pushi    $78                      
+032a: 72 0510      lofsa    short_0510               
+032d: 4a 0c        send     $0c                      
+032f: 39 2b        pushi    $2b                      
+0331: 78           push1                             
+0332: 39 7b        pushi    $7b                      
+0334: 39 06        pushi    $06                      
+0336: 78           push1                             
+0337: 39 ff        pushi    $ff                      
+0339: 39 6b        pushi    $6b                      
+033b: 76           push0                             
+033c: 39 2a        pushi    $2a                      
+033e: 76           push0                             
+033f: 39 66        pushi    $66                      
+0341: 78           push1                             
+0342: 39 66        pushi    $66                      
+0344: 76           push0                             
+0345: 81 71        lag      $71                      
+0347: 4a 04        send     $04                      
+0349: 36           push                              
+034a: 35 fe        ldi      $fe                      
+034c: 12           and                               
+034d: 36           push                              
+034e: 81 71        lag      $71                      
+0350: 4a 1a        send     $1a                      
+0352: 38 008e      pushi    $008e                    
+0355: 78           push1                             
+0356: 72 0c56      lofsa    short_0c56               
+0359: 36           push                              
+035a: 81 02        lag      $02                      
+035c: 4a 06        send     $06                      
+035e: 78           push1                             
+035f: 39 41        pushi    $41                      
+0361: 45 06 02     callb    $06, $02                 
+0364: 48           ret                               
+0365: 00           bnot                              
+
+036a: [Object section]
+	name = tuckwobat
+	species = 43
+0372: sel[0] = $43
+0374: sel[1] = $43
+0376: sel[2] = $0
+0378: sel[3] = string_1666;  'tuckwobat'
+037a: sel[4] = $0
+037c: sel[5] = $0
+037e: sel[6] = $0
+0380: sel[7] = $0
+0382: sel[8] = $0
+0384: sel[9] = $0
+0386: sel[10] = $0
+0388: sel[11] = $8
+038a: sel[12] = $0
+038c: sel[13] = $0
+038e: sel[14] = $0
+0390: sel[15] = $0
+0392: sel[16] = $0
+0394: sel[17] = $0
+0396: sel[18] = $0
+0398: sel[19] = $0
+039a: sel[20] = $a0
+039c: sel[21] = $8ad0
+039e: sel[22] = $0
+
+	func[0] = init code_000e;  push2
+
+03ac: [Object section]
+	name = frieze1
+	species = 2d
+03b4: sel[0] = $2d
+03b6: sel[1] = $2d
+03b8: sel[2] = $0
+03ba: sel[3] = string_16cb;  'frieze1'
+03bc: sel[4] = $1f
+03be: sel[5] = $bd
+03c0: sel[6] = $0
+03c2: sel[7] = $0
+03c4: sel[8] = $0
+03c6: sel[9] = $0
+03c8: sel[10] = $0
+03ca: sel[11] = $0
+03cc: sel[12] = $0
+03ce: sel[13] = string_1670;  '*** the battle frieze.'
+03d0: sel[14] = $5a
+03d2: sel[15] = $0
+03d4: sel[16] = $6789
+03d6: sel[17] = $0
+03d8: sel[18] = $0
+03da: sel[19] = $0
+03dc: sel[20] = $6789
+03de: sel[21] = string_1687;  '*** Robin's merrie men engage the Abbot's hoods in a fierce battle.'
+03e0: sel[22] = $50
+03e2: sel[23] = $0
+03e4: sel[24] = $0
+03e6: sel[25] = $f
+03e8: sel[26] = $0
+03ea: sel[27] = $0
+
+03f4: [Object section]
+	name = frieze2
+	species = 2d
+03fc: sel[0] = $2d
+03fe: sel[1] = $2d
+0400: sel[2] = $0
+0402: sel[3] = string_1718;  'frieze2'
+0404: sel[4] = $120
+0406: sel[5] = $bd
+0408: sel[6] = $0
+040a: sel[7] = $0
+040c: sel[8] = $0
+040e: sel[9] = $0
+0410: sel[10] = $0
+0412: sel[11] = $0
+0414: sel[12] = $0
+0416: sel[13] = string_1670;  '*** the battle frieze.'
+0418: sel[14] = $5a
+041a: sel[15] = $0
+041c: sel[16] = $6789
+041e: sel[17] = $0
+0420: sel[18] = $0
+0422: sel[19] = $0
+0424: sel[20] = $6789
+0426: sel[21] = string_16d3;  '*** Robin's merrie men engage the Abbott's hoods in a fierce battle.'
+0428: sel[22] = $50
+042a: sel[23] = $0
+042c: sel[24] = $1
+042e: sel[25] = $f
+0430: sel[26] = $0
+0432: sel[27] = $0
+
+043c: [Object section]
+	name = robin
+	species = 2f
+0444: sel[0] = $2f
+0446: sel[1] = $2f
+0448: sel[2] = $0
+044a: sel[3] = string_1720;  'robin'
+044c: sel[4] = $1f4
+044e: sel[5] = $1f4
+0450: sel[6] = $0
+0452: sel[7] = $0
+0454: sel[8] = $0
+0456: sel[9] = $0
+0458: sel[10] = $0
+045a: sel[11] = $0
+045c: sel[12] = $0
+045e: sel[13] = $0
+0460: sel[14] = $6789
+0462: sel[15] = $0
+0464: sel[16] = $6789
+0466: sel[17] = $0
+0468: sel[18] = $0
+046a: sel[19] = $0
+046c: sel[20] = $6789
+046e: sel[21] = $0
+0470: sel[22] = $2
+0472: sel[23] = $5
+0474: sel[24] = $3
+0476: sel[25] = $4
+0478: sel[26] = $0
+047a: sel[27] = $0
+047c: sel[28] = $0
+047e: sel[29] = $0
+0480: sel[30] = $0
+0482: sel[31] = $0
+0484: sel[32] = $0
+0486: sel[33] = $0
+0488: sel[34] = $0
+048a: sel[35] = $0
+048c: sel[36] = $0
+048e: sel[37] = $0
+0490: sel[38] = $8
+0492: sel[39] = $0
+0494: sel[40] = $0
+0496: sel[41] = $0
+0498: sel[42] = $0
+
+04a2: [Object section]
+	name = victim
+	species = 2f
+04aa: sel[0] = $2f
+04ac: sel[1] = $2f
+04ae: sel[2] = $0
+04b0: sel[3] = string_1726;  'victim'
+04b2: sel[4] = $b4
+04b4: sel[5] = $6a
+04b6: sel[6] = $0
+04b8: sel[7] = $0
+04ba: sel[8] = $0
+04bc: sel[9] = $0
+04be: sel[10] = $0
+04c0: sel[11] = $0
+04c2: sel[12] = $0
+04c4: sel[13] = $0
+04c6: sel[14] = $6789
+04c8: sel[15] = $0
+04ca: sel[16] = $6789
+04cc: sel[17] = $0
+04ce: sel[18] = $0
+04d0: sel[19] = $0
+04d2: sel[20] = $6789
+04d4: sel[21] = $0
+04d6: sel[22] = $2
+04d8: sel[23] = $73
+04da: sel[24] = $3
+04dc: sel[25] = $0
+04de: sel[26] = $0
+04e0: sel[27] = $0
+04e2: sel[28] = $0
+04e4: sel[29] = $0
+04e6: sel[30] = $0
+04e8: sel[31] = $0
+04ea: sel[32] = $0
+04ec: sel[33] = $0
+04ee: sel[34] = $0
+04f0: sel[35] = $0
+04f2: sel[36] = $0
+04f4: sel[37] = $0
+04f6: sel[38] = $6
+04f8: sel[39] = $0
+04fa: sel[40] = $0
+04fc: sel[41] = $0
+04fe: sel[42] = $2
+
+0508: [Object section]
+	name = victim2
+	species = 2f
+0510: sel[0] = $2f
+0512: sel[1] = $2f
+0514: sel[2] = $0
+0516: sel[3] = string_172d;  'victim2'
+0518: sel[4] = $0
+051a: sel[5] = $0
+051c: sel[6] = $0
+051e: sel[7] = $0
+0520: sel[8] = $0
+0522: sel[9] = $0
+0524: sel[10] = $0
+0526: sel[11] = $0
+0528: sel[12] = $0
+052a: sel[13] = $0
+052c: sel[14] = $6789
+052e: sel[15] = $0
+0530: sel[16] = $6789
+0532: sel[17] = $0
+0534: sel[18] = $0
+0536: sel[19] = $0
+0538: sel[20] = $6789
+053a: sel[21] = $0
+053c: sel[22] = $2
+053e: sel[23] = $73
+0540: sel[24] = $3
+0542: sel[25] = $0
+0544: sel[26] = $0
+0546: sel[27] = $0
+0548: sel[28] = $0
+054a: sel[29] = $0
+054c: sel[30] = $0
+054e: sel[31] = $0
+0550: sel[32] = $0
+0552: sel[33] = $0
+0554: sel[34] = $0
+0556: sel[35] = $0
+0558: sel[36] = $0
+055a: sel[37] = $0
+055c: sel[38] = $6
+055e: sel[39] = $0
+0560: sel[40] = $0
+0562: sel[41] = $0
+0564: sel[42] = $2
+
+056e: [Object section]
+	name = mule
+	species = 2d
+0576: sel[0] = $2d
+0578: sel[1] = $2d
+057a: sel[2] = $0
+057c: sel[3] = string_1735;  'mule'
+057e: sel[4] = $208
+0580: sel[5] = $208
+0582: sel[6] = $0
+0584: sel[7] = $0
+0586: sel[8] = $0
+0588: sel[9] = $0
+058a: sel[10] = $0
+058c: sel[11] = $0
+058e: sel[12] = $0
+0590: sel[13] = $0
+0592: sel[14] = $6789
+0594: sel[15] = $0
+0596: sel[16] = $6789
+0598: sel[17] = $0
+059a: sel[18] = $0
+059c: sel[19] = $0
+059e: sel[20] = $6789
+05a0: sel[21] = $0
+05a2: sel[22] = $73
+05a4: sel[23] = $7
+05a6: sel[24] = $0
+05a8: sel[25] = $ffff
+05aa: sel[26] = $0
+05ac: sel[27] = $0
+
+05b6: [Object section]
+	name = mule2
+	species = 2d
+05be: sel[0] = $2d
+05c0: sel[1] = $2d
+05c2: sel[2] = $0
+05c4: sel[3] = string_173a;  'mule2'
+05c6: sel[4] = $0
+05c8: sel[5] = $0
+05ca: sel[6] = $0
+05cc: sel[7] = $0
+05ce: sel[8] = $0
+05d0: sel[9] = $0
+05d2: sel[10] = $0
+05d4: sel[11] = $0
+05d6: sel[12] = $0
+05d8: sel[13] = $0
+05da: sel[14] = $6789
+05dc: sel[15] = $0
+05de: sel[16] = $6789
+05e0: sel[17] = $0
+05e2: sel[18] = $0
+05e4: sel[19] = $0
+05e6: sel[20] = $6789
+05e8: sel[21] = $0
+05ea: sel[22] = $73
+05ec: sel[23] = $7
+05ee: sel[24] = $0
+05f0: sel[25] = $ffff
+05f2: sel[26] = $0
+05f4: sel[27] = $0
+
+05fe: [Object section]
+	name = archer
+	species = 2f
+0606: sel[0] = $2f
+0608: sel[1] = $2f
+060a: sel[2] = $0
+060c: sel[3] = string_1740;  'archer'
+060e: sel[4] = $1ea
+0610: sel[5] = $1ea
+0612: sel[6] = $0
+0614: sel[7] = $0
+0616: sel[8] = $0
+0618: sel[9] = $0
+061a: sel[10] = $0
+061c: sel[11] = $0
+061e: sel[12] = $0
+0620: sel[13] = $0
+0622: sel[14] = $5a
+0624: sel[15] = $0
+0626: sel[16] = $6789
+0628: sel[17] = $0
+062a: sel[18] = $0
+062c: sel[19] = $0
+062e: sel[20] = $6789
+0630: sel[21] = $0
+0632: sel[22] = $2
+0634: sel[23] = $72
+0636: sel[24] = $5
+0638: sel[25] = $0
+063a: sel[26] = $0
+063c: sel[27] = $0
+063e: sel[28] = $0
+0640: sel[29] = $0
+0642: sel[30] = $0
+0644: sel[31] = $0
+0646: sel[32] = $0
+0648: sel[33] = $0
+064a: sel[34] = $0
+064c: sel[35] = $0
+064e: sel[36] = $0
+0650: sel[37] = $0
+0652: sel[38] = $6
+0654: sel[39] = $0
+0656: sel[40] = $0
+0658: sel[41] = $0
+065a: sel[42] = $2
+065c: sel[43] = $0
+
+0666: [Object section]
+	name = archer2
+	species = 2f
+066e: sel[0] = $2f
+0670: sel[1] = $2f
+0672: sel[2] = $0
+0674: sel[3] = string_1747;  'archer2'
+0676: sel[4] = $1ea
+0678: sel[5] = $1ea
+067a: sel[6] = $0
+067c: sel[7] = $0
+067e: sel[8] = $0
+0680: sel[9] = $0
+0682: sel[10] = $0
+0684: sel[11] = $0
+0686: sel[12] = $0
+0688: sel[13] = $0
+068a: sel[14] = $5a
+068c: sel[15] = $0
+068e: sel[16] = $6789
+0690: sel[17] = $0
+0692: sel[18] = $0
+0694: sel[19] = $0
+0696: sel[20] = $6789
+0698: sel[21] = $0
+069a: sel[22] = $2
+069c: sel[23] = $72
+069e: sel[24] = $5
+06a0: sel[25] = $0
+06a2: sel[26] = $0
+06a4: sel[27] = $0
+06a6: sel[28] = $0
+06a8: sel[29] = $0
+06aa: sel[30] = $0
+06ac: sel[31] = $0
+06ae: sel[32] = $0
+06b0: sel[33] = $0
+06b2: sel[34] = $0
+06b4: sel[35] = $0
+06b6: sel[36] = $0
+06b8: sel[37] = $0
+06ba: sel[38] = $6
+06bc: sel[39] = $0
+06be: sel[40] = $0
+06c0: sel[41] = $0
+06c2: sel[42] = $2
+06c4: sel[43] = $0
+
+06ce: [Object section]
+	name = outlaw
+	species = 30
+06d6: sel[0] = $30
+06d8: sel[1] = $30
+06da: sel[2] = $0
+06dc: sel[3] = string_174f;  'outlaw'
+06de: sel[4] = $7
+06e0: sel[5] = $6c
+06e2: sel[6] = $0
+06e4: sel[7] = $0
+06e6: sel[8] = $0
+06e8: sel[9] = $0
+06ea: sel[10] = $0
+06ec: sel[11] = $0
+06ee: sel[12] = $0
+06f0: sel[13] = $0
+06f2: sel[14] = $5a
+06f4: sel[15] = $0
+06f6: sel[16] = $6789
+06f8: sel[17] = $0
+06fa: sel[18] = $0
+06fc: sel[19] = $0
+06fe: sel[20] = $6789
+0700: sel[21] = $0
+0702: sel[22] = $2
+0704: sel[23] = $6f
+0706: sel[24] = $0
+0708: sel[25] = $0
+070a: sel[26] = $0
+070c: sel[27] = $0
+070e: sel[28] = $0
+0710: sel[29] = $0
+0712: sel[30] = $0
+0714: sel[31] = $0
+0716: sel[32] = $0
+0718: sel[33] = $0
+071a: sel[34] = $0
+071c: sel[35] = $0
+071e: sel[36] = $0
+0720: sel[37] = $0
+0722: sel[38] = $6
+0724: sel[39] = $0
+0726: sel[40] = $0
+0728: sel[41] = $0
+072a: sel[42] = $2
+072c: sel[43] = $0
+072e: sel[44] = $0
+0730: sel[45] = $0
+0732: sel[46] = $3
+0734: sel[47] = $6
+0736: sel[48] = $0
+0738: sel[49] = $0
+073a: sel[50] = $0
+073c: sel[51] = $0
+073e: sel[52] = $0
+0740: sel[53] = $0
+0742: sel[54] = $0
+
+074c: [Object section]
+	name = outlaw2
+	species = 30
+0754: sel[0] = $30
+0756: sel[1] = $30
+0758: sel[2] = $0
+075a: sel[3] = string_1756;  'outlaw2'
+075c: sel[4] = $0
+075e: sel[5] = $0
+0760: sel[6] = $0
+0762: sel[7] = $0
+0764: sel[8] = $0
+0766: sel[9] = $0
+0768: sel[10] = $0
+076a: sel[11] = $0
+076c: sel[12] = $0
+076e: sel[13] = $0
+0770: sel[14] = $5a
+0772: sel[15] = $0
+0774: sel[16] = $6789
+0776: sel[17] = $0
+0778: sel[18] = $0
+077a: sel[19] = $0
+077c: sel[20] = $6789
+077e: sel[21] = $0
+0780: sel[22] = $2
+0782: sel[23] = $6f
+0784: sel[24] = $0
+0786: sel[25] = $0
+0788: sel[26] = $0
+078a: sel[27] = $0
+078c: sel[28] = $0
+078e: sel[29] = $0
+0790: sel[30] = $0
+0792: sel[31] = $0
+0794: sel[32] = $0
+0796: sel[33] = $0
+0798: sel[34] = $0
+079a: sel[35] = $0
+079c: sel[36] = $0
+079e: sel[37] = $0
+07a0: sel[38] = $6
+07a2: sel[39] = $0
+07a4: sel[40] = $0
+07a6: sel[41] = $0
+07a8: sel[42] = $2
+07aa: sel[43] = $0
+07ac: sel[44] = $0
+07ae: sel[45] = $0
+07b0: sel[46] = $3
+07b2: sel[47] = $6
+07b4: sel[48] = $0
+07b6: sel[49] = $0
+07b8: sel[50] = $0
+07ba: sel[51] = $0
+07bc: sel[52] = $0
+07be: sel[53] = $0
+07c0: sel[54] = $0
+
+07ca: [Object section]
+	name = knave
+	species = 2f
+07d2: sel[0] = $2f
+07d4: sel[1] = $2f
+07d6: sel[2] = $0
+07d8: sel[3] = string_1788;  'knave'
+07da: sel[4] = $1d6
+07dc: sel[5] = $1d6
+07de: sel[6] = $0
+07e0: sel[7] = $0
+07e2: sel[8] = $0
+07e4: sel[9] = $0
+07e6: sel[10] = $0
+07e8: sel[11] = $0
+07ea: sel[12] = $0
+07ec: sel[13] = string_175e;  '*** one of the Abbott's thieving lackeys.'
+07ee: sel[14] = $5a
+07f0: sel[15] = $0
+07f2: sel[16] = $6789
+07f4: sel[17] = $0
+07f6: sel[18] = $0
+07f8: sel[19] = $0
+07fa: sel[20] = $6789
+07fc: sel[21] = $0
+07fe: sel[22] = $2
+0800: sel[23] = $72
+0802: sel[24] = $0
+0804: sel[25] = $0
+0806: sel[26] = $0
+0808: sel[27] = $0
+080a: sel[28] = $0
+080c: sel[29] = $0
+080e: sel[30] = $0
+0810: sel[31] = $0
+0812: sel[32] = $0
+0814: sel[33] = $0
+0816: sel[34] = $0
+0818: sel[35] = $0
+081a: sel[36] = $0
+081c: sel[37] = $0
+081e: sel[38] = $6
+0820: sel[39] = $0
+0822: sel[40] = $0
+0824: sel[41] = $0
+0826: sel[42] = $2
+0828: sel[43] = $0
+
+0832: [Object section]
+	name = knave2
+	species = 2f
+083a: sel[0] = $2f
+083c: sel[1] = $2f
+083e: sel[2] = $0
+0840: sel[3] = string_178e;  'knave2'
+0842: sel[4] = $0
+0844: sel[5] = $0
+0846: sel[6] = $0
+0848: sel[7] = $0
+084a: sel[8] = $0
+084c: sel[9] = $0
+084e: sel[10] = $0
+0850: sel[11] = $0
+0852: sel[12] = $0
+0854: sel[13] = $0
+0856: sel[14] = $5a
+0858: sel[15] = $0
+085a: sel[16] = $6789
+085c: sel[17] = $0
+085e: sel[18] = $0
+0860: sel[19] = $0
+0862: sel[20] = $6789
+0864: sel[21] = $0
+0866: sel[22] = $2
+0868: sel[23] = $72
+086a: sel[24] = $0
+086c: sel[25] = $0
+086e: sel[26] = $0
+0870: sel[27] = $0
+0872: sel[28] = $0
+0874: sel[29] = $0
+0876: sel[30] = $0
+0878: sel[31] = $0
+087a: sel[32] = $0
+087c: sel[33] = $0
+087e: sel[34] = $0
+0880: sel[35] = $0
+0882: sel[36] = $0
+0884: sel[37] = $0
+0886: sel[38] = $6
+0888: sel[39] = $0
+088a: sel[40] = $0
+088c: sel[41] = $0
+088e: sel[42] = $2
+0890: sel[43] = $0
+
+089a: [Object section]
+	name = knave3
+	species = 2f
+08a2: sel[0] = $2f
+08a4: sel[1] = $2f
+08a6: sel[2] = $0
+08a8: sel[3] = string_1795;  'knave3'
+08aa: sel[4] = $0
+08ac: sel[5] = $0
+08ae: sel[6] = $0
+08b0: sel[7] = $0
+08b2: sel[8] = $0
+08b4: sel[9] = $0
+08b6: sel[10] = $0
+08b8: sel[11] = $0
+08ba: sel[12] = $0
+08bc: sel[13] = $0
+08be: sel[14] = $5a
+08c0: sel[15] = $0
+08c2: sel[16] = $6789
+08c4: sel[17] = $0
+08c6: sel[18] = $0
+08c8: sel[19] = $0
+08ca: sel[20] = $6789
+08cc: sel[21] = $0
+08ce: sel[22] = $2
+08d0: sel[23] = $72
+08d2: sel[24] = $0
+08d4: sel[25] = $0
+08d6: sel[26] = $0
+08d8: sel[27] = $0
+08da: sel[28] = $0
+08dc: sel[29] = $0
+08de: sel[30] = $0
+08e0: sel[31] = $0
+08e2: sel[32] = $0
+08e4: sel[33] = $0
+08e6: sel[34] = $0
+08e8: sel[35] = $0
+08ea: sel[36] = $0
+08ec: sel[37] = $0
+08ee: sel[38] = $6
+08f0: sel[39] = $0
+08f2: sel[40] = $0
+08f4: sel[41] = $0
+08f6: sel[42] = $2
+08f8: sel[43] = $0
+
+0902: [Object section]
+	name = lancer
+	species = 30
+090a: sel[0] = $30
+090c: sel[1] = $30
+090e: sel[2] = $0
+0910: sel[3] = string_179c;  'lancer'
+0912: sel[4] = $0
+0914: sel[5] = $0
+0916: sel[6] = $0
+0918: sel[7] = $0
+091a: sel[8] = $0
+091c: sel[9] = $0
+091e: sel[10] = $0
+0920: sel[11] = $0
+0922: sel[12] = $0
+0924: sel[13] = $0
+0926: sel[14] = $5a
+0928: sel[15] = $0
+092a: sel[16] = $6789
+092c: sel[17] = $0
+092e: sel[18] = $0
+0930: sel[19] = $0
+0932: sel[20] = $6789
+0934: sel[21] = $0
+0936: sel[22] = $2
+0938: sel[23] = $6f
+093a: sel[24] = $1
+093c: sel[25] = $0
+093e: sel[26] = $0
+0940: sel[27] = $0
+0942: sel[28] = $800
+0944: sel[29] = $0
+0946: sel[30] = $0
+0948: sel[31] = $0
+094a: sel[32] = $0
+094c: sel[33] = $0
+094e: sel[34] = $0
+0950: sel[35] = $0
+0952: sel[36] = $0
+0954: sel[37] = $0
+0956: sel[38] = $6
+0958: sel[39] = $0
+095a: sel[40] = $0
+095c: sel[41] = $0
+095e: sel[42] = $2
+0960: sel[43] = $0
+0962: sel[44] = $0
+0964: sel[45] = $0
+0966: sel[46] = $3
+0968: sel[47] = $6
+096a: sel[48] = $0
+096c: sel[49] = $0
+096e: sel[50] = $0
+0970: sel[51] = $0
+0972: sel[52] = $0
+0974: sel[53] = $0
+0976: sel[54] = $0
+
+0980: [Object section]
+	name = lancer2
+	species = 30
+0988: sel[0] = $30
+098a: sel[1] = $30
+098c: sel[2] = $0
+098e: sel[3] = string_17a3;  'lancer2'
+0990: sel[4] = $0
+0992: sel[5] = $0
+0994: sel[6] = $0
+0996: sel[7] = $0
+0998: sel[8] = $0
+099a: sel[9] = $0
+099c: sel[10] = $0
+099e: sel[11] = $0
+09a0: sel[12] = $0
+09a2: sel[13] = $0
+09a4: sel[14] = $5a
+09a6: sel[15] = $0
+09a8: sel[16] = $6789
+09aa: sel[17] = $0
+09ac: sel[18] = $0
+09ae: sel[19] = $0
+09b0: sel[20] = $6789
+09b2: sel[21] = $0
+09b4: sel[22] = $2
+09b6: sel[23] = $6f
+09b8: sel[24] = $1
+09ba: sel[25] = $0
+09bc: sel[26] = $0
+09be: sel[27] = $0
+09c0: sel[28] = $800
+09c2: sel[29] = $0
+09c4: sel[30] = $0
+09c6: sel[31] = $0
+09c8: sel[32] = $0
+09ca: sel[33] = $0
+09cc: sel[34] = $0
+09ce: sel[35] = $0
+09d0: sel[36] = $0
+09d2: sel[37] = $0
+09d4: sel[38] = $6
+09d6: sel[39] = $0
+09d8: sel[40] = $0
+09da: sel[41] = $0
+09dc: sel[42] = $2
+09de: sel[43] = $0
+09e0: sel[44] = $0
+09e2: sel[45] = $0
+09e4: sel[46] = $3
+09e6: sel[47] = $6
+09e8: sel[48] = $0
+09ea: sel[49] = $0
+09ec: sel[50] = $0
+09ee: sel[51] = $0
+09f0: sel[52] = $0
+09f2: sel[53] = $0
+09f4: sel[54] = $0
+
+09fe: [Object section]
+	name = lancer3
+	species = 30
+0a06: sel[0] = $30
+0a08: sel[1] = $30
+0a0a: sel[2] = $0
+0a0c: sel[3] = string_17ab;  'lancer3'
+0a0e: sel[4] = $0
+0a10: sel[5] = $0
+0a12: sel[6] = $0
+0a14: sel[7] = $0
+0a16: sel[8] = $0
+0a18: sel[9] = $0
+0a1a: sel[10] = $0
+0a1c: sel[11] = $0
+0a1e: sel[12] = $0
+0a20: sel[13] = $0
+0a22: sel[14] = $5a
+0a24: sel[15] = $0
+0a26: sel[16] = $6789
+0a28: sel[17] = $0
+0a2a: sel[18] = $0
+0a2c: sel[19] = $0
+0a2e: sel[20] = $6789
+0a30: sel[21] = $0
+0a32: sel[22] = $2
+0a34: sel[23] = $6f
+0a36: sel[24] = $1
+0a38: sel[25] = $0
+0a3a: sel[26] = $0
+0a3c: sel[27] = $0
+0a3e: sel[28] = $800
+0a40: sel[29] = $0
+0a42: sel[30] = $0
+0a44: sel[31] = $0
+0a46: sel[32] = $0
+0a48: sel[33] = $0
+0a4a: sel[34] = $0
+0a4c: sel[35] = $0
+0a4e: sel[36] = $0
+0a50: sel[37] = $0
+0a52: sel[38] = $6
+0a54: sel[39] = $0
+0a56: sel[40] = $0
+0a58: sel[41] = $0
+0a5a: sel[42] = $2
+0a5c: sel[43] = $0
+0a5e: sel[44] = $0
+0a60: sel[45] = $0
+0a62: sel[46] = $3
+0a64: sel[47] = $6
+0a66: sel[48] = $0
+0a68: sel[49] = $0
+0a6a: sel[50] = $0
+0a6c: sel[51] = $0
+0a6e: sel[52] = $0
+0a70: sel[53] = $0
+0a72: sel[54] = $0
+
+0a7c: [Object section]
+	name = corpse
+	species = 2e
+0a84: sel[0] = $2e
+0a86: sel[1] = $2e
+0a88: sel[2] = $0
+0a8a: sel[3] = string_17b3;  'corpse'
+0a8c: sel[4] = $1ae
+0a8e: sel[5] = $1ae
+0a90: sel[6] = $0
+0a92: sel[7] = $0
+0a94: sel[8] = $0
+0a96: sel[9] = $0
+0a98: sel[10] = $0
+0a9a: sel[11] = $0
+0a9c: sel[12] = $0
+0a9e: sel[13] = $0
+0aa0: sel[14] = $5a
+0aa2: sel[15] = $0
+0aa4: sel[16] = $6789
+0aa6: sel[17] = $0
+0aa8: sel[18] = $0
+0aaa: sel[19] = $0
+0aac: sel[20] = $6789
+0aae: sel[21] = $0
+0ab0: sel[22] = $2
+0ab2: sel[23] = $73
+0ab4: sel[24] = $3
+0ab6: sel[25] = $5
+0ab8: sel[26] = $0
+0aba: sel[27] = $0
+0abc: sel[28] = $101
+0abe: sel[29] = $0
+0ac0: sel[30] = $0
+0ac2: sel[31] = $0
+0ac4: sel[32] = $0
+0ac6: sel[33] = $0
+0ac8: sel[34] = $0
+0aca: sel[35] = $0
+0acc: sel[36] = $0
+0ace: sel[37] = $0
+0ad0: sel[38] = $0
+
+0ada: [Object section]
+	name = corpse2
+	species = 2e
+0ae2: sel[0] = $2e
+0ae4: sel[1] = $2e
+0ae6: sel[2] = $0
+0ae8: sel[3] = string_17ba;  'corpse2'
+0aea: sel[4] = $0
+0aec: sel[5] = $0
+0aee: sel[6] = $0
+0af0: sel[7] = $0
+0af2: sel[8] = $0
+0af4: sel[9] = $0
+0af6: sel[10] = $0
+0af8: sel[11] = $0
+0afa: sel[12] = $0
+0afc: sel[13] = $0
+0afe: sel[14] = $5a
+0b00: sel[15] = $0
+0b02: sel[16] = $6789
+0b04: sel[17] = $0
+0b06: sel[18] = $0
+0b08: sel[19] = $0
+0b0a: sel[20] = $6789
+0b0c: sel[21] = $0
+0b0e: sel[22] = $2
+0b10: sel[23] = $73
+0b12: sel[24] = $3
+0b14: sel[25] = $5
+0b16: sel[26] = $0
+0b18: sel[27] = $0
+0b1a: sel[28] = $101
+0b1c: sel[29] = $0
+0b1e: sel[30] = $0
+0b20: sel[31] = $0
+0b22: sel[32] = $0
+0b24: sel[33] = $0
+0b26: sel[34] = $0
+0b28: sel[35] = $0
+0b2a: sel[36] = $0
+0b2c: sel[37] = $0
+0b2e: sel[38] = $0
+
+0b38: [Object section]
+	name = corpse3
+	species = 2e
+0b40: sel[0] = $2e
+0b42: sel[1] = $2e
+0b44: sel[2] = $0
+0b46: sel[3] = string_17c2;  'corpse3'
+0b48: sel[4] = $0
+0b4a: sel[5] = $0
+0b4c: sel[6] = $0
+0b4e: sel[7] = $0
+0b50: sel[8] = $0
+0b52: sel[9] = $0
+0b54: sel[10] = $0
+0b56: sel[11] = $0
+0b58: sel[12] = $0
+0b5a: sel[13] = $0
+0b5c: sel[14] = $5a
+0b5e: sel[15] = $0
+0b60: sel[16] = $6789
+0b62: sel[17] = $0
+0b64: sel[18] = $0
+0b66: sel[19] = $0
+0b68: sel[20] = $6789
+0b6a: sel[21] = $0
+0b6c: sel[22] = $2
+0b6e: sel[23] = $73
+0b70: sel[24] = $3
+0b72: sel[25] = $5
+0b74: sel[26] = $0
+0b76: sel[27] = $0
+0b78: sel[28] = $101
+0b7a: sel[29] = $0
+0b7c: sel[30] = $0
+0b7e: sel[31] = $0
+0b80: sel[32] = $0
+0b82: sel[33] = $0
+0b84: sel[34] = $0
+0b86: sel[35] = $0
+0b88: sel[36] = $0
+0b8a: sel[37] = $0
+0b8c: sel[38] = $0
+
+0b96: [Object section]
+	name = corpse4
+	species = 2e
+0b9e: sel[0] = $2e
+0ba0: sel[1] = $2e
+0ba2: sel[2] = $0
+0ba4: sel[3] = string_17ca;  'corpse4'
+0ba6: sel[4] = $0
+0ba8: sel[5] = $0
+0baa: sel[6] = $0
+0bac: sel[7] = $0
+0bae: sel[8] = $0
+0bb0: sel[9] = $0
+0bb2: sel[10] = $0
+0bb4: sel[11] = $0
+0bb6: sel[12] = $0
+0bb8: sel[13] = $0
+0bba: sel[14] = $5a
+0bbc: sel[15] = $0
+0bbe: sel[16] = $6789
+0bc0: sel[17] = $0
+0bc2: sel[18] = $0
+0bc4: sel[19] = $0
+0bc6: sel[20] = $6789
+0bc8: sel[21] = $0
+0bca: sel[22] = $2
+0bcc: sel[23] = $73
+0bce: sel[24] = $3
+0bd0: sel[25] = $5
+0bd2: sel[26] = $0
+0bd4: sel[27] = $0
+0bd6: sel[28] = $101
+0bd8: sel[29] = $0
+0bda: sel[30] = $0
+0bdc: sel[31] = $0
+0bde: sel[32] = $0
+0be0: sel[33] = $0
+0be2: sel[34] = $0
+0be4: sel[35] = $0
+0be6: sel[36] = $0
+0be8: sel[37] = $0
+0bea: sel[38] = $0
+
+0bf4: [Code section]
+
+code_0bf4:
+0bf4: 87 01        lap      $01                      
+0bf6: 65 0a        aTop     $0a                      
+0bf8: 36           push                              
+0bf9: 3c           dup                               
+0bfa: 35 00        ldi      $00                      
+0bfc: 1a           eq?                               
+0bfd: 30 0034      bnt      code_0c34;  dup          
+0c00: 39 6b        pushi    $6b                      
+0c02: 76           push0                             
+0c03: 39 06        pushi    $06                      
+0c05: 78           push1                             
+0c06: 39 04        pushi    $04                      
+0c08: 3c           dup                               
+0c09: 78           push1                             
+0c0a: 38 00e1      pushi    $00e1                    
+0c0d: 39 03        pushi    $03                      
+0c0f: 78           push1                             
+0c10: 39 69        pushi    $69                      
+0c12: 38 0121      pushi    $0121                    
+0c15: 78           push1                             
+0c16: 78           push1                             
+0c17: 38 0096      pushi    $0096                    
+0c1a: 78           push1                             
+0c1b: 51 18        class    $18                      
+0c1d: 36           push                              
+0c1e: 38 011b      pushi    $011b                    
+0c21: 39 04        pushi    $04                      
+0c23: 51 1e        class    $1e                      
+0c25: 36           push                              
+0c26: 38 0118      pushi    $0118                    
+0c29: 39 5a        pushi    $5a                      
+0c2b: 7c           pushSelf                          
+0c2c: 72 090a      lofsa    short_090a               
+0c2f: 4a 2e        send     $2e                      
+0c31: 32 0014      jmp      code_0c48;  toss         
+
+code_0c34:
+0c34: 3c           dup                               
+0c35: 35 01        ldi      $01                      
+0c37: 1a           eq?                               
+0c38: 30 000d      bnt      code_0c48;  toss         
+0c3b: 39 6c        pushi    $6c                      
+0c3d: 76           push0                             
+0c3e: 72 090a      lofsa    short_090a               
+0c41: 4a 04        send     $04                      
+0c43: 39 6c        pushi    $6c                      
+0c45: 76           push0                             
+0c46: 54 04        self     $04                      
+
+code_0c48:
+0c48: 3a           toss                              
+0c49: 48           ret                               
+
+0c4e: [Object section]
+	name = timer0
+	species = 6
+0c56: sel[0] = $6
+0c58: sel[1] = $6
+0c5a: sel[2] = $0
+0c5c: sel[3] = string_17d2;  'timer0'
+0c5e: sel[4] = $0
+0c60: sel[5] = $ffff
+0c62: sel[6] = $0
+0c64: sel[7] = $0
+0c66: sel[8] = $0
+0c68: sel[9] = $0
+0c6a: sel[10] = $0
+0c6c: sel[11] = $0
+0c6e: sel[12] = $0
+0c70: sel[13] = $0
+0c72: sel[14] = $0
+0c74: sel[15] = $0
+0c76: sel[16] = $0
+
+	func[0] = changeState code_0bf4;  lap
+
+0c84: [Code section]
+
+code_0c84:
+0c84: 87 01        lap      $01                      
+0c86: 65 0a        aTop     $0a                      
+0c88: 36           push                              
+0c89: 3c           dup                               
+0c8a: 35 00        ldi      $00                      
+0c8c: 1a           eq?                               
+0c8d: 30 003a      bnt      code_0cca;  dup          
+0c90: 39 06        pushi    $06                      
+0c92: 78           push1                             
+0c93: 7a           push2                             
+0c94: 39 04        pushi    $04                      
+0c96: 78           push1                             
+0c97: 39 0c        pushi    $0c                      
+0c99: 39 03        pushi    $03                      
+0c9b: 78           push1                             
+0c9c: 39 71        pushi    $71                      
+0c9e: 39 38        pushi    $38                      
+0ca0: 78           push1                             
+0ca1: 39 04        pushi    $04                      
+0ca3: 38 00db      pushi    $00db                    
+0ca6: 78           push1                             
+0ca7: 39 04        pushi    $04                      
+0ca9: 38 0096      pushi    $0096                    
+0cac: 78           push1                             
+0cad: 51 18        class    $18                      
+0caf: 36           push                              
+0cb0: 38 011b      pushi    $011b                    
+0cb3: 39 04        pushi    $04                      
+0cb5: 51 1e        class    $1e                      
+0cb7: 36           push                              
+0cb8: 38 00cb      pushi    $00cb                    
+0cbb: 39 4f        pushi    $4f                      
+0cbd: 7c           pushSelf                          
+0cbe: 38 0124      pushi    $0124                    
+0cc1: 76           push0                             
+0cc2: 72 0988      lofsa    short_0988               
+0cc5: 4a 34        send     $34                      
+0cc7: 32 0014      jmp      code_0cde;  toss         
+
+code_0cca:
+0cca: 3c           dup                               
+0ccb: 35 01        ldi      $01                      
+0ccd: 1a           eq?                               
+0cce: 30 000d      bnt      code_0cde;  toss         
+0cd1: 39 6c        pushi    $6c                      
+0cd3: 76           push0                             
+0cd4: 72 0988      lofsa    short_0988               
+0cd7: 4a 04        send     $04                      
+0cd9: 39 6c        pushi    $6c                      
+0cdb: 76           push0                             
+0cdc: 54 04        self     $04                      
+
+code_0cde:
+0cde: 3a           toss                              
+0cdf: 48           ret                               
+
+0ce4: [Object section]
+	name = timer0A
+	species = 6
+0cec: sel[0] = $6
+0cee: sel[1] = $6
+0cf0: sel[2] = $0
+0cf2: sel[3] = string_17d9;  'timer0A'
+0cf4: sel[4] = $0
+0cf6: sel[5] = $ffff
+0cf8: sel[6] = $0
+0cfa: sel[7] = $0
+0cfc: sel[8] = $0
+0cfe: sel[9] = $0
+0d00: sel[10] = $0
+0d02: sel[11] = $0
+0d04: sel[12] = $0
+0d06: sel[13] = $0
+0d08: sel[14] = $0
+0d0a: sel[15] = $0
+0d0c: sel[16] = $0
+
+	func[0] = changeState code_0c84;  lap
+
+0d1a: [Code section]
+
+code_0d1a:
+0d1a: 87 01        lap      $01                      
+0d1c: 65 0a        aTop     $0a                      
+0d1e: 36           push                              
+0d1f: 3c           dup                               
+0d20: 35 00        ldi      $00                      
+0d22: 1a           eq?                               
+0d23: 30 002c      bnt      code_0d52;  dup          
+0d26: 39 38        pushi    $38                      
+0d28: 78           push1                             
+0d29: 39 04        pushi    $04                      
+0d2b: 38 00db      pushi    $00db                    
+0d2e: 78           push1                             
+0d2f: 39 04        pushi    $04                      
+0d31: 38 0096      pushi    $0096                    
+0d34: 78           push1                             
+0d35: 51 18        class    $18                      
+0d37: 36           push                              
+0d38: 38 011b      pushi    $011b                    
+0d3b: 39 04        pushi    $04                      
+0d3d: 51 1e        class    $1e                      
+0d3f: 36           push                              
+0d40: 38 00cb      pushi    $00cb                    
+0d43: 39 4f        pushi    $4f                      
+0d45: 7c           pushSelf                          
+0d46: 38 0124      pushi    $0124                    
+0d49: 76           push0                             
+0d4a: 72 0754      lofsa    short_0754               
+0d4d: 4a 22        send     $22                      
+0d4f: 32 0014      jmp      code_0d66;  toss         
+
+code_0d52:
+0d52: 3c           dup                               
+0d53: 35 01        ldi      $01                      
+0d55: 1a           eq?                               
+0d56: 30 000d      bnt      code_0d66;  toss         
+0d59: 39 6c        pushi    $6c                      
+0d5b: 76           push0                             
+0d5c: 72 0754      lofsa    short_0754               
+0d5f: 4a 04        send     $04                      
+0d61: 39 6c        pushi    $6c                      
+0d63: 76           push0                             
+0d64: 54 04        self     $04                      
+
+code_0d66:
+0d66: 3a           toss                              
+0d67: 48           ret                               
+
+0d6c: [Object section]
+	name = timer1
+	species = 6
+0d74: sel[0] = $6
+0d76: sel[1] = $6
+0d78: sel[2] = $0
+0d7a: sel[3] = string_17e1;  'timer1'
+0d7c: sel[4] = $0
+0d7e: sel[5] = $ffff
+0d80: sel[6] = $0
+0d82: sel[7] = $0
+0d84: sel[8] = $0
+0d86: sel[9] = $0
+0d88: sel[10] = $0
+0d8a: sel[11] = $0
+0d8c: sel[12] = $0
+0d8e: sel[13] = $0
+0d90: sel[14] = $0
+0d92: sel[15] = $0
+0d94: sel[16] = $0
+
+	func[0] = changeState code_0d1a;  lap
+
+0da2: [Code section]
+
+code_0da2:
+0da2: 87 01        lap      $01                      
+0da4: 65 0a        aTop     $0a                      
+0da6: 36           push                              
+0da7: 3c           dup                               
+0da8: 35 00        ldi      $00                      
+0daa: 1a           eq?                               
+0dab: 30 0019      bnt      code_0dc7;  dup          
+0dae: 39 05        pushi    $05                      
+0db0: 78           push1                             
+0db1: 39 73        pushi    $73                      
+0db3: 39 07        pushi    $07                      
+0db5: 78           push1                             
+0db6: 76           push0                             
+0db7: 38 0096      pushi    $0096                    
+0dba: 7a           push2                             
+0dbb: 51 1a        class    $1a                      
+0dbd: 36           push                              
+0dbe: 7c           pushSelf                          
+0dbf: 72 0510      lofsa    short_0510               
+0dc2: 4a 14        send     $14                      
+0dc4: 32 0015      jmp      code_0ddc;  toss         
+
+code_0dc7:
+0dc7: 3c           dup                               
+0dc8: 35 01        ldi      $01                      
+0dca: 1a           eq?                               
+0dcb: 30 000e      bnt      code_0ddc;  toss         
+0dce: 38 011d      pushi    $011d                    
+0dd1: 76           push0                             
+0dd2: 72 0510      lofsa    short_0510               
+0dd5: 4a 04        send     $04                      
+0dd7: 39 6c        pushi    $6c                      
+0dd9: 76           push0                             
+0dda: 54 04        self     $04                      
+
+code_0ddc:
+0ddc: 3a           toss                              
+0ddd: 48           ret                               
+
+0de2: [Object section]
+	name = timer2
+	species = 6
+0dea: sel[0] = $6
+0dec: sel[1] = $6
+0dee: sel[2] = $0
+0df0: sel[3] = string_17e8;  'timer2'
+0df2: sel[4] = $0
+0df4: sel[5] = $ffff
+0df6: sel[6] = $0
+0df8: sel[7] = $0
+0dfa: sel[8] = $0
+0dfc: sel[9] = $0
+0dfe: sel[10] = $0
+0e00: sel[11] = $0
+0e02: sel[12] = $0
+0e04: sel[13] = $0
+0e06: sel[14] = $0
+0e08: sel[15] = $0
+0e0a: sel[16] = $0
+
+	func[0] = changeState code_0da2;  lap
+
+0e18: [Code section]
+
+code_0e18:
+0e18: 87 01        lap      $01                      
+0e1a: 65 0a        aTop     $0a                      
+0e1c: 36           push                              
+0e1d: 3c           dup                               
+0e1e: 35 00        ldi      $00                      
+0e20: 1a           eq?                               
+0e21: 30 004e      bnt      code_0e72;  dup          
+0e24: 39 06        pushi    $06                      
+0e26: 78           push1                             
+0e27: 7a           push2                             
+0e28: 39 3f        pushi    $3f                      
+0e2a: 78           push1                             
+0e2b: 76           push0                             
+0e2c: 39 11        pushi    $11                      
+0e2e: 78           push1                             
+0e2f: 39 11        pushi    $11                      
+0e31: 76           push0                             
+0e32: 72 0a06      lofsa    short_0a06               
+0e35: 4a 04        send     $04                      
+0e37: 36           push                              
+0e38: 35 10        ldi      $10                      
+0e3a: 14           or                                
+0e3b: 36           push                              
+0e3c: 39 04        pushi    $04                      
+0e3e: 78           push1                             
+0e3f: 39 0c        pushi    $0c                      
+0e41: 39 03        pushi    $03                      
+0e43: 78           push1                             
+0e44: 39 71        pushi    $71                      
+0e46: 39 38        pushi    $38                      
+0e48: 78           push1                             
+0e49: 39 04        pushi    $04                      
+0e4b: 38 00db      pushi    $00db                    
+0e4e: 78           push1                             
+0e4f: 39 04        pushi    $04                      
+0e51: 38 0096      pushi    $0096                    
+0e54: 78           push1                             
+0e55: 51 18        class    $18                      
+0e57: 36           push                              
+0e58: 38 011b      pushi    $011b                    
+0e5b: 39 04        pushi    $04                      
+0e5d: 51 1e        class    $1e                      
+0e5f: 36           push                              
+0e60: 38 009e      pushi    $009e                    
+0e63: 39 5f        pushi    $5f                      
+0e65: 7c           pushSelf                          
+0e66: 38 0124      pushi    $0124                    
+0e69: 76           push0                             
+0e6a: 72 0a06      lofsa    short_0a06               
+0e6d: 4a 40        send     $40                      
+0e6f: 32 0014      jmp      code_0e86;  toss         
+
+code_0e72:
+0e72: 3c           dup                               
+0e73: 35 01        ldi      $01                      
+0e75: 1a           eq?                               
+0e76: 30 000d      bnt      code_0e86;  toss         
+0e79: 39 6c        pushi    $6c                      
+0e7b: 76           push0                             
+0e7c: 72 0a06      lofsa    short_0a06               
+0e7f: 4a 04        send     $04                      
+0e81: 39 6c        pushi    $6c                      
+0e83: 76           push0                             
+0e84: 54 04        self     $04                      
+
+code_0e86:
+0e86: 3a           toss                              
+0e87: 48           ret                               
+
+0e8c: [Object section]
+	name = timer2A
+	species = 6
+0e94: sel[0] = $6
+0e96: sel[1] = $6
+0e98: sel[2] = $0
+0e9a: sel[3] = string_17ef;  'timer2A'
+0e9c: sel[4] = $0
+0e9e: sel[5] = $ffff
+0ea0: sel[6] = $0
+0ea2: sel[7] = $0
+0ea4: sel[8] = $0
+0ea6: sel[9] = $0
+0ea8: sel[10] = $0
+0eaa: sel[11] = $0
+0eac: sel[12] = $0
+0eae: sel[13] = $0
+0eb0: sel[14] = $0
+0eb2: sel[15] = $0
+0eb4: sel[16] = $0
+
+	func[0] = changeState code_0e18;  lap
+
+0ec2: [Code section]
+
+code_0ec2:
+0ec2: 87 01        lap      $01                      
+0ec4: 65 0a        aTop     $0a                      
+0ec6: 36           push                              
+0ec7: 3c           dup                               
+0ec8: 35 00        ldi      $00                      
+0eca: 1a           eq?                               
+0ecb: 30 0043      bnt      code_0f11;  dup          
+0ece: 39 6b        pushi    $6b                      
+0ed0: 76           push0                             
+0ed1: 39 3f        pushi    $3f                      
+0ed3: 78           push1                             
+0ed4: 76           push0                             
+0ed5: 39 11        pushi    $11                      
+0ed7: 78           push1                             
+0ed8: 39 11        pushi    $11                      
+0eda: 76           push0                             
+0edb: 72 06d6      lofsa    short_06d6               
+0ede: 4a 04        send     $04                      
+0ee0: 36           push                              
+0ee1: 35 10        ldi      $10                      
+0ee3: 14           or                                
+0ee4: 36           push                              
+0ee5: 39 38        pushi    $38                      
+0ee7: 78           push1                             
+0ee8: 39 04        pushi    $04                      
+0eea: 38 00db      pushi    $00db                    
+0eed: 78           push1                             
+0eee: 39 04        pushi    $04                      
+0ef0: 38 0096      pushi    $0096                    
+0ef3: 78           push1                             
+0ef4: 51 18        class    $18                      
+0ef6: 36           push                              
+0ef7: 38 011b      pushi    $011b                    
+0efa: 39 04        pushi    $04                      
+0efc: 51 1e        class    $1e                      
+0efe: 36           push                              
+0eff: 38 009c      pushi    $009c                    
+0f02: 39 5f        pushi    $5f                      
+0f04: 7c           pushSelf                          
+0f05: 38 0124      pushi    $0124                    
+0f08: 76           push0                             
+0f09: 72 06d6      lofsa    short_06d6               
+0f0c: 4a 32        send     $32                      
+0f0e: 32 0014      jmp      code_0f25;  toss         
+
+code_0f11:
+0f11: 3c           dup                               
+0f12: 35 01        ldi      $01                      
+0f14: 1a           eq?                               
+0f15: 30 000d      bnt      code_0f25;  toss         
+0f18: 39 6c        pushi    $6c                      
+0f1a: 76           push0                             
+0f1b: 72 06d6      lofsa    short_06d6               
+0f1e: 4a 04        send     $04                      
+0f20: 39 6c        pushi    $6c                      
+0f22: 76           push0                             
+0f23: 54 04        self     $04                      
+
+code_0f25:
+0f25: 3a           toss                              
+0f26: 48           ret                               
+0f27: 00           bnot                              
+
+0f2c: [Object section]
+	name = timer3
+	species = 6
+0f34: sel[0] = $6
+0f36: sel[1] = $6
+0f38: sel[2] = $0
+0f3a: sel[3] = string_17f7;  'timer3'
+0f3c: sel[4] = $0
+0f3e: sel[5] = $ffff
+0f40: sel[6] = $0
+0f42: sel[7] = $0
+0f44: sel[8] = $0
+0f46: sel[9] = $0
+0f48: sel[10] = $0
+0f4a: sel[11] = $0
+0f4c: sel[12] = $0
+0f4e: sel[13] = $0
+0f50: sel[14] = $0
+0f52: sel[15] = $0
+0f54: sel[16] = $0
+
+	func[0] = changeState code_0ec2;  lap
+
+0f62: [Code section]
+
+code_0f62:
+0f62: 87 01        lap      $01                      
+0f64: 65 0a        aTop     $0a                      
+0f66: 36           push                              
+0f67: 3c           dup                               
+0f68: 35 00        ldi      $00                      
+0f6a: 1a           eq?                               
+0f6b: 30 0019      bnt      code_0f87;  dup          
+0f6e: 39 05        pushi    $05                      
+0f70: 78           push1                             
+0f71: 39 73        pushi    $73                      
+0f73: 39 07        pushi    $07                      
+0f75: 78           push1                             
+0f76: 76           push0                             
+0f77: 38 0096      pushi    $0096                    
+0f7a: 7a           push2                             
+0f7b: 51 1a        class    $1a                      
+0f7d: 36           push                              
+0f7e: 7c           pushSelf                          
+0f7f: 72 07d2      lofsa    short_07d2               
+0f82: 4a 14        send     $14                      
+0f84: 32 0015      jmp      code_0f9c;  toss         
+
+code_0f87:
+0f87: 3c           dup                               
+0f88: 35 01        ldi      $01                      
+0f8a: 1a           eq?                               
+0f8b: 30 000e      bnt      code_0f9c;  toss         
+0f8e: 38 011d      pushi    $011d                    
+0f91: 76           push0                             
+0f92: 72 07d2      lofsa    short_07d2               
+0f95: 4a 04        send     $04                      
+0f97: 39 6c        pushi    $6c                      
+0f99: 76           push0                             
+0f9a: 54 04        self     $04                      
+
+code_0f9c:
+0f9c: 3a           toss                              
+0f9d: 48           ret                               
+
+0fa2: [Object section]
+	name = timer4
+	species = 6
+0faa: sel[0] = $6
+0fac: sel[1] = $6
+0fae: sel[2] = $0
+0fb0: sel[3] = string_17fe;  'timer4'
+0fb2: sel[4] = $0
+0fb4: sel[5] = $ffff
+0fb6: sel[6] = $0
+0fb8: sel[7] = $0
+0fba: sel[8] = $0
+0fbc: sel[9] = $0
+0fbe: sel[10] = $0
+0fc0: sel[11] = $0
+0fc2: sel[12] = $0
+0fc4: sel[13] = $0
+0fc6: sel[14] = $0
+0fc8: sel[15] = $0
+0fca: sel[16] = $0
+
+	func[0] = changeState code_0f62;  lap
+
+0fd8: [Code section]
+
+code_0fd8:
+0fd8: 87 01        lap      $01                      
+0fda: 65 0a        aTop     $0a                      
+0fdc: 36           push                              
+0fdd: 3c           dup                               
+0fde: 35 00        ldi      $00                      
+0fe0: 1a           eq?                               
+0fe1: 30 0022      bnt      code_1006;  dup          
+0fe4: 35 01        ldi      $01                      
+0fe6: a3 00        sal      $00                      
+0fe8: 39 05        pushi    $05                      
+0fea: 78           push1                             
+0feb: 39 0a        pushi    $0a                      
+0fed: 39 07        pushi    $07                      
+0fef: 78           push1                             
+0ff0: 76           push0                             
+0ff1: 38 008e      pushi    $008e                    
+0ff4: 78           push1                             
+0ff5: 76           push0                             
+0ff6: 38 0096      pushi    $0096                    
+0ff9: 7a           push2                             
+0ffa: 51 1a        class    $1a                      
+0ffc: 36           push                              
+0ffd: 7c           pushSelf                          
+0ffe: 72 0444      lofsa    short_0444               
+1001: 4a 1a        send     $1a                      
+1003: 32 000c      jmp      code_1012;  toss         
+
+code_1006:
+1006: 3c           dup                               
+1007: 35 01        ldi      $01                      
+1009: 1a           eq?                               
+100a: 30 0005      bnt      code_1012;  toss         
+100d: 39 6c        pushi    $6c                      
+100f: 76           push0                             
+1010: 54 04        self     $04                      
+
+code_1012:
+1012: 3a           toss                              
+1013: 48           ret                               
+
+1018: [Object section]
+	name = timer5
+	species = 6
+1020: sel[0] = $6
+1022: sel[1] = $6
+1024: sel[2] = $0
+1026: sel[3] = string_1805;  'timer5'
+1028: sel[4] = $0
+102a: sel[5] = $ffff
+102c: sel[6] = $0
+102e: sel[7] = $0
+1030: sel[8] = $0
+1032: sel[9] = $0
+1034: sel[10] = $0
+1036: sel[11] = $0
+1038: sel[12] = $0
+103a: sel[13] = $0
+103c: sel[14] = $0
+103e: sel[15] = $0
+1040: sel[16] = $0
+
+	func[0] = changeState code_0fd8;  lap
+
+104e: [Code section]
+
+code_104e:
+104e: 87 01        lap      $01                      
+1050: 65 0a        aTop     $0a                      
+1052: 36           push                              
+1053: 3c           dup                               
+1054: 35 00        ldi      $00                      
+1056: 1a           eq?                               
+1057: 30 0010      bnt      code_106a;  dup          
+105a: 38 0096      pushi    $0096                    
+105d: 7a           push2                             
+105e: 51 1b        class    $1b                      
+1060: 36           push                              
+1061: 7c           pushSelf                          
+1062: 72 0444      lofsa    short_0444               
+1065: 4a 08        send     $08                      
+1067: 32 00a2      jmp      code_110c;  toss         
+
+code_106a:
+106a: 3c           dup                               
+106b: 35 01        ldi      $01                      
+106d: 1a           eq?                               
+106e: 30 0063      bnt      code_10d4;  dup          
+1071: 39 66        pushi    $66                      
+1073: 78           push1                             
+1074: 39 66        pushi    $66                      
+1076: 76           push0                             
+1077: 81 64        lag      $64                      
+1079: 4a 04        send     $04                      
+107b: 36           push                              
+107c: 35 01        ldi      $01                      
+107e: 14           or                                
+107f: 36           push                              
+1080: 81 64        lag      $64                      
+1082: 4a 06        send     $06                      
+1084: 39 66        pushi    $66                      
+1086: 78           push1                             
+1087: 39 66        pushi    $66                      
+1089: 76           push0                             
+108a: 81 64        lag      $64                      
+108c: 4a 04        send     $04                      
+108e: 36           push                              
+108f: 35 01        ldi      $01                      
+1091: 14           or                                
+1092: 36           push                              
+1093: 38 009c      pushi    $009c                    
+1096: 76           push0                             
+1097: 81 71        lag      $71                      
+1099: 4a 0a        send     $0a                      
+109b: 38 008e      pushi    $008e                    
+109e: 78           push1                             
+109f: 76           push0                             
+10a0: 38 0096      pushi    $0096                    
+10a3: 78           push1                             
+10a4: 76           push0                             
+10a5: 72 0606      lofsa    short_0606               
+10a8: 4a 0c        send     $0c                      
+10aa: 38 008e      pushi    $008e                    
+10ad: 78           push1                             
+10ae: 76           push0                             
+10af: 38 0096      pushi    $0096                    
+10b2: 78           push1                             
+10b3: 76           push0                             
+10b4: 72 066e      lofsa    short_066e               
+10b7: 4a 0c        send     $0c                      
+10b9: 38 008e      pushi    $008e                    
+10bc: 78           push1                             
+10bd: 76           push0                             
+10be: 72 083a      lofsa    short_083a               
+10c1: 4a 06        send     $06                      
+10c3: 38 008e      pushi    $008e                    
+10c6: 78           push1                             
+10c7: 76           push0                             
+10c8: 72 08a2      lofsa    short_08a2               
+10cb: 4a 06        send     $06                      
+10cd: 35 0c        ldi      $0c                      
+10cf: 65 16        aTop     $16                      
+10d1: 32 0038      jmp      code_110c;  toss         
+
+code_10d4:
+10d4: 3c           dup                               
+10d5: 35 02        ldi      $02                      
+10d7: 1a           eq?                               
+10d8: 30 0010      bnt      code_10eb;  dup          
+10db: 39 04        pushi    $04                      
+10dd: 38 00ac      pushi    $00ac                    
+10e0: 76           push0                             
+10e1: 7c           pushSelf                          
+10e2: 39 6c        pushi    $6c                      
+10e4: 47 0d 04 08  calle    $0d, $04, $08            
+10e8: 32 0021      jmp      code_110c;  toss         
+
+code_10eb:
+10eb: 3c           dup                               
+10ec: 35 03        ldi      $03                      
+10ee: 1a           eq?                               
+10ef: 30 001a      bnt      code_110c;  toss         
+10f2: 81 19        lag      $19                      
+10f4: 30 0005      bnt      code_10fc;  pushi        
+10f7: 39 6c        pushi    $6c                      
+10f9: 76           push0                             
+10fa: 4a 04        send     $04                      
+
+code_10fc:
+10fc: 38 0179      pushi    $0179                    
+10ff: 78           push1                             
+1100: 38 00b3      pushi    $00b3                    
+1103: 81 02        lag      $02                      
+1105: 4a 06        send     $06                      
+1107: 39 6c        pushi    $6c                      
+1109: 76           push0                             
+110a: 54 04        self     $04                      
+
+code_110c:
+110c: 3a           toss                              
+110d: 48           ret                               
+
+1112: [Object section]
+	name = timer6
+	species = 6
+111a: sel[0] = $6
+111c: sel[1] = $6
+111e: sel[2] = $0
+1120: sel[3] = string_180c;  'timer6'
+1122: sel[4] = $0
+1124: sel[5] = $ffff
+1126: sel[6] = $0
+1128: sel[7] = $0
+112a: sel[8] = $0
+112c: sel[9] = $0
+112e: sel[10] = $0
+1130: sel[11] = $0
+1132: sel[12] = $0
+1134: sel[13] = $0
+1136: sel[14] = $0
+1138: sel[15] = $0
+113a: sel[16] = $0
+
+	func[0] = changeState code_104e;  lap
+
+1148: [Code section]
+
+code_1148:
+1148: 87 01        lap      $01                      
+114a: 65 0a        aTop     $0a                      
+114c: 36           push                              
+114d: 3c           dup                               
+114e: 35 00        ldi      $00                      
+1150: 1a           eq?                               
+1151: 30 001d      bnt      code_1171;  dup          
+1154: 38 00db      pushi    $00db                    
+1157: 78           push1                             
+1158: 39 08        pushi    $08                      
+115a: 39 07        pushi    $07                      
+115c: 78           push1                             
+115d: 76           push0                             
+115e: 38 0096      pushi    $0096                    
+1161: 7a           push2                             
+1162: 51 1a        class    $1a                      
+1164: 36           push                              
+1165: 7c           pushSelf                          
+1166: 38 0124      pushi    $0124                    
+1169: 76           push0                             
+116a: 63 08        pToa     $08                      
+116c: 4a 18        send     $18                      
+116e: 32 002b      jmp      code_119c;  toss         
+
+code_1171:
+1171: 3c           dup                               
+1172: 35 01        ldi      $01                      
+1174: 1a           eq?                               
+1175: 30 0018      bnt      code_1190;  dup          
+1178: 7a           push2                             
+1179: 39 04        pushi    $04                      
+117b: 39 08        pushi    $08                      
+117d: 43 3c 04     callk    $3c, $04                 
+1180: a3 06        sal      $06                      
+1182: 35 ff        ldi      $ff                      
+1184: 65 0a        aTop     $0a                      
+1186: 8b 06        lsl      $06                      
+1188: 35 0a        ldi      $0a                      
+118a: 06           mul                               
+118b: 65 16        aTop     $16                      
+118d: 32 000c      jmp      code_119c;  toss         
+
+code_1190:
+1190: 3c           dup                               
+1191: 35 02        ldi      $02                      
+1193: 1a           eq?                               
+1194: 30 0005      bnt      code_119c;  toss         
+1197: 39 6c        pushi    $6c                      
+1199: 76           push0                             
+119a: 54 04        self     $04                      
+
+code_119c:
+119c: 3a           toss                              
+119d: 48           ret                               
+
+11a2: [Object section]
+	name = kill
+	species = 6
+11aa: sel[0] = $6
+11ac: sel[1] = $6
+11ae: sel[2] = $0
+11b0: sel[3] = string_1813;  'kill'
+11b2: sel[4] = $0
+11b4: sel[5] = $ffff
+11b6: sel[6] = $0
+11b8: sel[7] = $0
+11ba: sel[8] = $0
+11bc: sel[9] = $0
+11be: sel[10] = $0
+11c0: sel[11] = $0
+11c2: sel[12] = $0
+11c4: sel[13] = $0
+11c6: sel[14] = $0
+11c8: sel[15] = $0
+11ca: sel[16] = $0
+
+	func[0] = changeState code_1148;  lap
+
+11d8: [Code section]
+
+code_11d8:
+11d8: 87 01        lap      $01                      
+11da: 65 0a        aTop     $0a                      
+11dc: 36           push                              
+11dd: 3c           dup                               
+11de: 35 00        ldi      $00                      
+11e0: 1a           eq?                               
+11e1: 30 001d      bnt      code_1201;  dup          
+11e4: 38 00db      pushi    $00db                    
+11e7: 78           push1                             
+11e8: 39 08        pushi    $08                      
+11ea: 39 07        pushi    $07                      
+11ec: 78           push1                             
+11ed: 76           push0                             
+11ee: 38 0096      pushi    $0096                    
+11f1: 7a           push2                             
+11f2: 51 1a        class    $1a                      
+11f4: 36           push                              
+11f5: 7c           pushSelf                          
+11f6: 38 0124      pushi    $0124                    
+11f9: 76           push0                             
+11fa: 63 08        pToa     $08                      
+11fc: 4a 18        send     $18                      
+11fe: 32 002b      jmp      code_122c;  toss         
+
+code_1201:
+1201: 3c           dup                               
+1202: 35 01        ldi      $01                      
+1204: 1a           eq?                               
+1205: 30 0018      bnt      code_1220;  dup          
+1208: 7a           push2                             
+1209: 39 07        pushi    $07                      
+120b: 39 0a        pushi    $0a                      
+120d: 43 3c 04     callk    $3c, $04                 
+1210: a3 07        sal      $07                      
+1212: 35 ff        ldi      $ff                      
+1214: 65 0a        aTop     $0a                      
+1216: 8b 07        lsl      $07                      
+1218: 35 0a        ldi      $0a                      
+121a: 06           mul                               
+121b: 65 16        aTop     $16                      
+121d: 32 000c      jmp      code_122c;  toss         
+
+code_1220:
+1220: 3c           dup                               
+1221: 35 02        ldi      $02                      
+1223: 1a           eq?                               
+1224: 30 0005      bnt      code_122c;  toss         
+1227: 39 6c        pushi    $6c                      
+1229: 76           push0                             
+122a: 54 04        self     $04                      
+
+code_122c:
+122c: 3a           toss                              
+122d: 48           ret                               
+
+1232: [Object section]
+	name = kill2
+	species = 6
+123a: sel[0] = $6
+123c: sel[1] = $6
+123e: sel[2] = $0
+1240: sel[3] = string_1818;  'kill2'
+1242: sel[4] = $0
+1244: sel[5] = $ffff
+1246: sel[6] = $0
+1248: sel[7] = $0
+124a: sel[8] = $0
+124c: sel[9] = $0
+124e: sel[10] = $0
+1250: sel[11] = $0
+1252: sel[12] = $0
+1254: sel[13] = $0
+1256: sel[14] = $0
+1258: sel[15] = $0
+125a: sel[16] = $0
+
+	func[0] = changeState code_11d8;  lap
+
+1268: [Code section]
+
+code_1268:
+1268: 87 01        lap      $01                      
+126a: 65 0a        aTop     $0a                      
+126c: 36           push                              
+126d: 3c           dup                               
+126e: 35 00        ldi      $00                      
+1270: 1a           eq?                               
+1271: 30 001d      bnt      code_1291;  dup          
+1274: 38 00db      pushi    $00db                    
+1277: 78           push1                             
+1278: 39 08        pushi    $08                      
+127a: 39 07        pushi    $07                      
+127c: 78           push1                             
+127d: 76           push0                             
+127e: 38 0096      pushi    $0096                    
+1281: 7a           push2                             
+1282: 51 1a        class    $1a                      
+1284: 36           push                              
+1285: 7c           pushSelf                          
+1286: 38 0124      pushi    $0124                    
+1289: 76           push0                             
+128a: 63 08        pToa     $08                      
+128c: 4a 18        send     $18                      
+128e: 32 002b      jmp      code_12bc;  toss         
+
+code_1291:
+1291: 3c           dup                               
+1292: 35 01        ldi      $01                      
+1294: 1a           eq?                               
+1295: 30 0018      bnt      code_12b0;  dup          
+1298: 7a           push2                             
+1299: 39 05        pushi    $05                      
+129b: 39 09        pushi    $09                      
+129d: 43 3c 04     callk    $3c, $04                 
+12a0: a3 08        sal      $08                      
+12a2: 35 ff        ldi      $ff                      
+12a4: 65 0a        aTop     $0a                      
+12a6: 8b 08        lsl      $08                      
+12a8: 35 0a        ldi      $0a                      
+12aa: 06           mul                               
+12ab: 65 16        aTop     $16                      
+12ad: 32 000c      jmp      code_12bc;  toss         
+
+code_12b0:
+12b0: 3c           dup                               
+12b1: 35 02        ldi      $02                      
+12b3: 1a           eq?                               
+12b4: 30 0005      bnt      code_12bc;  toss         
+12b7: 39 6c        pushi    $6c                      
+12b9: 76           push0                             
+12ba: 54 04        self     $04                      
+
+code_12bc:
+12bc: 3a           toss                              
+12bd: 48           ret                               
+
+12c2: [Object section]
+	name = kill3
+	species = 6
+12ca: sel[0] = $6
+12cc: sel[1] = $6
+12ce: sel[2] = $0
+12d0: sel[3] = string_181e;  'kill3'
+12d2: sel[4] = $0
+12d4: sel[5] = $ffff
+12d6: sel[6] = $0
+12d8: sel[7] = $0
+12da: sel[8] = $0
+12dc: sel[9] = $0
+12de: sel[10] = $0
+12e0: sel[11] = $0
+12e2: sel[12] = $0
+12e4: sel[13] = $0
+12e6: sel[14] = $0
+12e8: sel[15] = $0
+12ea: sel[16] = $0
+
+	func[0] = changeState code_1268;  lap
+
+12f8: [Code section]
+
+code_12f8:
+12f8: 87 01        lap      $01                      
+12fa: 65 0a        aTop     $0a                      
+12fc: 36           push                              
+12fd: 3c           dup                               
+12fe: 35 00        ldi      $00                      
+1300: 1a           eq?                               
+1301: 30 0007      bnt      code_130b;  dup          
+1304: 35 0c        ldi      $0c                      
+1306: 65 16        aTop     $16                      
+1308: 32 004f      jmp      code_135a;  toss         
+
+code_130b:
+130b: 3c           dup                               
+130c: 35 01        ldi      $01                      
+130e: 1a           eq?                               
+130f: 30 001d      bnt      code_132f;  dup          
+1312: 39 07        pushi    $07                      
+1314: 78           push1                             
+1315: 76           push0                             
+1316: 38 00db      pushi    $00db                    
+1319: 78           push1                             
+131a: 39 08        pushi    $08                      
+131c: 38 0096      pushi    $0096                    
+131f: 7a           push2                             
+1320: 51 1a        class    $1a                      
+1322: 36           push                              
+1323: 7c           pushSelf                          
+1324: 38 0124      pushi    $0124                    
+1327: 76           push0                             
+1328: 63 08        pToa     $08                      
+132a: 4a 18        send     $18                      
+132c: 32 002b      jmp      code_135a;  toss         
+
+code_132f:
+132f: 3c           dup                               
+1330: 35 02        ldi      $02                      
+1332: 1a           eq?                               
+1333: 30 0018      bnt      code_134e;  dup          
+1336: 7a           push2                             
+1337: 39 04        pushi    $04                      
+1339: 39 09        pushi    $09                      
+133b: 43 3c 04     callk    $3c, $04                 
+133e: a3 03        sal      $03                      
+1340: 35 ff        ldi      $ff                      
+1342: 65 0a        aTop     $0a                      
+1344: 8b 03        lsl      $03                      
+1346: 35 0a        ldi      $0a                      
+1348: 06           mul                               
+1349: 65 16        aTop     $16                      
+134b: 32 000c      jmp      code_135a;  toss         
+
+code_134e:
+134e: 3c           dup                               
+134f: 35 03        ldi      $03                      
+1351: 1a           eq?                               
+1352: 30 0005      bnt      code_135a;  toss         
+1355: 39 6c        pushi    $6c                      
+1357: 76           push0                             
+1358: 54 04        self     $04                      
+
+code_135a:
+135a: 3a           toss                              
+135b: 48           ret                               
+
+1360: [Object section]
+	name = shoot1
+	species = 6
+1368: sel[0] = $6
+136a: sel[1] = $6
+136c: sel[2] = $0
+136e: sel[3] = string_1824;  'shoot1'
+1370: sel[4] = $0
+1372: sel[5] = $ffff
+1374: sel[6] = $0
+1376: sel[7] = $0
+1378: sel[8] = $0
+137a: sel[9] = $0
+137c: sel[10] = $0
+137e: sel[11] = $0
+1380: sel[12] = $0
+1382: sel[13] = $0
+1384: sel[14] = $0
+1386: sel[15] = $0
+1388: sel[16] = $0
+
+	func[0] = changeState code_12f8;  lap
+
+1396: [Code section]
+
+code_1396:
+1396: 87 01        lap      $01                      
+1398: 65 0a        aTop     $0a                      
+139a: 36           push                              
+139b: 3c           dup                               
+139c: 35 00        ldi      $00                      
+139e: 1a           eq?                               
+139f: 30 001d      bnt      code_13bf;  dup          
+13a2: 39 07        pushi    $07                      
+13a4: 78           push1                             
+13a5: 76           push0                             
+13a6: 38 00db      pushi    $00db                    
+13a9: 78           push1                             
+13aa: 39 08        pushi    $08                      
+13ac: 38 0096      pushi    $0096                    
+13af: 7a           push2                             
+13b0: 51 1a        class    $1a                      
+13b2: 36           push                              
+13b3: 7c           pushSelf                          
+13b4: 38 0124      pushi    $0124                    
+13b7: 76           push0                             
+13b8: 63 08        pToa     $08                      
+13ba: 4a 18        send     $18                      
+13bc: 32 002b      jmp      code_13ea;  toss         
+
+code_13bf:
+13bf: 3c           dup                               
+13c0: 35 01        ldi      $01                      
+13c2: 1a           eq?                               
+13c3: 30 0018      bnt      code_13de;  dup          
+13c6: 7a           push2                             
+13c7: 39 04        pushi    $04                      
+13c9: 39 09        pushi    $09                      
+13cb: 43 3c 04     callk    $3c, $04                 
+13ce: a3 04        sal      $04                      
+13d0: 35 ff        ldi      $ff                      
+13d2: 65 0a        aTop     $0a                      
+13d4: 8b 04        lsl      $04                      
+13d6: 35 14        ldi      $14                      
+13d8: 06           mul                               
+13d9: 65 16        aTop     $16                      
+13db: 32 000c      jmp      code_13ea;  toss         
+
+code_13de:
+13de: 3c           dup                               
+13df: 35 02        ldi      $02                      
+13e1: 1a           eq?                               
+13e2: 30 0005      bnt      code_13ea;  toss         
+13e5: 39 6c        pushi    $6c                      
+13e7: 76           push0                             
+13e8: 54 04        self     $04                      
+
+code_13ea:
+13ea: 3a           toss                              
+13eb: 48           ret                               
+
+13f0: [Object section]
+	name = shoot2
+	species = 6
+13f8: sel[0] = $6
+13fa: sel[1] = $6
+13fc: sel[2] = $0
+13fe: sel[3] = string_182b;  'shoot2'
+1400: sel[4] = $0
+1402: sel[5] = $ffff
+1404: sel[6] = $0
+1406: sel[7] = $0
+1408: sel[8] = $0
+140a: sel[9] = $0
+140c: sel[10] = $0
+140e: sel[11] = $0
+1410: sel[12] = $0
+1412: sel[13] = $0
+1414: sel[14] = $0
+1416: sel[15] = $0
+1418: sel[16] = $0
+
+	func[0] = changeState code_1396;  lap
+
+1426: [Code section]
+
+code_1426:
+1426: 87 01        lap      $01                      
+1428: 65 0a        aTop     $0a                      
+142a: 36           push                              
+142b: 3c           dup                               
+142c: 35 00        ldi      $00                      
+142e: 1a           eq?                               
+142f: 30 001d      bnt      code_144f;  dup          
+1432: 39 07        pushi    $07                      
+1434: 78           push1                             
+1435: 76           push0                             
+1436: 38 00db      pushi    $00db                    
+1439: 78           push1                             
+143a: 39 08        pushi    $08                      
+143c: 38 0096      pushi    $0096                    
+143f: 7a           push2                             
+1440: 51 1a        class    $1a                      
+1442: 36           push                              
+1443: 7c           pushSelf                          
+1444: 38 0124      pushi    $0124                    
+1447: 76           push0                             
+1448: 63 08        pToa     $08                      
+144a: 4a 18        send     $18                      
+144c: 32 002b      jmp      code_147a;  toss         
+
+code_144f:
+144f: 3c           dup                               
+1450: 35 01        ldi      $01                      
+1452: 1a           eq?                               
+1453: 30 0018      bnt      code_146e;  dup          
+1456: 7a           push2                             
+1457: 39 04        pushi    $04                      
+1459: 39 09        pushi    $09                      
+145b: 43 3c 04     callk    $3c, $04                 
+145e: a3 05        sal      $05                      
+1460: 35 ff        ldi      $ff                      
+1462: 65 0a        aTop     $0a                      
+1464: 8b 05        lsl      $05                      
+1466: 35 0a        ldi      $0a                      
+1468: 06           mul                               
+1469: 65 16        aTop     $16                      
+146b: 32 000c      jmp      code_147a;  toss         
+
+code_146e:
+146e: 3c           dup                               
+146f: 35 02        ldi      $02                      
+1471: 1a           eq?                               
+1472: 30 0005      bnt      code_147a;  toss         
+1475: 39 6c        pushi    $6c                      
+1477: 76           push0                             
+1478: 54 04        self     $04                      
+
+code_147a:
+147a: 3a           toss                              
+147b: 48           ret                               
+
+1480: [Object section]
+	name = shoot3
+	species = 6
+1488: sel[0] = $6
+148a: sel[1] = $6
+148c: sel[2] = $0
+148e: sel[3] = string_1832;  'shoot3'
+1490: sel[4] = $0
+1492: sel[5] = $ffff
+1494: sel[6] = $0
+1496: sel[7] = $0
+1498: sel[8] = $0
+149a: sel[9] = $0
+149c: sel[10] = $0
+149e: sel[11] = $0
+14a0: sel[12] = $0
+14a2: sel[13] = $0
+14a4: sel[14] = $0
+14a6: sel[15] = $0
+14a8: sel[16] = $0
+
+	func[0] = changeState code_1426;  lap
+
+14b6: [Code section]
+
+code_14b6:
+14b6: 87 01        lap      $01                      
+14b8: 65 0a        aTop     $0a                      
+14ba: 36           push                              
+14bb: 3c           dup                               
+14bc: 35 00        ldi      $00                      
+14be: 1a           eq?                               
+14bf: 30 001d      bnt      code_14df;  dup          
+14c2: 39 07        pushi    $07                      
+14c4: 78           push1                             
+14c5: 76           push0                             
+14c6: 38 00db      pushi    $00db                    
+14c9: 78           push1                             
+14ca: 39 08        pushi    $08                      
+14cc: 38 0096      pushi    $0096                    
+14cf: 7a           push2                             
+14d0: 51 1a        class    $1a                      
+14d2: 36           push                              
+14d3: 7c           pushSelf                          
+14d4: 38 0124      pushi    $0124                    
+14d7: 76           push0                             
+14d8: 63 08        pToa     $08                      
+14da: 4a 18        send     $18                      
+14dc: 32 002b      jmp      code_150a;  toss         
+
+code_14df:
+14df: 3c           dup                               
+14e0: 35 01        ldi      $01                      
+14e2: 1a           eq?                               
+14e3: 30 0018      bnt      code_14fe;  dup          
+14e6: 7a           push2                             
+14e7: 39 04        pushi    $04                      
+14e9: 39 09        pushi    $09                      
+14eb: 43 3c 04     callk    $3c, $04                 
+14ee: a3 02        sal      $02                      
+14f0: 35 ff        ldi      $ff                      
+14f2: 65 0a        aTop     $0a                      
+14f4: 8b 02        lsl      $02                      
+14f6: 35 0a        ldi      $0a                      
+14f8: 06           mul                               
+14f9: 65 16        aTop     $16                      
+14fb: 32 000c      jmp      code_150a;  toss         
+
+code_14fe:
+14fe: 3c           dup                               
+14ff: 35 02        ldi      $02                      
+1501: 1a           eq?                               
+1502: 30 0005      bnt      code_150a;  toss         
+1505: 39 6c        pushi    $6c                      
+1507: 76           push0                             
+1508: 54 04        self     $04                      
+
+code_150a:
+150a: 3a           toss                              
+150b: 48           ret                               
+
+1510: [Object section]
+	name = shoot4
+	species = 6
+1518: sel[0] = $6
+151a: sel[1] = $6
+151c: sel[2] = $0
+151e: sel[3] = string_1839;  'shoot4'
+1520: sel[4] = $0
+1522: sel[5] = $ffff
+1524: sel[6] = $0
+1526: sel[7] = $0
+1528: sel[8] = $0
+152a: sel[9] = $0
+152c: sel[10] = $0
+152e: sel[11] = $0
+1530: sel[12] = $0
+1532: sel[13] = $0
+1534: sel[14] = $0
+1536: sel[15] = $0
+1538: sel[16] = $0
+
+	func[0] = changeState code_14b6;  lap
+
+1546: [Code section]
+
+code_1546:
+1546: 38 009a      pushi    $009a                    
+1549: 76           push0                             
+154a: 81 64        lag      $64                      
+154c: 4a 04        send     $04                      
+154e: 36           push                              
+154f: 3c           dup                               
+1550: 35 01        ldi      $01                      
+1552: 1a           eq?                               
+1553: 30 0003      bnt      code_1559;  dup          
+1556: 32 00d0      jmp      code_1629;  toss         
+
+code_1559:
+1559: 3c           dup                               
+155a: 35 02        ldi      $02                      
+155c: 1a           eq?                               
+155d: 30 0013      bnt      code_1573;  dup          
+1560: 39 6b        pushi    $6b                      
+1562: 76           push0                             
+1563: 38 008e      pushi    $008e                    
+1566: 78           push1                             
+1567: 72 0cec      lofsa    short_0cec               
+156a: 36           push                              
+156b: 72 0988      lofsa    short_0988               
+156e: 4a 0a        send     $0a                      
+1570: 32 00b6      jmp      code_1629;  toss         
+
+code_1573:
+1573: 3c           dup                               
+1574: 35 03        ldi      $03                      
+1576: 1a           eq?                               
+1577: 30 0013      bnt      code_158d;  dup          
+157a: 39 6b        pushi    $6b                      
+157c: 76           push0                             
+157d: 38 008e      pushi    $008e                    
+1580: 78           push1                             
+1581: 72 0d74      lofsa    short_0d74               
+1584: 36           push                              
+1585: 72 0754      lofsa    short_0754               
+1588: 4a 0a        send     $0a                      
+158a: 32 009c      jmp      code_1629;  toss         
+
+code_158d:
+158d: 3c           dup                               
+158e: 35 04        ldi      $04                      
+1590: 1a           eq?                               
+1591: 30 0010      bnt      code_15a4;  dup          
+1594: 38 008e      pushi    $008e                    
+1597: 78           push1                             
+1598: 72 0dea      lofsa    short_0dea               
+159b: 36           push                              
+159c: 72 0510      lofsa    short_0510               
+159f: 4a 06        send     $06                      
+15a1: 32 0085      jmp      code_1629;  toss         
+
+code_15a4:
+15a4: 3c           dup                               
+15a5: 35 05        ldi      $05                      
+15a7: 1a           eq?                               
+15a8: 30 0013      bnt      code_15be;  dup          
+15ab: 39 6b        pushi    $6b                      
+15ad: 76           push0                             
+15ae: 38 008e      pushi    $008e                    
+15b1: 78           push1                             
+15b2: 72 0e94      lofsa    short_0e94               
+15b5: 36           push                              
+15b6: 72 0a06      lofsa    short_0a06               
+15b9: 4a 0a        send     $0a                      
+15bb: 32 006b      jmp      code_1629;  toss         
+
+code_15be:
+15be: 3c           dup                               
+15bf: 35 06        ldi      $06                      
+15c1: 1a           eq?                               
+15c2: 30 0010      bnt      code_15d5;  dup          
+15c5: 38 008e      pushi    $008e                    
+15c8: 78           push1                             
+15c9: 72 0f34      lofsa    short_0f34               
+15cc: 36           push                              
+15cd: 72 06d6      lofsa    short_06d6               
+15d0: 4a 06        send     $06                      
+15d2: 32 0054      jmp      code_1629;  toss         
+
+code_15d5:
+15d5: 3c           dup                               
+15d6: 35 07        ldi      $07                      
+15d8: 1a           eq?                               
+15d9: 30 0010      bnt      code_15ec;  dup          
+15dc: 38 008e      pushi    $008e                    
+15df: 78           push1                             
+15e0: 72 0faa      lofsa    short_0faa               
+15e3: 36           push                              
+15e4: 72 07d2      lofsa    short_07d2               
+15e7: 4a 06        send     $06                      
+15e9: 32 003d      jmp      code_1629;  toss         
+
+code_15ec:
+15ec: 3c           dup                               
+15ed: 35 08        ldi      $08                      
+15ef: 1a           eq?                               
+15f0: 30 0010      bnt      code_1603;  dup          
+15f3: 38 008e      pushi    $008e                    
+15f6: 78           push1                             
+15f7: 72 1020      lofsa    short_1020               
+15fa: 36           push                              
+15fb: 72 0444      lofsa    short_0444               
+15fe: 4a 06        send     $06                      
+1600: 32 0026      jmp      code_1629;  toss         
+
+code_1603:
+1603: 3c           dup                               
+1604: 35 09        ldi      $09                      
+1606: 1a           eq?                               
+1607: 30 0018      bnt      code_1622;  dup          
+160a: 38 009c      pushi    $009c                    
+160d: 76           push0                             
+160e: 81 71        lag      $71                      
+1610: 4a 04        send     $04                      
+1612: 38 008e      pushi    $008e                    
+1615: 78           push1                             
+1616: 72 111a      lofsa    short_111a               
+1619: 36           push                              
+161a: 72 0444      lofsa    short_0444               
+161d: 4a 06        send     $06                      
+161f: 32 0007      jmp      code_1629;  toss         
+
+code_1622:
+1622: 3c           dup                               
+1623: 35 ff        ldi      $ff                      
+1625: 1a           eq?                               
+1626: 30 d9d7      bnt      null_f000                
+
+code_1629:
+1629: 3a           toss                              
+162a: 48           ret                               
+162b: 00           bnot                              
+
+1630: [Object section]
+	name = musicScript
+	species = 6
+1638: sel[0] = $6
+163a: sel[1] = $6
+163c: sel[2] = $0
+163e: sel[3] = string_1840;  'musicScript'
+1640: sel[4] = $0
+1642: sel[5] = $ffff
+1644: sel[6] = $0
+1646: sel[7] = $0
+1648: sel[8] = $0
+164a: sel[9] = $0
+164c: sel[10] = $0
+164e: sel[11] = $0
+1650: sel[12] = $0
+1652: sel[13] = $0
+1654: sel[14] = $0
+1656: sel[15] = $0
+1658: sel[16] = $0
+
+	func[0] = cue code_1546;  pushi
+
+1666: [String section]
+1666 = 'tuckwobat'
+1670 = '*** the battle frieze.'
+1687 = '*** Robin's merrie men engage the Abbot's hoods in a fierce battle.'
+16cb = 'frieze1'
+16d3 = '*** Robin's merrie men engage the Abbott's hoods in a fierce battle.'
+1718 = 'frieze2'
+1720 = 'robin'
+1726 = 'victim'
+172d = 'victim2'
+1735 = 'mule'
+173a = 'mule2'
+1740 = 'archer'
+1747 = 'archer2'
+174f = 'outlaw'
+1756 = 'outlaw2'
+175e = '*** one of the Abbott's thieving lackeys.'
+1788 = 'knave'
+178e = 'knave2'
+1795 = 'knave3'
+179c = 'lancer'
+17a3 = 'lancer2'
+17ab = 'lancer3'
+17b3 = 'corpse'
+17ba = 'corpse2'
+17c2 = 'corpse3'
+17ca = 'corpse4'
+17d2 = 'timer0'
+17d9 = 'timer0A'
+17e1 = 'timer1'
+17e8 = 'timer2'
+17ef = 'timer2A'
+17f7 = 'timer3'
+17fe = 'timer4'
+1805 = 'timer5'
+180c = 'timer6'
+1813 = 'kill'
+1818 = 'kill2'
+181e = 'kill3'
+1824 = 'shoot1'
+182b = 'shoot2'
+1832 = 'shoot3'
+1839 = 'shoot4'
+1840 = 'musicScript'
+
+1850: [Preload section]
+
+1854: [Local variables]
+var[0] = $0
+var[1] = $0
+var[2] = $0
+var[3] = $0
+var[4] = $0
+var[5] = $0
+var[6] = $0
+var[7] = $0
+var[8] = $0
+var[9] = $0
+
+186c: [Relocation section]
+	pointer[0] = 0041; ref_ref_0041;  0041
+	pointer[1] = 0049; ref_ref_0049;  0049
+	pointer[2] = 0062; ref_ref_0062;  0062
+	pointer[3] = 0070; ref_ref_0070;  0070
+	pointer[4] = 0093; ref_ref_0093;  0093
+	pointer[5] = 00bd; ref_ref_00bd;  00bd
+	pointer[6] = 00da; ref_ref_00da;  00da
+	pointer[7] = 00fd; ref_ref_00fd;  00fd
+	pointer[8] = 0106; ref_ref_0106;  0106
+	pointer[9] = 010a; ref_ref_010a;  010a
+	pointer[10] = 0113; ref_ref_0113;  0113
+	pointer[11] = 0117; ref_ref_0117;  0117
+	pointer[12] = 0120; ref_ref_0120;  0120
+	pointer[13] = 0124; ref_ref_0124;  0124
+	pointer[14] = 012d; ref_ref_012d;  012d
+	pointer[15] = 0131; ref_ref_0131;  0131
+	pointer[16] = 013a; ref_ref_013a;  013a
+	pointer[17] = 013e; ref_ref_013e;  013e
+	pointer[18] = 0147; ref_ref_0147;  0147
+	pointer[19] = 014b; ref_ref_014b;  014b
+	pointer[20] = 0154; ref_ref_0154;  0154
+	pointer[21] = 0158; ref_ref_0158;  0158
+	pointer[22] = 017e; ref_ref_017e;  017e
+	pointer[23] = 01ac; ref_ref_01ac;  01ac
+	pointer[24] = 01bc; ref_ref_01bc;  01bc
+	pointer[25] = 01e4; ref_ref_01e4;  01e4
+	pointer[26] = 020c; ref_ref_020c;  020c
+	pointer[27] = 0234; ref_ref_0234;  0234
+	pointer[28] = 025d; ref_ref_025d;  025d
+	pointer[29] = 0266; ref_ref_0266;  0266
+	pointer[30] = 026a; ref_ref_026a;  026a
+	pointer[31] = 026e; ref_ref_026e;  026e
+	pointer[32] = 0272; ref_ref_0272;  0272
+	pointer[33] = 0276; ref_ref_0276;  0276
+	pointer[34] = 027a; ref_ref_027a;  027a
+	pointer[35] = 027e; ref_ref_027e;  027e
+	pointer[36] = 0282; ref_ref_0282;  0282
+	pointer[37] = 029e; ref_ref_029e;  029e
+	pointer[38] = 02ae; ref_ref_02ae;  02ae
+	pointer[39] = 02cd; ref_ref_02cd;  02cd
+	pointer[40] = 02dd; ref_ref_02dd;  02dd
+	pointer[41] = 02ed; ref_ref_02ed;  02ed
+	pointer[42] = 030c; ref_ref_030c;  030c
+	pointer[43] = 031b; ref_ref_031b;  031b
+	pointer[44] = 032b; ref_ref_032b;  032b
+	pointer[45] = 0357; ref_ref_0357;  0357
+	pointer[46] = 0378; ref_ref_0378;  0378
+	pointer[47] = 03ba; ref_ref_03ba;  03ba
+	pointer[48] = 03ce; ref_ref_03ce;  03ce
+	pointer[49] = 03de; ref_ref_03de;  03de
+	pointer[50] = 0402; ref_ref_0402;  0402
+	pointer[51] = 0416; ref_ref_0416;  0416
+	pointer[52] = 0426; ref_ref_0426;  0426
+	pointer[53] = 044a; ref_ref_044a;  044a
+	pointer[54] = 04b0; ref_ref_04b0;  04b0
+	pointer[55] = 0516; ref_ref_0516;  0516
+	pointer[56] = 057c; ref_ref_057c;  057c
+	pointer[57] = 05c4; ref_ref_05c4;  05c4
+	pointer[58] = 060c; ref_ref_060c;  060c
+	pointer[59] = 0674; ref_ref_0674;  0674
+	pointer[60] = 06dc; ref_ref_06dc;  06dc
+	pointer[61] = 075a; ref_ref_075a;  075a
+	pointer[62] = 07d8; ref_ref_07d8;  07d8
+	pointer[63] = 07ec; ref_ref_07ec;  07ec
+	pointer[64] = 0840; ref_ref_0840;  0840
+	pointer[65] = 08a8; ref_ref_08a8;  08a8
+	pointer[66] = 0910; ref_ref_0910;  0910
+	pointer[67] = 098e; ref_ref_098e;  098e
+	pointer[68] = 0a0c; ref_ref_0a0c;  0a0c
+	pointer[69] = 0a8a; ref_ref_0a8a;  0a8a
+	pointer[70] = 0ae8; ref_ref_0ae8;  0ae8
+	pointer[71] = 0b46; ref_ref_0b46;  0b46
+	pointer[72] = 0ba4; ref_ref_0ba4;  0ba4
+	pointer[73] = 0c2d; ref_ref_0c2d;  0c2d
+	pointer[74] = 0c3f; ref_ref_0c3f;  0c3f
+	pointer[75] = 0c5c; ref_ref_0c5c;  0c5c
+	pointer[76] = 0cc3; ref_ref_0cc3;  0cc3
+	pointer[77] = 0cd5; ref_ref_0cd5;  0cd5
+	pointer[78] = 0cf2; ref_ref_0cf2;  0cf2
+	pointer[79] = 0d4b; ref_ref_0d4b;  0d4b
+	pointer[80] = 0d5d; ref_ref_0d5d;  0d5d
+	pointer[81] = 0d7a; ref_ref_0d7a;  0d7a
+	pointer[82] = 0dc0; ref_ref_0dc0;  0dc0
+	pointer[83] = 0dd3; ref_ref_0dd3;  0dd3
+	pointer[84] = 0df0; ref_ref_0df0;  0df0
+	pointer[85] = 0e33; ref_ref_0e33;  0e33
+	pointer[86] = 0e6b; ref_ref_0e6b;  0e6b
+	pointer[87] = 0e7d; ref_ref_0e7d;  0e7d
+	pointer[88] = 0e9a; ref_ref_0e9a;  0e9a
+	pointer[89] = 0edc; ref_ref_0edc;  0edc
+	pointer[90] = 0f0a; ref_ref_0f0a;  0f0a
+	pointer[91] = 0f1c; ref_ref_0f1c;  0f1c
+	pointer[92] = 0f3a; ref_ref_0f3a;  0f3a
+	pointer[93] = 0f80; ref_ref_0f80;  0f80
+	pointer[94] = 0f93; ref_ref_0f93;  0f93
+	pointer[95] = 0fb0; ref_ref_0fb0;  0fb0
+	pointer[96] = 0fff; ref_ref_0fff;  0fff
+	pointer[97] = 1026; ref_ref_1026;  1026
+	pointer[98] = 1063; ref_ref_1063;  1063
+	pointer[99] = 10a6; ref_ref_10a6;  10a6
+	pointer[100] = 10b5; ref_ref_10b5;  10b5
+	pointer[101] = 10bf; ref_ref_10bf;  10bf
+	pointer[102] = 10c9; ref_ref_10c9;  10c9
+	pointer[103] = 1120; ref_ref_1120;  1120
+	pointer[104] = 11b0; ref_ref_11b0;  11b0
+	pointer[105] = 1240; ref_ref_1240;  1240
+	pointer[106] = 12d0; ref_ref_12d0;  12d0
+	pointer[107] = 136e; ref_ref_136e;  136e
+	pointer[108] = 13fe; ref_ref_13fe;  13fe
+	pointer[109] = 148e; ref_ref_148e;  148e
+	pointer[110] = 151e; ref_ref_151e;  151e
+	pointer[111] = 1568; ref_ref_1568;  1568
+	pointer[112] = 156c; ref_ref_156c;  156c
+	pointer[113] = 1582; ref_ref_1582;  1582
+	pointer[114] = 1586; ref_ref_1586;  1586
+	pointer[115] = 1599; ref_ref_1599;  1599
+	pointer[116] = 159d; ref_ref_159d;  159d
+	pointer[117] = 15b3; ref_ref_15b3;  15b3
+	pointer[118] = 15b7; ref_ref_15b7;  15b7
+	pointer[119] = 15ca; ref_ref_15ca;  15ca
+	pointer[120] = 15ce; ref_ref_15ce;  15ce
+	pointer[121] = 15e1; ref_ref_15e1;  15e1
+	pointer[122] = 15e5; ref_ref_15e5;  15e5
+	pointer[123] = 15f8; ref_ref_15f8;  15f8
+	pointer[124] = 15fc; ref_ref_15fc;  15fc
+	pointer[125] = 1617; ref_ref_1617;  1617
+	pointer[126] = 161b; ref_ref_161b;  161b
+	pointer[127] = 163e; ref_ref_163e;  163e

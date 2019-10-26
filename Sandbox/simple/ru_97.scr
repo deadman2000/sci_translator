@@ -1,0 +1,2467 @@
+0004: [Exports section]
+	export_0 = short_0170;  $0043
+
+000e: [Code section]
+
+code_000e:
+000e: 76           push0                             
+000f: 45 03 00     callb    $03, $00                 
+0012: 39 03        pushi    $03                      
+0014: 38 0081      pushi    $0081                    
+0017: 38 0389      pushi    $0389                    
+001a: 38 0323      pushi    $0323                    
+001d: 46 export958_0 06  calle    export958_0, $06         
+0023: 7a           push2                             
+0024: 38 0080      pushi    $0080                    
+0027: 38 035d      pushi    $035d                    
+002a: 46 export958_0 04  calle    export958_0, $04         
+0030: 39 73        pushi    $73                      
+0032: 78           push1                             
+0033: 72 1146      lofsa    short_1146;  $0006       
+0036: 36           push                              
+0037: 81 49        lag      $49                      
+0039: 4a 06        send     $06                      
+003b: 39 73        pushi    $73                      
+003d: 78           push1                             
+003e: 72 1146      lofsa    short_1146;  $0006       
+0041: 36           push                              
+0042: 81 48        lag      $48                      
+0044: 4a 06        send     $06                      
+0046: 39 03        pushi    $03                      
+0048: 72 1178      lofsa    string_1178;  ''         
+004b: 36           push                              
+004c: 76           push0                             
+004d: 76           push0                             
+004e: 43 23 06     callk    $23, $06                 
+0051: 78           push1                             
+0052: 76           push0                             
+0053: 45 05 02     callb    $05, $02                 
+0056: 30 0007      bnt      code_0060;  ldi          
+0059: 35 0a        ldi      $0a                      
+005b: a3 00        sal      $00                      
+005d: 32 0005      jmp      code_0065;  pushi        
+
+code_0060:
+0060: 34 06 80     ldi      $06, $80                 
+0063: a3 00        sal      $00                      
+
+code_0065:
+0065: 39 6b        pushi    $6b                      
+0067: 76           push0                             
+0068: 57 43 04     super    $43, $04                 
+006b: 39 2b        pushi    $2b                      
+006d: 78           push1                             
+006e: 78           push1                             
+006f: 39 03        pushi    $03                      
+0071: 43 2d 02     callk    $2d, $02                 
+0074: 36           push                              
+0075: 35 20        ldi      $20                      
+0077: 1a           eq?                               
+0078: 30 0005      bnt      code_0080;  ldi          
+007b: 35 1b        ldi      $1b                      
+007d: 32 0002      jmp      code_0082;  push         
+
+code_0080:
+0080: 35 1c        ldi      $1c                      
+
+code_0082:
+0082: 36           push                              
+0083: 39 06        pushi    $06                      
+0085: 78           push1                             
+0086: 78           push1                             
+0087: 39 2a        pushi    $2a                      
+0089: 76           push0                             
+008a: 81 64        lag      $64                      
+008c: 4a 10        send     $10                      
+008e: 39 6b        pushi    $6b                      
+0090: 76           push0                             
+0091: 72 01b6      lofsa    short_01b6;  $002e       
+0094: 4a 04        send     $04                      
+0096: 39 6b        pushi    $6b                      
+0098: 76           push0                             
+0099: 72 0212      lofsa    short_0212;  $002e       
+009c: 4a 04        send     $04                      
+009e: 39 6b        pushi    $6b                      
+00a0: 76           push0                             
+00a1: 72 026e      lofsa    short_026e;  $002e       
+00a4: 4a 04        send     $04                      
+00a6: 39 6b        pushi    $6b                      
+00a8: 76           push0                             
+00a9: 72 02ca      lofsa    short_02ca;  $002e       
+00ac: 4a 04        send     $04                      
+00ae: 39 6b        pushi    $6b                      
+00b0: 76           push0                             
+00b1: 72 0326      lofsa    short_0326;  $002e       
+00b4: 4a 04        send     $04                      
+00b6: 39 6b        pushi    $6b                      
+00b8: 76           push0                             
+00b9: 72 0382      lofsa    short_0382;  $002e       
+00bc: 4a 04        send     $04                      
+00be: 39 6b        pushi    $6b                      
+00c0: 76           push0                             
+00c1: 72 03de      lofsa    short_03de;  $002e       
+00c4: 4a 04        send     $04                      
+00c6: 39 6b        pushi    $6b                      
+00c8: 76           push0                             
+00c9: 72 043a      lofsa    short_043a;  $002e       
+00cc: 4a 04        send     $04                      
+00ce: 39 6b        pushi    $6b                      
+00d0: 76           push0                             
+00d1: 72 0496      lofsa    short_0496;  $002e       
+00d4: 4a 04        send     $04                      
+00d6: 39 6b        pushi    $6b                      
+00d8: 76           push0                             
+00d9: 72 04f2      lofsa    short_04f2;  $002e       
+00dc: 4a 04        send     $04                      
+00de: 39 6b        pushi    $6b                      
+00e0: 76           push0                             
+00e1: 39 69        pushi    $69                      
+00e3: 76           push0                             
+00e4: 72 054e      lofsa    short_054e;  $002e       
+00e7: 4a 08        send     $08                      
+00e9: 39 6b        pushi    $6b                      
+00eb: 76           push0                             
+00ec: 39 69        pushi    $69                      
+00ee: 76           push0                             
+00ef: 72 05aa      lofsa    short_05aa;  $002e       
+00f2: 4a 08        send     $08                      
+00f4: 39 6b        pushi    $6b                      
+00f6: 76           push0                             
+00f7: 39 69        pushi    $69                      
+00f9: 76           push0                             
+00fa: 72 0606      lofsa    short_0606;  $002e       
+00fd: 4a 08        send     $08                      
+00ff: 39 6b        pushi    $6b                      
+0101: 76           push0                             
+0102: 39 69        pushi    $69                      
+0104: 76           push0                             
+0105: 72 0662      lofsa    short_0662;  $002e       
+0108: 4a 08        send     $08                      
+010a: 39 6b        pushi    $6b                      
+010c: 76           push0                             
+010d: 39 69        pushi    $69                      
+010f: 76           push0                             
+0110: 72 06be      lofsa    short_06be;  $002e       
+0113: 4a 08        send     $08                      
+0115: 39 6b        pushi    $6b                      
+0117: 76           push0                             
+0118: 39 69        pushi    $69                      
+011a: 76           push0                             
+011b: 72 071a      lofsa    short_071a;  $002e       
+011e: 4a 08        send     $08                      
+0120: 38 00bb      pushi    $00bb                    
+0123: 7a           push2                             
+0124: 39 05        pushi    $05                      
+0126: 78           push1                             
+0127: 81 01        lag      $01                      
+0129: 4a 08        send     $08                      
+012b: 38 008e      pushi    $008e                    
+012e: 78           push1                             
+012f: 72 1146      lofsa    short_1146;  $0006       
+0132: 36           push                              
+0133: 54 06        self     $06                      
+0135: 48           ret                               
+
+code_0136:
+0136: 38 009f      pushi    $009f                    
+0139: 39 04        pushi    $04                      
+013b: 76           push0                             
+013c: 39 0c        pushi    $0c                      
+013e: 3c           dup                               
+013f: 78           push1                             
+0140: 81 64        lag      $64                      
+0142: 4a 0c        send     $0c                      
+0144: 39 54        pushi    $54                      
+0146: 78           push1                             
+0147: 72 1146      lofsa    short_1146;  $0006       
+014a: 36           push                              
+014b: 81 49        lag      $49                      
+014d: 4a 06        send     $06                      
+014f: 39 54        pushi    $54                      
+0151: 78           push1                             
+0152: 72 1146      lofsa    short_1146;  $0006       
+0155: 36           push                              
+0156: 81 48        lag      $48                      
+0158: 4a 06        send     $06                      
+015a: 39 6c        pushi    $6c                      
+015c: 76           push0                             
+015d: 59 01        &rest    $01                      
+015f: 57 43 04     super    $43, $04                 
+0162: 48           ret                               
+0163: 00           bnot                              
+
+0168: [Object section]
+	name = theEnd
+	species = 43
+0170: sel[0] = $43
+0172: sel[1] = $43
+0174: sel[2] = $0
+0176: sel[3] = ref_el_117a
+0178: sel[4] = $0
+017a: sel[5] = $0
+017c: sel[6] = $0
+017e: sel[7] = $0
+0180: sel[8] = $0
+0182: sel[9] = $0
+0184: sel[10] = $389
+0186: sel[11] = $f
+0188: sel[12] = $0
+018a: sel[13] = $0
+018c: sel[14] = $0
+018e: sel[15] = $0
+0190: sel[16] = $0
+0192: sel[17] = $0
+0194: sel[18] = $0
+0196: sel[19] = $0
+0198: sel[20] = $a0
+019a: sel[21] = $8ad0
+019c: sel[22] = $0
+
+	func[0] = init code_000e;  push0
+	func[1] = dispose code_0136;  pushi
+
+01ae: [Object section]
+	name = title1
+	species = 2e
+01b6: sel[0] = $2e
+01b8: sel[1] = $2e
+01ba: sel[2] = $0
+01bc: sel[3] = string_1181;  'title1'
+01be: sel[4] = $4
+01c0: sel[5] = $a
+01c2: sel[6] = $0
+01c4: sel[7] = $0
+01c6: sel[8] = $0
+01c8: sel[9] = $0
+01ca: sel[10] = $0
+01cc: sel[11] = $0
+01ce: sel[12] = $0
+01d0: sel[13] = $0
+01d2: sel[14] = $6789
+01d4: sel[15] = $0
+01d6: sel[16] = $6789
+01d8: sel[17] = $0
+01da: sel[18] = $0
+01dc: sel[19] = $0
+01de: sel[20] = $6789
+01e0: sel[21] = $0
+01e2: sel[22] = $2
+01e4: sel[23] = $35d
+01e6: sel[24] = $0
+01e8: sel[25] = $0
+01ea: sel[26] = $0
+01ec: sel[27] = $0
+01ee: sel[28] = $101
+01f0: sel[29] = $0
+01f2: sel[30] = $0
+01f4: sel[31] = $0
+01f6: sel[32] = $0
+01f8: sel[33] = $0
+01fa: sel[34] = $0
+01fc: sel[35] = $0
+01fe: sel[36] = $0
+0200: sel[37] = $0
+
+020a: [Object section]
+	name = name1
+	species = 2e
+0212: sel[0] = $2e
+0214: sel[1] = $2e
+0216: sel[2] = $0
+0218: sel[3] = string_1188;  'name1'
+021a: sel[4] = $8c
+021c: sel[5] = $a
+021e: sel[6] = $0
+0220: sel[7] = $0
+0222: sel[8] = $0
+0224: sel[9] = $0
+0226: sel[10] = $0
+0228: sel[11] = $0
+022a: sel[12] = $0
+022c: sel[13] = $0
+022e: sel[14] = $6789
+0230: sel[15] = $0
+0232: sel[16] = $6789
+0234: sel[17] = $0
+0236: sel[18] = $0
+0238: sel[19] = $0
+023a: sel[20] = $6789
+023c: sel[21] = $0
+023e: sel[22] = $2
+0240: sel[23] = $35d
+0242: sel[24] = $2
+0244: sel[25] = $1
+0246: sel[26] = $0
+0248: sel[27] = $0
+024a: sel[28] = $101
+024c: sel[29] = $0
+024e: sel[30] = $0
+0250: sel[31] = $0
+0252: sel[32] = $0
+0254: sel[33] = $0
+0256: sel[34] = $0
+0258: sel[35] = $0
+025a: sel[36] = $0
+025c: sel[37] = $0
+
+0266: [Object section]
+	name = name2
+	species = 2e
+026e: sel[0] = $2e
+0270: sel[1] = $2e
+0272: sel[2] = $0
+0274: sel[3] = string_118e;  'name2'
+0276: sel[4] = $8c
+0278: sel[5] = $1e
+027a: sel[6] = $0
+027c: sel[7] = $0
+027e: sel[8] = $0
+0280: sel[9] = $0
+0282: sel[10] = $0
+0284: sel[11] = $0
+0286: sel[12] = $0
+0288: sel[13] = $0
+028a: sel[14] = $6789
+028c: sel[15] = $0
+028e: sel[16] = $6789
+0290: sel[17] = $0
+0292: sel[18] = $0
+0294: sel[19] = $0
+0296: sel[20] = $6789
+0298: sel[21] = $0
+029a: sel[22] = $2
+029c: sel[23] = $35d
+029e: sel[24] = $0
+02a0: sel[25] = $1
+02a2: sel[26] = $0
+02a4: sel[27] = $0
+02a6: sel[28] = $101
+02a8: sel[29] = $0
+02aa: sel[30] = $0
+02ac: sel[31] = $0
+02ae: sel[32] = $0
+02b0: sel[33] = $0
+02b2: sel[34] = $0
+02b4: sel[35] = $0
+02b6: sel[36] = $0
+02b8: sel[37] = $0
+
+02c2: [Object section]
+	name = name3
+	species = 2e
+02ca: sel[0] = $2e
+02cc: sel[1] = $2e
+02ce: sel[2] = $0
+02d0: sel[3] = string_1194;  'name3'
+02d2: sel[4] = $8c
+02d4: sel[5] = $32
+02d6: sel[6] = $0
+02d8: sel[7] = $0
+02da: sel[8] = $0
+02dc: sel[9] = $0
+02de: sel[10] = $0
+02e0: sel[11] = $0
+02e2: sel[12] = $0
+02e4: sel[13] = $0
+02e6: sel[14] = $6789
+02e8: sel[15] = $0
+02ea: sel[16] = $6789
+02ec: sel[17] = $0
+02ee: sel[18] = $0
+02f0: sel[19] = $0
+02f2: sel[20] = $6789
+02f4: sel[21] = $0
+02f6: sel[22] = $2
+02f8: sel[23] = $35d
+02fa: sel[24] = $0
+02fc: sel[25] = $2
+02fe: sel[26] = $0
+0300: sel[27] = $0
+0302: sel[28] = $101
+0304: sel[29] = $0
+0306: sel[30] = $0
+0308: sel[31] = $0
+030a: sel[32] = $0
+030c: sel[33] = $0
+030e: sel[34] = $0
+0310: sel[35] = $0
+0312: sel[36] = $0
+0314: sel[37] = $0
+
+031e: [Object section]
+	name = name4
+	species = 2e
+0326: sel[0] = $2e
+0328: sel[1] = $2e
+032a: sel[2] = $0
+032c: sel[3] = string_119a;  'name4'
+032e: sel[4] = $8c
+0330: sel[5] = $46
+0332: sel[6] = $0
+0334: sel[7] = $0
+0336: sel[8] = $0
+0338: sel[9] = $0
+033a: sel[10] = $0
+033c: sel[11] = $0
+033e: sel[12] = $0
+0340: sel[13] = $0
+0342: sel[14] = $6789
+0344: sel[15] = $0
+0346: sel[16] = $6789
+0348: sel[17] = $0
+034a: sel[18] = $0
+034c: sel[19] = $0
+034e: sel[20] = $6789
+0350: sel[21] = $0
+0352: sel[22] = $2
+0354: sel[23] = $35d
+0356: sel[24] = $0
+0358: sel[25] = $3
+035a: sel[26] = $0
+035c: sel[27] = $0
+035e: sel[28] = $101
+0360: sel[29] = $0
+0362: sel[30] = $0
+0364: sel[31] = $0
+0366: sel[32] = $0
+0368: sel[33] = $0
+036a: sel[34] = $0
+036c: sel[35] = $0
+036e: sel[36] = $0
+0370: sel[37] = $0
+
+037a: [Object section]
+	name = name5
+	species = 2e
+0382: sel[0] = $2e
+0384: sel[1] = $2e
+0386: sel[2] = $0
+0388: sel[3] = string_11a0;  'name5'
+038a: sel[4] = $8c
+038c: sel[5] = $6e
+038e: sel[6] = $0
+0390: sel[7] = $0
+0392: sel[8] = $0
+0394: sel[9] = $0
+0396: sel[10] = $0
+0398: sel[11] = $0
+039a: sel[12] = $0
+039c: sel[13] = $0
+039e: sel[14] = $6789
+03a0: sel[15] = $0
+03a2: sel[16] = $6789
+03a4: sel[17] = $0
+03a6: sel[18] = $0
+03a8: sel[19] = $0
+03aa: sel[20] = $6789
+03ac: sel[21] = $0
+03ae: sel[22] = $2
+03b0: sel[23] = $35d
+03b2: sel[24] = $2
+03b4: sel[25] = $2
+03b6: sel[26] = $0
+03b8: sel[27] = $0
+03ba: sel[28] = $101
+03bc: sel[29] = $0
+03be: sel[30] = $0
+03c0: sel[31] = $0
+03c2: sel[32] = $0
+03c4: sel[33] = $0
+03c6: sel[34] = $0
+03c8: sel[35] = $0
+03ca: sel[36] = $0
+03cc: sel[37] = $0
+
+03d6: [Object section]
+	name = name6
+	species = 2e
+03de: sel[0] = $2e
+03e0: sel[1] = $2e
+03e2: sel[2] = $0
+03e4: sel[3] = string_11a6;  'name6'
+03e6: sel[4] = $8c
+03e8: sel[5] = $82
+03ea: sel[6] = $0
+03ec: sel[7] = $0
+03ee: sel[8] = $0
+03f0: sel[9] = $0
+03f2: sel[10] = $0
+03f4: sel[11] = $0
+03f6: sel[12] = $0
+03f8: sel[13] = $0
+03fa: sel[14] = $6789
+03fc: sel[15] = $0
+03fe: sel[16] = $6789
+0400: sel[17] = $0
+0402: sel[18] = $0
+0404: sel[19] = $0
+0406: sel[20] = $6789
+0408: sel[21] = $0
+040a: sel[22] = $2
+040c: sel[23] = $35d
+040e: sel[24] = $1
+0410: sel[25] = $1
+0412: sel[26] = $0
+0414: sel[27] = $0
+0416: sel[28] = $101
+0418: sel[29] = $0
+041a: sel[30] = $0
+041c: sel[31] = $0
+041e: sel[32] = $0
+0420: sel[33] = $0
+0422: sel[34] = $0
+0424: sel[35] = $0
+0426: sel[36] = $0
+0428: sel[37] = $0
+
+0432: [Object section]
+	name = name7
+	species = 2e
+043a: sel[0] = $2e
+043c: sel[1] = $2e
+043e: sel[2] = $0
+0440: sel[3] = string_11ac;  'name7'
+0442: sel[4] = $8c
+0444: sel[5] = $aa
+0446: sel[6] = $0
+0448: sel[7] = $0
+044a: sel[8] = $0
+044c: sel[9] = $0
+044e: sel[10] = $0
+0450: sel[11] = $0
+0452: sel[12] = $0
+0454: sel[13] = $0
+0456: sel[14] = $6789
+0458: sel[15] = $0
+045a: sel[16] = $6789
+045c: sel[17] = $0
+045e: sel[18] = $0
+0460: sel[19] = $0
+0462: sel[20] = $6789
+0464: sel[21] = $0
+0466: sel[22] = $2
+0468: sel[23] = $35d
+046a: sel[24] = $1
+046c: sel[25] = $2
+046e: sel[26] = $0
+0470: sel[27] = $0
+0472: sel[28] = $101
+0474: sel[29] = $0
+0476: sel[30] = $0
+0478: sel[31] = $0
+047a: sel[32] = $0
+047c: sel[33] = $0
+047e: sel[34] = $0
+0480: sel[35] = $0
+0482: sel[36] = $0
+0484: sel[37] = $0
+
+048e: [Object section]
+	name = name8
+	species = 2e
+0496: sel[0] = $2e
+0498: sel[1] = $2e
+049a: sel[2] = $0
+049c: sel[3] = string_11b2;  'name8'
+049e: sel[4] = $8c
+04a0: sel[5] = $96
+04a2: sel[6] = $0
+04a4: sel[7] = $0
+04a6: sel[8] = $0
+04a8: sel[9] = $0
+04aa: sel[10] = $0
+04ac: sel[11] = $0
+04ae: sel[12] = $0
+04b0: sel[13] = $0
+04b2: sel[14] = $6789
+04b4: sel[15] = $0
+04b6: sel[16] = $6789
+04b8: sel[17] = $0
+04ba: sel[18] = $0
+04bc: sel[19] = $0
+04be: sel[20] = $6789
+04c0: sel[21] = $0
+04c2: sel[22] = $2
+04c4: sel[23] = $35d
+04c6: sel[24] = $3
+04c8: sel[25] = $0
+04ca: sel[26] = $0
+04cc: sel[27] = $0
+04ce: sel[28] = $101
+04d0: sel[29] = $0
+04d2: sel[30] = $0
+04d4: sel[31] = $0
+04d6: sel[32] = $0
+04d8: sel[33] = $0
+04da: sel[34] = $0
+04dc: sel[35] = $0
+04de: sel[36] = $0
+04e0: sel[37] = $0
+
+04ea: [Object section]
+	name = name9
+	species = 2e
+04f2: sel[0] = $2e
+04f4: sel[1] = $2e
+04f6: sel[2] = $0
+04f8: sel[3] = string_11b8;  'name9'
+04fa: sel[4] = $8c
+04fc: sel[5] = $5a
+04fe: sel[6] = $0
+0500: sel[7] = $0
+0502: sel[8] = $0
+0504: sel[9] = $0
+0506: sel[10] = $0
+0508: sel[11] = $0
+050a: sel[12] = $0
+050c: sel[13] = $0
+050e: sel[14] = $6789
+0510: sel[15] = $0
+0512: sel[16] = $6789
+0514: sel[17] = $0
+0516: sel[18] = $0
+0518: sel[19] = $0
+051a: sel[20] = $6789
+051c: sel[21] = $0
+051e: sel[22] = $2
+0520: sel[23] = $35d
+0522: sel[24] = $1
+0524: sel[25] = $0
+0526: sel[26] = $0
+0528: sel[27] = $0
+052a: sel[28] = $101
+052c: sel[29] = $0
+052e: sel[30] = $0
+0530: sel[31] = $0
+0532: sel[32] = $0
+0534: sel[33] = $0
+0536: sel[34] = $0
+0538: sel[35] = $0
+053a: sel[36] = $0
+053c: sel[37] = $0
+
+0546: [Object section]
+	name = name10
+	species = 2e
+054e: sel[0] = $2e
+0550: sel[1] = $2e
+0552: sel[2] = $0
+0554: sel[3] = string_11be;  'name10'
+0556: sel[4] = $aa
+0558: sel[5] = $6e
+055a: sel[6] = $0
+055c: sel[7] = $0
+055e: sel[8] = $0
+0560: sel[9] = $0
+0562: sel[10] = $0
+0564: sel[11] = $0
+0566: sel[12] = $0
+0568: sel[13] = $0
+056a: sel[14] = $6789
+056c: sel[15] = $0
+056e: sel[16] = $6789
+0570: sel[17] = $0
+0572: sel[18] = $0
+0574: sel[19] = $0
+0576: sel[20] = $6789
+0578: sel[21] = $0
+057a: sel[22] = $2
+057c: sel[23] = $35d
+057e: sel[24] = $9
+0580: sel[25] = $2
+0582: sel[26] = $0
+0584: sel[27] = $0
+0586: sel[28] = $101
+0588: sel[29] = $0
+058a: sel[30] = $0
+058c: sel[31] = $0
+058e: sel[32] = $0
+0590: sel[33] = $0
+0592: sel[34] = $0
+0594: sel[35] = $0
+0596: sel[36] = $0
+0598: sel[37] = $0
+
+05a2: [Object section]
+	name = name11
+	species = 2e
+05aa: sel[0] = $2e
+05ac: sel[1] = $2e
+05ae: sel[2] = $0
+05b0: sel[3] = string_11c5;  'name11'
+05b2: sel[4] = $28
+05b4: sel[5] = $82
+05b6: sel[6] = $0
+05b8: sel[7] = $0
+05ba: sel[8] = $0
+05bc: sel[9] = $0
+05be: sel[10] = $0
+05c0: sel[11] = $0
+05c2: sel[12] = $0
+05c4: sel[13] = $0
+05c6: sel[14] = $6789
+05c8: sel[15] = $0
+05ca: sel[16] = $6789
+05cc: sel[17] = $0
+05ce: sel[18] = $0
+05d0: sel[19] = $0
+05d2: sel[20] = $6789
+05d4: sel[21] = $0
+05d6: sel[22] = $2
+05d8: sel[23] = $35d
+05da: sel[24] = $9
+05dc: sel[25] = $3
+05de: sel[26] = $0
+05e0: sel[27] = $0
+05e2: sel[28] = $101
+05e4: sel[29] = $0
+05e6: sel[30] = $0
+05e8: sel[31] = $0
+05ea: sel[32] = $0
+05ec: sel[33] = $0
+05ee: sel[34] = $0
+05f0: sel[35] = $0
+05f2: sel[36] = $0
+05f4: sel[37] = $0
+
+05fe: [Object section]
+	name = name12
+	species = 2e
+0606: sel[0] = $2e
+0608: sel[1] = $2e
+060a: sel[2] = $0
+060c: sel[3] = string_11cc;  'name12'
+060e: sel[4] = $aa
+0610: sel[5] = $82
+0612: sel[6] = $0
+0614: sel[7] = $0
+0616: sel[8] = $0
+0618: sel[9] = $0
+061a: sel[10] = $0
+061c: sel[11] = $0
+061e: sel[12] = $0
+0620: sel[13] = $0
+0622: sel[14] = $6789
+0624: sel[15] = $0
+0626: sel[16] = $6789
+0628: sel[17] = $0
+062a: sel[18] = $0
+062c: sel[19] = $0
+062e: sel[20] = $6789
+0630: sel[21] = $0
+0632: sel[22] = $2
+0634: sel[23] = $35d
+0636: sel[24] = $8
+0638: sel[25] = $3
+063a: sel[26] = $0
+063c: sel[27] = $0
+063e: sel[28] = $101
+0640: sel[29] = $0
+0642: sel[30] = $0
+0644: sel[31] = $0
+0646: sel[32] = $0
+0648: sel[33] = $0
+064a: sel[34] = $0
+064c: sel[35] = $0
+064e: sel[36] = $0
+0650: sel[37] = $0
+
+065a: [Object section]
+	name = name13
+	species = 2e
+0662: sel[0] = $2e
+0664: sel[1] = $2e
+0666: sel[2] = $0
+0668: sel[3] = string_11d3;  'name13'
+066a: sel[4] = $28
+066c: sel[5] = $96
+066e: sel[6] = $0
+0670: sel[7] = $0
+0672: sel[8] = $0
+0674: sel[9] = $0
+0676: sel[10] = $0
+0678: sel[11] = $0
+067a: sel[12] = $0
+067c: sel[13] = $0
+067e: sel[14] = $6789
+0680: sel[15] = $0
+0682: sel[16] = $6789
+0684: sel[17] = $0
+0686: sel[18] = $0
+0688: sel[19] = $0
+068a: sel[20] = $6789
+068c: sel[21] = $0
+068e: sel[22] = $2
+0690: sel[23] = $35d
+0692: sel[24] = $9
+0694: sel[25] = $4
+0696: sel[26] = $0
+0698: sel[27] = $0
+069a: sel[28] = $101
+069c: sel[29] = $0
+069e: sel[30] = $0
+06a0: sel[31] = $0
+06a2: sel[32] = $0
+06a4: sel[33] = $0
+06a6: sel[34] = $0
+06a8: sel[35] = $0
+06aa: sel[36] = $0
+06ac: sel[37] = $0
+
+06b6: [Object section]
+	name = name14
+	species = 2e
+06be: sel[0] = $2e
+06c0: sel[1] = $2e
+06c2: sel[2] = $0
+06c4: sel[3] = string_11da;  'name14'
+06c6: sel[4] = $aa
+06c8: sel[5] = $96
+06ca: sel[6] = $0
+06cc: sel[7] = $0
+06ce: sel[8] = $0
+06d0: sel[9] = $0
+06d2: sel[10] = $0
+06d4: sel[11] = $0
+06d6: sel[12] = $0
+06d8: sel[13] = $0
+06da: sel[14] = $6789
+06dc: sel[15] = $0
+06de: sel[16] = $6789
+06e0: sel[17] = $0
+06e2: sel[18] = $0
+06e4: sel[19] = $0
+06e6: sel[20] = $6789
+06e8: sel[21] = $0
+06ea: sel[22] = $2
+06ec: sel[23] = $35d
+06ee: sel[24] = $9
+06f0: sel[25] = $5
+06f2: sel[26] = $0
+06f4: sel[27] = $0
+06f6: sel[28] = $101
+06f8: sel[29] = $0
+06fa: sel[30] = $0
+06fc: sel[31] = $0
+06fe: sel[32] = $0
+0700: sel[33] = $0
+0702: sel[34] = $0
+0704: sel[35] = $0
+0706: sel[36] = $0
+0708: sel[37] = $0
+
+0712: [Object section]
+	name = name15
+	species = 2e
+071a: sel[0] = $2e
+071c: sel[1] = $2e
+071e: sel[2] = $0
+0720: sel[3] = string_11e1;  'name15'
+0722: sel[4] = $6b
+0724: sel[5] = $aa
+0726: sel[6] = $0
+0728: sel[7] = $0
+072a: sel[8] = $0
+072c: sel[9] = $0
+072e: sel[10] = $0
+0730: sel[11] = $0
+0732: sel[12] = $0
+0734: sel[13] = $0
+0736: sel[14] = $6789
+0738: sel[15] = $0
+073a: sel[16] = $6789
+073c: sel[17] = $0
+073e: sel[18] = $0
+0740: sel[19] = $0
+0742: sel[20] = $6789
+0744: sel[21] = $0
+0746: sel[22] = $2
+0748: sel[23] = $35d
+074a: sel[24] = $9
+074c: sel[25] = $6
+074e: sel[26] = $0
+0750: sel[27] = $0
+0752: sel[28] = $101
+0754: sel[29] = $0
+0756: sel[30] = $0
+0758: sel[31] = $0
+075a: sel[32] = $0
+075c: sel[33] = $0
+075e: sel[34] = $0
+0760: sel[35] = $0
+0762: sel[36] = $0
+0764: sel[37] = $0
+
+076e: [Code section]
+
+code_076e:
+076e: 39 40        pushi    $40                      
+0770: 76           push0                             
+0771: 87 01        lap      $01                      
+0773: 4a 04        send     $04                      
+0775: 36           push                              
+0776: 35 03        ldi      $03                      
+0778: 12           and                               
+0779: 30 000b      bnt      code_0787;  bt           
+077c: 39 22        pushi    $22                      
+077e: 76           push0                             
+077f: 87 01        lap      $01                      
+0781: 4a 04        send     $04                      
+0783: 36           push                              
+0784: 35 01        ldi      $01                      
+0786: 12           and                               
+
+code_0787:
+0787: 2e 19 00     bt       $19, $00                 
+078a: 39 22        pushi    $22                      
+078c: 76           push0                             
+078d: 87 01        lap      $01                      
+078f: 4a 04        send     $04                      
+0791: 36           push                              
+0792: 35 04        ldi      $04                      
+0794: 12           and                               
+0795: 30 001a      bnt      code_07b2;  pushi        
+0798: 39 28        pushi    $28                      
+079a: 76           push0                             
+079b: 87 01        lap      $01                      
+079d: 4a 04        send     $04                      
+079f: 36           push                              
+07a0: 35 1b        ldi      $1b                      
+07a2: 1a           eq?                               
+07a3: 30 000c      bnt      code_07b2;  pushi        
+07a6: 38 0081      pushi    $0081                    
+07a9: 78           push1                             
+07aa: 8f 01        lsp      $01                      
+07ac: 57 06 06     super    $06, $06                 
+07af: 32 004d      jmp      code_07ff;  ret          
+
+code_07b2:
+07b2: 39 22        pushi    $22                      
+07b4: 76           push0                             
+07b5: 87 01        lap      $01                      
+07b7: 4a 04        send     $04                      
+07b9: 36           push                              
+07ba: 35 01        ldi      $01                      
+07bc: 1a           eq?                               
+07bd: 2e 19 00     bt       $19, $00                 
+07c0: 39 22        pushi    $22                      
+07c2: 76           push0                             
+07c3: 87 01        lap      $01                      
+07c5: 4a 04        send     $04                      
+07c7: 36           push                              
+07c8: 35 04        ldi      $04                      
+07ca: 12           and                               
+07cb: 30 0028      bnt      code_07f6;  pushi        
+07ce: 39 28        pushi    $28                      
+07d0: 76           push0                             
+07d1: 87 01        lap      $01                      
+07d3: 4a 04        send     $04                      
+07d5: 36           push                              
+07d6: 35 0d        ldi      $0d                      
+07d8: 1a           eq?                               
+07d9: 30 001a      bnt      code_07f6;  pushi        
+07dc: 39 4c        pushi    $4c                      
+07de: 78           push1                             
+07df: 78           push1                             
+07e0: 87 01        lap      $01                      
+07e2: 4a 06        send     $06                      
+07e4: 38 008d      pushi    $008d                    
+07e7: 76           push0                             
+07e8: 54 04        self     $04                      
+07ea: 38 0081      pushi    $0081                    
+07ed: 78           push1                             
+07ee: 8f 01        lsp      $01                      
+07f0: 57 06 06     super    $06, $06                 
+07f3: 32 0009      jmp      code_07ff;  ret          
+
+code_07f6:
+07f6: 38 0081      pushi    $0081                    
+07f9: 78           push1                             
+07fa: 8f 01        lsp      $01                      
+07fc: 57 06 06     super    $06, $06                 
+
+code_07ff:
+07ff: 48           ret                               
+
+code_0800:
+0800: 87 01        lap      $01                      
+0802: 65 0a        aTop     $0a                      
+0804: 36           push                              
+0805: 3c           dup                               
+0806: 35 00        ldi      $00                      
+0808: 1a           eq?                               
+0809: 30 000e      bnt      code_081a;  dup          
+080c: 35 00        ldi      $00                      
+080e: 76           push0                             
+080f: 45 03 00     callb    $03, $00                 
+0812: 34 58 02     ldi      $58, $02                 
+0815: 65 16        aTop     $16                      
+0817: 32 091e      jmp      code_1138;  toss         
+
+code_081a:
+081a: 3c           dup                               
+081b: 35 01        ldi      $01                      
+081d: 1a           eq?                               
+081e: 30 006e      bnt      code_088f;  dup          
+0821: 35 01        ldi      $01                      
+0823: 38 00c9      pushi    $00c9                    
+0826: 76           push0                             
+0827: 81 45        lag      $45                      
+0829: 4a 04        send     $04                      
+082b: 38 018c      pushi    $018c                    
+082e: 7a           push2                             
+082f: 38 0323      pushi    $0323                    
+0832: 8b 00        lsl      $00                      
+0834: 81 02        lag      $02                      
+0836: 4a 08        send     $08                      
+0838: 39 69        pushi    $69                      
+083a: 76           push0                             
+083b: 72 01b6      lofsa    short_01b6;  $002e       
+083e: 4a 04        send     $04                      
+0840: 39 69        pushi    $69                      
+0842: 76           push0                             
+0843: 72 0212      lofsa    short_0212;  $002e       
+0846: 4a 04        send     $04                      
+0848: 39 69        pushi    $69                      
+084a: 76           push0                             
+084b: 72 026e      lofsa    short_026e;  $002e       
+084e: 4a 04        send     $04                      
+0850: 39 69        pushi    $69                      
+0852: 76           push0                             
+0853: 72 02ca      lofsa    short_02ca;  $002e       
+0856: 4a 04        send     $04                      
+0858: 39 69        pushi    $69                      
+085a: 76           push0                             
+085b: 72 0326      lofsa    short_0326;  $002e       
+085e: 4a 04        send     $04                      
+0860: 39 69        pushi    $69                      
+0862: 76           push0                             
+0863: 72 0382      lofsa    short_0382;  $002e       
+0866: 4a 04        send     $04                      
+0868: 39 69        pushi    $69                      
+086a: 76           push0                             
+086b: 72 03de      lofsa    short_03de;  $002e       
+086e: 4a 04        send     $04                      
+0870: 39 69        pushi    $69                      
+0872: 76           push0                             
+0873: 72 043a      lofsa    short_043a;  $002e       
+0876: 4a 04        send     $04                      
+0878: 39 69        pushi    $69                      
+087a: 76           push0                             
+087b: 72 0496      lofsa    short_0496;  $002e       
+087e: 4a 04        send     $04                      
+0880: 39 69        pushi    $69                      
+0882: 76           push0                             
+0883: 72 04f2      lofsa    short_04f2;  $002e       
+0886: 4a 04        send     $04                      
+0888: 35 06        ldi      $06                      
+088a: 65 16        aTop     $16                      
+088c: 32 08a9      jmp      code_1138;  toss         
+
+code_088f:
+088f: 3c           dup                               
+0890: 35 02        ldi      $02                      
+0892: 1a           eq?                               
+0893: 30 00c1      bnt      code_0957;  dup          
+0896: 35 02        ldi      $02                      
+0898: 38 018c      pushi    $018c                    
+089b: 7a           push2                             
+089c: 38 0389      pushi    $0389                    
+089f: 8b 00        lsl      $00                      
+08a1: 81 02        lag      $02                      
+08a3: 4a 08        send     $08                      
+08a5: 39 06        pushi    $06                      
+08a7: 78           push1                             
+08a8: 7a           push2                             
+08a9: 39 07        pushi    $07                      
+08ab: 78           push1                             
+08ac: 76           push0                             
+08ad: 39 04        pushi    $04                      
+08af: 78           push1                             
+08b0: 39 04        pushi    $04                      
+08b2: 39 03        pushi    $03                      
+08b4: 78           push1                             
+08b5: 39 32        pushi    $32                      
+08b7: 38 00c2      pushi    $00c2                    
+08ba: 76           push0                             
+08bb: 72 01b6      lofsa    short_01b6;  $002e       
+08be: 4a 1c        send     $1c                      
+08c0: 39 06        pushi    $06                      
+08c2: 78           push1                             
+08c3: 7a           push2                             
+08c4: 39 07        pushi    $07                      
+08c6: 78           push1                             
+08c7: 78           push1                             
+08c8: 39 04        pushi    $04                      
+08ca: 78           push1                             
+08cb: 38 008c      pushi    $008c                    
+08ce: 39 03        pushi    $03                      
+08d0: 78           push1                             
+08d1: 39 46        pushi    $46                      
+08d3: 38 00c2      pushi    $00c2                    
+08d6: 76           push0                             
+08d7: 72 0212      lofsa    short_0212;  $002e       
+08da: 4a 1c        send     $1c                      
+08dc: 39 06        pushi    $06                      
+08de: 78           push1                             
+08df: 7a           push2                             
+08e0: 39 07        pushi    $07                      
+08e2: 78           push1                             
+08e3: 7a           push2                             
+08e4: 39 04        pushi    $04                      
+08e6: 78           push1                             
+08e7: 38 008c      pushi    $008c                    
+08ea: 39 03        pushi    $03                      
+08ec: 78           push1                             
+08ed: 39 5a        pushi    $5a                      
+08ef: 38 00c2      pushi    $00c2                    
+08f2: 76           push0                             
+08f3: 72 026e      lofsa    short_026e;  $002e       
+08f6: 4a 1c        send     $1c                      
+08f8: 39 06        pushi    $06                      
+08fa: 78           push1                             
+08fb: 7a           push2                             
+08fc: 39 07        pushi    $07                      
+08fe: 78           push1                             
+08ff: 39 03        pushi    $03                      
+0901: 39 04        pushi    $04                      
+0903: 78           push1                             
+0904: 38 008c      pushi    $008c                    
+0907: 39 03        pushi    $03                      
+0909: 78           push1                             
+090a: 39 6e        pushi    $6e                      
+090c: 38 00c2      pushi    $00c2                    
+090f: 76           push0                             
+0910: 72 02ca      lofsa    short_02ca;  $002e       
+0913: 4a 1c        send     $1c                      
+0915: 39 06        pushi    $06                      
+0917: 78           push1                             
+0918: 39 03        pushi    $03                      
+091a: 39 07        pushi    $07                      
+091c: 78           push1                             
+091d: 78           push1                             
+091e: 39 04        pushi    $04                      
+0920: 78           push1                             
+0921: 38 008c      pushi    $008c                    
+0924: 39 03        pushi    $03                      
+0926: 78           push1                             
+0927: 38 0082      pushi    $0082                    
+092a: 38 00c2      pushi    $00c2                    
+092d: 76           push0                             
+092e: 72 0326      lofsa    short_0326;  $002e       
+0931: 4a 1c        send     $1c                      
+0933: 39 06        pushi    $06                      
+0935: 78           push1                             
+0936: 76           push0                             
+0937: 39 07        pushi    $07                      
+0939: 78           push1                             
+093a: 78           push1                             
+093b: 39 04        pushi    $04                      
+093d: 78           push1                             
+093e: 38 008c      pushi    $008c                    
+0941: 39 03        pushi    $03                      
+0943: 78           push1                             
+0944: 38 0096      pushi    $0096                    
+0947: 38 00c2      pushi    $00c2                    
+094a: 76           push0                             
+094b: 72 0382      lofsa    short_0382;  $002e       
+094e: 4a 1c        send     $1c                      
+0950: 35 06        ldi      $06                      
+0952: 65 16        aTop     $16                      
+0954: 32 07e1      jmp      code_1138;  toss         
+
+code_0957:
+0957: 3c           dup                               
+0958: 35 03        ldi      $03                      
+095a: 1a           eq?                               
+095b: 30 0012      bnt      code_0970;  dup          
+095e: 35 03        ldi      $03                      
+0960: 38 00a7      pushi    $00a7                    
+0963: 76           push0                             
+0964: 81 45        lag      $45                      
+0966: 4a 04        send     $04                      
+0968: 34 58 02     ldi      $58, $02                 
+096b: 65 16        aTop     $16                      
+096d: 32 07c8      jmp      code_1138;  toss         
+
+code_0970:
+0970: 3c           dup                               
+0971: 35 04        ldi      $04                      
+0973: 1a           eq?                               
+0974: 30 004e      bnt      code_09c5;  dup          
+0977: 35 04        ldi      $04                      
+0979: 38 00c9      pushi    $00c9                    
+097c: 76           push0                             
+097d: 81 45        lag      $45                      
+097f: 4a 04        send     $04                      
+0981: 38 018c      pushi    $018c                    
+0984: 7a           push2                             
+0985: 38 0323      pushi    $0323                    
+0988: 8b 00        lsl      $00                      
+098a: 81 02        lag      $02                      
+098c: 4a 08        send     $08                      
+098e: 39 69        pushi    $69                      
+0990: 76           push0                             
+0991: 72 01b6      lofsa    short_01b6;  $002e       
+0994: 4a 04        send     $04                      
+0996: 39 69        pushi    $69                      
+0998: 76           push0                             
+0999: 72 0212      lofsa    short_0212;  $002e       
+099c: 4a 04        send     $04                      
+099e: 39 69        pushi    $69                      
+09a0: 76           push0                             
+09a1: 72 026e      lofsa    short_026e;  $002e       
+09a4: 4a 04        send     $04                      
+09a6: 39 69        pushi    $69                      
+09a8: 76           push0                             
+09a9: 72 02ca      lofsa    short_02ca;  $002e       
+09ac: 4a 04        send     $04                      
+09ae: 39 69        pushi    $69                      
+09b0: 76           push0                             
+09b1: 72 0326      lofsa    short_0326;  $002e       
+09b4: 4a 04        send     $04                      
+09b6: 39 69        pushi    $69                      
+09b8: 76           push0                             
+09b9: 72 0382      lofsa    short_0382;  $002e       
+09bc: 4a 04        send     $04                      
+09be: 35 06        ldi      $06                      
+09c0: 65 16        aTop     $16                      
+09c2: 32 0773      jmp      code_1138;  toss         
+
+code_09c5:
+09c5: 3c           dup                               
+09c6: 35 05        ldi      $05                      
+09c8: 1a           eq?                               
+09c9: 30 0153      bnt      code_0b1f;  dup          
+09cc: 35 05        ldi      $05                      
+09ce: 38 018c      pushi    $018c                    
+09d1: 7a           push2                             
+09d2: 38 0389      pushi    $0389                    
+09d5: 8b 00        lsl      $00                      
+09d7: 81 02        lag      $02                      
+09d9: 4a 08        send     $08                      
+09db: 39 06        pushi    $06                      
+09dd: 78           push1                             
+09de: 39 04        pushi    $04                      
+09e0: 39 07        pushi    $07                      
+09e2: 78           push1                             
+09e3: 76           push0                             
+09e4: 39 04        pushi    $04                      
+09e6: 78           push1                             
+09e7: 39 6b        pushi    $6b                      
+09e9: 39 03        pushi    $03                      
+09eb: 78           push1                             
+09ec: 39 1e        pushi    $1e                      
+09ee: 38 00c2      pushi    $00c2                    
+09f1: 76           push0                             
+09f2: 72 01b6      lofsa    short_01b6;  $002e       
+09f5: 4a 1c        send     $1c                      
+09f7: 39 06        pushi    $06                      
+09f9: 78           push1                             
+09fa: 39 04        pushi    $04                      
+09fc: 39 07        pushi    $07                      
+09fe: 78           push1                             
+09ff: 7a           push2                             
+0a00: 39 04        pushi    $04                      
+0a02: 78           push1                             
+0a03: 39 28        pushi    $28                      
+0a05: 39 03        pushi    $03                      
+0a07: 78           push1                             
+0a08: 39 32        pushi    $32                      
+0a0a: 38 00c2      pushi    $00c2                    
+0a0d: 76           push0                             
+0a0e: 72 0212      lofsa    short_0212;  $002e       
+0a11: 4a 1c        send     $1c                      
+0a13: 39 06        pushi    $06                      
+0a15: 78           push1                             
+0a16: 39 04        pushi    $04                      
+0a18: 39 07        pushi    $07                      
+0a1a: 78           push1                             
+0a1b: 78           push1                             
+0a1c: 39 04        pushi    $04                      
+0a1e: 78           push1                             
+0a1f: 38 00aa      pushi    $00aa                    
+0a22: 39 03        pushi    $03                      
+0a24: 78           push1                             
+0a25: 39 32        pushi    $32                      
+0a27: 38 00c2      pushi    $00c2                    
+0a2a: 76           push0                             
+0a2b: 72 026e      lofsa    short_026e;  $002e       
+0a2e: 4a 1c        send     $1c                      
+0a30: 39 06        pushi    $06                      
+0a32: 78           push1                             
+0a33: 39 04        pushi    $04                      
+0a35: 39 07        pushi    $07                      
+0a37: 78           push1                             
+0a38: 39 03        pushi    $03                      
+0a3a: 39 04        pushi    $04                      
+0a3c: 78           push1                             
+0a3d: 39 28        pushi    $28                      
+0a3f: 39 03        pushi    $03                      
+0a41: 78           push1                             
+0a42: 39 46        pushi    $46                      
+0a44: 38 00c2      pushi    $00c2                    
+0a47: 76           push0                             
+0a48: 72 02ca      lofsa    short_02ca;  $002e       
+0a4b: 4a 1c        send     $1c                      
+0a4d: 39 06        pushi    $06                      
+0a4f: 78           push1                             
+0a50: 39 05        pushi    $05                      
+0a52: 39 07        pushi    $07                      
+0a54: 78           push1                             
+0a55: 78           push1                             
+0a56: 39 04        pushi    $04                      
+0a58: 78           push1                             
+0a59: 38 00aa      pushi    $00aa                    
+0a5c: 39 03        pushi    $03                      
+0a5e: 78           push1                             
+0a5f: 39 46        pushi    $46                      
+0a61: 38 00c2      pushi    $00c2                    
+0a64: 76           push0                             
+0a65: 72 0326      lofsa    short_0326;  $002e       
+0a68: 4a 1c        send     $1c                      
+0a6a: 39 06        pushi    $06                      
+0a6c: 78           push1                             
+0a6d: 39 05        pushi    $05                      
+0a6f: 39 07        pushi    $07                      
+0a71: 78           push1                             
+0a72: 7a           push2                             
+0a73: 39 04        pushi    $04                      
+0a75: 78           push1                             
+0a76: 39 28        pushi    $28                      
+0a78: 39 03        pushi    $03                      
+0a7a: 78           push1                             
+0a7b: 39 5a        pushi    $5a                      
+0a7d: 38 00c2      pushi    $00c2                    
+0a80: 76           push0                             
+0a81: 72 0382      lofsa    short_0382;  $002e       
+0a84: 4a 1c        send     $1c                      
+0a86: 39 06        pushi    $06                      
+0a88: 78           push1                             
+0a89: 39 05        pushi    $05                      
+0a8b: 39 07        pushi    $07                      
+0a8d: 78           push1                             
+0a8e: 76           push0                             
+0a8f: 39 04        pushi    $04                      
+0a91: 78           push1                             
+0a92: 38 00aa      pushi    $00aa                    
+0a95: 39 03        pushi    $03                      
+0a97: 78           push1                             
+0a98: 39 5a        pushi    $5a                      
+0a9a: 38 00c2      pushi    $00c2                    
+0a9d: 76           push0                             
+0a9e: 72 03de      lofsa    short_03de;  $002e       
+0aa1: 4a 1c        send     $1c                      
+0aa3: 39 06        pushi    $06                      
+0aa5: 78           push1                             
+0aa6: 39 06        pushi    $06                      
+0aa8: 39 07        pushi    $07                      
+0aaa: 78           push1                             
+0aab: 7a           push2                             
+0aac: 39 04        pushi    $04                      
+0aae: 78           push1                             
+0aaf: 39 28        pushi    $28                      
+0ab1: 39 03        pushi    $03                      
+0ab3: 78           push1                             
+0ab4: 39 6e        pushi    $6e                      
+0ab6: 38 00c2      pushi    $00c2                    
+0ab9: 76           push0                             
+0aba: 72 043a      lofsa    short_043a;  $002e       
+0abd: 4a 1c        send     $1c                      
+0abf: 39 06        pushi    $06                      
+0ac1: 78           push1                             
+0ac2: 39 06        pushi    $06                      
+0ac4: 39 07        pushi    $07                      
+0ac6: 78           push1                             
+0ac7: 78           push1                             
+0ac8: 39 04        pushi    $04                      
+0aca: 78           push1                             
+0acb: 38 00aa      pushi    $00aa                    
+0ace: 39 03        pushi    $03                      
+0ad0: 78           push1                             
+0ad1: 39 6e        pushi    $6e                      
+0ad3: 38 00c2      pushi    $00c2                    
+0ad6: 76           push0                             
+0ad7: 72 0496      lofsa    short_0496;  $002e       
+0ada: 4a 1c        send     $1c                      
+0adc: 39 06        pushi    $06                      
+0ade: 78           push1                             
+0adf: 39 0a        pushi    $0a                      
+0ae1: 39 07        pushi    $07                      
+0ae3: 78           push1                             
+0ae4: 39 05        pushi    $05                      
+0ae6: 39 04        pushi    $04                      
+0ae8: 78           push1                             
+0ae9: 38 00aa      pushi    $00aa                    
+0aec: 39 03        pushi    $03                      
+0aee: 78           push1                             
+0aef: 38 0082      pushi    $0082                    
+0af2: 38 00c2      pushi    $00c2                    
+0af5: 76           push0                             
+0af6: 72 04f2      lofsa    short_04f2;  $002e       
+0af9: 4a 1c        send     $1c                      
+0afb: 39 06        pushi    $06                      
+0afd: 78           push1                             
+0afe: 39 0a        pushi    $0a                      
+0b00: 39 07        pushi    $07                      
+0b02: 78           push1                             
+0b03: 39 04        pushi    $04                      
+0b05: 3c           dup                               
+0b06: 78           push1                             
+0b07: 39 28        pushi    $28                      
+0b09: 39 03        pushi    $03                      
+0b0b: 78           push1                             
+0b0c: 38 0082      pushi    $0082                    
+0b0f: 38 00c2      pushi    $00c2                    
+0b12: 76           push0                             
+0b13: 72 054e      lofsa    short_054e;  $002e       
+0b16: 4a 1c        send     $1c                      
+0b18: 35 06        ldi      $06                      
+0b1a: 65 16        aTop     $16                      
+0b1c: 32 0619      jmp      code_1138;  toss         
+
+code_0b1f:
+0b1f: 3c           dup                               
+0b20: 35 06        ldi      $06                      
+0b22: 1a           eq?                               
+0b23: 30 0012      bnt      code_0b38;  dup          
+0b26: 35 06        ldi      $06                      
+0b28: 38 00a7      pushi    $00a7                    
+0b2b: 76           push0                             
+0b2c: 81 45        lag      $45                      
+0b2e: 4a 04        send     $04                      
+0b30: 34 58 02     ldi      $58, $02                 
+0b33: 65 16        aTop     $16                      
+0b35: 32 0600      jmp      code_1138;  toss         
+
+code_0b38:
+0b38: 3c           dup                               
+0b39: 35 07        ldi      $07                      
+0b3b: 1a           eq?                               
+0b3c: 30 0076      bnt      code_0bb5;  dup          
+0b3f: 35 07        ldi      $07                      
+0b41: 38 00c9      pushi    $00c9                    
+0b44: 76           push0                             
+0b45: 81 45        lag      $45                      
+0b47: 4a 04        send     $04                      
+0b49: 38 018c      pushi    $018c                    
+0b4c: 7a           push2                             
+0b4d: 38 0323      pushi    $0323                    
+0b50: 8b 00        lsl      $00                      
+0b52: 81 02        lag      $02                      
+0b54: 4a 08        send     $08                      
+0b56: 39 69        pushi    $69                      
+0b58: 76           push0                             
+0b59: 72 01b6      lofsa    short_01b6;  $002e       
+0b5c: 4a 04        send     $04                      
+0b5e: 39 69        pushi    $69                      
+0b60: 76           push0                             
+0b61: 72 0212      lofsa    short_0212;  $002e       
+0b64: 4a 04        send     $04                      
+0b66: 39 69        pushi    $69                      
+0b68: 76           push0                             
+0b69: 72 026e      lofsa    short_026e;  $002e       
+0b6c: 4a 04        send     $04                      
+0b6e: 39 69        pushi    $69                      
+0b70: 76           push0                             
+0b71: 72 02ca      lofsa    short_02ca;  $002e       
+0b74: 4a 04        send     $04                      
+0b76: 39 69        pushi    $69                      
+0b78: 76           push0                             
+0b79: 72 0326      lofsa    short_0326;  $002e       
+0b7c: 4a 04        send     $04                      
+0b7e: 39 69        pushi    $69                      
+0b80: 76           push0                             
+0b81: 72 0382      lofsa    short_0382;  $002e       
+0b84: 4a 04        send     $04                      
+0b86: 39 69        pushi    $69                      
+0b88: 76           push0                             
+0b89: 72 03de      lofsa    short_03de;  $002e       
+0b8c: 4a 04        send     $04                      
+0b8e: 39 69        pushi    $69                      
+0b90: 76           push0                             
+0b91: 72 043a      lofsa    short_043a;  $002e       
+0b94: 4a 04        send     $04                      
+0b96: 39 69        pushi    $69                      
+0b98: 76           push0                             
+0b99: 72 0496      lofsa    short_0496;  $002e       
+0b9c: 4a 04        send     $04                      
+0b9e: 39 69        pushi    $69                      
+0ba0: 76           push0                             
+0ba1: 72 04f2      lofsa    short_04f2;  $002e       
+0ba4: 4a 04        send     $04                      
+0ba6: 39 69        pushi    $69                      
+0ba8: 76           push0                             
+0ba9: 72 054e      lofsa    short_054e;  $002e       
+0bac: 4a 04        send     $04                      
+0bae: 35 06        ldi      $06                      
+0bb0: 65 16        aTop     $16                      
+0bb2: 32 0583      jmp      code_1138;  toss         
+
+code_0bb5:
+0bb5: 3c           dup                               
+0bb6: 35 08        ldi      $08                      
+0bb8: 1a           eq?                               
+0bb9: 30 0193      bnt      code_0d4f;  dup          
+0bbc: 35 08        ldi      $08                      
+0bbe: 38 018c      pushi    $018c                    
+0bc1: 7a           push2                             
+0bc2: 38 0389      pushi    $0389                    
+0bc5: 8b 00        lsl      $00                      
+0bc7: 81 02        lag      $02                      
+0bc9: 4a 08        send     $08                      
+0bcb: 39 06        pushi    $06                      
+0bcd: 78           push1                             
+0bce: 39 07        pushi    $07                      
+0bd0: 3c           dup                               
+0bd1: 78           push1                             
+0bd2: 76           push0                             
+0bd3: 39 04        pushi    $04                      
+0bd5: 78           push1                             
+0bd6: 39 32        pushi    $32                      
+0bd8: 39 03        pushi    $03                      
+0bda: 78           push1                             
+0bdb: 39 0a        pushi    $0a                      
+0bdd: 38 00c2      pushi    $00c2                    
+0be0: 76           push0                             
+0be1: 72 01b6      lofsa    short_01b6;  $002e       
+0be4: 4a 1c        send     $1c                      
+0be6: 39 06        pushi    $06                      
+0be8: 78           push1                             
+0be9: 39 07        pushi    $07                      
+0beb: 3c           dup                               
+0bec: 78           push1                             
+0bed: 78           push1                             
+0bee: 39 04        pushi    $04                      
+0bf0: 78           push1                             
+0bf1: 39 28        pushi    $28                      
+0bf3: 39 03        pushi    $03                      
+0bf5: 78           push1                             
+0bf6: 39 1e        pushi    $1e                      
+0bf8: 38 00c2      pushi    $00c2                    
+0bfb: 76           push0                             
+0bfc: 72 0212      lofsa    short_0212;  $002e       
+0bff: 4a 1c        send     $1c                      
+0c01: 39 06        pushi    $06                      
+0c03: 78           push1                             
+0c04: 39 07        pushi    $07                      
+0c06: 3c           dup                               
+0c07: 78           push1                             
+0c08: 7a           push2                             
+0c09: 39 04        pushi    $04                      
+0c0b: 78           push1                             
+0c0c: 38 00aa      pushi    $00aa                    
+0c0f: 39 03        pushi    $03                      
+0c11: 78           push1                             
+0c12: 39 1e        pushi    $1e                      
+0c14: 38 00c2      pushi    $00c2                    
+0c17: 76           push0                             
+0c18: 72 026e      lofsa    short_026e;  $002e       
+0c1b: 4a 1c        send     $1c                      
+0c1d: 39 06        pushi    $06                      
+0c1f: 78           push1                             
+0c20: 39 08        pushi    $08                      
+0c22: 39 07        pushi    $07                      
+0c24: 78           push1                             
+0c25: 7a           push2                             
+0c26: 39 04        pushi    $04                      
+0c28: 78           push1                             
+0c29: 39 28        pushi    $28                      
+0c2b: 39 03        pushi    $03                      
+0c2d: 78           push1                             
+0c2e: 39 32        pushi    $32                      
+0c30: 38 00c2      pushi    $00c2                    
+0c33: 76           push0                             
+0c34: 72 02ca      lofsa    short_02ca;  $002e       
+0c37: 4a 1c        send     $1c                      
+0c39: 39 06        pushi    $06                      
+0c3b: 78           push1                             
+0c3c: 39 07        pushi    $07                      
+0c3e: 3c           dup                               
+0c3f: 78           push1                             
+0c40: 39 04        pushi    $04                      
+0c42: 3c           dup                               
+0c43: 78           push1                             
+0c44: 38 00aa      pushi    $00aa                    
+0c47: 39 03        pushi    $03                      
+0c49: 78           push1                             
+0c4a: 39 32        pushi    $32                      
+0c4c: 38 00c2      pushi    $00c2                    
+0c4f: 76           push0                             
+0c50: 72 0326      lofsa    short_0326;  $002e       
+0c53: 4a 1c        send     $1c                      
+0c55: 39 06        pushi    $06                      
+0c57: 78           push1                             
+0c58: 39 06        pushi    $06                      
+0c5a: 39 07        pushi    $07                      
+0c5c: 78           push1                             
+0c5d: 7a           push2                             
+0c5e: 39 04        pushi    $04                      
+0c60: 78           push1                             
+0c61: 39 28        pushi    $28                      
+0c63: 39 03        pushi    $03                      
+0c65: 78           push1                             
+0c66: 39 46        pushi    $46                      
+0c68: 38 00c2      pushi    $00c2                    
+0c6b: 76           push0                             
+0c6c: 72 0382      lofsa    short_0382;  $002e       
+0c6f: 4a 1c        send     $1c                      
+0c71: 39 06        pushi    $06                      
+0c73: 78           push1                             
+0c74: 39 07        pushi    $07                      
+0c76: 3c           dup                               
+0c77: 78           push1                             
+0c78: 39 05        pushi    $05                      
+0c7a: 39 04        pushi    $04                      
+0c7c: 78           push1                             
+0c7d: 38 00aa      pushi    $00aa                    
+0c80: 39 03        pushi    $03                      
+0c82: 78           push1                             
+0c83: 39 46        pushi    $46                      
+0c85: 38 00c2      pushi    $00c2                    
+0c88: 76           push0                             
+0c89: 72 03de      lofsa    short_03de;  $002e       
+0c8c: 4a 1c        send     $1c                      
+0c8e: 39 06        pushi    $06                      
+0c90: 78           push1                             
+0c91: 39 07        pushi    $07                      
+0c93: 3c           dup                               
+0c94: 78           push1                             
+0c95: 39 06        pushi    $06                      
+0c97: 39 04        pushi    $04                      
+0c99: 78           push1                             
+0c9a: 39 28        pushi    $28                      
+0c9c: 39 03        pushi    $03                      
+0c9e: 78           push1                             
+0c9f: 39 5a        pushi    $5a                      
+0ca1: 38 00c2      pushi    $00c2                    
+0ca4: 76           push0                             
+0ca5: 72 043a      lofsa    short_043a;  $002e       
+0ca8: 4a 1c        send     $1c                      
+0caa: 39 06        pushi    $06                      
+0cac: 78           push1                             
+0cad: 39 09        pushi    $09                      
+0caf: 39 07        pushi    $07                      
+0cb1: 78           push1                             
+0cb2: 76           push0                             
+0cb3: 39 04        pushi    $04                      
+0cb5: 78           push1                             
+0cb6: 38 00aa      pushi    $00aa                    
+0cb9: 39 03        pushi    $03                      
+0cbb: 78           push1                             
+0cbc: 39 5a        pushi    $5a                      
+0cbe: 38 00c2      pushi    $00c2                    
+0cc1: 76           push0                             
+0cc2: 72 0496      lofsa    short_0496;  $002e       
+0cc5: 4a 1c        send     $1c                      
+0cc7: 39 06        pushi    $06                      
+0cc9: 78           push1                             
+0cca: 39 09        pushi    $09                      
+0ccc: 39 07        pushi    $07                      
+0cce: 78           push1                             
+0ccf: 78           push1                             
+0cd0: 39 04        pushi    $04                      
+0cd2: 78           push1                             
+0cd3: 39 28        pushi    $28                      
+0cd5: 39 03        pushi    $03                      
+0cd7: 78           push1                             
+0cd8: 39 6e        pushi    $6e                      
+0cda: 38 00c2      pushi    $00c2                    
+0cdd: 76           push0                             
+0cde: 72 04f2      lofsa    short_04f2;  $002e       
+0ce1: 4a 1c        send     $1c                      
+0ce3: 39 06        pushi    $06                      
+0ce5: 78           push1                             
+0ce6: 39 09        pushi    $09                      
+0ce8: 39 07        pushi    $07                      
+0cea: 78           push1                             
+0ceb: 7a           push2                             
+0cec: 39 04        pushi    $04                      
+0cee: 78           push1                             
+0cef: 38 00aa      pushi    $00aa                    
+0cf2: 39 03        pushi    $03                      
+0cf4: 78           push1                             
+0cf5: 39 6e        pushi    $6e                      
+0cf7: 38 00c2      pushi    $00c2                    
+0cfa: 76           push0                             
+0cfb: 72 054e      lofsa    short_054e;  $002e       
+0cfe: 4a 1c        send     $1c                      
+0d00: 39 05        pushi    $05                      
+0d02: 78           push1                             
+0d03: 38 035d      pushi    $035d                    
+0d06: 39 06        pushi    $06                      
+0d08: 78           push1                             
+0d09: 39 09        pushi    $09                      
+0d0b: 39 07        pushi    $07                      
+0d0d: 78           push1                             
+0d0e: 39 03        pushi    $03                      
+0d10: 39 04        pushi    $04                      
+0d12: 78           push1                             
+0d13: 39 28        pushi    $28                      
+0d15: 39 03        pushi    $03                      
+0d17: 78           push1                             
+0d18: 38 0082      pushi    $0082                    
+0d1b: 38 00c2      pushi    $00c2                    
+0d1e: 76           push0                             
+0d1f: 72 05aa      lofsa    short_05aa;  $002e       
+0d22: 4a 22        send     $22                      
+0d24: 38 00c2      pushi    $00c2                    
+0d27: 76           push0                             
+0d28: 72 0606      lofsa    short_0606;  $002e       
+0d2b: 4a 04        send     $04                      
+0d2d: 38 00c2      pushi    $00c2                    
+0d30: 76           push0                             
+0d31: 72 0662      lofsa    short_0662;  $002e       
+0d34: 4a 04        send     $04                      
+0d36: 38 00c2      pushi    $00c2                    
+0d39: 76           push0                             
+0d3a: 72 06be      lofsa    short_06be;  $002e       
+0d3d: 4a 04        send     $04                      
+0d3f: 38 00c2      pushi    $00c2                    
+0d42: 76           push0                             
+0d43: 72 071a      lofsa    short_071a;  $002e       
+0d46: 4a 04        send     $04                      
+0d48: 35 06        ldi      $06                      
+0d4a: 65 16        aTop     $16                      
+0d4c: 32 03e9      jmp      code_1138;  toss         
+
+code_0d4f:
+0d4f: 3c           dup                               
+0d50: 35 09        ldi      $09                      
+0d52: 1a           eq?                               
+0d53: 30 0012      bnt      code_0d68;  dup          
+0d56: 35 09        ldi      $09                      
+0d58: 38 00a7      pushi    $00a7                    
+0d5b: 76           push0                             
+0d5c: 81 45        lag      $45                      
+0d5e: 4a 04        send     $04                      
+0d60: 34 84 03     ldi      $84, $03                 
+0d63: 65 16        aTop     $16                      
+0d65: 32 03d0      jmp      code_1138;  toss         
+
+code_0d68:
+0d68: 3c           dup                               
+0d69: 35 0a        ldi      $0a                      
+0d6b: 1a           eq?                               
+0d6c: 30 009e      bnt      code_0e0d;  dup          
+0d6f: 35 0a        ldi      $0a                      
+0d71: 38 00c9      pushi    $00c9                    
+0d74: 76           push0                             
+0d75: 81 45        lag      $45                      
+0d77: 4a 04        send     $04                      
+0d79: 38 018c      pushi    $018c                    
+0d7c: 7a           push2                             
+0d7d: 38 0323      pushi    $0323                    
+0d80: 8b 00        lsl      $00                      
+0d82: 81 02        lag      $02                      
+0d84: 4a 08        send     $08                      
+0d86: 39 69        pushi    $69                      
+0d88: 76           push0                             
+0d89: 72 01b6      lofsa    short_01b6;  $002e       
+0d8c: 4a 04        send     $04                      
+0d8e: 39 69        pushi    $69                      
+0d90: 76           push0                             
+0d91: 72 0212      lofsa    short_0212;  $002e       
+0d94: 4a 04        send     $04                      
+0d96: 39 69        pushi    $69                      
+0d98: 76           push0                             
+0d99: 72 026e      lofsa    short_026e;  $002e       
+0d9c: 4a 04        send     $04                      
+0d9e: 39 69        pushi    $69                      
+0da0: 76           push0                             
+0da1: 72 02ca      lofsa    short_02ca;  $002e       
+0da4: 4a 04        send     $04                      
+0da6: 39 69        pushi    $69                      
+0da8: 76           push0                             
+0da9: 72 0326      lofsa    short_0326;  $002e       
+0dac: 4a 04        send     $04                      
+0dae: 39 69        pushi    $69                      
+0db0: 76           push0                             
+0db1: 72 0382      lofsa    short_0382;  $002e       
+0db4: 4a 04        send     $04                      
+0db6: 39 69        pushi    $69                      
+0db8: 76           push0                             
+0db9: 72 03de      lofsa    short_03de;  $002e       
+0dbc: 4a 04        send     $04                      
+0dbe: 39 69        pushi    $69                      
+0dc0: 76           push0                             
+0dc1: 72 043a      lofsa    short_043a;  $002e       
+0dc4: 4a 04        send     $04                      
+0dc6: 39 69        pushi    $69                      
+0dc8: 76           push0                             
+0dc9: 72 0496      lofsa    short_0496;  $002e       
+0dcc: 4a 04        send     $04                      
+0dce: 39 69        pushi    $69                      
+0dd0: 76           push0                             
+0dd1: 72 04f2      lofsa    short_04f2;  $002e       
+0dd4: 4a 04        send     $04                      
+0dd6: 39 69        pushi    $69                      
+0dd8: 76           push0                             
+0dd9: 72 054e      lofsa    short_054e;  $002e       
+0ddc: 4a 04        send     $04                      
+0dde: 39 69        pushi    $69                      
+0de0: 76           push0                             
+0de1: 72 05aa      lofsa    short_05aa;  $002e       
+0de4: 4a 04        send     $04                      
+0de6: 39 69        pushi    $69                      
+0de8: 76           push0                             
+0de9: 72 0606      lofsa    short_0606;  $002e       
+0dec: 4a 04        send     $04                      
+0dee: 39 69        pushi    $69                      
+0df0: 76           push0                             
+0df1: 72 0662      lofsa    short_0662;  $002e       
+0df4: 4a 04        send     $04                      
+0df6: 39 69        pushi    $69                      
+0df8: 76           push0                             
+0df9: 72 06be      lofsa    short_06be;  $002e       
+0dfc: 4a 04        send     $04                      
+0dfe: 39 69        pushi    $69                      
+0e00: 76           push0                             
+0e01: 72 071a      lofsa    short_071a;  $002e       
+0e04: 4a 04        send     $04                      
+0e06: 35 06        ldi      $06                      
+0e08: 65 16        aTop     $16                      
+0e0a: 32 032b      jmp      code_1138;  toss         
+
+code_0e0d:
+0e0d: 3c           dup                               
+0e0e: 35 0b        ldi      $0b                      
+0e10: 1a           eq?                               
+0e11: 30 00a9      bnt      code_0ebd;  dup          
+0e14: 35 0b        ldi      $0b                      
+0e16: 38 018c      pushi    $018c                    
+0e19: 7a           push2                             
+0e1a: 38 0389      pushi    $0389                    
+0e1d: 8b 00        lsl      $00                      
+0e1f: 81 02        lag      $02                      
+0e21: 4a 08        send     $08                      
+0e23: 39 06        pushi    $06                      
+0e25: 78           push1                             
+0e26: 39 0c        pushi    $0c                      
+0e28: 39 07        pushi    $07                      
+0e2a: 78           push1                             
+0e2b: 76           push0                             
+0e2c: 39 04        pushi    $04                      
+0e2e: 78           push1                             
+0e2f: 38 00d9      pushi    $00d9                    
+0e32: 39 03        pushi    $03                      
+0e34: 78           push1                             
+0e35: 39 32        pushi    $32                      
+0e37: 38 00c2      pushi    $00c2                    
+0e3a: 76           push0                             
+0e3b: 72 01b6      lofsa    short_01b6;  $002e       
+0e3e: 4a 1c        send     $1c                      
+0e40: 39 06        pushi    $06                      
+0e42: 78           push1                             
+0e43: 39 0a        pushi    $0a                      
+0e45: 39 07        pushi    $07                      
+0e47: 78           push1                             
+0e48: 7a           push2                             
+0e49: 39 04        pushi    $04                      
+0e4b: 78           push1                             
+0e4c: 38 0096      pushi    $0096                    
+0e4f: 39 03        pushi    $03                      
+0e51: 78           push1                             
+0e52: 39 46        pushi    $46                      
+0e54: 38 00c2      pushi    $00c2                    
+0e57: 76           push0                             
+0e58: 72 0212      lofsa    short_0212;  $002e       
+0e5b: 4a 1c        send     $1c                      
+0e5d: 39 06        pushi    $06                      
+0e5f: 78           push1                             
+0e60: 39 0c        pushi    $0c                      
+0e62: 39 07        pushi    $07                      
+0e64: 78           push1                             
+0e65: 7a           push2                             
+0e66: 39 04        pushi    $04                      
+0e68: 78           push1                             
+0e69: 38 0096      pushi    $0096                    
+0e6c: 39 03        pushi    $03                      
+0e6e: 78           push1                             
+0e6f: 39 5a        pushi    $5a                      
+0e71: 38 00c2      pushi    $00c2                    
+0e74: 76           push0                             
+0e75: 72 026e      lofsa    short_026e;  $002e       
+0e78: 4a 1c        send     $1c                      
+0e7a: 39 06        pushi    $06                      
+0e7c: 78           push1                             
+0e7d: 39 0c        pushi    $0c                      
+0e7f: 39 07        pushi    $07                      
+0e81: 78           push1                             
+0e82: 78           push1                             
+0e83: 39 04        pushi    $04                      
+0e85: 78           push1                             
+0e86: 38 0096      pushi    $0096                    
+0e89: 39 03        pushi    $03                      
+0e8b: 78           push1                             
+0e8c: 39 6e        pushi    $6e                      
+0e8e: 38 00c2      pushi    $00c2                    
+0e91: 76           push0                             
+0e92: 72 02ca      lofsa    short_02ca;  $002e       
+0e95: 4a 1c        send     $1c                      
+0e97: 39 06        pushi    $06                      
+0e99: 78           push1                             
+0e9a: 39 0a        pushi    $0a                      
+0e9c: 39 07        pushi    $07                      
+0e9e: 78           push1                             
+0e9f: 39 03        pushi    $03                      
+0ea1: 39 04        pushi    $04                      
+0ea3: 78           push1                             
+0ea4: 38 0096      pushi    $0096                    
+0ea7: 39 03        pushi    $03                      
+0ea9: 78           push1                             
+0eaa: 38 0082      pushi    $0082                    
+0ead: 38 00c2      pushi    $00c2                    
+0eb0: 76           push0                             
+0eb1: 72 0326      lofsa    short_0326;  $002e       
+0eb4: 4a 1c        send     $1c                      
+0eb6: 35 06        ldi      $06                      
+0eb8: 65 16        aTop     $16                      
+0eba: 32 027b      jmp      code_1138;  toss         
+
+code_0ebd:
+0ebd: 3c           dup                               
+0ebe: 35 0c        ldi      $0c                      
+0ec0: 1a           eq?                               
+0ec1: 30 0012      bnt      code_0ed6;  dup          
+0ec4: 35 0c        ldi      $0c                      
+0ec6: 38 00a7      pushi    $00a7                    
+0ec9: 76           push0                             
+0eca: 81 45        lag      $45                      
+0ecc: 4a 04        send     $04                      
+0ece: 34 84 03     ldi      $84, $03                 
+0ed1: 65 16        aTop     $16                      
+0ed3: 32 0262      jmp      code_1138;  toss         
+
+code_0ed6:
+0ed6: 3c           dup                               
+0ed7: 35 0d        ldi      $0d                      
+0ed9: 1a           eq?                               
+0eda: 30 0046      bnt      code_0f23;  dup          
+0edd: 35 0d        ldi      $0d                      
+0edf: 38 00c9      pushi    $00c9                    
+0ee2: 76           push0                             
+0ee3: 81 45        lag      $45                      
+0ee5: 4a 04        send     $04                      
+0ee7: 38 018c      pushi    $018c                    
+0eea: 7a           push2                             
+0eeb: 38 0323      pushi    $0323                    
+0eee: 8b 00        lsl      $00                      
+0ef0: 81 02        lag      $02                      
+0ef2: 4a 08        send     $08                      
+0ef4: 39 69        pushi    $69                      
+0ef6: 76           push0                             
+0ef7: 72 01b6      lofsa    short_01b6;  $002e       
+0efa: 4a 04        send     $04                      
+0efc: 39 69        pushi    $69                      
+0efe: 76           push0                             
+0eff: 72 0212      lofsa    short_0212;  $002e       
+0f02: 4a 04        send     $04                      
+0f04: 39 69        pushi    $69                      
+0f06: 76           push0                             
+0f07: 72 026e      lofsa    short_026e;  $002e       
+0f0a: 4a 04        send     $04                      
+0f0c: 39 69        pushi    $69                      
+0f0e: 76           push0                             
+0f0f: 72 02ca      lofsa    short_02ca;  $002e       
+0f12: 4a 04        send     $04                      
+0f14: 39 69        pushi    $69                      
+0f16: 76           push0                             
+0f17: 72 0326      lofsa    short_0326;  $002e       
+0f1a: 4a 04        send     $04                      
+0f1c: 35 06        ldi      $06                      
+0f1e: 65 16        aTop     $16                      
+0f20: 32 0215      jmp      code_1138;  toss         
+
+code_0f23:
+0f23: 3c           dup                               
+0f24: 35 0e        ldi      $0e                      
+0f26: 1a           eq?                               
+0f27: 30 004f      bnt      code_0f79;  dup          
+0f2a: 35 0e        ldi      $0e                      
+0f2c: 38 018c      pushi    $018c                    
+0f2f: 7a           push2                             
+0f30: 38 0389      pushi    $0389                    
+0f33: 8b 00        lsl      $00                      
+0f35: 81 02        lag      $02                      
+0f37: 4a 08        send     $08                      
+0f39: 39 06        pushi    $06                      
+0f3b: 78           push1                             
+0f3c: 39 0b        pushi    $0b                      
+0f3e: 39 07        pushi    $07                      
+0f40: 78           push1                             
+0f41: 76           push0                             
+0f42: 39 04        pushi    $04                      
+0f44: 78           push1                             
+0f45: 39 04        pushi    $04                      
+0f47: 39 03        pushi    $03                      
+0f49: 78           push1                             
+0f4a: 39 3c        pushi    $3c                      
+0f4c: 38 00c2      pushi    $00c2                    
+0f4f: 76           push0                             
+0f50: 72 01b6      lofsa    short_01b6;  $002e       
+0f53: 4a 1c        send     $1c                      
+0f55: 39 06        pushi    $06                      
+0f57: 78           push1                             
+0f58: 39 0b        pushi    $0b                      
+0f5a: 39 07        pushi    $07                      
+0f5c: 78           push1                             
+0f5d: 78           push1                             
+0f5e: 39 04        pushi    $04                      
+0f60: 78           push1                             
+0f61: 38 008c      pushi    $008c                    
+0f64: 39 03        pushi    $03                      
+0f66: 78           push1                             
+0f67: 39 50        pushi    $50                      
+0f69: 38 00c2      pushi    $00c2                    
+0f6c: 76           push0                             
+0f6d: 72 0212      lofsa    short_0212;  $002e       
+0f70: 4a 1c        send     $1c                      
+0f72: 35 06        ldi      $06                      
+0f74: 65 16        aTop     $16                      
+0f76: 32 01bf      jmp      code_1138;  toss         
+
+code_0f79:
+0f79: 3c           dup                               
+0f7a: 35 0f        ldi      $0f                      
+0f7c: 1a           eq?                               
+0f7d: 30 0012      bnt      code_0f92;  dup          
+0f80: 35 0f        ldi      $0f                      
+0f82: 38 00a7      pushi    $00a7                    
+0f85: 76           push0                             
+0f86: 81 45        lag      $45                      
+0f88: 4a 04        send     $04                      
+0f8a: 34 2c 01     ldi      $2c, $01                 
+0f8d: 65 16        aTop     $16                      
+0f8f: 32 01a6      jmp      code_1138;  toss         
+
+code_0f92:
+0f92: 3c           dup                               
+0f93: 35 10        ldi      $10                      
+0f95: 1a           eq?                               
+0f96: 30 002e      bnt      code_0fc7;  dup          
+0f99: 35 10        ldi      $10                      
+0f9b: 38 00c9      pushi    $00c9                    
+0f9e: 76           push0                             
+0f9f: 81 45        lag      $45                      
+0fa1: 4a 04        send     $04                      
+0fa3: 38 018c      pushi    $018c                    
+0fa6: 7a           push2                             
+0fa7: 38 0323      pushi    $0323                    
+0faa: 8b 00        lsl      $00                      
+0fac: 81 02        lag      $02                      
+0fae: 4a 08        send     $08                      
+0fb0: 39 69        pushi    $69                      
+0fb2: 76           push0                             
+0fb3: 72 01b6      lofsa    short_01b6;  $002e       
+0fb6: 4a 04        send     $04                      
+0fb8: 39 69        pushi    $69                      
+0fba: 76           push0                             
+0fbb: 72 0212      lofsa    short_0212;  $002e       
+0fbe: 4a 04        send     $04                      
+0fc0: 35 01        ldi      $01                      
+0fc2: 65 16        aTop     $16                      
+0fc4: 32 0171      jmp      code_1138;  toss         
+
+code_0fc7:
+0fc7: 3c           dup                               
+0fc8: 35 11        ldi      $11                      
+0fca: 1a           eq?                               
+0fcb: 30 013e      bnt      code_110c;  dup          
+0fce: 35 11        ldi      $11                      
+0fd0: 38 018c      pushi    $018c                    
+0fd3: 7a           push2                             
+0fd4: 38 0389      pushi    $0389                    
+0fd7: 8b 00        lsl      $00                      
+0fd9: 81 02        lag      $02                      
+0fdb: 4a 08        send     $08                      
+0fdd: 39 05        pushi    $05                      
+0fdf: 78           push1                             
+0fe0: 38 035d      pushi    $035d                    
+0fe3: 39 06        pushi    $06                      
+0fe5: 78           push1                             
+0fe6: 76           push0                             
+0fe7: 39 07        pushi    $07                      
+0fe9: 78           push1                             
+0fea: 76           push0                             
+0feb: 39 04        pushi    $04                      
+0fed: 78           push1                             
+0fee: 39 04        pushi    $04                      
+0ff0: 39 03        pushi    $03                      
+0ff2: 78           push1                             
+0ff3: 39 0a        pushi    $0a                      
+0ff5: 38 00c2      pushi    $00c2                    
+0ff8: 76           push0                             
+0ff9: 72 01b6      lofsa    short_01b6;  $002e       
+0ffc: 4a 22        send     $22                      
+0ffe: 39 05        pushi    $05                      
+1000: 78           push1                             
+1001: 38 035d      pushi    $035d                    
+1004: 39 06        pushi    $06                      
+1006: 78           push1                             
+1007: 7a           push2                             
+1008: 39 07        pushi    $07                      
+100a: 78           push1                             
+100b: 78           push1                             
+100c: 39 04        pushi    $04                      
+100e: 78           push1                             
+100f: 38 008c      pushi    $008c                    
+1012: 39 03        pushi    $03                      
+1014: 78           push1                             
+1015: 39 0a        pushi    $0a                      
+1017: 38 00c2      pushi    $00c2                    
+101a: 76           push0                             
+101b: 72 0212      lofsa    short_0212;  $002e       
+101e: 4a 22        send     $22                      
+1020: 39 06        pushi    $06                      
+1022: 78           push1                             
+1023: 76           push0                             
+1024: 39 07        pushi    $07                      
+1026: 78           push1                             
+1027: 78           push1                             
+1028: 39 04        pushi    $04                      
+102a: 78           push1                             
+102b: 38 008c      pushi    $008c                    
+102e: 39 03        pushi    $03                      
+1030: 78           push1                             
+1031: 39 1e        pushi    $1e                      
+1033: 38 00c2      pushi    $00c2                    
+1036: 76           push0                             
+1037: 72 026e      lofsa    short_026e;  $002e       
+103a: 4a 1c        send     $1c                      
+103c: 39 06        pushi    $06                      
+103e: 78           push1                             
+103f: 76           push0                             
+1040: 39 07        pushi    $07                      
+1042: 78           push1                             
+1043: 7a           push2                             
+1044: 39 04        pushi    $04                      
+1046: 78           push1                             
+1047: 38 008c      pushi    $008c                    
+104a: 39 03        pushi    $03                      
+104c: 78           push1                             
+104d: 39 32        pushi    $32                      
+104f: 38 00c2      pushi    $00c2                    
+1052: 76           push0                             
+1053: 72 02ca      lofsa    short_02ca;  $002e       
+1056: 4a 1c        send     $1c                      
+1058: 39 06        pushi    $06                      
+105a: 78           push1                             
+105b: 76           push0                             
+105c: 39 07        pushi    $07                      
+105e: 78           push1                             
+105f: 39 03        pushi    $03                      
+1061: 39 04        pushi    $04                      
+1063: 78           push1                             
+1064: 38 008c      pushi    $008c                    
+1067: 39 03        pushi    $03                      
+1069: 78           push1                             
+106a: 39 46        pushi    $46                      
+106c: 38 00c2      pushi    $00c2                    
+106f: 76           push0                             
+1070: 72 0326      lofsa    short_0326;  $002e       
+1073: 4a 1c        send     $1c                      
+1075: 39 06        pushi    $06                      
+1077: 78           push1                             
+1078: 7a           push2                             
+1079: 39 07        pushi    $07                      
+107b: 78           push1                             
+107c: 7a           push2                             
+107d: 39 04        pushi    $04                      
+107f: 78           push1                             
+1080: 38 008c      pushi    $008c                    
+1083: 39 03        pushi    $03                      
+1085: 78           push1                             
+1086: 39 6e        pushi    $6e                      
+1088: 38 00c2      pushi    $00c2                    
+108b: 76           push0                             
+108c: 72 0382      lofsa    short_0382;  $002e       
+108f: 4a 1c        send     $1c                      
+1091: 39 06        pushi    $06                      
+1093: 78           push1                             
+1094: 78           push1                             
+1095: 39 07        pushi    $07                      
+1097: 78           push1                             
+1098: 78           push1                             
+1099: 39 04        pushi    $04                      
+109b: 78           push1                             
+109c: 38 008c      pushi    $008c                    
+109f: 39 03        pushi    $03                      
+10a1: 78           push1                             
+10a2: 38 0082      pushi    $0082                    
+10a5: 38 00c2      pushi    $00c2                    
+10a8: 76           push0                             
+10a9: 72 03de      lofsa    short_03de;  $002e       
+10ac: 4a 1c        send     $1c                      
+10ae: 39 06        pushi    $06                      
+10b0: 78           push1                             
+10b1: 78           push1                             
+10b2: 39 07        pushi    $07                      
+10b4: 78           push1                             
+10b5: 7a           push2                             
+10b6: 39 04        pushi    $04                      
+10b8: 78           push1                             
+10b9: 38 008c      pushi    $008c                    
+10bc: 39 03        pushi    $03                      
+10be: 78           push1                             
+10bf: 38 00aa      pushi    $00aa                    
+10c2: 38 00c2      pushi    $00c2                    
+10c5: 76           push0                             
+10c6: 72 043a      lofsa    short_043a;  $002e       
+10c9: 4a 1c        send     $1c                      
+10cb: 39 06        pushi    $06                      
+10cd: 78           push1                             
+10ce: 39 03        pushi    $03                      
+10d0: 39 07        pushi    $07                      
+10d2: 78           push1                             
+10d3: 76           push0                             
+10d4: 39 04        pushi    $04                      
+10d6: 78           push1                             
+10d7: 38 008c      pushi    $008c                    
+10da: 39 03        pushi    $03                      
+10dc: 78           push1                             
+10dd: 38 0096      pushi    $0096                    
+10e0: 38 00c2      pushi    $00c2                    
+10e3: 76           push0                             
+10e4: 72 0496      lofsa    short_0496;  $002e       
+10e7: 4a 1c        send     $1c                      
+10e9: 39 06        pushi    $06                      
+10eb: 78           push1                             
+10ec: 78           push1                             
+10ed: 39 07        pushi    $07                      
+10ef: 78           push1                             
+10f0: 76           push0                             
+10f1: 39 04        pushi    $04                      
+10f3: 78           push1                             
+10f4: 38 008c      pushi    $008c                    
+10f7: 39 03        pushi    $03                      
+10f9: 78           push1                             
+10fa: 39 5a        pushi    $5a                      
+10fc: 38 00c2      pushi    $00c2                    
+10ff: 76           push0                             
+1100: 72 04f2      lofsa    short_04f2;  $002e       
+1103: 4a 1c        send     $1c                      
+1105: 35 06        ldi      $06                      
+1107: 65 16        aTop     $16                      
+1109: 32 002c      jmp      code_1138;  toss         
+
+code_110c:
+110c: 3c           dup                               
+110d: 35 12        ldi      $12                      
+110f: 1a           eq?                               
+1110: 30 0012      bnt      code_1125;  dup          
+1113: 35 12        ldi      $12                      
+1115: 38 00a7      pushi    $00a7                    
+1118: 76           push0                             
+1119: 81 45        lag      $45                      
+111b: 4a 04        send     $04                      
+111d: 34 2c 01     ldi      $2c, $01                 
+1120: 65 16        aTop     $16                      
+1122: 32 0013      jmp      code_1138;  toss         
+
+code_1125:
+1125: 3c           dup                               
+1126: 35 13        ldi      $13                      
+1128: 1a           eq?                               
+1129: 30 000c      bnt      code_1138;  toss         
+112c: 35 13        ldi      $13                      
+112e: 35 ff        ldi      $ff                      
+1130: 65 0a        aTop     $0a                      
+1132: 38 008d      pushi    $008d                    
+1135: 76           push0                             
+1136: 54 04        self     $04                      
+
+code_1138:
+1138: 3a           toss                              
+1139: 48           ret                               
+
+113e: [Object section]
+	name = giveEmTheWorks
+	species = 6
+1146: sel[0] = $6
+1148: sel[1] = $6
+114a: sel[2] = $0
+114c: sel[3] = string_11e8;  'giveEmTheWorks'
+114e: sel[4] = $0
+1150: sel[5] = $ffff
+1152: sel[6] = $0
+1154: sel[7] = $0
+1156: sel[8] = $0
+1158: sel[9] = $0
+115a: sel[10] = $0
+115c: sel[11] = $0
+115e: sel[12] = $0
+1160: sel[13] = $0
+1162: sel[14] = $0
+1164: sel[15] = $0
+1166: sel[16] = $0
+
+	func[0] = changeState code_0800;  lap
+	func[1] = handleEvent code_076e;  pushi
+
+1178: [String section]
+1178 = ''
+1179 = '.theEnd'
+1181 = 'title1'
+1188 = 'name1'
+118e = 'name2'
+1194 = 'name3'
+119a = 'name4'
+11a0 = 'name5'
+11a6 = 'name6'
+11ac = 'name7'
+11b2 = 'name8'
+11b8 = 'name9'
+11be = 'name10'
+11c5 = 'name11'
+11cc = 'name12'
+11d3 = 'name13'
+11da = 'name14'
+11e1 = 'name15'
+11e8 = 'giveEmTheWorks'
+11f7 = ''
+
+11fc: [Local variables]
+var[0] = $0
+
+1202: [Relocation section]
+	pointer[0] = 0034; ref_ref_0034;  0034
+	pointer[1] = 003f; ref_ref_003f;  003f
+	pointer[2] = 0049; ref_ref_0049;  0049
+	pointer[3] = 0092; ref_ref_0092;  0092
+	pointer[4] = 009a; ref_ref_009a;  009a
+	pointer[5] = 00a2; ref_ref_00a2;  00a2
+	pointer[6] = 00aa; ref_ref_00aa;  00aa
+	pointer[7] = 00b2; ref_ref_00b2;  00b2
+	pointer[8] = 00ba; ref_ref_00ba;  00ba
+	pointer[9] = 00c2; ref_ref_00c2;  00c2
+	pointer[10] = 00ca; ref_ref_00ca;  00ca
+	pointer[11] = 00d2; ref_ref_00d2;  00d2
+	pointer[12] = 00da; ref_ref_00da;  00da
+	pointer[13] = 00e5; ref_ref_00e5;  00e5
+	pointer[14] = 00f0; ref_ref_00f0;  00f0
+	pointer[15] = 00fb; ref_ref_00fb;  00fb
+	pointer[16] = 0106; ref_ref_0106;  0106
+	pointer[17] = 0111; ref_ref_0111;  0111
+	pointer[18] = 011c; ref_ref_011c;  011c
+	pointer[19] = 0130; ref_ref_0130;  0130
+	pointer[20] = 0148; ref_ref_0148;  0148
+	pointer[21] = 0153; ref_ref_0153;  0153
+	pointer[22] = 0176; ref_ref_0176;  0176
+	pointer[23] = 01bc; ref_ref_01bc;  01bc
+	pointer[24] = 0218; ref_ref_0218;  0218
+	pointer[25] = 0274; ref_ref_0274;  0274
+	pointer[26] = 02d0; ref_ref_02d0;  02d0
+	pointer[27] = 032c; ref_ref_032c;  032c
+	pointer[28] = 0388; ref_ref_0388;  0388
+	pointer[29] = 03e4; ref_ref_03e4;  03e4
+	pointer[30] = 0440; ref_ref_0440;  0440
+	pointer[31] = 049c; ref_ref_049c;  049c
+	pointer[32] = 04f8; ref_ref_04f8;  04f8
+	pointer[33] = 0554; ref_ref_0554;  0554
+	pointer[34] = 05b0; ref_ref_05b0;  05b0
+	pointer[35] = 060c; ref_ref_060c;  060c
+	pointer[36] = 0668; ref_ref_0668;  0668
+	pointer[37] = 06c4; ref_ref_06c4;  06c4
+	pointer[38] = 0720; ref_ref_0720;  0720
+	pointer[39] = 083c; ref_ref_083c;  083c
+	pointer[40] = 0844; ref_ref_0844;  0844
+	pointer[41] = 084c; ref_ref_084c;  084c
+	pointer[42] = 0854; ref_ref_0854;  0854
+	pointer[43] = 085c; ref_ref_085c;  085c
+	pointer[44] = 0864; ref_ref_0864;  0864
+	pointer[45] = 086c; ref_ref_086c;  086c
+	pointer[46] = 0874; ref_ref_0874;  0874
+	pointer[47] = 087c; ref_ref_087c;  087c
+	pointer[48] = 0884; ref_ref_0884;  0884
+	pointer[49] = 08bc; ref_ref_08bc;  08bc
+	pointer[50] = 08d8; ref_ref_08d8;  08d8
+	pointer[51] = 08f4; ref_ref_08f4;  08f4
+	pointer[52] = 0911; ref_ref_0911;  0911
+	pointer[53] = 092f; ref_ref_092f;  092f
+	pointer[54] = 094c; ref_ref_094c;  094c
+	pointer[55] = 0992; ref_ref_0992;  0992
+	pointer[56] = 099a; ref_ref_099a;  099a
+	pointer[57] = 09a2; ref_ref_09a2;  09a2
+	pointer[58] = 09aa; ref_ref_09aa;  09aa
+	pointer[59] = 09b2; ref_ref_09b2;  09b2
+	pointer[60] = 09ba; ref_ref_09ba;  09ba
+	pointer[61] = 09f3; ref_ref_09f3;  09f3
+	pointer[62] = 0a0f; ref_ref_0a0f;  0a0f
+	pointer[63] = 0a2c; ref_ref_0a2c;  0a2c
+	pointer[64] = 0a49; ref_ref_0a49;  0a49
+	pointer[65] = 0a66; ref_ref_0a66;  0a66
+	pointer[66] = 0a82; ref_ref_0a82;  0a82
+	pointer[67] = 0a9f; ref_ref_0a9f;  0a9f
+	pointer[68] = 0abb; ref_ref_0abb;  0abb
+	pointer[69] = 0ad8; ref_ref_0ad8;  0ad8
+	pointer[70] = 0af7; ref_ref_0af7;  0af7
+	pointer[71] = 0b14; ref_ref_0b14;  0b14
+	pointer[72] = 0b5a; ref_ref_0b5a;  0b5a
+	pointer[73] = 0b62; ref_ref_0b62;  0b62
+	pointer[74] = 0b6a; ref_ref_0b6a;  0b6a
+	pointer[75] = 0b72; ref_ref_0b72;  0b72
+	pointer[76] = 0b7a; ref_ref_0b7a;  0b7a
+	pointer[77] = 0b82; ref_ref_0b82;  0b82
+	pointer[78] = 0b8a; ref_ref_0b8a;  0b8a
+	pointer[79] = 0b92; ref_ref_0b92;  0b92
+	pointer[80] = 0b9a; ref_ref_0b9a;  0b9a
+	pointer[81] = 0ba2; ref_ref_0ba2;  0ba2
+	pointer[82] = 0baa; ref_ref_0baa;  0baa
+	pointer[83] = 0be2; ref_ref_0be2;  0be2
+	pointer[84] = 0bfd; ref_ref_0bfd;  0bfd
+	pointer[85] = 0c19; ref_ref_0c19;  0c19
+	pointer[86] = 0c35; ref_ref_0c35;  0c35
+	pointer[87] = 0c51; ref_ref_0c51;  0c51
+	pointer[88] = 0c6d; ref_ref_0c6d;  0c6d
+	pointer[89] = 0c8a; ref_ref_0c8a;  0c8a
+	pointer[90] = 0ca6; ref_ref_0ca6;  0ca6
+	pointer[91] = 0cc3; ref_ref_0cc3;  0cc3
+	pointer[92] = 0cdf; ref_ref_0cdf;  0cdf
+	pointer[93] = 0cfc; ref_ref_0cfc;  0cfc
+	pointer[94] = 0d20; ref_ref_0d20;  0d20
+	pointer[95] = 0d29; ref_ref_0d29;  0d29
+	pointer[96] = 0d32; ref_ref_0d32;  0d32
+	pointer[97] = 0d3b; ref_ref_0d3b;  0d3b
+	pointer[98] = 0d44; ref_ref_0d44;  0d44
+	pointer[99] = 0d8a; ref_ref_0d8a;  0d8a
+	pointer[100] = 0d92; ref_ref_0d92;  0d92
+	pointer[101] = 0d9a; ref_ref_0d9a;  0d9a
+	pointer[102] = 0da2; ref_ref_0da2;  0da2
+	pointer[103] = 0daa; ref_ref_0daa;  0daa
+	pointer[104] = 0db2; ref_ref_0db2;  0db2
+	pointer[105] = 0dba; ref_ref_0dba;  0dba
+	pointer[106] = 0dc2; ref_ref_0dc2;  0dc2
+	pointer[107] = 0dca; ref_ref_0dca;  0dca
+	pointer[108] = 0dd2; ref_ref_0dd2;  0dd2
+	pointer[109] = 0dda; ref_ref_0dda;  0dda
+	pointer[110] = 0de2; ref_ref_0de2;  0de2
+	pointer[111] = 0dea; ref_ref_0dea;  0dea
+	pointer[112] = 0df2; ref_ref_0df2;  0df2
+	pointer[113] = 0dfa; ref_ref_0dfa;  0dfa
+	pointer[114] = 0e02; ref_ref_0e02;  0e02
+	pointer[115] = 0e3c; ref_ref_0e3c;  0e3c
+	pointer[116] = 0e59; ref_ref_0e59;  0e59
+	pointer[117] = 0e76; ref_ref_0e76;  0e76
+	pointer[118] = 0e93; ref_ref_0e93;  0e93
+	pointer[119] = 0eb2; ref_ref_0eb2;  0eb2
+	pointer[120] = 0ef8; ref_ref_0ef8;  0ef8
+	pointer[121] = 0f00; ref_ref_0f00;  0f00
+	pointer[122] = 0f08; ref_ref_0f08;  0f08
+	pointer[123] = 0f10; ref_ref_0f10;  0f10
+	pointer[124] = 0f18; ref_ref_0f18;  0f18
+	pointer[125] = 0f51; ref_ref_0f51;  0f51
+	pointer[126] = 0f6e; ref_ref_0f6e;  0f6e
+	pointer[127] = 0fb4; ref_ref_0fb4;  0fb4
+	pointer[128] = 0fbc; ref_ref_0fbc;  0fbc
+	pointer[129] = 0ffa; ref_ref_0ffa;  0ffa
+	pointer[130] = 101c; ref_ref_101c;  101c
+	pointer[131] = 1038; ref_ref_1038;  1038
+	pointer[132] = 1054; ref_ref_1054;  1054
+	pointer[133] = 1071; ref_ref_1071;  1071
+	pointer[134] = 108d; ref_ref_108d;  108d
+	pointer[135] = 10aa; ref_ref_10aa;  10aa
+	pointer[136] = 10c7; ref_ref_10c7;  10c7
+	pointer[137] = 10e5; ref_ref_10e5;  10e5
+	pointer[138] = 1101; ref_ref_1101;  1101
+	pointer[139] = 114c; ref_ref_114c;  114c

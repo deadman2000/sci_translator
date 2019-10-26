@@ -1,0 +1,3754 @@
+0004: [Exports section]
+	export_0 = code_1122;  link
+	export_1 = code_110f;  pushi
+	export_2 = code_10e4;  link
+	export_3 = code_188f;  link
+	export_4 = code_18cb;  link
+	export_5 = code_0042;  pushi
+
+0022: [Code section]
+
+code_0022:
+0022: 3f 02        link     $02                      
+0024: 39 6a        pushi    $6a                      
+0026: 76           push0                             
+0027: 51 07        class    $07                      
+0029: 4a 04        send     $04                      
+002b: a5 00        sat      $00                      
+002d: 39 22        pushi    $22                      
+002f: 76           push0                             
+0030: 4a 04        send     $04                      
+0032: 36           push                              
+0033: 35 02        ldi      $02                      
+0035: 1c           ne?                               
+0036: a5 01        sat      $01                      
+0038: 39 6c        pushi    $6c                      
+003a: 76           push0                             
+003b: 85 00        lat      $00                      
+003d: 4a 04        send     $04                      
+003f: 85 01        lat      $01                      
+0041: 48           ret                               
+
+code_0042:
+0042: 39 0a        pushi    $0a                      
+0044: 76           push0                             
+0045: 87 01        lap      $01                      
+0047: 4a 04        send     $04                      
+0049: 36           push                              
+004a: 39 04        pushi    $04                      
+004c: 76           push0                             
+004d: 87 02        lap      $02                      
+004f: 4a 04        send     $04                      
+0051: 22           lt?                               
+0052: 30 0028      bnt      code_007d;  ret          
+0055: 60           pprev                             
+0056: 39 0c        pushi    $0c                      
+0058: 76           push0                             
+0059: 87 01        lap      $01                      
+005b: 4a 04        send     $04                      
+005d: 22           lt?                               
+005e: 30 001c      bnt      code_007d;  ret          
+0061: 39 09        pushi    $09                      
+0063: 76           push0                             
+0064: 87 01        lap      $01                      
+0066: 4a 04        send     $04                      
+0068: 36           push                              
+0069: 39 03        pushi    $03                      
+006b: 76           push0                             
+006c: 87 02        lap      $02                      
+006e: 4a 04        send     $04                      
+0070: 22           lt?                               
+0071: 30 0009      bnt      code_007d;  ret          
+0074: 60           pprev                             
+0075: 39 0b        pushi    $0b                      
+0077: 76           push0                             
+0078: 87 01        lap      $01                      
+007a: 4a 04        send     $04                      
+007c: 22           lt?                               
+
+code_007d:
+007d: 48           ret                               
+
+code_007e:
+007e: 35 01        ldi      $01                      
+0080: 65 08        aTop     $08                      
+0082: 78           push1                             
+0083: 78           push1                             
+0084: 43 20 02     callk    $20, $02                 
+0087: 48           ret                               
+
+code_0088:
+0088: 78           push1                             
+0089: 76           push0                             
+008a: 43 20 02     callk    $20, $02                 
+008d: 48           ret                               
+
+code_008e:
+008e: 76           push0                             
+008f: 59 01        &rest    $01                      
+0091: 43 22 00     callk    $22, $00                 
+0094: 48           ret                               
+
+code_0095:
+0095: 3f 02        link     $02                      
+0097: 35 00        ldi      $00                      
+0099: a5 00        sat      $00                      
+009b: 63 08        pToa     $08                      
+009d: 30 001c      bnt      code_00bc;  lat          
+00a0: 7a           push2                             
+00a1: 39 0c        pushi    $0c                      
+00a3: 39 1e        pushi    $1e                      
+00a5: 43 6d 04     callk    $6d, $04                 
+00a8: a5 01        sat      $01                      
+00aa: 78           push1                             
+00ab: 8f 01        lsp      $01                      
+00ad: 59 02        &rest    $02                      
+00af: 43 21 02     callk    $21, $02                 
+00b2: a5 00        sat      $00                      
+00b4: 7a           push2                             
+00b5: 39 0c        pushi    $0c                      
+00b7: 8d 01        lst      $01                      
+00b9: 43 6d 04     callk    $6d, $04                 
+
+code_00bc:
+00bc: 85 00        lat      $00                      
+00be: 48           ret                               
+00bf: 00           bnot                              
+
+00c4: [Class section]
+	name = 
+	species = b
+00cc: sel[0] = $b
+00ce: sel[1] = $0
+00d0: sel[2] = $8000
+00d2: sel[3] = $0
+00d4: sel[4] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 0020	
+
+	func[0] = draw code_007e;  ldi
+	func[1] = hide code_0088;  push1
+	func[2] = handleEvent code_0095;  link
+	func[3] = add code_008e;  push0
+
+00f8: [Code section]
+
+code_00f8:
+00f8: 87 01        lap      $01                      
+00fa: 30 000a      bnt      code_0107;  pTos         
+00fd: 67 0a        pTos     $0a                      
+00ff: 35 01        ldi      $01                      
+0101: 14           or                                
+0102: 65 0a        aTop     $0a                      
+0104: 32 0007      jmp      code_010e;  ret          
+
+code_0107:
+0107: 67 0a        pTos     $0a                      
+0109: 35 fe        ldi      $fe                      
+010b: 12           and                               
+010c: 65 0a        aTop     $0a                      
+
+code_010e:
+010e: 48           ret                               
+
+code_010f:
+010f: 87 01        lap      $01                      
+0111: 30 000a      bnt      code_011e;  pTos         
+0114: 67 0a        pTos     $0a                      
+0116: 35 08        ldi      $08                      
+0118: 14           or                                
+0119: 65 0a        aTop     $0a                      
+011b: 32 0007      jmp      code_0125;  pushi        
+
+code_011e:
+011e: 67 0a        pTos     $0a                      
+0120: 35 f7        ldi      $f7                      
+0122: 12           and                               
+0123: 65 0a        aTop     $0a                      
+
+code_0125:
+0125: 39 53        pushi    $53                      
+0127: 76           push0                             
+0128: 54 04        self     $04                      
+012a: 48           ret                               
+
+code_012b:
+012b: 3f 03        link     $03                      
+012d: 39 4c        pushi    $4c                      
+012f: 76           push0                             
+0130: 87 01        lap      $01                      
+0132: 4a 04        send     $04                      
+0134: 30 0003      bnt      code_013a;  ldi          
+0137: 35 00        ldi      $00                      
+0139: 48           ret                               
+
+code_013a:
+013a: 35 00        ldi      $00                      
+013c: a5 00        sat      $00                      
+013e: 67 0a        pTos     $0a                      
+0140: 35 01        ldi      $01                      
+0142: 12           and                               
+0143: 30 0055      bnt      code_019b;  lat          
+0146: 39 22        pushi    $22                      
+0148: 76           push0                             
+0149: 87 01        lap      $01                      
+014b: 4a 04        send     $04                      
+014d: a5 01        sat      $01                      
+014f: 36           push                              
+0150: 34 80 00     ldi      $80, $00                 
+0153: 1a           eq?                               
+0154: 30 0006      bnt      code_015d;  bt           
+0157: 78           push1                             
+0158: 67 16        pTos     $16                      
+015a: 43 25 02     callk    $25, $02                 
+
+code_015d:
+015d: 2e 26 00     bt       $26, $00                 
+0160: 8d 01        lst      $01                      
+0162: 35 04        ldi      $04                      
+0164: 1a           eq?                               
+0165: 30 000b      bnt      code_0173;  bt           
+0168: 39 28        pushi    $28                      
+016a: 76           push0                             
+016b: 87 01        lap      $01                      
+016d: 4a 04        send     $04                      
+016f: 36           push                              
+0170: 63 14        pToa     $14                      
+0172: 1a           eq?                               
+
+code_0173:
+0173: 2e 10 00     bt       $10, $00                 
+0176: 8d 01        lst      $01                      
+0178: 35 01        ldi      $01                      
+017a: 1a           eq?                               
+017b: 30 001d      bnt      code_019b;  lat          
+017e: 38 00a4      pushi    $00a4                    
+0181: 78           push1                             
+0182: 8f 01        lsp      $01                      
+0184: 54 06        self     $06                      
+0186: 30 0012      bnt      code_019b;  lat          
+0189: 39 4c        pushi    $4c                      
+018b: 78           push1                             
+018c: 78           push1                             
+018d: 87 01        lap      $01                      
+018f: 4a 06        send     $06                      
+0191: 38 00a9      pushi    $00a9                    
+0194: 78           push1                             
+0195: 8f 01        lsp      $01                      
+0197: 54 06        self     $06                      
+0199: a5 00        sat      $00                      
+
+code_019b:
+019b: 85 00        lat      $00                      
+019d: 48           ret                               
+
+code_019e:
+019e: 39 04        pushi    $04                      
+01a0: 76           push0                             
+01a1: 87 01        lap      $01                      
+01a3: 4a 04        send     $04                      
+01a5: 36           push                              
+01a6: 63 0e        pToa     $0e                      
+01a8: 20           ge?                               
+01a9: 30 0027      bnt      code_01d3;  ret          
+01ac: 39 03        pushi    $03                      
+01ae: 76           push0                             
+01af: 87 01        lap      $01                      
+01b1: 4a 04        send     $04                      
+01b3: 36           push                              
+01b4: 63 0c        pToa     $0c                      
+01b6: 20           ge?                               
+01b7: 30 0019      bnt      code_01d3;  ret          
+01ba: 39 04        pushi    $04                      
+01bc: 76           push0                             
+01bd: 87 01        lap      $01                      
+01bf: 4a 04        send     $04                      
+01c1: 36           push                              
+01c2: 63 12        pToa     $12                      
+01c4: 22           lt?                               
+01c5: 30 000b      bnt      code_01d3;  ret          
+01c8: 39 03        pushi    $03                      
+01ca: 76           push0                             
+01cb: 87 01        lap      $01                      
+01cd: 4a 04        send     $04                      
+01cf: 36           push                              
+01d0: 63 10        pToa     $10                      
+01d2: 22           lt?                               
+
+code_01d3:
+01d3: 48           ret                               
+
+code_01d4:
+01d4: 3f 02        link     $02                      
+01d6: 78           push1                             
+01d7: 39 22        pushi    $22                      
+01d9: 76           push0                             
+01da: 87 01        lap      $01                      
+01dc: 4a 04        send     $04                      
+01de: 1a           eq?                               
+01df: 30 0053      bnt      code_0235;  selfID       
+01e2: 35 00        ldi      $00                      
+01e4: a5 01        sat      $01                      
+
+code_01e6:
+01e6: 39 6a        pushi    $6a                      
+01e8: 78           push1                             
+01e9: 38 8000      pushi    $8000                    
+01ec: 51 07        class    $07                      
+01ee: 4a 06        send     $06                      
+01f0: a7 01        sap      $01                      
+01f2: 38 0090      pushi    $0090                    
+01f5: 76           push0                             
+01f6: 4a 04        send     $04                      
+01f8: 38 00a4      pushi    $00a4                    
+01fb: 78           push1                             
+01fc: 8f 01        lsp      $01                      
+01fe: 54 06        self     $06                      
+0200: a5 00        sat      $00                      
+0202: 36           push                              
+0203: 85 01        lat      $01                      
+0205: 1c           ne?                               
+0206: 30 0009      bnt      code_0212;  pushi        
+0209: 78           push1                             
+020a: 7c           pushSelf                          
+020b: 43 18 02     callk    $18, $02                 
+020e: 85 00        lat      $00                      
+0210: a5 01        sat      $01                      
+
+code_0212:
+0212: 39 6c        pushi    $6c                      
+0214: 76           push0                             
+0215: 87 01        lap      $01                      
+0217: 4a 04        send     $04                      
+0219: 76           push0                             
+021a: 40 fffffe04 00  call     code_0022;  link, $00    
+021e: 18           not                               
+021f: 2e 03 00     bt       $03, $00                 
+0222: 32 ffffffc1  jmp      code_01e6;  pushi        
+0225: 85 00        lat      $00                      
+0227: 30 0005      bnt      code_022f;  lat          
+022a: 78           push1                             
+022b: 7c           pushSelf                          
+022c: 43 18 02     callk    $18, $02                 
+
+code_022f:
+022f: 85 00        lat      $00                      
+0231: 48           ret                               
+0232: 32 0002      jmp      code_0237;  ret          
+
+code_0235:
+0235: 5c           selfID                            
+0236: 48           ret                               
+
+code_0237:
+0237: 48           ret                               
+
+code_0238:
+0238: 67 08        pTos     $08                      
+023a: 87 01        lap      $01                      
+023c: 1a           eq?                               
+023d: 48           ret                               
+
+code_023e:
+023e: 67 0a        pTos     $0a                      
+0240: 87 01        lap      $01                      
+0242: 12           and                               
+0243: 48           ret                               
+
+code_0244:
+0244: 63 18        pToa     $18                      
+0246: 48           ret                               
+
+code_0247:
+0247: 48           ret                               
+
+code_0248:
+0248: 67 12        pTos     $12                      
+024a: 87 01        lap      $01                      
+024c: 02           add                               
+024d: 65 12        aTop     $12                      
+024f: 67 0e        pTos     $0e                      
+0251: 87 01        lap      $01                      
+0253: 02           add                               
+0254: 65 0e        aTop     $0e                      
+0256: 67 0c        pTos     $0c                      
+0258: 87 02        lap      $02                      
+025a: 02           add                               
+025b: 65 0c        aTop     $0c                      
+025d: 67 10        pTos     $10                      
+025f: 87 02        lap      $02                      
+0261: 02           add                               
+0262: 65 10        aTop     $10                      
+0264: 48           ret                               
+
+code_0265:
+0265: 38 00ab      pushi    $00ab                    
+0268: 7a           push2                             
+0269: 8f 01        lsp      $01                      
+026b: 63 0e        pToa     $0e                      
+026d: 04           sub                               
+026e: 36           push                              
+026f: 8f 02        lsp      $02                      
+0271: 63 0c        pToa     $0c                      
+0273: 04           sub                               
+0274: 36           push                              
+0275: 54 08        self     $08                      
+0277: 48           ret                               
+
+code_0278:
+0278: 78           push1                             
+0279: 7c           pushSelf                          
+027a: 43 17 02     callk    $17, $02                 
+027d: 48           ret                               
+
+code_027e:
+027e: 48           ret                               
+027f: 00           bnot                              
+
+0284: [Class section]
+	name = 
+	species = c
+028c: sel[0] = $c
+028e: sel[1] = $0
+0290: sel[2] = $8000
+0292: sel[3] = $0
+0294: sel[4] = $0
+0296: sel[5] = $0
+0298: sel[6] = $0
+029a: sel[7] = $0
+029c: sel[8] = $0
+029e: sel[9] = $0
+02a0: sel[10] = $0
+02a2: sel[11] = $0
+02a4: sel[12] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 0022	
+	varsel[5] = 0020	
+	varsel[6] = 0009	
+	varsel[7] = 000a	
+	varsel[8] = 000b	
+	varsel[9] = 000c	
+	varsel[10] = 0018	
+	varsel[11] = 004b	
+	varsel[12] = 004d	
+
+	func[0] = doit code_0244;  pToa
+	func[1] = enable code_00f8;  lap
+	func[2] = select code_010f;  lap
+	func[3] = handleEvent code_012b;  link
+	func[4] = check code_019e;  pushi
+	func[5] = track code_01d4;  link
+	func[6] = setSize code_0247;  ret
+	func[7] = move code_0248;  pTos
+	func[8] = moveTo code_0265;  pushi
+	func[9] = draw code_0278;  push1
+	func[10] = isType code_0238;  pTos
+	func[11] = checkState code_023e;  pTos
+	func[12] = cycle code_027e;  ret
+
+02fc: [Code section]
+
+code_02fc:
+02fc: 3f 01        link     $01                      
+02fe: 39 21        pushi    $21                      
+0300: 78           push1                             
+0301: 89 16        lsg      $16                      
+0303: 39 72        pushi    $72                      
+0305: 76           push0                             
+0306: 39 6a        pushi    $6a                      
+0308: 76           push0                             
+0309: 57 0c 04     super    $0c, $04                 
+030c: 4a 0a        send     $0a                      
+030e: 48           ret                               
+
+code_030f:
+030f: 3f 04        link     $04                      
+0311: 39 05        pushi    $05                      
+0313: 35 00        ldi      $00                      
+0315: 5b 14 00     lea      $14, $00                 
+0318: 36           push                              
+0319: 67 1a        pTos     $1a                      
+031b: 67 1c        pTos     $1c                      
+031d: 87 00        lap      $00                      
+031f: 30 0005      bnt      code_0327;  ldi          
+0322: 87 01        lap      $01                      
+0324: 32 0002      jmp      code_0329;  push         
+
+code_0327:
+0327: 35 00        ldi      $00                      
+
+code_0329:
+0329: 36           push                              
+032a: 72 18e6      lofsa    string_18e6;  '$0D$0A----------$0D$0A'
+032d: 36           push                              
+032e: 43 1a 0a     callk    $1a, $0a                 
+0331: 67 0c        pTos     $0c                      
+0333: 35 02        ldi      $02                      
+0335: 95 00        lati     $00                      
+0337: 02           add                               
+0338: 65 10        aTop     $10                      
+033a: 67 0e        pTos     $0e                      
+033c: 35 03        ldi      $03                      
+033e: 95 00        lati     $00                      
+0340: 02           add                               
+0341: 65 12        aTop     $12                      
+0343: 48           ret                               
+
+0348: [Class section]
+	name = DText
+	species = d
+0350: sel[0] = $d
+0352: sel[1] = $c
+0354: sel[2] = $8000
+0356: sel[3] = string_18f5;  'DText'
+0358: sel[4] = $2
+035a: sel[5] = $0
+035c: sel[6] = $0
+035e: sel[7] = $0
+0360: sel[8] = $0
+0362: sel[9] = $0
+0364: sel[10] = $0
+0366: sel[11] = $0
+0368: sel[12] = $0
+036a: sel[13] = $0
+036c: sel[14] = $1
+036e: sel[15] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 0022	
+	varsel[5] = 0020	
+	varsel[6] = 0009	
+	varsel[7] = 000a	
+	varsel[8] = 000b	
+	varsel[9] = 000c	
+	varsel[10] = 0018	
+	varsel[11] = 004b	
+	varsel[12] = 004d	
+	varsel[13] = 001a	
+	varsel[14] = 0021	
+	varsel[15] = 001e	
+
+	func[0] = new code_02fc;  link
+	func[1] = setSize code_030f;  link
+
+03a0: [Code section]
+
+code_03a0:
+03a0: 3f 04        link     $04                      
+03a2: 67 0e        pTos     $0e                      
+03a4: 39 03        pushi    $03                      
+03a6: 67 1a        pTos     $1a                      
+03a8: 67 1c        pTos     $1c                      
+03aa: 67 1e        pTos     $1e                      
+03ac: 43 0f 06     callk    $0f, $06                 
+03af: 02           add                               
+03b0: 65 12        aTop     $12                      
+03b2: 67 0c        pTos     $0c                      
+03b4: 39 03        pushi    $03                      
+03b6: 67 1a        pTos     $1a                      
+03b8: 67 1c        pTos     $1c                      
+03ba: 67 1e        pTos     $1e                      
+03bc: 43 10 06     callk    $10, $06                 
+03bf: 02           add                               
+03c0: 65 10        aTop     $10                      
+03c2: 48           ret                               
+03c3: 00           bnot                              
+
+03c8: [Class section]
+	name = DIcon
+	species = e
+03d0: sel[0] = $e
+03d2: sel[1] = $c
+03d4: sel[2] = $8000
+03d6: sel[3] = string_18fb;  'DIcon'
+03d8: sel[4] = $4
+03da: sel[5] = $0
+03dc: sel[6] = $0
+03de: sel[7] = $0
+03e0: sel[8] = $0
+03e2: sel[9] = $0
+03e4: sel[10] = $0
+03e6: sel[11] = $0
+03e8: sel[12] = $0
+03ea: sel[13] = $0
+03ec: sel[14] = $0
+03ee: sel[15] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 0022	
+	varsel[5] = 0020	
+	varsel[6] = 0009	
+	varsel[7] = 000a	
+	varsel[8] = 000b	
+	varsel[9] = 000c	
+	varsel[10] = 0018	
+	varsel[11] = 004b	
+	varsel[12] = 004d	
+	varsel[13] = 0005	
+	varsel[14] = 0006	
+	varsel[15] = 0007	
+
+	func[0] = setSize code_03a0;  link
+
+041c: [Code section]
+
+code_041c:
+041c: 3f 04        link     $04                      
+041e: 39 05        pushi    $05                      
+0420: 35 00        ldi      $00                      
+0422: 5b 14 00     lea      $14, $00                 
+0425: 36           push                              
+0426: 67 1a        pTos     $1a                      
+0428: 67 1c        pTos     $1c                      
+042a: 76           push0                             
+042b: 76           push0                             
+042c: 43 1a 0a     callk    $1a, $0a                 
+042f: 35 02        ldi      $02                      
+0431: 9d 00        lsti     $00                      
+0433: 02           add                               
+0434: 36           push                              
+0435: 35 02        ldi      $02                      
+0437: b5 00        sati     $00                      
+0439: 35 03        ldi      $03                      
+043b: 9d 00        lsti     $00                      
+043d: 35 02        ldi      $02                      
+043f: 02           add                               
+0440: 36           push                              
+0441: 35 03        ldi      $03                      
+0443: b5 00        sati     $00                      
+0445: 67 0c        pTos     $0c                      
+0447: 35 02        ldi      $02                      
+0449: 95 00        lati     $00                      
+044b: 02           add                               
+044c: 65 10        aTop     $10                      
+044e: 35 03        ldi      $03                      
+0450: 9d 00        lsti     $00                      
+0452: 35 0f        ldi      $0f                      
+0454: 02           add                               
+0455: 36           push                              
+0456: 35 10        ldi      $10                      
+0458: 08           div                               
+0459: 36           push                              
+045a: 35 10        ldi      $10                      
+045c: 06           mul                               
+045d: 36           push                              
+045e: 35 03        ldi      $03                      
+0460: b5 00        sati     $00                      
+0462: 35 03        ldi      $03                      
+0464: 9d 00        lsti     $00                      
+0466: 63 0e        pToa     $0e                      
+0468: 02           add                               
+0469: 65 12        aTop     $12                      
+046b: 48           ret                               
+
+0470: [Class section]
+	name = DButton
+	species = f
+0478: sel[0] = $f
+047a: sel[1] = $c
+047c: sel[2] = $8000
+047e: sel[3] = string_1901;  'DButton'
+0480: sel[4] = $1
+0482: sel[5] = $3
+0484: sel[6] = $0
+0486: sel[7] = $0
+0488: sel[8] = $0
+048a: sel[9] = $0
+048c: sel[10] = $0
+048e: sel[11] = $0
+0490: sel[12] = $0
+0492: sel[13] = $0
+0494: sel[14] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 0022	
+	varsel[5] = 0020	
+	varsel[6] = 0009	
+	varsel[7] = 000a	
+	varsel[8] = 000b	
+	varsel[9] = 000c	
+	varsel[10] = 0018	
+	varsel[11] = 004b	
+	varsel[12] = 004d	
+	varsel[13] = 001a	
+	varsel[14] = 0021	
+
+	func[0] = setSize code_041c;  link
+
+04c0: [Code section]
+
+code_04c0:
+04c0: 7a           push2                             
+04c1: 7c           pushSelf                          
+04c2: 8f 01        lsp      $01                      
+04c4: 43 19 04     callk    $19, $04                 
+04c7: 5c           selfID                            
+04c8: 48           ret                               
+
+code_04c9:
+04c9: 3f 04        link     $04                      
+04cb: 81 55        lag      $55                      
+04cd: 65 1c        aTop     $1c                      
+04cf: 39 05        pushi    $05                      
+04d1: 35 00        ldi      $00                      
+04d3: 5b 14 00     lea      $14, $00                 
+04d6: 36           push                              
+04d7: 72 1909      lofsa    string_1909;  'M'        
+04da: 36           push                              
+04db: 67 1c        pTos     $1c                      
+04dd: 76           push0                             
+04de: 76           push0                             
+04df: 43 1a 0a     callk    $1a, $0a                 
+04e2: 67 0c        pTos     $0c                      
+04e4: 35 02        ldi      $02                      
+04e6: 95 00        lati     $00                      
+04e8: 02           add                               
+04e9: 65 10        aTop     $10                      
+04eb: 67 0e        pTos     $0e                      
+04ed: 35 03        ldi      $03                      
+04ef: 9d 00        lsti     $00                      
+04f1: 63 1e        pToa     $1e                      
+04f3: 06           mul                               
+04f4: 36           push                              
+04f5: 35 03        ldi      $03                      
+04f7: 06           mul                               
+04f8: 36           push                              
+04f9: 35 04        ldi      $04                      
+04fb: 08           div                               
+04fc: 02           add                               
+04fd: 65 12        aTop     $12                      
+04ff: 78           push1                             
+0500: 67 1a        pTos     $1a                      
+0502: 43 46 02     callk    $46, $02                 
+0505: 65 20        aTop     $20                      
+0507: 48           ret                               
+
+050c: [Class section]
+	name = DEdit
+	species = 10
+0514: sel[0] = $10
+0516: sel[1] = $c
+0518: sel[2] = $8000
+051a: sel[3] = string_190b;  'DEdit'
+051c: sel[4] = $3
+051e: sel[5] = $1
+0520: sel[6] = $0
+0522: sel[7] = $0
+0524: sel[8] = $0
+0526: sel[9] = $0
+0528: sel[10] = $0
+052a: sel[11] = $0
+052c: sel[12] = $0
+052e: sel[13] = $0
+0530: sel[14] = $0
+0532: sel[15] = $0
+0534: sel[16] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 0022	
+	varsel[5] = 0020	
+	varsel[6] = 0009	
+	varsel[7] = 000a	
+	varsel[8] = 000b	
+	varsel[9] = 000c	
+	varsel[10] = 0018	
+	varsel[11] = 004b	
+	varsel[12] = 004d	
+	varsel[13] = 001a	
+	varsel[14] = 0021	
+	varsel[15] = 0025	
+	varsel[16] = 0024	
+
+	func[0] = track code_04c0;  push2
+	func[1] = setSize code_04c9;  link
+
+0568: [Code section]
+
+code_0568:
+0568: 3f 02        link     $02                      
+056a: 63 20        pToa     $20                      
+056c: a5 00        sat      $00                      
+056e: 35 00        ldi      $00                      
+0570: a5 01        sat      $01                      
+
+code_0572:
+0572: 8d 01        lst      $01                      
+0574: 34 2c 01     ldi      $2c, $01                 
+0577: 22           lt?                               
+0578: 30 0029      bnt      code_05a4;  ret          
+057b: 76           push0                             
+057c: 78           push1                             
+057d: 8d 00        lst      $00                      
+057f: 43 46 02     callk    $46, $02                 
+0582: 1a           eq?                               
+0583: 30 0003      bnt      code_0589;  push2        
+0586: 35 ff        ldi      $ff                      
+0588: 48           ret                               
+
+code_0589:
+0589: 7a           push2                             
+058a: 8f 01        lsp      $01                      
+058c: 8d 00        lst      $00                      
+058e: 43 45 04     callk    $45, $04                 
+0591: 18           not                               
+0592: 30 0003      bnt      code_0598;  lst          
+0595: 85 01        lat      $01                      
+0597: 48           ret                               
+
+code_0598:
+0598: 8d 00        lst      $00                      
+059a: 63 1c        pToa     $1c                      
+059c: 02           add                               
+059d: a5 00        sat      $00                      
+059f: c5 01        +at      $01                      
+05a1: 32 ffffffce  jmp      code_0572;  lst          
+
+code_05a4:
+05a4: 48           ret                               
+
+code_05a5:
+05a5: 67 20        pTos     $20                      
+05a7: 67 1c        pTos     $1c                      
+05a9: 87 01        lap      $01                      
+05ab: 06           mul                               
+05ac: 02           add                               
+05ad: 48           ret                               
+
+code_05ae:
+05ae: 3f 04        link     $04                      
+05b0: 39 05        pushi    $05                      
+05b2: 35 00        ldi      $00                      
+05b4: 5b 14 00     lea      $14, $00                 
+05b7: 36           push                              
+05b8: 72 1909      lofsa    string_1909;  'M'        
+05bb: 36           push                              
+05bc: 67 1a        pTos     $1a                      
+05be: 76           push0                             
+05bf: 76           push0                             
+05c0: 43 1a 0a     callk    $1a, $0a                 
+05c3: 67 0c        pTos     $0c                      
+05c5: 35 14        ldi      $14                      
+05c7: 02           add                               
+05c8: 36           push                              
+05c9: 35 02        ldi      $02                      
+05cb: 9d 00        lsti     $00                      
+05cd: 63 1e        pToa     $1e                      
+05cf: 06           mul                               
+05d0: 02           add                               
+05d1: 65 10        aTop     $10                      
+05d3: 67 0e        pTos     $0e                      
+05d5: 35 03        ldi      $03                      
+05d7: 9d 00        lsti     $00                      
+05d9: 63 1c        pToa     $1c                      
+05db: 06           mul                               
+05dc: 36           push                              
+05dd: 35 03        ldi      $03                      
+05df: 06           mul                               
+05e0: 36           push                              
+05e1: 35 04        ldi      $04                      
+05e3: 08           div                               
+05e4: 02           add                               
+05e5: 65 12        aTop     $12                      
+05e7: 63 20        pToa     $20                      
+05e9: 65 22        aTop     $22                      
+05eb: 65 24        aTop     $24                      
+05ed: 35 00        ldi      $00                      
+05ef: 65 26        aTop     $26                      
+05f1: 48           ret                               
+
+code_05f2:
+05f2: 3f 01        link     $01                      
+05f4: 35 00        ldi      $00                      
+05f6: a5 00        sat      $00                      
+
+code_05f8:
+05f8: 87 01        lap      $01                      
+05fa: 30 002f      bnt      code_062c;  lat          
+05fd: 67 22        pTos     $22                      
+05ff: 63 20        pToa     $20                      
+0601: 1c           ne?                               
+0602: 30 0027      bnt      code_062c;  lat          
+0605: 35 01        ldi      $01                      
+0607: a5 00        sat      $00                      
+0609: 67 22        pTos     $22                      
+060b: 63 1c        pToa     $1c                      
+060d: 04           sub                               
+060e: 65 22        aTop     $22                      
+0610: 63 26        pToa     $26                      
+0612: 30 0005      bnt      code_061a;  pTos         
+0615: 6d 26        dpToa    $26                      
+0617: 32 0007      jmp      code_0621;  -ap          
+
+code_061a:
+061a: 67 24        pTos     $24                      
+061c: 63 1c        pToa     $1c                      
+061e: 04           sub                               
+061f: 65 24        aTop     $24                      
+
+code_0621:
+0621: e7 01        -ap      $01                      
+0623: 32 ffffffd2  jmp      code_05f8;  lap          
+0626: 32 0003      jmp      code_062c;  lat          
+0629: 32 ffffffcc  jmp      code_05f8;  lap          
+
+code_062c:
+062c: 85 00        lat      $00                      
+062e: 30 0007      bnt      code_0638;  ret          
+0631: 39 53        pushi    $53                      
+0633: 76           push0                             
+0634: 54 04        self     $04                      
+0636: 35 01        ldi      $01                      
+
+code_0638:
+0638: 48           ret                               
+
+code_0639:
+0639: 3f 01        link     $01                      
+063b: 7a           push2                             
+063c: 67 22        pTos     $22                      
+063e: 76           push0                             
+063f: 43 62 04     callk    $62, $04                 
+0642: 18           not                               
+0643: 30 0001      bnt      code_0647;  ldi          
+0646: 48           ret                               
+
+code_0647:
+0647: 35 00        ldi      $00                      
+0649: a5 00        sat      $00                      
+
+code_064b:
+064b: 87 01        lap      $01                      
+064d: 30 0039      bnt      code_0689;  lat          
+0650: 7a           push2                             
+0651: 67 22        pTos     $22                      
+0653: 67 1c        pTos     $1c                      
+0655: 43 62 04     callk    $62, $04                 
+0658: 30 002e      bnt      code_0689;  lat          
+065b: 35 01        ldi      $01                      
+065d: a5 00        sat      $00                      
+065f: 67 22        pTos     $22                      
+0661: 63 1c        pToa     $1c                      
+0663: 02           add                               
+0664: 65 22        aTop     $22                      
+0666: 67 26        pTos     $26                      
+0668: 35 01        ldi      $01                      
+066a: 02           add                               
+066b: 36           push                              
+066c: 63 1e        pToa     $1e                      
+066e: 22           lt?                               
+066f: 30 0005      bnt      code_0677;  pTos         
+0672: 6b 26        ipToa    $26                      
+0674: 32 0007      jmp      code_067e;  -ap          
+
+code_0677:
+0677: 67 24        pTos     $24                      
+0679: 63 1c        pToa     $1c                      
+067b: 02           add                               
+067c: 65 24        aTop     $24                      
+
+code_067e:
+067e: e7 01        -ap      $01                      
+0680: 32 ffffffc8  jmp      code_064b;  lap          
+0683: 32 0003      jmp      code_0689;  lat          
+0686: 32 ffffffc2  jmp      code_064b;  lap          
+
+code_0689:
+0689: 85 00        lat      $00                      
+068b: 30 0007      bnt      code_0695;  ret          
+068e: 39 53        pushi    $53                      
+0690: 76           push0                             
+0691: 54 04        self     $04                      
+0693: 35 01        ldi      $01                      
+
+code_0695:
+0695: 48           ret                               
+
+code_0696:
+0696: 3f 09        link     $09                      
+0698: 39 4c        pushi    $4c                      
+069a: 76           push0                             
+069b: 87 01        lap      $01                      
+069d: 4a 04        send     $04                      
+069f: 30 0003      bnt      code_06a5;  ldi          
+06a2: 35 00        ldi      $00                      
+06a4: 48           ret                               
+
+code_06a5:
+06a5: 35 00        ldi      $00                      
+06a7: a5 00        sat      $00                      
+06a9: 39 22        pushi    $22                      
+06ab: 76           push0                             
+06ac: 87 01        lap      $01                      
+06ae: 4a 04        send     $04                      
+06b0: 36           push                              
+06b1: 3c           dup                               
+06b2: 35 04        ldi      $04                      
+06b4: 1a           eq?                               
+06b5: 30 008e      bnt      code_0746;  dup          
+06b8: 39 4c        pushi    $4c                      
+06ba: 78           push1                             
+06bb: 39 28        pushi    $28                      
+06bd: 76           push0                             
+06be: 87 01        lap      $01                      
+06c0: 4a 04        send     $04                      
+06c2: 36           push                              
+06c3: 3c           dup                               
+06c4: 34 00 47     ldi      $00, $47                 
+06c7: 1a           eq?                               
+06c8: 30 000b      bnt      code_06d6;  dup          
+06cb: 38 00b2      pushi    $00b2                    
+06ce: 78           push1                             
+06cf: 39 32        pushi    $32                      
+06d1: 54 06        self     $06                      
+06d3: 32 0067      jmp      code_073d;  toss         
+
+code_06d6:
+06d6: 3c           dup                               
+06d7: 34 00 4f     ldi      $00, $4f                 
+06da: 1a           eq?                               
+06db: 30 000b      bnt      code_06e9;  dup          
+06de: 38 00b1      pushi    $00b1                    
+06e1: 78           push1                             
+06e2: 39 32        pushi    $32                      
+06e4: 54 06        self     $06                      
+06e6: 32 0054      jmp      code_073d;  toss         
+
+code_06e9:
+06e9: 3c           dup                               
+06ea: 34 00 51     ldi      $00, $51                 
+06ed: 1a           eq?                               
+06ee: 30 000f      bnt      code_0700;  dup          
+06f1: 38 00b1      pushi    $00b1                    
+06f4: 78           push1                             
+06f5: 67 1e        pTos     $1e                      
+06f7: 35 01        ldi      $01                      
+06f9: 04           sub                               
+06fa: 36           push                              
+06fb: 54 06        self     $06                      
+06fd: 32 003d      jmp      code_073d;  toss         
+
+code_0700:
+0700: 3c           dup                               
+0701: 34 00 49     ldi      $00, $49                 
+0704: 1a           eq?                               
+0705: 30 000f      bnt      code_0717;  dup          
+0708: 38 00b2      pushi    $00b2                    
+070b: 78           push1                             
+070c: 67 1e        pTos     $1e                      
+070e: 35 01        ldi      $01                      
+0710: 04           sub                               
+0711: 36           push                              
+0712: 54 06        self     $06                      
+0714: 32 0026      jmp      code_073d;  toss         
+
+code_0717:
+0717: 3c           dup                               
+0718: 34 00 50     ldi      $00, $50                 
+071b: 1a           eq?                               
+071c: 30 000a      bnt      code_0729;  dup          
+071f: 38 00b1      pushi    $00b1                    
+0722: 78           push1                             
+0723: 78           push1                             
+0724: 54 06        self     $06                      
+0726: 32 0014      jmp      code_073d;  toss         
+
+code_0729:
+0729: 3c           dup                               
+072a: 34 00 48     ldi      $00, $48                 
+072d: 1a           eq?                               
+072e: 30 000a      bnt      code_073b;  ldi          
+0731: 38 00b2      pushi    $00b2                    
+0734: 78           push1                             
+0735: 78           push1                             
+0736: 54 06        self     $06                      
+0738: 32 0002      jmp      code_073d;  toss         
+
+code_073b:
+073b: 35 00        ldi      $00                      
+
+code_073d:
+073d: 3a           toss                              
+073e: 36           push                              
+073f: 87 01        lap      $01                      
+0741: 4a 06        send     $06                      
+0743: 32 00b3      jmp      code_07f9;  toss         
+
+code_0746:
+0746: 3c           dup                               
+0747: 35 01        ldi      $01                      
+0749: 1a           eq?                               
+074a: 30 00ac      bnt      code_07f9;  toss         
+074d: 38 00a4      pushi    $00a4                    
+0750: 78           push1                             
+0751: 8f 01        lsp      $01                      
+0753: 54 06        self     $06                      
+0755: 30 00a1      bnt      code_07f9;  toss         
+0758: 39 4c        pushi    $4c                      
+075a: 78           push1                             
+075b: 78           push1                             
+075c: 87 01        lap      $01                      
+075e: 4a 06        send     $06                      
+0760: 39 03        pushi    $03                      
+0762: 76           push0                             
+0763: 87 01        lap      $01                      
+0765: 4a 04        send     $04                      
+0767: 36           push                              
+0768: 67 0c        pTos     $0c                      
+076a: 35 0a        ldi      $0a                      
+076c: 02           add                               
+076d: 22           lt?                               
+076e: 30 0016      bnt      code_0787;  pushi        
+
+code_0771:
+0771: 38 00b2      pushi    $00b2                    
+0774: 78           push1                             
+0775: 78           push1                             
+0776: 54 06        self     $06                      
+0778: 76           push0                             
+0779: 40 fffff8a5 00  call     code_0022;  link, $00    
+077d: 18           not                               
+077e: 2e 78 00     bt       $78, $00                 
+0781: 32 ffffffed  jmp      code_0771;  pushi        
+0784: 32 0072      jmp      code_07f9;  toss         
+
+code_0787:
+0787: 39 03        pushi    $03                      
+0789: 76           push0                             
+078a: 87 01        lap      $01                      
+078c: 4a 04        send     $04                      
+078e: 36           push                              
+078f: 67 10        pTos     $10                      
+0791: 35 0a        ldi      $0a                      
+0793: 04           sub                               
+0794: 1e           gt?                               
+0795: 30 0016      bnt      code_07ae;  pushi        
+
+code_0798:
+0798: 38 00b1      pushi    $00b1                    
+079b: 78           push1                             
+079c: 78           push1                             
+079d: 54 06        self     $06                      
+079f: 76           push0                             
+07a0: 40 fffff87e 00  call     code_0022;  link, $00    
+07a4: 18           not                               
+07a5: 2e 51 00     bt       $51, $00                 
+07a8: 32 ffffffed  jmp      code_0798;  pushi        
+07ab: 32 004b      jmp      code_07f9;  toss         
+
+code_07ae:
+07ae: 39 05        pushi    $05                      
+07b0: 35 00        ldi      $00                      
+07b2: 5b 14 05     lea      $14, $05                 
+07b5: 36           push                              
+07b6: 72 1909      lofsa    string_1909;  'M'        
+07b9: 36           push                              
+07ba: 67 1a        pTos     $1a                      
+07bc: 76           push0                             
+07bd: 76           push0                             
+07be: 43 1a 0a     callk    $1a, $0a                 
+07c1: 39 03        pushi    $03                      
+07c3: 76           push0                             
+07c4: 87 01        lap      $01                      
+07c6: 4a 04        send     $04                      
+07c8: 36           push                              
+07c9: 67 0c        pTos     $0c                      
+07cb: 35 0a        ldi      $0a                      
+07cd: 02           add                               
+07ce: 04           sub                               
+07cf: 36           push                              
+07d0: 35 02        ldi      $02                      
+07d2: 95 05        lati     $05                      
+07d4: 08           div                               
+07d5: a5 04        sat      $04                      
+07d7: 36           push                              
+07d8: 63 26        pToa     $26                      
+07da: 1e           gt?                               
+07db: 30 000f      bnt      code_07ed;  pushi        
+07de: 38 00b1      pushi    $00b1                    
+07e1: 78           push1                             
+07e2: 8d 04        lst      $04                      
+07e4: 63 26        pToa     $26                      
+07e6: 04           sub                               
+07e7: 36           push                              
+07e8: 54 06        self     $06                      
+07ea: 32 000c      jmp      code_07f9;  toss         
+
+code_07ed:
+07ed: 38 00b2      pushi    $00b2                    
+07f0: 78           push1                             
+07f1: 67 26        pTos     $26                      
+07f3: 85 04        lat      $04                      
+07f5: 04           sub                               
+07f6: 36           push                              
+07f7: 54 06        self     $06                      
+
+code_07f9:
+07f9: 3a           toss                              
+07fa: 39 4c        pushi    $4c                      
+07fc: 76           push0                             
+07fd: 87 01        lap      $01                      
+07ff: 4a 04        send     $04                      
+0801: 30 000c      bnt      code_0810;  ldi          
+0804: 67 0a        pTos     $0a                      
+0806: 35 02        ldi      $02                      
+0808: 12           and                               
+0809: 30 0004      bnt      code_0810;  ldi          
+080c: 5c           selfID                            
+080d: 32 0002      jmp      code_0812;  ret          
+
+code_0810:
+0810: 35 00        ldi      $00                      
+
+code_0812:
+0812: 48           ret                               
+0813: 00           bnot                              
+
+0818: [Class section]
+	name = DSelector
+	species = 11
+0820: sel[0] = $11
+0822: sel[1] = $c
+0824: sel[2] = $8000
+0826: sel[3] = string_1911;  'DSelector'
+0828: sel[4] = $6
+082a: sel[5] = $0
+082c: sel[6] = $0
+082e: sel[7] = $0
+0830: sel[8] = $0
+0832: sel[9] = $0
+0834: sel[10] = $0
+0836: sel[11] = $0
+0838: sel[12] = $0
+083a: sel[13] = $0
+083c: sel[14] = $14
+083e: sel[15] = $6
+0840: sel[16] = $0
+0842: sel[17] = $0
+0844: sel[18] = $0
+0846: sel[19] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 0022	
+	varsel[5] = 0020	
+	varsel[6] = 0009	
+	varsel[7] = 000a	
+	varsel[8] = 000b	
+	varsel[9] = 000c	
+	varsel[10] = 0018	
+	varsel[11] = 004b	
+	varsel[12] = 004d	
+	varsel[13] = 0021	
+	varsel[14] = 0004	
+	varsel[15] = 0003	
+	varsel[16] = 001a	
+	varsel[17] = 0024	
+	varsel[18] = 0065	
+	varsel[19] = 0026	
+
+	func[0] = handleEvent code_0696;  link
+	func[1] = setSize code_05ae;  link
+	func[2] = indexOf code_0568;  link
+	func[3] = at code_05a5;  pTos
+	func[4] = advance code_0639;  link
+	func[5] = retreat code_05f2;  link
+
+0890: [Code section]
+
+code_0890:
+0890: 76           push0                             
+0891: 43 0a 00     callk    $0a, $00                 
+0894: 30 0012      bnt      code_08a9;  pushi        
+0897: 81 05        lag      $05                      
+0899: 30 000d      bnt      code_08a9;  pushi        
+089c: 7a           push2                             
+089d: 39 1b        pushi    $1b                      
+089f: 76           push0                             
+08a0: 81 05        lag      $05                      
+08a2: 4a 04        send     $04                      
+08a4: 36           push                              
+08a5: 76           push0                             
+08a6: 43 0b 04     callk    $0b, $04                 
+
+code_08a9:
+08a9: 39 6a        pushi    $6a                      
+08ab: 76           push0                             
+08ac: 63 0e        pToa     $0e                      
+08ae: 4a 04        send     $04                      
+08b0: 65 0e        aTop     $0e                      
+08b2: 38 00b7      pushi    $00b7                    
+08b5: 78           push1                             
+08b6: 67 12        pTos     $12                      
+08b8: 38 00b8      pushi    $00b8                    
+08bb: 78           push1                             
+08bc: 67 14        pTos     $14                      
+08be: 38 00b9      pushi    $00b9                    
+08c1: 78           push1                             
+08c2: 67 16        pTos     $16                      
+08c4: 38 00ba      pushi    $00ba                    
+08c7: 78           push1                             
+08c8: 67 18        pTos     $18                      
+08ca: 39 50        pushi    $50                      
+08cc: 78           push1                             
+08cd: 67 0c        pTos     $0c                      
+08cf: 39 22        pushi    $22                      
+08d1: 78           push1                             
+08d2: 8f 01        lsp      $01                      
+08d4: 39 3f        pushi    $3f                      
+08d6: 78           push1                             
+08d7: 8f 02        lsp      $02                      
+08d9: 38 00b5      pushi    $00b5                    
+08dc: 76           push0                             
+08dd: 63 0e        pToa     $0e                      
+08df: 4a 2e        send     $2e                      
+08e1: 63 1a        pToa     $1a                      
+08e3: 65 20        aTop     $20                      
+08e5: 39 53        pushi    $53                      
+08e7: 76           push0                             
+08e8: 54 04        self     $04                      
+08ea: 48           ret                               
+
+code_08eb:
+08eb: 39 74        pushi    $74                      
+08ed: 78           push1                             
+08ee: 39 53        pushi    $53                      
+08f0: 54 06        self     $06                      
+08f2: 48           ret                               
+
+code_08f3:
+08f3: 3f 05        link     $05                      
+08f5: 89 56        lsg      $56                      
+08f7: 76           push0                             
+08f8: 43 42 00     callk    $42, $00                 
+08fb: 02           add                               
+08fc: a1 58        sag      $58                      
+08fe: 35 00        ldi      $00                      
+0900: a5 00        sat      $00                      
+0902: 35 01        ldi      $01                      
+0904: 65 1c        aTop     $1c                      
+0906: 39 74        pushi    $74                      
+0908: 78           push1                             
+0909: 39 6b        pushi    $6b                      
+090b: 54 06        self     $06                      
+090d: 63 10        pToa     $10                      
+090f: 30 0007      bnt      code_0919;  lap          
+0912: 38 00a8      pushi    $00a8                    
+0915: 78           push1                             
+0916: 76           push0                             
+0917: 4a 06        send     $06                      
+
+code_0919:
+0919: 87 00        lap      $00                      
+091b: 30 000a      bnt      code_0928;  pushi        
+091e: 87 01        lap      $01                      
+0920: 30 0005      bnt      code_0928;  pushi        
+0923: 87 01        lap      $01                      
+0925: 32 0009      jmp      code_0931;  aTop         
+
+code_0928:
+0928: 39 75        pushi    $75                      
+092a: 7a           push2                             
+092b: 38 00af      pushi    $00af                    
+092e: 78           push1                             
+092f: 54 08        self     $08                      
+
+code_0931:
+0931: 65 10        aTop     $10                      
+0933: 63 10        pToa     $10                      
+0935: 30 0007      bnt      code_093f;  pToa         
+0938: 38 00a8      pushi    $00a8                    
+093b: 78           push1                             
+093c: 78           push1                             
+093d: 4a 06        send     $06                      
+
+code_093f:
+093f: 63 10        pToa     $10                      
+0941: 18           not                               
+0942: 30 000d      bnt      code_0952;  ldi          
+0945: 81 4f        lag      $4f                      
+0947: a5 03        sat      $03                      
+0949: 76           push0                             
+094a: 43 42 00     callk    $42, $00                 
+094d: a5 04        sat      $04                      
+094f: 32 0004      jmp      code_0956;  ldi          
+
+code_0952:
+0952: 35 00        ldi      $00                      
+0954: a5 03        sat      $03                      
+
+code_0956:
+0956: 35 00        ldi      $00                      
+0958: a5 02        sat      $02                      
+
+code_095a:
+095a: 85 02        lat      $02                      
+095c: 18           not                               
+095d: 30 008e      bnt      code_09ee;  ldi          
+0960: 89 56        lsg      $56                      
+0962: 76           push0                             
+0963: 43 42 00     callk    $42, $00                 
+0966: 02           add                               
+0967: a1 58        sag      $58                      
+0969: 39 74        pushi    $74                      
+096b: 78           push1                             
+096c: 38 00b0      pushi    $00b0                    
+096f: 54 06        self     $06                      
+0971: 38 0090      pushi    $0090                    
+0974: 76           push0                             
+0975: 39 6a        pushi    $6a                      
+0977: 76           push0                             
+0978: 51 07        class    $07                      
+097a: 4a 04        send     $04                      
+097c: 4a 04        send     $04                      
+097e: a5 01        sat      $01                      
+0980: 85 03        lat      $03                      
+0982: 30 002e      bnt      code_09b3;  pushi        
+0985: e5 03        -at      $03                      
+0987: 39 22        pushi    $22                      
+0989: 76           push0                             
+098a: 85 01        lat      $01                      
+098c: 4a 04        send     $04                      
+098e: 36           push                              
+098f: 35 01        ldi      $01                      
+0991: 1a           eq?                               
+0992: 30 0008      bnt      code_099d;  lst          
+0995: 39 22        pushi    $22                      
+0997: 78           push1                             
+0998: 76           push0                             
+0999: 85 01        lat      $01                      
+099b: 4a 06        send     $06                      
+
+code_099d:
+099d: 8d 04        lst      $04                      
+099f: 76           push0                             
+09a0: 43 42 00     callk    $42, $00                 
+09a3: 1a           eq?                               
+09a4: 30 0006      bnt      code_09ad;  push0        
+09a7: 32 fffffff3  jmp      code_099d;  lst          
+09aa: 32 fffffff0  jmp      code_099d;  lst          
+
+code_09ad:
+09ad: 76           push0                             
+09ae: 43 42 00     callk    $42, $00                 
+09b1: a5 04        sat      $04                      
+
+code_09b3:
+09b3: 38 0081      pushi    $0081                    
+09b6: 78           push1                             
+09b7: 8d 01        lst      $01                      
+09b9: 54 06        self     $06                      
+09bb: a5 02        sat      $02                      
+09bd: 39 6c        pushi    $6c                      
+09bf: 76           push0                             
+09c0: 85 01        lat      $01                      
+09c2: 4a 04        send     $04                      
+09c4: 38 00a4      pushi    $00a4                    
+09c7: 76           push0                             
+09c8: 54 04        self     $04                      
+09ca: 8d 02        lst      $02                      
+09cc: 35 ff        ldi      $ff                      
+09ce: 1a           eq?                               
+09cf: 2e 03 00     bt       $03, $00                 
+09d2: 63 1c        pToa     $1c                      
+09d4: 18           not                               
+09d5: 30 000e      bnt      code_09e6;  push1        
+09d8: 35 00        ldi      $00                      
+09da: a5 02        sat      $02                      
+09dc: 7a           push2                             
+09dd: 67 10        pTos     $10                      
+09df: 76           push0                             
+09e0: 43 19 04     callk    $19, $04                 
+09e3: 32 0008      jmp      code_09ee;  ldi          
+
+code_09e6:
+09e6: 78           push1                             
+09e7: 78           push1                             
+09e8: 43 41 02     callk    $41, $02                 
+09eb: 32 ffffff6c  jmp      code_095a;  lat          
+
+code_09ee:
+09ee: 35 00        ldi      $00                      
+09f0: 65 1c        aTop     $1c                      
+09f2: 85 02        lat      $02                      
+09f4: 48           ret                               
+
+code_09f5:
+09f5: 3f 01        link     $01                      
+09f7: 63 20        pToa     $20                      
+09f9: 30 001d      bnt      code_0a19;  ret          
+09fc: 78           push1                             
+09fd: 78           push1                             
+09fe: 43 42 02     callk    $42, $02                 
+0a01: a5 00        sat      $00                      
+0a03: 67 22        pTos     $22                      
+0a05: 1c           ne?                               
+0a06: 30 0010      bnt      code_0a19;  ret          
+0a09: 85 00        lat      $00                      
+0a0b: 65 22        aTop     $22                      
+0a0d: 6d 20        dpToa    $20                      
+0a0f: 18           not                               
+0a10: 30 0006      bnt      code_0a19;  ret          
+0a13: 38 008d      pushi    $008d                    
+0a16: 76           push0                             
+0a17: 54 04        self     $04                      
+
+code_0a19:
+0a19: 48           ret                               
+
+code_0a1a:
+0a1a: 63 1c        pToa     $1c                      
+0a1c: 18           not                               
+0a1d: 30 0008      bnt      code_0a28;  ldi          
+0a20: 39 6c        pushi    $6c                      
+0a22: 76           push0                             
+0a23: 54 04        self     $04                      
+0a25: 32 0004      jmp      code_0a2c;  ret          
+
+code_0a28:
+0a28: 35 00        ldi      $00                      
+0a2a: 65 1c        aTop     $1c                      
+
+code_0a2c:
+0a2c: 48           ret                               
+
+code_0a2d:
+0a2d: 3f 01        link     $01                      
+0a2f: 39 74        pushi    $74                      
+0a31: 78           push1                             
+0a32: 39 6c        pushi    $6c                      
+0a34: 39 7a        pushi    $7a                      
+0a36: 76           push0                             
+0a37: 54 0a        self     $0a                      
+0a39: 7c           pushSelf                          
+0a3a: 81 19        lag      $19                      
+0a3c: 1a           eq?                               
+0a3d: 30 000e      bnt      code_0a4e;  pToa         
+0a40: 78           push1                             
+0a41: 89 29        lsg      $29                      
+0a43: 43 15 02     callk    $15, $02                 
+0a46: 35 00        ldi      $00                      
+0a48: a1 19        sag      $19                      
+0a4a: 35 00        ldi      $00                      
+0a4c: a1 29        sag      $29                      
+
+code_0a4e:
+0a4e: 63 0e        pToa     $0e                      
+0a50: 30 0005      bnt      code_0a58;  ldi          
+0a53: 39 6c        pushi    $6c                      
+0a55: 76           push0                             
+0a56: 4a 04        send     $04                      
+
+code_0a58:
+0a58: 35 00        ldi      $00                      
+0a5a: 65 0e        aTop     $0e                      
+0a5c: 65 10        aTop     $10                      
+0a5e: 63 1e        pToa     $1e                      
+0a60: a5 00        sat      $00                      
+0a62: 39 6c        pushi    $6c                      
+0a64: 76           push0                             
+0a65: 57 03 04     super    $03, $04                 
+0a68: 85 00        lat      $00                      
+0a6a: 30 0006      bnt      code_0a73;  ret          
+0a6d: 38 008d      pushi    $008d                    
+0a70: 76           push0                             
+0a71: 4a 04        send     $04                      
+
+code_0a73:
+0a73: 48           ret                               
+
+code_0a74:
+0a74: 3f 02        link     $02                      
+0a76: 63 10        pToa     $10                      
+0a78: 30 007f      bnt      code_0afa;  ret          
+0a7b: 38 00a8      pushi    $00a8                    
+0a7e: 78           push1                             
+0a7f: 76           push0                             
+0a80: 4a 06        send     $06                      
+0a82: 39 77        pushi    $77                      
+0a84: 78           push1                             
+0a85: 67 10        pTos     $10                      
+0a87: 54 06        self     $06                      
+0a89: a5 01        sat      $01                      
+
+code_0a8b:
+0a8b: 39 44        pushi    $44                      
+0a8d: 78           push1                             
+0a8e: 8d 01        lst      $01                      
+0a90: 54 06        self     $06                      
+0a92: a5 01        sat      $01                      
+0a94: 18           not                               
+0a95: 30 0007      bnt      code_0a9f;  push1        
+0a98: 39 79        pushi    $79                      
+0a9a: 76           push0                             
+0a9b: 54 04        self     $04                      
+0a9d: a5 01        sat      $01                      
+
+code_0a9f:
+0a9f: 78           push1                             
+0aa0: 8d 01        lst      $01                      
+0aa2: 43 36 02     callk    $36, $02                 
+0aa5: 65 10        aTop     $10                      
+0aa7: 39 20        pushi    $20                      
+0aa9: 76           push0                             
+0aaa: 63 10        pToa     $10                      
+0aac: 4a 04        send     $04                      
+0aae: 36           push                              
+0aaf: 35 01        ldi      $01                      
+0ab1: 12           and                               
+0ab2: 30 ffffffd6  bnt      code_0a8b;  pushi        
+0ab5: 32 0003      jmp      code_0abb;  pushi        
+0ab8: 32 ffffffd0  jmp      code_0a8b;  pushi        
+
+code_0abb:
+0abb: 38 00a8      pushi    $00a8                    
+0abe: 78           push1                             
+0abf: 78           push1                             
+0ac0: 63 10        pToa     $10                      
+0ac2: 4a 06        send     $06                      
+0ac4: 38 00bb      pushi    $00bb                    
+0ac7: 39 04        pushi    $04                      
+0ac9: 89 13        lsg      $13                      
+0acb: 78           push1                             
+0acc: 39 0a        pushi    $0a                      
+0ace: 76           push0                             
+0acf: 63 10        pToa     $10                      
+0ad1: 4a 04        send     $04                      
+0ad3: 36           push                              
+0ad4: 39 0c        pushi    $0c                      
+0ad6: 76           push0                             
+0ad7: 63 10        pToa     $10                      
+0ad9: 4a 04        send     $04                      
+0adb: 36           push                              
+0adc: 39 0a        pushi    $0a                      
+0ade: 76           push0                             
+0adf: 63 10        pToa     $10                      
+0ae1: 4a 04        send     $04                      
+0ae3: 04           sub                               
+0ae4: 36           push                              
+0ae5: 35 02        ldi      $02                      
+0ae7: 08           div                               
+0ae8: 02           add                               
+0ae9: 36           push                              
+0aea: 39 0b        pushi    $0b                      
+0aec: 76           push0                             
+0aed: 63 10        pToa     $10                      
+0aef: 4a 04        send     $04                      
+0af1: 36           push                              
+0af2: 35 03        ldi      $03                      
+0af4: 04           sub                               
+0af5: 36           push                              
+0af6: 81 01        lag      $01                      
+0af8: 4a 0c        send     $0c                      
+
+code_0afa:
+0afa: 48           ret                               
+
+code_0afb:
+0afb: 3f 02        link     $02                      
+0afd: 63 10        pToa     $10                      
+0aff: 30 007f      bnt      code_0b81;  ret          
+0b02: 38 00a8      pushi    $00a8                    
+0b05: 78           push1                             
+0b06: 76           push0                             
+0b07: 4a 06        send     $06                      
+0b09: 39 77        pushi    $77                      
+0b0b: 78           push1                             
+0b0c: 67 10        pTos     $10                      
+0b0e: 54 06        self     $06                      
+0b10: a5 01        sat      $01                      
+
+code_0b12:
+0b12: 39 7c        pushi    $7c                      
+0b14: 78           push1                             
+0b15: 8d 01        lst      $01                      
+0b17: 54 06        self     $06                      
+0b19: a5 01        sat      $01                      
+0b1b: 18           not                               
+0b1c: 30 0007      bnt      code_0b26;  push1        
+0b1f: 39 7b        pushi    $7b                      
+0b21: 76           push0                             
+0b22: 54 04        self     $04                      
+0b24: a5 01        sat      $01                      
+
+code_0b26:
+0b26: 78           push1                             
+0b27: 8d 01        lst      $01                      
+0b29: 43 36 02     callk    $36, $02                 
+0b2c: 65 10        aTop     $10                      
+0b2e: 39 20        pushi    $20                      
+0b30: 76           push0                             
+0b31: 63 10        pToa     $10                      
+0b33: 4a 04        send     $04                      
+0b35: 36           push                              
+0b36: 35 01        ldi      $01                      
+0b38: 12           and                               
+0b39: 30 ffffffd6  bnt      code_0b12;  pushi        
+0b3c: 32 0003      jmp      code_0b42;  pushi        
+0b3f: 32 ffffffd0  jmp      code_0b12;  pushi        
+
+code_0b42:
+0b42: 38 00a8      pushi    $00a8                    
+0b45: 78           push1                             
+0b46: 78           push1                             
+0b47: 63 10        pToa     $10                      
+0b49: 4a 06        send     $06                      
+0b4b: 38 00bb      pushi    $00bb                    
+0b4e: 39 04        pushi    $04                      
+0b50: 89 13        lsg      $13                      
+0b52: 78           push1                             
+0b53: 39 0a        pushi    $0a                      
+0b55: 76           push0                             
+0b56: 63 10        pToa     $10                      
+0b58: 4a 04        send     $04                      
+0b5a: 36           push                              
+0b5b: 39 0c        pushi    $0c                      
+0b5d: 76           push0                             
+0b5e: 63 10        pToa     $10                      
+0b60: 4a 04        send     $04                      
+0b62: 36           push                              
+0b63: 39 0a        pushi    $0a                      
+0b65: 76           push0                             
+0b66: 63 10        pToa     $10                      
+0b68: 4a 04        send     $04                      
+0b6a: 04           sub                               
+0b6b: 36           push                              
+0b6c: 35 02        ldi      $02                      
+0b6e: 08           div                               
+0b6f: 02           add                               
+0b70: 36           push                              
+0b71: 39 0b        pushi    $0b                      
+0b73: 76           push0                             
+0b74: 63 10        pToa     $10                      
+0b76: 4a 04        send     $04                      
+0b78: 36           push                              
+0b79: 35 03        ldi      $03                      
+0b7b: 04           sub                               
+0b7c: 36           push                              
+0b7d: 81 01        lag      $01                      
+0b7f: 4a 0c        send     $0c                      
+
+code_0b81:
+0b81: 48           ret                               
+
+code_0b82:
+0b82: 3f 01        link     $01                      
+0b84: 39 22        pushi    $22                      
+0b86: 76           push0                             
+0b87: 87 01        lap      $01                      
+0b89: 4a 04        send     $04                      
+0b8b: 36           push                              
+0b8c: 35 40        ldi      $40                      
+0b8e: 12           and                               
+0b8f: 30 006b      bnt      code_0bfd;  pushi        
+0b92: 39 22        pushi    $22                      
+0b94: 78           push1                             
+0b95: 39 04        pushi    $04                      
+0b97: 87 01        lap      $01                      
+0b99: 4a 06        send     $06                      
+0b9b: 39 28        pushi    $28                      
+0b9d: 76           push0                             
+0b9e: 87 01        lap      $01                      
+0ba0: 4a 04        send     $04                      
+0ba2: 36           push                              
+0ba3: 3c           dup                               
+0ba4: 35 05        ldi      $05                      
+0ba6: 1a           eq?                               
+0ba7: 30 000d      bnt      code_0bb7;  dup          
+0baa: 39 28        pushi    $28                      
+0bac: 78           push1                             
+0bad: 38 5000      pushi    $5000                    
+0bb0: 87 01        lap      $01                      
+0bb2: 4a 06        send     $06                      
+0bb4: 32 0045      jmp      code_0bfc;  toss         
+
+code_0bb7:
+0bb7: 3c           dup                               
+0bb8: 35 01        ldi      $01                      
+0bba: 1a           eq?                               
+0bbb: 30 000d      bnt      code_0bcb;  dup          
+0bbe: 39 28        pushi    $28                      
+0bc0: 78           push1                             
+0bc1: 38 4800      pushi    $4800                    
+0bc4: 87 01        lap      $01                      
+0bc6: 4a 06        send     $06                      
+0bc8: 32 0031      jmp      code_0bfc;  toss         
+
+code_0bcb:
+0bcb: 3c           dup                               
+0bcc: 35 07        ldi      $07                      
+0bce: 1a           eq?                               
+0bcf: 30 000d      bnt      code_0bdf;  dup          
+0bd2: 39 28        pushi    $28                      
+0bd4: 78           push1                             
+0bd5: 38 4b00      pushi    $4b00                    
+0bd8: 87 01        lap      $01                      
+0bda: 4a 06        send     $06                      
+0bdc: 32 001d      jmp      code_0bfc;  toss         
+
+code_0bdf:
+0bdf: 3c           dup                               
+0be0: 35 03        ldi      $03                      
+0be2: 1a           eq?                               
+0be3: 30 000d      bnt      code_0bf3;  pushi        
+0be6: 39 28        pushi    $28                      
+0be8: 78           push1                             
+0be9: 38 4d00      pushi    $4d00                    
+0bec: 87 01        lap      $01                      
+0bee: 4a 06        send     $06                      
+0bf0: 32 0009      jmp      code_0bfc;  toss         
+
+code_0bf3:
+0bf3: 39 22        pushi    $22                      
+0bf5: 78           push1                             
+0bf6: 39 40        pushi    $40                      
+0bf8: 87 01        lap      $01                      
+0bfa: 4a 06        send     $06                      
+
+code_0bfc:
+0bfc: 3a           toss                              
+
+code_0bfd:
+0bfd: 39 4c        pushi    $4c                      
+0bff: 76           push0                             
+0c00: 87 01        lap      $01                      
+0c02: 4a 04        send     $04                      
+0c04: 2e 3f 00     bt       $3f, $00                 
+0c07: 39 22        pushi    $22                      
+0c09: 76           push0                             
+0c0a: 87 01        lap      $01                      
+0c0c: 4a 04        send     $04                      
+0c0e: 36           push                              
+0c0f: 35 00        ldi      $00                      
+0c11: 1a           eq?                               
+0c12: 2e 31 00     bt       $31, $00                 
+0c15: 78           push1                             
+0c16: 39 22        pushi    $22                      
+0c18: 76           push0                             
+0c19: 87 01        lap      $01                      
+0c1b: 4a 04        send     $04                      
+0c1d: 1c           ne?                               
+0c1e: 30 0033      bnt      code_0c54;  pushi        
+0c21: 39 04        pushi    $04                      
+0c23: 39 22        pushi    $22                      
+0c25: 76           push0                             
+0c26: 87 01        lap      $01                      
+0c28: 4a 04        send     $04                      
+0c2a: 1c           ne?                               
+0c2b: 30 0026      bnt      code_0c54;  pushi        
+0c2e: 39 40        pushi    $40                      
+0c30: 39 22        pushi    $22                      
+0c32: 76           push0                             
+0c33: 87 01        lap      $01                      
+0c35: 4a 04        send     $04                      
+0c37: 1c           ne?                               
+0c38: 30 0019      bnt      code_0c54;  pushi        
+0c3b: 38 0100      pushi    $0100                    
+0c3e: 39 22        pushi    $22                      
+0c40: 76           push0                             
+0c41: 87 01        lap      $01                      
+0c43: 4a 04        send     $04                      
+0c45: 1c           ne?                               
+0c46: 30 000b      bnt      code_0c54;  pushi        
+0c49: 7a           push2                             
+0c4a: 67 10        pTos     $10                      
+0c4c: 8f 01        lsp      $01                      
+0c4e: 43 19 04     callk    $19, $04                 
+0c51: 35 00        ldi      $00                      
+0c53: 48           ret                               
+
+code_0c54:
+0c54: 39 75        pushi    $75                      
+0c56: 7a           push2                             
+0c57: 38 0081      pushi    $0081                    
+0c5a: 8f 01        lsp      $01                      
+0c5c: 54 08        self     $08                      
+0c5e: a5 00        sat      $00                      
+0c60: 30 0039      bnt      code_0c9c;  ldi          
+0c63: 7a           push2                             
+0c64: 67 10        pTos     $10                      
+0c66: 76           push0                             
+0c67: 43 19 04     callk    $19, $04                 
+0c6a: 38 00af      pushi    $00af                    
+0c6d: 78           push1                             
+0c6e: 7a           push2                             
+0c6f: 85 00        lat      $00                      
+0c71: 4a 06        send     $06                      
+0c73: 18           not                               
+0c74: 30 0210      bnt      code_0e87;  lat          
+0c77: 63 10        pToa     $10                      
+0c79: 30 0007      bnt      code_0c83;  pushi        
+0c7c: 38 00a8      pushi    $00a8                    
+0c7f: 78           push1                             
+0c80: 76           push0                             
+0c81: 4a 06        send     $06                      
+
+code_0c83:
+0c83: 38 00a8      pushi    $00a8                    
+0c86: 78           push1                             
+0c87: 78           push1                             
+0c88: 85 00        lat      $00                      
+0c8a: 65 10        aTop     $10                      
+0c8c: 4a 06        send     $06                      
+0c8e: 39 3c        pushi    $3c                      
+0c90: 76           push0                             
+0c91: 85 00        lat      $00                      
+0c93: 4a 04        send     $04                      
+0c95: 35 00        ldi      $00                      
+0c97: a5 00        sat      $00                      
+0c99: 32 01eb      jmp      code_0e87;  lat          
+
+code_0c9c:
+0c9c: 35 00        ldi      $00                      
+0c9e: a5 00        sat      $00                      
+0ca0: 39 22        pushi    $22                      
+0ca2: 76           push0                             
+0ca3: 87 01        lap      $01                      
+0ca5: 4a 04        send     $04                      
+0ca7: 36           push                              
+0ca8: 34 00 01     ldi      $00, $01                 
+0cab: 1a           eq?                               
+0cac: 2e 17 00     bt       $17, $00                 
+0caf: 39 04        pushi    $04                      
+0cb1: 39 22        pushi    $22                      
+0cb3: 76           push0                             
+0cb4: 87 01        lap      $01                      
+0cb6: 4a 04        send     $04                      
+0cb8: 1a           eq?                               
+0cb9: 30 0032      bnt      code_0cee;  pushi        
+0cbc: 39 0d        pushi    $0d                      
+0cbe: 39 28        pushi    $28                      
+0cc0: 76           push0                             
+0cc1: 87 01        lap      $01                      
+0cc3: 4a 04        send     $04                      
+0cc5: 1a           eq?                               
+0cc6: 30 0025      bnt      code_0cee;  pushi        
+0cc9: 63 10        pToa     $10                      
+0ccb: 30 0020      bnt      code_0cee;  pushi        
+0cce: 38 00af      pushi    $00af                    
+0cd1: 78           push1                             
+0cd2: 78           push1                             
+0cd3: 4a 06        send     $06                      
+0cd5: 30 0016      bnt      code_0cee;  pushi        
+0cd8: 63 10        pToa     $10                      
+0cda: a5 00        sat      $00                      
+0cdc: 7a           push2                             
+0cdd: 67 10        pTos     $10                      
+0cdf: 76           push0                             
+0ce0: 43 19 04     callk    $19, $04                 
+0ce3: 39 4c        pushi    $4c                      
+0ce5: 78           push1                             
+0ce6: 78           push1                             
+0ce7: 87 01        lap      $01                      
+0ce9: 4a 06        send     $06                      
+0ceb: 32 0199      jmp      code_0e87;  lat          
+
+code_0cee:
+0cee: 39 75        pushi    $75                      
+0cf0: 7a           push2                             
+0cf1: 38 00af      pushi    $00af                    
+0cf4: 78           push1                             
+0cf5: 54 08        self     $08                      
+0cf7: 18           not                               
+0cf8: 30 0031      bnt      code_0d2c;  bt           
+0cfb: 39 04        pushi    $04                      
+0cfd: 39 22        pushi    $22                      
+0cff: 76           push0                             
+0d00: 87 01        lap      $01                      
+0d02: 4a 04        send     $04                      
+0d04: 1a           eq?                               
+0d05: 30 000a      bnt      code_0d12;  bt           
+0d08: 39 0d        pushi    $0d                      
+0d0a: 39 28        pushi    $28                      
+0d0c: 76           push0                             
+0d0d: 87 01        lap      $01                      
+0d0f: 4a 04        send     $04                      
+0d11: 1a           eq?                               
+
+code_0d12:
+0d12: 2e 31 00     bt       $31, $00                 
+0d15: 78           push1                             
+0d16: 39 22        pushi    $22                      
+0d18: 76           push0                             
+0d19: 87 01        lap      $01                      
+0d1b: 4a 04        send     $04                      
+0d1d: 1a           eq?                               
+0d1e: 2e 25 00     bt       $25, $00                 
+0d21: 38 0100      pushi    $0100                    
+0d24: 39 22        pushi    $22                      
+0d26: 76           push0                             
+0d27: 87 01        lap      $01                      
+0d29: 4a 04        send     $04                      
+0d2b: 1a           eq?                               
+
+code_0d2c:
+0d2c: 2e 17 00     bt       $17, $00                 
+0d2f: 39 04        pushi    $04                      
+0d31: 39 22        pushi    $22                      
+0d33: 76           push0                             
+0d34: 87 01        lap      $01                      
+0d36: 4a 04        send     $04                      
+0d38: 1a           eq?                               
+0d39: 30 001c      bnt      code_0d58;  push1        
+0d3c: 39 1b        pushi    $1b                      
+0d3e: 39 28        pushi    $28                      
+0d40: 76           push0                             
+0d41: 87 01        lap      $01                      
+0d43: 4a 04        send     $04                      
+0d45: 1a           eq?                               
+0d46: 30 000f      bnt      code_0d58;  push1        
+0d49: 39 4c        pushi    $4c                      
+0d4b: 78           push1                             
+0d4c: 78           push1                             
+0d4d: 87 01        lap      $01                      
+0d4f: 4a 06        send     $06                      
+0d51: 35 ff        ldi      $ff                      
+0d53: a5 00        sat      $00                      
+0d55: 32 012f      jmp      code_0e87;  lat          
+
+code_0d58:
+0d58: 78           push1                             
+0d59: 67 10        pTos     $10                      
+0d5b: 43 06 02     callk    $06, $02                 
+0d5e: 30 0056      bnt      code_0db7;  push1        
+0d61: 38 00ae      pushi    $00ae                    
+0d64: 78           push1                             
+0d65: 39 03        pushi    $03                      
+0d67: 63 10        pToa     $10                      
+0d69: 4a 06        send     $06                      
+0d6b: 30 0049      bnt      code_0db7;  push1        
+0d6e: 39 22        pushi    $22                      
+0d70: 76           push0                             
+0d71: 87 01        lap      $01                      
+0d73: 4a 04        send     $04                      
+0d75: 36           push                              
+0d76: 35 04        ldi      $04                      
+0d78: 1a           eq?                               
+0d79: 30 003b      bnt      code_0db7;  push1        
+0d7c: 39 28        pushi    $28                      
+0d7e: 76           push0                             
+0d7f: 87 01        lap      $01                      
+0d81: 4a 04        send     $04                      
+0d83: 36           push                              
+0d84: 34 00 4d     ldi      $00, $4d                 
+0d87: 1a           eq?                               
+0d88: 30 002c      bnt      code_0db7;  push1        
+0d8b: 39 24        pushi    $24                      
+0d8d: 76           push0                             
+0d8e: 63 10        pToa     $10                      
+0d90: 4a 04        send     $04                      
+0d92: 36           push                              
+0d93: 78           push1                             
+0d94: 39 1a        pushi    $1a                      
+0d96: 76           push0                             
+0d97: 63 10        pToa     $10                      
+0d99: 4a 04        send     $04                      
+0d9b: 36           push                              
+0d9c: 43 46 02     callk    $46, $02                 
+0d9f: 20           ge?                               
+0da0: 30 0009      bnt      code_0dac;  push2        
+0da3: 38 00b1      pushi    $00b1                    
+0da6: 76           push0                             
+0da7: 54 04        self     $04                      
+0da9: 32 00db      jmp      code_0e87;  lat          
+
+code_0dac:
+0dac: 7a           push2                             
+0dad: 67 10        pTos     $10                      
+0daf: 8f 01        lsp      $01                      
+0db1: 43 19 04     callk    $19, $04                 
+0db4: 32 00d0      jmp      code_0e87;  lat          
+
+code_0db7:
+0db7: 78           push1                             
+0db8: 67 10        pTos     $10                      
+0dba: 43 06 02     callk    $06, $02                 
+0dbd: 30 004c      bnt      code_0e0c;  pushi        
+0dc0: 38 00ae      pushi    $00ae                    
+0dc3: 78           push1                             
+0dc4: 39 03        pushi    $03                      
+0dc6: 63 10        pToa     $10                      
+0dc8: 4a 06        send     $06                      
+0dca: 30 003f      bnt      code_0e0c;  pushi        
+0dcd: 39 22        pushi    $22                      
+0dcf: 76           push0                             
+0dd0: 87 01        lap      $01                      
+0dd2: 4a 04        send     $04                      
+0dd4: 36           push                              
+0dd5: 35 04        ldi      $04                      
+0dd7: 1a           eq?                               
+0dd8: 30 0031      bnt      code_0e0c;  pushi        
+0ddb: 39 28        pushi    $28                      
+0ddd: 76           push0                             
+0dde: 87 01        lap      $01                      
+0de0: 4a 04        send     $04                      
+0de2: 36           push                              
+0de3: 34 00 4b     ldi      $00, $4b                 
+0de6: 1a           eq?                               
+0de7: 30 0022      bnt      code_0e0c;  pushi        
+0dea: 39 24        pushi    $24                      
+0dec: 76           push0                             
+0ded: 63 10        pToa     $10                      
+0def: 4a 04        send     $04                      
+0df1: 36           push                              
+0df2: 35 00        ldi      $00                      
+0df4: 24           le?                               
+0df5: 30 0009      bnt      code_0e01;  push2        
+0df8: 38 00b2      pushi    $00b2                    
+0dfb: 76           push0                             
+0dfc: 54 04        self     $04                      
+0dfe: 32 0086      jmp      code_0e87;  lat          
+
+code_0e01:
+0e01: 7a           push2                             
+0e02: 67 10        pTos     $10                      
+0e04: 8f 01        lsp      $01                      
+0e06: 43 19 04     callk    $19, $04                 
+0e09: 32 007b      jmp      code_0e87;  lat          
+
+code_0e0c:
+0e0c: 39 04        pushi    $04                      
+0e0e: 39 22        pushi    $22                      
+0e10: 76           push0                             
+0e11: 87 01        lap      $01                      
+0e13: 4a 04        send     $04                      
+0e15: 1a           eq?                               
+0e16: 30 002c      bnt      code_0e45;  pushi        
+0e19: 39 04        pushi    $04                      
+0e1b: 39 28        pushi    $28                      
+0e1d: 76           push0                             
+0e1e: 87 01        lap      $01                      
+0e20: 4a 04        send     $04                      
+0e22: 36           push                              
+0e23: 39 09        pushi    $09                      
+0e25: 38 4d00      pushi    $4d00                    
+0e28: 38 5000      pushi    $5000                    
+0e2b: 46 export999_5 08  calle    export999_5, $08         
+0e31: 30 0011      bnt      code_0e45;  pushi        
+0e34: 39 4c        pushi    $4c                      
+0e36: 78           push1                             
+0e37: 78           push1                             
+0e38: 87 01        lap      $01                      
+0e3a: 4a 06        send     $06                      
+0e3c: 38 00b1      pushi    $00b1                    
+0e3f: 76           push0                             
+0e40: 54 04        self     $04                      
+0e42: 32 0042      jmp      code_0e87;  lat          
+
+code_0e45:
+0e45: 39 04        pushi    $04                      
+0e47: 39 22        pushi    $22                      
+0e49: 76           push0                             
+0e4a: 87 01        lap      $01                      
+0e4c: 4a 04        send     $04                      
+0e4e: 1a           eq?                               
+0e4f: 30 002d      bnt      code_0e7f;  push2        
+0e52: 39 04        pushi    $04                      
+0e54: 39 28        pushi    $28                      
+0e56: 76           push0                             
+0e57: 87 01        lap      $01                      
+0e59: 4a 04        send     $04                      
+0e5b: 36           push                              
+0e5c: 38 0f00      pushi    $0f00                    
+0e5f: 38 4b00      pushi    $4b00                    
+0e62: 38 4800      pushi    $4800                    
+0e65: 46 export999_5 08  calle    export999_5, $08         
+0e6b: 30 0011      bnt      code_0e7f;  push2        
+0e6e: 39 4c        pushi    $4c                      
+0e70: 78           push1                             
+0e71: 78           push1                             
+0e72: 87 01        lap      $01                      
+0e74: 4a 06        send     $06                      
+0e76: 38 00b2      pushi    $00b2                    
+0e79: 76           push0                             
+0e7a: 54 04        self     $04                      
+0e7c: 32 0008      jmp      code_0e87;  lat          
+
+code_0e7f:
+0e7f: 7a           push2                             
+0e80: 67 10        pTos     $10                      
+0e82: 8f 01        lsp      $01                      
+0e84: 43 19 04     callk    $19, $04                 
+
+code_0e87:
+0e87: 85 00        lat      $00                      
+0e89: 48           ret                               
+
+code_0e8a:
+0e8a: 67 18        pTos     $18                      
+0e8c: 87 01        lap      $01                      
+0e8e: 02           add                               
+0e8f: 65 18        aTop     $18                      
+0e91: 67 14        pTos     $14                      
+0e93: 87 01        lap      $01                      
+0e95: 02           add                               
+0e96: 65 14        aTop     $14                      
+0e98: 67 12        pTos     $12                      
+0e9a: 87 02        lap      $02                      
+0e9c: 02           add                               
+0e9d: 65 12        aTop     $12                      
+0e9f: 67 16        pTos     $16                      
+0ea1: 87 02        lap      $02                      
+0ea3: 02           add                               
+0ea4: 65 16        aTop     $16                      
+0ea6: 48           ret                               
+
+code_0ea7:
+0ea7: 38 00ab      pushi    $00ab                    
+0eaa: 7a           push2                             
+0eab: 8f 01        lsp      $01                      
+0ead: 63 14        pToa     $14                      
+0eaf: 04           sub                               
+0eb0: 36           push                              
+0eb1: 8f 02        lsp      $02                      
+0eb3: 63 12        pToa     $12                      
+0eb5: 04           sub                               
+0eb6: 36           push                              
+0eb7: 54 08        self     $08                      
+0eb9: 48           ret                               
+
+code_0eba:
+0eba: 38 00ac      pushi    $00ac                    
+0ebd: 7a           push2                             
+0ebe: 39 14        pushi    $14                      
+0ec0: 76           push0                             
+0ec1: 63 0e        pToa     $0e                      
+0ec3: 4a 04        send     $04                      
+0ec5: 36           push                              
+0ec6: 39 16        pushi    $16                      
+0ec8: 76           push0                             
+0ec9: 63 0e        pToa     $0e                      
+0ecb: 4a 04        send     $04                      
+0ecd: 36           push                              
+0ece: 39 14        pushi    $14                      
+0ed0: 76           push0                             
+0ed1: 63 0e        pToa     $0e                      
+0ed3: 4a 04        send     $04                      
+0ed5: 04           sub                               
+0ed6: 36           push                              
+0ed7: 67 18        pTos     $18                      
+0ed9: 63 14        pToa     $14                      
+0edb: 04           sub                               
+0edc: 04           sub                               
+0edd: 36           push                              
+0ede: 35 02        ldi      $02                      
+0ee0: 08           div                               
+0ee1: 02           add                               
+0ee2: 36           push                              
+0ee3: 39 13        pushi    $13                      
+0ee5: 76           push0                             
+0ee6: 63 0e        pToa     $0e                      
+0ee8: 4a 04        send     $04                      
+0eea: 36           push                              
+0eeb: 39 15        pushi    $15                      
+0eed: 76           push0                             
+0eee: 63 0e        pToa     $0e                      
+0ef0: 4a 04        send     $04                      
+0ef2: 36           push                              
+0ef3: 39 13        pushi    $13                      
+0ef5: 76           push0                             
+0ef6: 63 0e        pToa     $0e                      
+0ef8: 4a 04        send     $04                      
+0efa: 04           sub                               
+0efb: 36           push                              
+0efc: 67 16        pTos     $16                      
+0efe: 63 12        pToa     $12                      
+0f00: 04           sub                               
+0f01: 04           sub                               
+0f02: 36           push                              
+0f03: 35 02        ldi      $02                      
+0f05: 08           div                               
+0f06: 02           add                               
+0f07: 36           push                              
+0f08: 54 08        self     $08                      
+0f0a: 48           ret                               
+
+code_0f0b:
+0f0b: 3f 06        link     $06                      
+0f0d: 63 0c        pToa     $0c                      
+0f0f: 30 002c      bnt      code_0f3e;  ldi          
+0f12: 39 05        pushi    $05                      
+0f14: 35 00        ldi      $00                      
+0f16: 5b 14 02     lea      $14, $02                 
+0f19: 36           push                              
+0f1a: 67 0c        pTos     $0c                      
+0f1c: 76           push0                             
+0f1d: 39 ff        pushi    $ff                      
+0f1f: 76           push0                             
+0f20: 43 1a 0a     callk    $1a, $0a                 
+0f23: 35 00        ldi      $00                      
+0f25: 95 02        lati     $02                      
+0f27: 65 12        aTop     $12                      
+0f29: 35 01        ldi      $01                      
+0f2b: 95 02        lati     $02                      
+0f2d: 65 14        aTop     $14                      
+0f2f: 35 02        ldi      $02                      
+0f31: 95 02        lati     $02                      
+0f33: 65 16        aTop     $16                      
+0f35: 35 03        ldi      $03                      
+0f37: 95 02        lati     $02                      
+0f39: 65 18        aTop     $18                      
+0f3b: 32 000a      jmp      code_0f48;  pushi        
+
+code_0f3e:
+0f3e: 35 00        ldi      $00                      
+0f40: 65 12        aTop     $12                      
+0f42: 65 14        aTop     $14                      
+0f44: 65 16        aTop     $16                      
+0f46: 65 18        aTop     $18                      
+
+code_0f48:
+0f48: 39 79        pushi    $79                      
+0f4a: 76           push0                             
+0f4b: 54 04        self     $04                      
+0f4d: a5 00        sat      $00                      
+
+code_0f4f:
+0f4f: 85 00        lat      $00                      
+0f51: 30 006d      bnt      code_0fc1;  pTos         
+0f54: 78           push1                             
+0f55: 36           push                              
+0f56: 43 36 02     callk    $36, $02                 
+0f59: a5 01        sat      $01                      
+0f5b: 39 0a        pushi    $0a                      
+0f5d: 76           push0                             
+0f5e: 4a 04        send     $04                      
+0f60: 36           push                              
+0f61: 63 14        pToa     $14                      
+0f63: 22           lt?                               
+0f64: 30 0009      bnt      code_0f70;  pushi        
+0f67: 39 0a        pushi    $0a                      
+0f69: 76           push0                             
+0f6a: 85 01        lat      $01                      
+0f6c: 4a 04        send     $04                      
+0f6e: 65 14        aTop     $14                      
+
+code_0f70:
+0f70: 39 09        pushi    $09                      
+0f72: 76           push0                             
+0f73: 85 01        lat      $01                      
+0f75: 4a 04        send     $04                      
+0f77: 36           push                              
+0f78: 63 12        pToa     $12                      
+0f7a: 22           lt?                               
+0f7b: 30 0009      bnt      code_0f87;  pushi        
+0f7e: 39 09        pushi    $09                      
+0f80: 76           push0                             
+0f81: 85 01        lat      $01                      
+0f83: 4a 04        send     $04                      
+0f85: 65 12        aTop     $12                      
+
+code_0f87:
+0f87: 39 0c        pushi    $0c                      
+0f89: 76           push0                             
+0f8a: 85 01        lat      $01                      
+0f8c: 4a 04        send     $04                      
+0f8e: 36           push                              
+0f8f: 63 18        pToa     $18                      
+0f91: 1e           gt?                               
+0f92: 30 0009      bnt      code_0f9e;  pushi        
+0f95: 39 0c        pushi    $0c                      
+0f97: 76           push0                             
+0f98: 85 01        lat      $01                      
+0f9a: 4a 04        send     $04                      
+0f9c: 65 18        aTop     $18                      
+
+code_0f9e:
+0f9e: 39 0b        pushi    $0b                      
+0fa0: 76           push0                             
+0fa1: 85 01        lat      $01                      
+0fa3: 4a 04        send     $04                      
+0fa5: 36           push                              
+0fa6: 63 16        pToa     $16                      
+0fa8: 1e           gt?                               
+0fa9: 30 0009      bnt      code_0fb5;  pushi        
+0fac: 39 0b        pushi    $0b                      
+0fae: 76           push0                             
+0faf: 85 01        lat      $01                      
+0fb1: 4a 04        send     $04                      
+0fb3: 65 16        aTop     $16                      
+
+code_0fb5:
+0fb5: 39 44        pushi    $44                      
+0fb7: 78           push1                             
+0fb8: 8d 00        lst      $00                      
+0fba: 54 06        self     $06                      
+0fbc: a5 00        sat      $00                      
+0fbe: 32 ffffff8e  jmp      code_0f4f;  lat          
+
+code_0fc1:
+0fc1: 67 18        pTos     $18                      
+0fc3: 35 04        ldi      $04                      
+0fc5: 02           add                               
+0fc6: 65 18        aTop     $18                      
+0fc8: 67 16        pTos     $16                      
+0fca: 35 04        ldi      $04                      
+0fcc: 02           add                               
+0fcd: 65 16        aTop     $16                      
+0fcf: 38 00ac      pushi    $00ac                    
+0fd2: 7a           push2                             
+0fd3: 76           push0                             
+0fd4: 76           push0                             
+0fd5: 54 08        self     $08                      
+0fd7: 48           ret                               
+
+0fdc: [Class section]
+	name = Dialog
+	species = 12
+0fe4: sel[0] = $12
+0fe6: sel[1] = $3
+0fe8: sel[2] = $8000
+0fea: sel[3] = string_191b;  'Dialog'
+0fec: sel[4] = $0
+0fee: sel[5] = $0
+0ff0: sel[6] = $0
+0ff2: sel[7] = $0
+0ff4: sel[8] = $0
+0ff6: sel[9] = $0
+0ff8: sel[10] = $0
+0ffa: sel[11] = $0
+0ffc: sel[12] = $0
+0ffe: sel[13] = $0
+1000: sel[14] = $0
+1002: sel[15] = $0
+1004: sel[16] = $0
+1006: sel[17] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 001b	
+	varsel[5] = 0059	
+	varsel[6] = 001a	
+	varsel[7] = 0023	
+	varsel[8] = 00b3	
+	varsel[9] = 0009	
+	varsel[10] = 000a	
+	varsel[11] = 000b	
+	varsel[12] = 000c	
+	varsel[13] = 0019	
+	varsel[14] = 00b4	
+	varsel[15] = 008b	
+	varsel[16] = 0085	
+	varsel[17] = 0086	
+
+	func[0] = doit code_08f3;  link
+	func[1] = dispose code_0a2d;  link
+	func[2] = open code_0890;  push0
+	func[3] = draw code_08eb;  pushi
+	func[4] = cue code_0a1a;  pToa
+	func[5] = advance code_0a74;  link
+	func[6] = retreat code_0afb;  link
+	func[7] = move code_0e8a;  pTos
+	func[8] = moveTo code_0ea7;  pushi
+	func[9] = center code_0eba;  pushi
+	func[10] = setSize code_0f0b;  link
+	func[11] = handleEvent code_0b82;  link
+	func[12] = check code_09f5;  link
+
+1068: [Code section]
+
+code_1068:
+1068: 39 74        pushi    $74                      
+106a: 78           push1                             
+106b: 38 00aa      pushi    $00aa                    
+106e: 54 06        self     $06                      
+1070: 39 74        pushi    $74                      
+1072: 78           push1                             
+1073: 39 53        pushi    $53                      
+1075: 54 06        self     $06                      
+1077: 48           ret                               
+
+code_1078:
+1078: 3f 01        link     $01                      
+107a: 39 4c        pushi    $4c                      
+107c: 76           push0                             
+107d: 87 01        lap      $01                      
+107f: 4a 04        send     $04                      
+1081: 30 0003      bnt      code_1087;  pushi        
+1084: 35 00        ldi      $00                      
+1086: 48           ret                               
+
+code_1087:
+1087: 39 75        pushi    $75                      
+1089: 7a           push2                             
+108a: 38 0081      pushi    $0081                    
+108d: 8f 01        lsp      $01                      
+108f: 54 08        self     $08                      
+1091: a5 00        sat      $00                      
+1093: 30 0016      bnt      code_10ac;  lat          
+1096: 38 00af      pushi    $00af                    
+1099: 78           push1                             
+109a: 7a           push2                             
+109b: 4a 06        send     $06                      
+109d: 18           not                               
+109e: 30 000b      bnt      code_10ac;  lat          
+10a1: 39 3c        pushi    $3c                      
+10a3: 76           push0                             
+10a4: 85 00        lat      $00                      
+10a6: 4a 04        send     $04                      
+10a8: 35 00        ldi      $00                      
+10aa: a5 00        sat      $00                      
+
+code_10ac:
+10ac: 85 00        lat      $00                      
+10ae: 48           ret                               
+10af: 00           bnot                              
+
+10b4: [Class section]
+	name = Controls
+	species = 13
+10bc: sel[0] = $13
+10be: sel[1] = $3
+10c0: sel[2] = $8000
+10c2: sel[3] = string_1922;  'Controls'
+10c4: sel[4] = $0
+10c6: sel[5] = $0
+
+	varsel[0] = 0000	
+	varsel[1] = 0001	
+	varsel[2] = 0002	
+	varsel[3] = 0017	
+	varsel[4] = 001b	
+	varsel[5] = 0059	
+
+	func[0] = draw code_1068;  pushi
+	func[1] = handleEvent code_1078;  link
+
+10e4: [Code section]
+
+code_10e4:
+10e4: 3f 04        link     $04                      
+10e6: 39 04        pushi    $04                      
+10e8: 8f 00        lsp      $00                      
+10ea: 35 03        ldi      $03                      
+10ec: 20           ge?                               
+10ed: 30 0005      bnt      code_10f5;  lofsa        
+10f0: 87 03        lap      $03                      
+10f2: 32 0003      jmp      code_10f8;  push         
+
+code_10f5:
+10f5: 72 192b      lofsa    string_192b;  ''         
+
+code_10f8:
+10f8: 36           push                              
+10f9: 39 29        pushi    $29                      
+10fb: 8f 01        lsp      $01                      
+10fd: 8f 02        lsp      $02                      
+10ff: 59 04        &rest    $04                      
+1101: 40 001d 08   call     code_1122;  link, $08    
+1105: 30 0006      bnt      code_110e;  ret          
+1108: 78           push1                             
+1109: 8f 01        lsp      $01                      
+110b: 43 46 02     callk    $46, $02                 
+
+code_110e:
+110e: 48           ret                               
+
+code_110f:
+110f: 39 05        pushi    $05                      
+1111: 8f 01        lsp      $01                      
+1113: 39 52        pushi    $52                      
+1115: 8f 02        lsp      $02                      
+1117: 8f 03        lsp      $03                      
+1119: 8f 04        lsp      $04                      
+111b: 59 05        &rest    $05                      
+111d: 40 0001 0a   call     code_1122;  link, $0a    
+1121: 48           ret                               
+
+code_1122:
+1122: 3e 09 04     link     $09, $04                 
+1125: 35 00        ldi      $00                      
+1127: a4 04 04     sat      $04, $04                 
+112a: 35 00        ldi      $00                      
+112c: a4 05 04     sat      $05, $04                 
+112f: 35 ff        ldi      $ff                      
+1131: a5 07        sat      $07                      
+1133: a5 06        sat      $06                      
+1135: 39 57        pushi    $57                      
+1137: 76           push0                             
+1138: 81 01        lag      $01                      
+113a: 4a 04        send     $04                      
+113c: a4 02 04     sat      $02, $04                 
+113f: 39 58        pushi    $58                      
+1141: 76           push0                             
+1142: 81 01        lag      $01                      
+1144: 4a 04        send     $04                      
+1146: a4 03 04     sat      $03, $04                 
+1149: 35 00        ldi      $00                      
+114b: a5 13        sat      $13                      
+114d: a4 06 04     sat      $06, $04                 
+1150: a4 ff 03     sat      $ff, $03                 
+1153: a5 03        sat      $03                      
+1155: a5 02        sat      $02                      
+1157: a5 12        sat      $12                      
+1159: a5 08        sat      $08                      
+115b: a5 09        sat      $09                      
+115d: a4 08 04     sat      $08, $04                 
+1160: 39 23        pushi    $23                      
+1162: 78           push1                             
+1163: 89 26        lsg      $26                      
+1165: 39 17        pushi    $17                      
+1167: 78           push1                             
+1168: 72 192d      lofsa    string_192d;  'PrintD'   
+116b: 36           push                              
+116c: 39 6a        pushi    $6a                      
+116e: 76           push0                             
+116f: 51 12        class    $12                      
+1171: 4a 04        send     $04                      
+1173: a5 00        sat      $00                      
+1175: 4a 0c        send     $0c                      
+1177: 35 00        ldi      $00                      
+1179: 9f 01        lspi     $01                      
+117b: 34 e8 03     ldi      $e8, $03                 
+117e: 2a           ult?                              
+117f: 30 0018      bnt      code_119a;  ldi          
+1182: 39 03        pushi    $03                      
+1184: 35 00        ldi      $00                      
+1186: 9f 01        lspi     $01                      
+1188: 35 01        ldi      $01                      
+118a: 9f 01        lspi     $01                      
+118c: 5b 04 15     lea      $04, $15                 
+118f: 36           push                              
+1190: 43 49 06     callk    $49, $06                 
+1193: 35 02        ldi      $02                      
+1195: a5 05        sat      $05                      
+1197: 32 0022      jmp      code_11bc;  ldi          
+
+code_119a:
+119a: 35 00        ldi      $00                      
+119c: 97 01        lapi     $01                      
+119e: 30 0013      bnt      code_11b4;  ldi          
+11a1: 7a           push2                             
+11a2: 5b 04 15     lea      $04, $15                 
+11a5: 36           push                              
+11a6: 35 00        ldi      $00                      
+11a8: 9f 01        lspi     $01                      
+11aa: 43 47 04     callk    $47, $04                 
+11ad: 35 01        ldi      $01                      
+11af: a5 05        sat      $05                      
+11b1: 32 0008      jmp      code_11bc;  ldi          
+
+code_11b4:
+11b4: 35 00        ldi      $00                      
+11b6: a5 15        sat      $15                      
+11b8: 35 00        ldi      $00                      
+11ba: a5 05        sat      $05                      
+
+code_11bc:
+11bc: 35 00        ldi      $00                      
+11be: a4 fe 03     sat      $fe, $03                 
+
+code_11c1:
+11c1: 7a           push2                             
+11c2: 5b 04 15     lea      $04, $15                 
+11c5: 36           push                              
+11c6: 8c fe 03     lst      $fe, $03                 
+11c9: 43 62 04     callk    $62, $04                 
+11cc: 30 00a5      bnt      code_1274;  pushi        
+11cf: 7a           push2                             
+11d0: 5b 04 15     lea      $04, $15                 
+11d3: 36           push                              
+11d4: 8c fe 03     lst      $fe, $03                 
+11d7: 43 62 04     callk    $62, $04                 
+11da: 36           push                              
+11db: 34 00 3a     ldi      $00, $3a                 
+11de: 1a           eq?                               
+11df: 30 008c      bnt      code_126e;  +at          
+11e2: 7a           push2                             
+11e3: 5b 04 15     lea      $04, $15                 
+11e6: 36           push                              
+11e7: 78           push1                             
+11e8: 84 fe 03     lat      $fe, $03                 
+11eb: 02           add                               
+11ec: 36           push                              
+11ed: 43 62 04     callk    $62, $04                 
+11f0: 36           push                              
+11f1: 35 4a        ldi      $4a                      
+11f3: 1a           eq?                               
+11f4: 30 0077      bnt      code_126e;  +at          
+11f7: 39 57        pushi    $57                      
+11f9: 78           push1                             
+11fa: 78           push1                             
+11fb: 39 58        pushi    $58                      
+11fd: 78           push1                             
+11fe: 39 51        pushi    $51                      
+1200: 81 01        lag      $01                      
+1202: 4a 0c        send     $0c                      
+1204: 39 03        pushi    $03                      
+1206: 5b 04 15     lea      $04, $15                 
+1209: 36           push                              
+120a: 5b 04 15     lea      $04, $15                 
+120d: 36           push                              
+120e: 72 1934      lofsa    string_1934;  '#J'       
+1211: 36           push                              
+1212: 43 7b 06     callk    $7b, $06                 
+1215: 39 57        pushi    $57                      
+1217: 78           push1                             
+1218: 8c 02 04     lst      $02, $04                 
+121b: 39 58        pushi    $58                      
+121d: 78           push1                             
+121e: 8c 03 04     lst      $03, $04                 
+1221: 81 01        lag      $01                      
+1223: 4a 0c        send     $0c                      
+1225: 39 03        pushi    $03                      
+1227: 5b 04 15     lea      $04, $15                 
+122a: 36           push                              
+122b: 8c fe 03     lst      $fe, $03                 
+122e: 76           push0                             
+122f: 43 62 06     callk    $62, $06                 
+1232: 39 03        pushi    $03                      
+1234: 39 51        pushi    $51                      
+1236: 8c 02 04     lst      $02, $04                 
+1239: 8c 03 04     lst      $03, $04                 
+123c: 46 export999_5 06  calle    export999_5, $06         
+1242: 30 0029      bnt      code_126e;  +at          
+1245: 39 1a        pushi    $1a                      
+1247: 78           push1                             
+1248: 5b 04 15     lea      $04, $15                 
+124b: 36           push                              
+124c: 35 02        ldi      $02                      
+124e: 02           add                               
+124f: 36           push                              
+1250: 84 fe 03     lat      $fe, $03                 
+1253: 02           add                               
+1254: 36           push                              
+1255: 39 21        pushi    $21                      
+1257: 78           push1                             
+1258: 38 0384      pushi    $0384                    
+125b: 39 17        pushi    $17                      
+125d: 78           push1                             
+125e: 72 1937      lofsa    string_1937;  'jDText'   
+1261: 36           push                              
+1262: 39 6a        pushi    $6a                      
+1264: 76           push0                             
+1265: 51 0d        class    $0d                      
+1267: 4a 04        send     $04                      
+1269: a4 ff 03     sat      $ff, $03                 
+126c: 4a 12        send     $12                      
+
+code_126e:
+126e: c4 fe 03     +at      $fe, $03                 
+1271: 32 ffffff4d  jmp      code_11c1;  push2        
+
+code_1274:
+1274: 39 1a        pushi    $1a                      
+1276: 78           push1                             
+1277: 5b 04 15     lea      $04, $15                 
+127a: 36           push                              
+127b: 39 21        pushi    $21                      
+127d: 78           push1                             
+127e: 89 16        lsg      $16                      
+1280: 39 6a        pushi    $6a                      
+1282: 76           push0                             
+1283: 51 0d        class    $0d                      
+1285: 4a 04        send     $04                      
+1287: a5 01        sat      $01                      
+1289: 4a 0c        send     $0c                      
+128b: 84 ff 03     lat      $ff, $03                 
+128e: 30 000f      bnt      code_12a0;  lat          
+1291: 8c 02 04     lst      $02, $04                 
+1294: 35 51        ldi      $51                      
+1296: 1a           eq?                               
+1297: 30 0006      bnt      code_12a0;  lat          
+129a: 84 ff 03     lat      $ff, $03                 
+129d: 32 0002      jmp      code_12a2;  sat          
+
+code_12a0:
+12a0: 85 01        lat      $01                      
+
+code_12a2:
+12a2: a4 00 04     sat      $00, $04                 
+12a5: 8c 03 04     lst      $03, $04                 
+12a8: 35 51        ldi      $51                      
+12aa: 1a           eq?                               
+12ab: 30 0006      bnt      code_12b4;  lat          
+12ae: 84 ff 03     lat      $ff, $03                 
+12b1: 32 001c      jmp      code_12d0;  sat          
+
+code_12b4:
+12b4: 84 ff 03     lat      $ff, $03                 
+12b7: 30 0016      bnt      code_12d0;  sat          
+12ba: 84 03 04     lat      $03, $04                 
+12bd: 30 0005      bnt      code_12c5;  pushi        
+12c0: 85 01        lat      $01                      
+12c2: 32 000b      jmp      code_12d0;  sat          
+
+code_12c5:
+12c5: 39 6c        pushi    $6c                      
+12c7: 76           push0                             
+12c8: 85 01        lat      $01                      
+12ca: 4a 04        send     $04                      
+12cc: 35 00        ldi      $00                      
+12ce: a5 01        sat      $01                      
+
+code_12d0:
+12d0: a4 01 04     sat      $01, $04                 
+12d3: 38 00ac      pushi    $00ac                    
+12d6: 7a           push2                             
+12d7: 39 04        pushi    $04                      
+12d9: 3c           dup                               
+12da: 38 00aa      pushi    $00aa                    
+12dd: 76           push0                             
+12de: 84 00 04     lat      $00, $04                 
+12e1: 4a 0c        send     $0c                      
+12e3: 39 73        pushi    $73                      
+12e5: 78           push1                             
+12e6: 8c 00 04     lst      $00, $04                 
+12e9: 38 00aa      pushi    $00aa                    
+12ec: 76           push0                             
+12ed: 85 00        lat      $00                      
+12ef: 4a 0a        send     $0a                      
+12f1: 84 01 04     lat      $01, $04                 
+12f4: 30 0030      bnt      code_1327;  lat          
+12f7: 38 00aa      pushi    $00aa                    
+12fa: 76           push0                             
+12fb: 38 00ac      pushi    $00ac                    
+12fe: 7a           push2                             
+12ff: 39 0a        pushi    $0a                      
+1301: 76           push0                             
+1302: 84 00 04     lat      $00, $04                 
+1305: 4a 04        send     $04                      
+1307: 36           push                              
+1308: 39 04        pushi    $04                      
+130a: 39 0b        pushi    $0b                      
+130c: 76           push0                             
+130d: 84 00 04     lat      $00, $04                 
+1310: 4a 04        send     $04                      
+1312: 02           add                               
+1313: 36           push                              
+1314: 84 01 04     lat      $01, $04                 
+1317: 4a 0c        send     $0c                      
+1319: 39 73        pushi    $73                      
+131b: 78           push1                             
+131c: 8c 01 04     lst      $01, $04                 
+131f: 38 00aa      pushi    $00aa                    
+1322: 76           push0                             
+1323: 85 00        lat      $00                      
+1325: 4a 0a        send     $0a                      
+
+code_1327:
+1327: 85 05        lat      $05                      
+1329: a5 05        sat      $05                      
+
+code_132b:
+132b: 8d 05        lst      $05                      
+132d: 87 00        lap      $00                      
+132f: 22           lt?                               
+1330: 30 0234      bnt      code_1567;  lat          
+1333: 85 05        lat      $05                      
+1335: 9f 01        lspi     $01                      
+1337: 3c           dup                               
+1338: 35 1e        ldi      $1e                      
+133a: 1a           eq?                               
+133b: 30 001c      bnt      code_135a;  dup          
+133e: c5 05        +at      $05                      
+1340: 85 01        lat      $01                      
+1342: 30 021c      bnt      code_1561;  toss         
+1345: 84 01 04     lat      $01, $04                 
+1348: 18           not                               
+1349: 30 0215      bnt      code_1561;  toss         
+134c: 39 1e        pushi    $1e                      
+134e: 78           push1                             
+134f: 85 05        lat      $05                      
+1351: 9f 01        lspi     $01                      
+1353: 85 01        lat      $01                      
+1355: 4a 06        send     $06                      
+1357: 32 0207      jmp      code_1561;  toss         
+
+code_135a:
+135a: 3c           dup                               
+135b: 35 21        ldi      $21                      
+135d: 1a           eq?                               
+135e: 30 001b      bnt      code_137c;  dup          
+1361: c5 05        +at      $05                      
+1363: 85 01        lat      $01                      
+1365: 30 01f9      bnt      code_1561;  toss         
+1368: 39 21        pushi    $21                      
+136a: 78           push1                             
+136b: 85 05        lat      $05                      
+136d: 9f 01        lspi     $01                      
+136f: 38 00aa      pushi    $00aa                    
+1372: 78           push1                             
+1373: 8d 08        lst      $08                      
+1375: 85 01        lat      $01                      
+1377: 4a 0c        send     $0c                      
+1379: 32 01e5      jmp      code_1561;  toss         
+
+code_137c:
+137c: 3c           dup                               
+137d: 35 46        ldi      $46                      
+137f: 1a           eq?                               
+1380: 30 0042      bnt      code_13c5;  dup          
+1383: 35 01        ldi      $01                      
+1385: a4 04 04     sat      $04, $04                 
+1388: c5 05        +at      $05                      
+138a: 97 01        lapi     $01                      
+138c: a5 08        sat      $08                      
+138e: 38 00aa      pushi    $00aa                    
+1391: 78           push1                             
+1392: 36           push                              
+1393: 84 00 04     lat      $00, $04                 
+1396: 4a 06        send     $06                      
+1398: 84 01 04     lat      $01, $04                 
+139b: 30 01c3      bnt      code_1561;  toss         
+139e: 38 00aa      pushi    $00aa                    
+13a1: 78           push1                             
+13a2: 8d 08        lst      $08                      
+13a4: 38 00ac      pushi    $00ac                    
+13a7: 7a           push2                             
+13a8: 39 0a        pushi    $0a                      
+13aa: 76           push0                             
+13ab: 84 00 04     lat      $00, $04                 
+13ae: 4a 04        send     $04                      
+13b0: 36           push                              
+13b1: 39 04        pushi    $04                      
+13b3: 39 0b        pushi    $0b                      
+13b5: 76           push0                             
+13b6: 84 00 04     lat      $00, $04                 
+13b9: 4a 04        send     $04                      
+13bb: 02           add                               
+13bc: 36           push                              
+13bd: 84 01 04     lat      $01, $04                 
+13c0: 4a 0e        send     $0e                      
+13c2: 32 019c      jmp      code_1561;  toss         
+
+code_13c5:
+13c5: 3c           dup                               
+13c6: 35 19        ldi      $19                      
+13c8: 1a           eq?                               
+13c9: 30 000e      bnt      code_13da;  dup          
+13cc: c5 05        +at      $05                      
+13ce: 39 19        pushi    $19                      
+13d0: 78           push1                             
+13d1: 9f 01        lspi     $01                      
+13d3: 85 00        lat      $00                      
+13d5: 4a 06        send     $06                      
+13d7: 32 0187      jmp      code_1561;  toss         
+
+code_13da:
+13da: 3c           dup                               
+13db: 35 50        ldi      $50                      
+13dd: 1a           eq?                               
+13de: 30 000e      bnt      code_13ef;  dup          
+13e1: c5 05        +at      $05                      
+13e3: 39 1a        pushi    $1a                      
+13e5: 78           push1                             
+13e6: 9f 01        lspi     $01                      
+13e8: 85 00        lat      $00                      
+13ea: 4a 06        send     $06                      
+13ec: 32 0172      jmp      code_1561;  toss         
+
+code_13ef:
+13ef: 3c           dup                               
+13f0: 35 43        ldi      $43                      
+13f2: 1a           eq?                               
+13f3: 30 000f      bnt      code_1405;  dup          
+13f6: c5 05        +at      $05                      
+13f8: 97 01        lapi     $01                      
+13fa: a5 06        sat      $06                      
+13fc: c5 05        +at      $05                      
+13fe: 97 01        lapi     $01                      
+1400: a5 07        sat      $07                      
+1402: 32 015c      jmp      code_1561;  toss         
+
+code_1405:
+1405: 3c           dup                               
+1406: 35 53        ldi      $53                      
+1408: 1a           eq?                               
+1409: 30 0010      bnt      code_141c;  dup          
+140c: 7a           push2                             
+140d: 39 1b        pushi    $1b                      
+140f: 76           push0                             
+1410: 81 05        lag      $05                      
+1412: 4a 04        send     $04                      
+1414: 36           push                              
+1415: 76           push0                             
+1416: 43 0b 04     callk    $0b, $04                 
+1419: 32 0145      jmp      code_1561;  toss         
+
+code_141c:
+141c: 3c           dup                               
+141d: 35 29        ldi      $29                      
+141f: 1a           eq?                               
+1420: 30 0024      bnt      code_1447;  dup          
+1423: c5 05        +at      $05                      
+1425: 39 1a        pushi    $1a                      
+1427: 78           push1                             
+1428: 9f 01        lspi     $01                      
+142a: 39 6a        pushi    $6a                      
+142c: 76           push0                             
+142d: 51 10        class    $10                      
+142f: 4a 04        send     $04                      
+1431: a5 03        sat      $03                      
+1433: 4a 06        send     $06                      
+1435: c5 05        +at      $05                      
+1437: 39 25        pushi    $25                      
+1439: 78           push1                             
+143a: 9f 01        lspi     $01                      
+143c: 38 00aa      pushi    $00aa                    
+143f: 76           push0                             
+1440: 85 03        lat      $03                      
+1442: 4a 0a        send     $0a                      
+1444: 32 011a      jmp      code_1561;  toss         
+
+code_1447:
+1447: 3c           dup                               
+1448: 35 51        ldi      $51                      
+144a: 1a           eq?                               
+144b: 30 0037      bnt      code_1485;  dup          
+144e: 39 1a        pushi    $1a                      
+1450: 78           push1                             
+1451: c5 05        +at      $05                      
+1453: 9f 01        lspi     $01                      
+1455: 39 4d        pushi    $4d                      
+1457: 78           push1                             
+1458: c5 05        +at      $05                      
+145a: 9f 01        lspi     $01                      
+145c: 38 00aa      pushi    $00aa                    
+145f: 76           push0                             
+1460: 39 6a        pushi    $6a                      
+1462: 76           push0                             
+1463: 51 0f        class    $0f                      
+1465: 4a 04        send     $04                      
+1467: 36           push                              
+1468: 85 13        lat      $13                      
+146a: b5 0c        sati     $0c                      
+146c: 4a 10        send     $10                      
+146e: 8d 12        lst      $12                      
+1470: 39 0c        pushi    $0c                      
+1472: 76           push0                             
+1473: 85 13        lat      $13                      
+1475: 95 0c        lati     $0c                      
+1477: 4a 04        send     $04                      
+1479: 36           push                              
+147a: 35 04        ldi      $04                      
+147c: 02           add                               
+147d: 02           add                               
+147e: a5 12        sat      $12                      
+1480: c5 13        +at      $13                      
+1482: 32 00dc      jmp      code_1561;  toss         
+
+code_1485:
+1485: 3c           dup                               
+1486: 35 52        ldi      $52                      
+1488: 1a           eq?                               
+1489: 30 006a      bnt      code_14f6;  dup          
+148c: 35 01        ldi      $01                      
+148e: a4 05 04     sat      $05, $04                 
+1491: 78           push1                             
+1492: 8d 05        lst      $05                      
+1494: 35 01        ldi      $01                      
+1496: 02           add                               
+1497: 9f 01        lspi     $01                      
+1499: 43 06 02     callk    $06, $02                 
+149c: 30 001e      bnt      code_14bd;  pushi        
+149f: 39 6a        pushi    $6a                      
+14a1: 76           push0                             
+14a2: 8d 05        lst      $05                      
+14a4: 35 01        ldi      $01                      
+14a6: 02           add                               
+14a7: 97 01        lapi     $01                      
+14a9: 4a 04        send     $04                      
+14ab: a5 02        sat      $02                      
+14ad: 38 00aa      pushi    $00aa                    
+14b0: 76           push0                             
+14b1: 4a 04        send     $04                      
+14b3: 8d 05        lst      $05                      
+14b5: 35 01        ldi      $01                      
+14b7: 02           add                               
+14b8: a5 05        sat      $05                      
+14ba: 32 00a4      jmp      code_1561;  toss         
+
+code_14bd:
+14bd: 39 6a        pushi    $6a                      
+14bf: 76           push0                             
+14c0: 51 0e        class    $0e                      
+14c2: 4a 04        send     $04                      
+14c4: a5 02        sat      $02                      
+14c6: 39 05        pushi    $05                      
+14c8: 78           push1                             
+14c9: 8d 05        lst      $05                      
+14cb: 35 01        ldi      $01                      
+14cd: 02           add                               
+14ce: 9f 01        lspi     $01                      
+14d0: 39 06        pushi    $06                      
+14d2: 78           push1                             
+14d3: 8d 05        lst      $05                      
+14d5: 35 02        ldi      $02                      
+14d7: 02           add                               
+14d8: 9f 01        lspi     $01                      
+14da: 39 07        pushi    $07                      
+14dc: 78           push1                             
+14dd: 8d 05        lst      $05                      
+14df: 35 03        ldi      $03                      
+14e1: 02           add                               
+14e2: 9f 01        lspi     $01                      
+14e4: 38 00aa      pushi    $00aa                    
+14e7: 76           push0                             
+14e8: 85 02        lat      $02                      
+14ea: 4a 16        send     $16                      
+14ec: 8d 05        lst      $05                      
+14ee: 35 03        ldi      $03                      
+14f0: 02           add                               
+14f1: a5 05        sat      $05                      
+14f3: 32 006b      jmp      code_1561;  toss         
+
+code_14f6:
+14f6: 3c           dup                               
+14f7: 35 6c        ldi      $6c                      
+14f9: 1a           eq?                               
+14fa: 30 0043      bnt      code_1540;  dup          
+14fd: 8d 05        lst      $05                      
+14ff: 35 01        ldi      $01                      
+1501: 02           add                               
+1502: 36           push                              
+1503: 87 00        lap      $00                      
+1505: 22           lt?                               
+1506: 30 001f      bnt      code_1528;  push0        
+1509: 78           push1                             
+150a: 8d 05        lst      $05                      
+150c: 35 01        ldi      $01                      
+150e: 02           add                               
+150f: 9f 01        lspi     $01                      
+1511: 43 06 02     callk    $06, $02                 
+1514: 30 0011      bnt      code_1528;  push0        
+1517: 38 008b      pushi    $008b                    
+151a: 78           push1                             
+151b: 8d 05        lst      $05                      
+151d: 35 01        ldi      $01                      
+151f: 02           add                               
+1520: 9f 01        lspi     $01                      
+1522: 85 00        lat      $00                      
+1524: 4a 06        send     $06                      
+1526: c5 05        +at      $05                      
+
+code_1528:
+1528: 76           push0                             
+1529: 35 51        ldi      $51                      
+152b: 1c           ne?                               
+152c: 30 0032      bnt      code_1561;  toss         
+152f: 81 19        lag      $19                      
+1531: 30 0005      bnt      code_1539;  lat          
+1534: 39 6c        pushi    $6c                      
+1536: 76           push0                             
+1537: 4a 04        send     $04                      
+
+code_1539:
+1539: 85 00        lat      $00                      
+153b: a5 09        sat      $09                      
+153d: 32 0021      jmp      code_1561;  toss         
+
+code_1540:
+1540: 3c           dup                               
+1541: 35 23        ldi      $23                      
+1543: 1a           eq?                               
+1544: 30 000e      bnt      code_1555;  dup          
+1547: c5 05        +at      $05                      
+1549: 39 23        pushi    $23                      
+154b: 78           push1                             
+154c: 9f 01        lspi     $01                      
+154e: 85 00        lat      $00                      
+1550: 4a 06        send     $06                      
+1552: 32 000c      jmp      code_1561;  toss         
+
+code_1555:
+1555: 3c           dup                               
+1556: 35 79        ldi      $79                      
+1558: 1a           eq?                               
+1559: 30 0005      bnt      code_1561;  toss         
+155c: 35 01        ldi      $01                      
+155e: a4 08 04     sat      $08, $04                 
+
+code_1561:
+1561: 3a           toss                              
+1562: c5 05        +at      $05                      
+1564: 32 fffffdc4  jmp      code_132b;  lst          
+
+code_1567:
+1567: 84 08 04     lat      $08, $04                 
+156a: 30 0004      bnt      code_1571;  lat          
+156d: 35 00        ldi      $00                      
+156f: a5 09        sat      $09                      
+
+code_1571:
+1571: 84 04 04     lat      $04, $04                 
+1574: 2e 03 00     bt       $03, $00                 
+1577: 84 05 04     lat      $05, $04                 
+157a: 18           not                               
+157b: 30 004e      bnt      code_15cc;  lat          
+157e: 39 0b        pushi    $0b                      
+1580: 76           push0                             
+1581: 85 00        lat      $00                      
+1583: 4a 04        send     $04                      
+1585: 36           push                              
+1586: 39 09        pushi    $09                      
+1588: 76           push0                             
+1589: 85 00        lat      $00                      
+158b: 4a 04        send     $04                      
+158d: 04           sub                               
+158e: 36           push                              
+158f: 35 64        ldi      $64                      
+1591: 1e           gt?                               
+1592: 30 0037      bnt      code_15cc;  lat          
+1595: 38 00aa      pushi    $00aa                    
+1598: 78           push1                             
+1599: 38 012c      pushi    $012c                    
+159c: 84 00 04     lat      $00, $04                 
+159f: 4a 06        send     $06                      
+15a1: 84 01 04     lat      $01, $04                 
+15a4: 30 0025      bnt      code_15cc;  lat          
+15a7: 38 00aa      pushi    $00aa                    
+15aa: 78           push1                             
+15ab: 38 012c      pushi    $012c                    
+15ae: 38 00ac      pushi    $00ac                    
+15b1: 7a           push2                             
+15b2: 39 0a        pushi    $0a                      
+15b4: 76           push0                             
+15b5: 84 00 04     lat      $00, $04                 
+15b8: 4a 04        send     $04                      
+15ba: 36           push                              
+15bb: 39 04        pushi    $04                      
+15bd: 39 0b        pushi    $0b                      
+15bf: 76           push0                             
+15c0: 84 00 04     lat      $00, $04                 
+15c3: 4a 04        send     $04                      
+15c5: 02           add                               
+15c6: 36           push                              
+15c7: 84 01 04     lat      $01, $04                 
+15ca: 4a 0e        send     $0e                      
+
+code_15cc:
+15cc: 85 02        lat      $02                      
+15ce: 30 00ac      bnt      code_167d;  pushi        
+15d1: 38 00ac      pushi    $00ac                    
+15d4: 7a           push2                             
+15d5: 39 04        pushi    $04                      
+15d7: 3c           dup                               
+15d8: 4a 08        send     $08                      
+15da: 8c 00 04     lst      $00, $04                 
+15dd: 84 ff 03     lat      $ff, $03                 
+15e0: 1a           eq?                               
+15e1: 2e 07 00     bt       $07, $00                 
+15e4: 8c 01 04     lst      $01, $04                 
+15e7: 84 ff 03     lat      $ff, $03                 
+15ea: 1a           eq?                               
+15eb: 30 0005      bnt      code_15f3;  pushi        
+15ee: 35 08        ldi      $08                      
+15f0: a4 06 04     sat      $06, $04                 
+
+code_15f3:
+15f3: 39 20        pushi    $20                      
+15f5: 76           push0                             
+15f6: 85 02        lat      $02                      
+15f8: 4a 04        send     $04                      
+15fa: 36           push                              
+15fb: 35 10        ldi      $10                      
+15fd: 12           and                               
+15fe: 30 0029      bnt      code_162a;  pushi        
+1601: 38 00ac      pushi    $00ac                    
+1604: 7a           push2                             
+1605: 39 04        pushi    $04                      
+1607: 84 06 04     lat      $06, $04                 
+160a: 02           add                               
+160b: 36           push                              
+160c: 39 0b        pushi    $0b                      
+160e: 76           push0                             
+160f: 85 02        lat      $02                      
+1611: 4a 04        send     $04                      
+1613: 36           push                              
+1614: 39 09        pushi    $09                      
+1616: 76           push0                             
+1617: 84 00 04     lat      $00, $04                 
+161a: 4a 04        send     $04                      
+161c: 02           add                               
+161d: 36           push                              
+161e: 38 00aa      pushi    $00aa                    
+1621: 76           push0                             
+1622: 84 00 04     lat      $00, $04                 
+1625: 4a 0c        send     $0c                      
+1627: 32 0026      jmp      code_1650;  lat          
+
+code_162a:
+162a: 38 00ac      pushi    $00ac                    
+162d: 7a           push2                             
+162e: 39 04        pushi    $04                      
+1630: 39 0c        pushi    $0c                      
+1632: 76           push0                             
+1633: 85 02        lat      $02                      
+1635: 4a 04        send     $04                      
+1637: 02           add                               
+1638: 36           push                              
+1639: 84 06 04     lat      $06, $04                 
+163c: 02           add                               
+163d: 36           push                              
+163e: 39 09        pushi    $09                      
+1640: 76           push0                             
+1641: 84 00 04     lat      $00, $04                 
+1644: 4a 04        send     $04                      
+1646: 36           push                              
+1647: 38 00aa      pushi    $00aa                    
+164a: 76           push0                             
+164b: 84 00 04     lat      $00, $04                 
+164e: 4a 0c        send     $0c                      
+
+code_1650:
+1650: 84 01 04     lat      $01, $04                 
+1653: 30 001e      bnt      code_1674;  pushi        
+1656: 38 00ac      pushi    $00ac                    
+1659: 7a           push2                             
+165a: 39 0a        pushi    $0a                      
+165c: 76           push0                             
+165d: 84 00 04     lat      $00, $04                 
+1660: 4a 04        send     $04                      
+1662: 36           push                              
+1663: 39 04        pushi    $04                      
+1665: 39 0b        pushi    $0b                      
+1667: 76           push0                             
+1668: 84 00 04     lat      $00, $04                 
+166b: 4a 04        send     $04                      
+166d: 02           add                               
+166e: 36           push                              
+166f: 84 01 04     lat      $01, $04                 
+1672: 4a 08        send     $08                      
+
+code_1674:
+1674: 39 73        pushi    $73                      
+1676: 78           push1                             
+1677: 8d 02        lst      $02                      
+1679: 85 00        lat      $00                      
+167b: 4a 06        send     $06                      
+
+code_167d:
+167d: 38 00aa      pushi    $00aa                    
+1680: 76           push0                             
+1681: 85 00        lat      $00                      
+1683: 4a 04        send     $04                      
+1685: 85 03        lat      $03                      
+1687: 30 0036      bnt      code_16c0;  lst          
+168a: 38 00ac      pushi    $00ac                    
+168d: 7a           push2                             
+168e: 39 0a        pushi    $0a                      
+1690: 76           push0                             
+1691: 84 01 04     lat      $01, $04                 
+1694: 2e 03 00     bt       $03, $00                 
+1697: 84 00 04     lat      $00, $04                 
+169a: 4a 04        send     $04                      
+169c: 36           push                              
+169d: 39 04        pushi    $04                      
+169f: 39 0b        pushi    $0b                      
+16a1: 76           push0                             
+16a2: 84 01 04     lat      $01, $04                 
+16a5: 2e 03 00     bt       $03, $00                 
+16a8: 84 00 04     lat      $00, $04                 
+16ab: 4a 04        send     $04                      
+16ad: 02           add                               
+16ae: 36           push                              
+16af: 85 03        lat      $03                      
+16b1: 4a 08        send     $08                      
+16b3: 39 73        pushi    $73                      
+16b5: 78           push1                             
+16b6: 8d 03        lst      $03                      
+16b8: 38 00aa      pushi    $00aa                    
+16bb: 76           push0                             
+16bc: 85 00        lat      $00                      
+16be: 4a 0a        send     $0a                      
+
+code_16c0:
+16c0: 8d 12        lst      $12                      
+16c2: 39 0c        pushi    $0c                      
+16c4: 76           push0                             
+16c5: 85 00        lat      $00                      
+16c7: 4a 04        send     $04                      
+16c9: 1e           gt?                               
+16ca: 30 0005      bnt      code_16d2;  pushi        
+16cd: 35 04        ldi      $04                      
+16cf: 32 000b      jmp      code_16dd;  sat          
+
+code_16d2:
+16d2: 39 0c        pushi    $0c                      
+16d4: 76           push0                             
+16d5: 85 00        lat      $00                      
+16d7: 4a 04        send     $04                      
+16d9: 36           push                              
+16da: 85 12        lat      $12                      
+16dc: 04           sub                               
+
+code_16dd:
+16dd: a5 14        sat      $14                      
+16df: 35 00        ldi      $00                      
+16e1: a5 05        sat      $05                      
+
+code_16e3:
+16e3: 8d 05        lst      $05                      
+16e5: 85 13        lat      $13                      
+16e7: 22           lt?                               
+16e8: 30 0032      bnt      code_171d;  pushi        
+16eb: 38 00ac      pushi    $00ac                    
+16ee: 7a           push2                             
+16ef: 8d 14        lst      $14                      
+16f1: 39 0b        pushi    $0b                      
+16f3: 76           push0                             
+16f4: 85 00        lat      $00                      
+16f6: 4a 04        send     $04                      
+16f8: 36           push                              
+16f9: 85 05        lat      $05                      
+16fb: 95 0c        lati     $0c                      
+16fd: 4a 08        send     $08                      
+16ff: 39 73        pushi    $73                      
+1701: 78           push1                             
+1702: 85 05        lat      $05                      
+1704: 9d 0c        lsti     $0c                      
+1706: 85 00        lat      $00                      
+1708: 4a 06        send     $06                      
+170a: 39 04        pushi    $04                      
+170c: 39 0c        pushi    $0c                      
+170e: 76           push0                             
+170f: 85 05        lat      $05                      
+1711: 95 0c        lati     $0c                      
+1713: 4a 04        send     $04                      
+1715: 02           add                               
+1716: a5 14        sat      $14                      
+1718: c5 05        +at      $05                      
+171a: 32 ffffffc6  jmp      code_16e3;  lst          
+
+code_171d:
+171d: 38 00aa      pushi    $00aa                    
+1720: 76           push0                             
+1721: 38 00b6      pushi    $00b6                    
+1724: 76           push0                             
+1725: 85 00        lat      $00                      
+1727: 4a 08        send     $08                      
+1729: 85 02        lat      $02                      
+172b: 30 0009      bnt      code_1737;  bt           
+172e: 39 20        pushi    $20                      
+1730: 76           push0                             
+1731: 4a 04        send     $04                      
+1733: 36           push                              
+1734: 35 10        ldi      $10                      
+1736: 12           and                               
+
+code_1737:
+1737: 2e 0e 00     bt       $0e, $00                 
+173a: 85 02        lat      $02                      
+173c: 30 003d      bnt      code_177c;  pushi        
+173f: 78           push1                             
+1740: 5b 04 15     lea      $04, $15                 
+1743: 36           push                              
+1744: 43 46 02     callk    $46, $02                 
+1747: 18           not                               
+1748: 30 0031      bnt      code_177c;  pushi        
+174b: 38 00ac      pushi    $00ac                    
+174e: 7a           push2                             
+174f: 39 0c        pushi    $0c                      
+1751: 76           push0                             
+1752: 85 00        lat      $00                      
+1754: 4a 04        send     $04                      
+1756: 36           push                              
+1757: 39 0a        pushi    $0a                      
+1759: 76           push0                             
+175a: 85 00        lat      $00                      
+175c: 4a 04        send     $04                      
+175e: 04           sub                               
+175f: 36           push                              
+1760: 39 0c        pushi    $0c                      
+1762: 76           push0                             
+1763: 85 02        lat      $02                      
+1765: 4a 04        send     $04                      
+1767: 36           push                              
+1768: 39 0a        pushi    $0a                      
+176a: 76           push0                             
+176b: 85 02        lat      $02                      
+176d: 4a 04        send     $04                      
+176f: 04           sub                               
+1770: 04           sub                               
+1771: 36           push                              
+1772: 35 02        ldi      $02                      
+1774: 08           div                               
+1775: 36           push                              
+1776: 39 04        pushi    $04                      
+1778: 85 02        lat      $02                      
+177a: 4a 08        send     $08                      
+
+code_177c:
+177c: 38 00ac      pushi    $00ac                    
+177f: 7a           push2                             
+1780: 39 ff        pushi    $ff                      
+1782: 85 06        lat      $06                      
+1784: 1a           eq?                               
+1785: 30 000a      bnt      code_1792;  lat          
+1788: 39 0a        pushi    $0a                      
+178a: 76           push0                             
+178b: 85 00        lat      $00                      
+178d: 4a 04        send     $04                      
+178f: 32 0002      jmp      code_1794;  push         
+
+code_1792:
+1792: 85 06        lat      $06                      
+
+code_1794:
+1794: 36           push                              
+1795: 39 ff        pushi    $ff                      
+1797: 85 07        lat      $07                      
+1799: 1a           eq?                               
+179a: 30 000a      bnt      code_17a7;  lat          
+179d: 39 09        pushi    $09                      
+179f: 76           push0                             
+17a0: 85 00        lat      $00                      
+17a2: 4a 04        send     $04                      
+17a4: 32 0002      jmp      code_17a9;  push         
+
+code_17a7:
+17a7: 85 07        lat      $07                      
+
+code_17a9:
+17a9: 36           push                              
+17aa: 85 00        lat      $00                      
+17ac: 4a 08        send     $08                      
+17ae: 76           push0                             
+17af: 43 14 00     callk    $14, $00                 
+17b2: a5 0b        sat      $0b                      
+17b4: 38 00b5      pushi    $00b5                    
+17b7: 7a           push2                             
+17b8: 39 1a        pushi    $1a                      
+17ba: 76           push0                             
+17bb: 85 00        lat      $00                      
+17bd: 4a 04        send     $04                      
+17bf: 30 0005      bnt      code_17c7;  ldi          
+17c2: 35 04        ldi      $04                      
+17c4: 32 0002      jmp      code_17c9;  push         
+
+code_17c7:
+17c7: 35 00        ldi      $00                      
+
+code_17c9:
+17c9: 36           push                              
+17ca: 85 09        lat      $09                      
+17cc: 30 0005      bnt      code_17d4;  ldi          
+17cf: 35 0f        ldi      $0f                      
+17d1: 32 0002      jmp      code_17d6;  push         
+
+code_17d4:
+17d4: 35 ff        ldi      $ff                      
+
+code_17d6:
+17d6: 36           push                              
+17d7: 85 00        lat      $00                      
+17d9: 4a 08        send     $08                      
+17db: 85 09        lat      $09                      
+17dd: 30 0014      bnt      code_17f4;  pushi        
+17e0: 76           push0                             
+17e1: 43 14 00     callk    $14, $00                 
+17e4: a1 29        sag      $29                      
+17e6: 78           push1                             
+17e7: 8d 0b        lst      $0b                      
+17e9: 43 15 02     callk    $15, $02                 
+17ec: 85 09        lat      $09                      
+17ee: a1 19        sag      $19                      
+17f0: 48           ret                               
+17f1: 32 0009      jmp      code_17fd;  pushi        
+
+code_17f4:
+17f4: 38 009d      pushi    $009d                    
+17f7: 78           push1                             
+17f8: 78           push1                             
+17f9: 81 08        lag      $08                      
+17fb: 4a 06        send     $06                      
+
+code_17fd:
+17fd: 39 75        pushi    $75                      
+17ff: 7a           push2                             
+1800: 38 00af      pushi    $00af                    
+1803: 78           push1                             
+1804: 85 00        lat      $00                      
+1806: 4a 08        send     $08                      
+1808: a5 0a        sat      $0a                      
+180a: 30 0022      bnt      code_182f;  pushi        
+180d: 39 75        pushi    $75                      
+180f: 7a           push2                             
+1810: 38 00af      pushi    $00af                    
+1813: 7a           push2                             
+1814: 85 00        lat      $00                      
+1816: 4a 08        send     $08                      
+1818: 18           not                               
+1819: 30 0013      bnt      code_182f;  pushi        
+181c: 39 20        pushi    $20                      
+181e: 78           push1                             
+181f: 39 20        pushi    $20                      
+1821: 76           push0                             
+1822: 85 0a        lat      $0a                      
+1824: 4a 04        send     $04                      
+1826: 36           push                              
+1827: 35 02        ldi      $02                      
+1829: 14           or                                
+182a: 36           push                              
+182b: 85 0a        lat      $0a                      
+182d: 4a 06        send     $06                      
+
+code_182f:
+182f: 39 3c        pushi    $3c                      
+1831: 78           push1                             
+1832: 8d 0a        lst      $0a                      
+1834: 85 00        lat      $00                      
+1836: 4a 06        send     $06                      
+1838: a5 04        sat      $04                      
+183a: 36           push                              
+183b: 35 ff        ldi      $ff                      
+183d: 1a           eq?                               
+183e: 30 0004      bnt      code_1845;  ldi          
+1841: 35 00        ldi      $00                      
+1843: a5 04        sat      $04                      
+
+code_1845:
+1845: 35 00        ldi      $00                      
+1847: a5 05        sat      $05                      
+
+code_1849:
+1849: 8d 05        lst      $05                      
+184b: 85 13        lat      $13                      
+184d: 22           lt?                               
+184e: 30 001b      bnt      code_186c;  pushi        
+1851: 8d 04        lst      $04                      
+1853: 85 05        lat      $05                      
+1855: 95 0c        lati     $0c                      
+1857: 1a           eq?                               
+1858: 30 000c      bnt      code_1867;  +at          
+185b: 39 4d        pushi    $4d                      
+185d: 76           push0                             
+185e: 85 04        lat      $04                      
+1860: 4a 04        send     $04                      
+1862: a5 04        sat      $04                      
+1864: 32 0005      jmp      code_186c;  pushi        
+
+code_1867:
+1867: c5 05        +at      $05                      
+1869: 32 ffffffdd  jmp      code_1849;  lst          
+
+code_186c:
+186c: 38 00b3      pushi    $00b3                    
+186f: 76           push0                             
+1870: 85 00        lat      $00                      
+1872: 4a 04        send     $04                      
+1874: 18           not                               
+1875: 30 0004      bnt      code_187c;  pushi        
+1878: 35 01        ldi      $01                      
+187a: a5 04        sat      $04                      
+
+code_187c:
+187c: 39 6c        pushi    $6c                      
+187e: 76           push0                             
+187f: 85 00        lat      $00                      
+1881: 4a 04        send     $04                      
+1883: 38 009d      pushi    $009d                    
+1886: 78           push1                             
+1887: 76           push0                             
+1888: 81 08        lag      $08                      
+188a: 4a 06        send     $06                      
+188c: 85 04        lat      $04                      
+188e: 48           ret                               
+
+code_188f:
+188f: 3f 28        link     $28                      
+1891: 35 00        ldi      $00                      
+1893: a5 00        sat      $00                      
+1895: 8f 00        lsp      $00                      
+1897: 35 01        ldi      $01                      
+1899: 1e           gt?                               
+189a: 30 000f      bnt      code_18ac;  pushi        
+189d: 39 04        pushi    $04                      
+189f: 5b 04 00     lea      $04, $00                 
+18a2: 36           push                              
+18a3: 38 00ff      pushi    $00ff                    
+18a6: 76           push0                             
+18a7: 8f 02        lsp      $02                      
+18a9: 43 48 08     callk    $48, $08                 
+
+code_18ac:
+18ac: 39 03        pushi    $03                      
+18ae: 5b 04 00     lea      $04, $00                 
+18b1: 36           push                              
+18b2: 39 05        pushi    $05                      
+18b4: 8f 01        lsp      $01                      
+18b6: 40 fffff82a 06  call     code_10e4;  link, $06    
+18ba: 30 000b      bnt      code_18c8;  ldi          
+18bd: 78           push1                             
+18be: 5b 04 00     lea      $04, $00                 
+18c1: 36           push                              
+18c2: 43 4a 02     callk    $4a, $02                 
+18c5: 32 0002      jmp      code_18ca;  ret          
+
+code_18c8:
+18c8: 35 ff        ldi      $ff                      
+
+code_18ca:
+18ca: 48           ret                               
+
+code_18cb:
+18cb: 3e f4 01     link     $f4, $01                 
+18ce: 78           push1                             
+18cf: 5b 04 00     lea      $04, $00                 
+18d2: 36           push                              
+18d3: 59 01        &rest    $01                      
+18d5: 43 48 02     callk    $48, $02                 
+18d8: 78           push1                             
+18d9: 5b 04 00     lea      $04, $00                 
+18dc: 36           push                              
+18dd: 40 fffff841 02  call     code_1122;  link, $02    
+18e1: 48           ret                               
+
+18e6: [String section]
+18e6 = '$0D$0A----------$0D$0A'
+18f5 = 'DText'
+18fb = 'DIcon'
+1901 = 'DButton'
+1909 = 'M'
+190b = 'DEdit'
+1911 = 'DSelector'
+191b = 'Dialog'
+1922 = 'Controls'
+192b = ''
+192c = ''
+192d = 'PrintD'
+1934 = '#J'
+1937 = 'jDText'
+
+1942: [Preload section]
+
+1946: [Relocation section]
+	pointer[0] = 032b; ref_ref_032b;  032b
+	pointer[1] = 0356; ref_ref_0356;  0356
+	pointer[2] = 03d6; ref_ref_03d6;  03d6
+	pointer[3] = 047e; ref_ref_047e;  047e
+	pointer[4] = 04d8; ref_ref_04d8;  04d8
+	pointer[5] = 051a; ref_ref_051a;  051a
+	pointer[6] = 05b9; ref_ref_05b9;  05b9
+	pointer[7] = 07b7; ref_ref_07b7;  07b7
+	pointer[8] = 0826; ref_ref_0826;  0826
+	pointer[9] = 0fea; ref_ref_0fea;  0fea
+	pointer[10] = 10c2; ref_ref_10c2;  10c2
+	pointer[11] = 10f6; ref_ref_10f6;  10f6
+	pointer[12] = 1169; ref_ref_1169;  1169
+	pointer[13] = 120f; ref_ref_120f;  120f
+	pointer[14] = 125f; ref_ref_125f;  125f

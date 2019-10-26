@@ -1,0 +1,1593 @@
+(script 255)
+
+(string
+    string_18e6 "
+----------
+"
+    string_18f5 "DText"
+    string_18fb "DIcon"
+    string_1901 "DButton"
+    string_1909 "M"
+    string_190b "DEdit"
+    string_1911 "DSelector"
+    string_191b "Dialog"
+    string_1922 "Controls"
+    string_192b ""
+    string_192c ""
+    string_192d "PrintD"
+    string_1934 "#J"
+    string_1937 "jDText"
+)
+
+(said
+)
+
+// 00c6
+(class  of Obj
+    (properties
+        state $0
+    )
+    (method (draw) // method_007e
+  007e:35 01              ldi 1
+  0080:65 08             aTop 8
+  0082:78               push1 
+  0083:78               push1 
+  0084:43 20 02         callk 20 2
+  0087:48                 ret 
+    )
+    (method (hide) // method_0088
+  0088:78               push1 
+  0089:76               push0 
+  008a:43 20 02         callk 20 2
+  008d:48                 ret 
+    )
+    (method (handleEvent) // method_0095
+  0095:3f 02             link 2
+  0097:35 00              ldi 0
+  0099:a5 00              sat 0
+  009b:63 08             pToa 8
+  009d:30 001c            bnt code_00bc
+  00a0:7a               push2 
+  00a1:39 0c            pushi c
+  00a3:39 1e            pushi 1e
+  00a5:43 6d 04         callk 6d 4
+  00a8:a5 01              sat 1
+  00aa:78               push1 
+  00ab:8f 01              lsp 1
+  00ad:59 02            &rest 2
+  00af:43 21 02         callk 21 2
+  00b2:a5 00              sat 0
+  00b4:7a               push2 
+  00b5:39 0c            pushi c
+  00b7:8d 01              lst 1
+  00b9:43 6d 04         callk 6d 4
+        code_00bc
+  00bc:85 00              lat 0
+  00be:48                 ret 
+    )
+    (method (add) // method_008e
+  008e:76               push0 
+  008f:59 01            &rest 1
+  0091:43 22 00         callk 22 0
+  0094:48                 ret 
+    )
+)
+
+// 0286
+(class  of Obj
+    (properties
+        type $0
+        state $0
+        nsTop $0
+        nsLeft $0
+        nsBottom $0
+        nsRight $0
+        key $0
+        said $0
+        value $0
+    )
+    (method (doit) // method_0244
+  0244:63 18             pToa 18
+  0246:48                 ret 
+    )
+    (method (enable) // method_00f8
+  00f8:87 01              lap 1
+  00fa:30 000a            bnt code_0107
+  00fd:67 0a             pTos a
+  00ff:35 01              ldi 1
+  0101:14                  or 
+  0102:65 0a             aTop a
+  0104:32 0007            jmp code_010e
+        code_0107
+  0107:67 0a             pTos a
+  0109:35 fe              ldi fe
+  010b:12                 and 
+  010c:65 0a             aTop a
+        code_010e
+  010e:48                 ret 
+    )
+    (method (select) // method_010f
+  010f:87 01              lap 1
+  0111:30 000a            bnt code_011e
+  0114:67 0a             pTos a
+  0116:35 08              ldi 8
+  0118:14                  or 
+  0119:65 0a             aTop a
+  011b:32 0007            jmp code_0125
+        code_011e
+  011e:67 0a             pTos a
+  0120:35 f7              ldi f7
+  0122:12                 and 
+  0123:65 0a             aTop a
+        code_0125
+  0125:39 53            pushi 53
+  0127:76               push0 
+  0128:54 04             self 4
+
+  012a:48                 ret 
+    )
+    (method (handleEvent) // method_012b
+  012b:3f 03             link 3
+  012d:39 4c            pushi 4c
+  012f:76               push0 
+  0130:87 01              lap 1
+  0132:4a 04             send 4
+
+  0134:30 0003            bnt code_013a
+  0137:35 00              ldi 0
+  0139:48                 ret 
+    )
+    (method (check) // method_019e
+  019e:39 04            pushi 4
+  01a0:76               push0 
+  01a1:87 01              lap 1
+  01a3:4a 04             send 4
+
+  01a5:36                push 
+  01a6:63 0e             pToa e
+  01a8:20                 ge? 
+  01a9:30 0027            bnt code_01d3
+  01ac:39 03            pushi 3
+  01ae:76               push0 
+  01af:87 01              lap 1
+  01b1:4a 04             send 4
+
+  01b3:36                push 
+  01b4:63 0c             pToa c
+  01b6:20                 ge? 
+  01b7:30 0019            bnt code_01d3
+  01ba:39 04            pushi 4
+  01bc:76               push0 
+  01bd:87 01              lap 1
+  01bf:4a 04             send 4
+
+  01c1:36                push 
+  01c2:63 12             pToa 12
+  01c4:22                 lt? 
+  01c5:30 000b            bnt code_01d3
+  01c8:39 03            pushi 3
+  01ca:76               push0 
+  01cb:87 01              lap 1
+  01cd:4a 04             send 4
+
+  01cf:36                push 
+  01d0:63 10             pToa 10
+  01d2:22                 lt? 
+        code_01d3
+  01d3:48                 ret 
+    )
+    (method (track) // method_01d4
+  01d4:3f 02             link 2
+  01d6:78               push1 
+  01d7:39 22            pushi 22
+  01d9:76               push0 
+  01da:87 01              lap 1
+  01dc:4a 04             send 4
+
+  01de:1a                 eq? 
+  01df:30 0053            bnt code_0235
+  01e2:35 00              ldi 0
+  01e4:a5 01              sat 1
+        code_01e6
+  01e6:39 6a            pushi 6a
+  01e8:78               push1 
+  01e9:38 8000          pushi 8000
+  01ec:51 07            class 7
+  01ee:4a 06             send 6
+
+  01f0:a7 01              sap 1
+  01f2:38 0090          pushi 90
+  01f5:76               push0 
+  01f6:4a 04             send 4
+
+  01f8:38 00a4          pushi a4
+  01fb:78               push1 
+  01fc:8f 01              lsp 1
+  01fe:54 06             self 6
+
+  0200:a5 00              sat 0
+  0202:36                push 
+  0203:85 01              lat 1
+  0205:1c                 ne? 
+  0206:30 0009            bnt code_0212
+  0209:78               push1 
+  020a:7c               pushSelf 
+  020b:43 18 02         callk 18 2
+  020e:85 00              lat 0
+  0210:a5 01              sat 1
+        code_0212
+  0212:39 6c            pushi 6c
+  0214:76               push0 
+  0215:87 01              lap 1
+  0217:4a 04             send 4
+
+  0219:76               push0 
+  021a:40 fe04 00        call code_0022 0
+
+  021e:18                 not 
+  021f:2e 03 00            bt 3 0
+  0222:32 ffc1            jmp code_01e6
+  0225:85 00              lat 0
+  0227:30 0005            bnt code_022f
+  022a:78               push1 
+  022b:7c               pushSelf 
+  022c:43 18 02         callk 18 2
+        code_022f
+  022f:85 00              lat 0
+  0231:48                 ret 
+    )
+    (method (setSize) // method_0247
+  0247:48                 ret 
+    )
+    (method (move) // method_0248
+  0248:67 12             pTos 12
+  024a:87 01              lap 1
+  024c:02                 add 
+  024d:65 12             aTop 12
+  024f:67 0e             pTos e
+  0251:87 01              lap 1
+  0253:02                 add 
+  0254:65 0e             aTop e
+  0256:67 0c             pTos c
+  0258:87 02              lap 2
+  025a:02                 add 
+  025b:65 0c             aTop c
+  025d:67 10             pTos 10
+  025f:87 02              lap 2
+  0261:02                 add 
+  0262:65 10             aTop 10
+  0264:48                 ret 
+    )
+    (method (moveTo) // method_0265
+  0265:38 00ab          pushi ab
+  0268:7a               push2 
+  0269:8f 01              lsp 1
+  026b:63 0e             pToa e
+  026d:04                 sub 
+  026e:36                push 
+  026f:8f 02              lsp 2
+  0271:63 0c             pToa c
+  0273:04                 sub 
+  0274:36                push 
+  0275:54 08             self 8
+
+  0277:48                 ret 
+    )
+    (method (draw) // method_0278
+  0278:78               push1 
+  0279:7c               pushSelf 
+  027a:43 17 02         callk 17 2
+  027d:48                 ret 
+    )
+    (method (isType) // method_0238
+  0238:67 08             pTos 8
+  023a:87 01              lap 1
+  023c:1a                 eq? 
+  023d:48                 ret 
+    )
+    (method (checkState) // method_023e
+  023e:67 0a             pTos a
+  0240:87 01              lap 1
+  0242:12                 and 
+  0243:48                 ret 
+    )
+    (method (cycle) // method_027e
+  027e:48                 ret 
+    )
+)
+
+// 034a
+(class DText of 
+    (properties
+        type $2
+        state $0
+        nsTop $0
+        nsLeft $0
+        nsBottom $0
+        nsRight $0
+        key $0
+        said $0
+        value $0
+        text $0
+        font $1
+        mode $0
+    )
+    (method (new) // method_02fc
+  02fc:3f 01             link 1
+  02fe:39 21            pushi 21
+  0300:78               push1 
+  0301:89 16              lsg 16
+  0303:39 72            pushi 72
+  0305:76               push0 
+  0306:39 6a            pushi 6a
+  0308:76               push0 
+  0309:57 0c 04         super c 4
+
+  030c:4a 0a             send a
+
+  030e:48                 ret 
+    )
+    (method (setSize) // method_030f
+  030f:3f 04             link 4
+  0311:39 05            pushi 5
+  0313:35 00              ldi 0
+  0315:5b 14 00           lea 14 0
+  0318:36                push 
+  0319:67 1a             pTos 1a
+  031b:67 1c             pTos 1c
+  031d:87 00              lap 0
+  031f:30 0005            bnt code_0327
+  0322:87 01              lap 1
+  0324:32 0002            jmp code_0329
+        code_0327
+  0327:35 00              ldi 0
+        code_0329
+  0329:36                push 
+  032a:72 18e6          lofsa stringconst_18e6
+  032d:36                push 
+  032e:43 1a 0a         callk 1a a
+  0331:67 0c             pTos c
+  0333:35 02              ldi 2
+  0335:95 00             lati 0
+  0337:02                 add 
+  0338:65 10             aTop 10
+  033a:67 0e             pTos e
+  033c:35 03              ldi 3
+  033e:95 00             lati 0
+  0340:02                 add 
+  0341:65 12             aTop 12
+  0343:48                 ret 
+    )
+)
+
+// 03ca
+(class DIcon of 
+    (properties
+        type $4
+        state $0
+        nsTop $0
+        nsLeft $0
+        nsBottom $0
+        nsRight $0
+        key $0
+        said $0
+        value $0
+        view $0
+        loop $0
+        cel $0
+    )
+    (method (setSize) // method_03a0
+  03a0:3f 04             link 4
+  03a2:67 0e             pTos e
+  03a4:39 03            pushi 3
+  03a6:67 1a             pTos 1a
+  03a8:67 1c             pTos 1c
+  03aa:67 1e             pTos 1e
+  03ac:43 0f 06         callk f 6
+  03af:02                 add 
+  03b0:65 12             aTop 12
+  03b2:67 0c             pTos c
+  03b4:39 03            pushi 3
+  03b6:67 1a             pTos 1a
+  03b8:67 1c             pTos 1c
+  03ba:67 1e             pTos 1e
+  03bc:43 10 06         callk 10 6
+  03bf:02                 add 
+  03c0:65 10             aTop 10
+  03c2:48                 ret 
+    )
+)
+
+// 0472
+(class DButton of 
+    (properties
+        type $1
+        state $3
+        nsTop $0
+        nsLeft $0
+        nsBottom $0
+        nsRight $0
+        key $0
+        said $0
+        value $0
+        text $0
+        font $0
+    )
+    (method (setSize) // method_041c
+  041c:3f 04             link 4
+  041e:39 05            pushi 5
+  0420:35 00              ldi 0
+  0422:5b 14 00           lea 14 0
+  0425:36                push 
+  0426:67 1a             pTos 1a
+  0428:67 1c             pTos 1c
+  042a:76               push0 
+  042b:76               push0 
+  042c:43 1a 0a         callk 1a a
+  042f:35 02              ldi 2
+  0431:9d 00             lsti 0
+  0433:02                 add 
+  0434:36                push 
+  0435:35 02              ldi 2
+  0437:b5 00             sati 0
+  0439:35 03              ldi 3
+  043b:9d 00             lsti 0
+  043d:35 02              ldi 2
+  043f:02                 add 
+  0440:36                push 
+  0441:35 03              ldi 3
+  0443:b5 00             sati 0
+  0445:67 0c             pTos c
+  0447:35 02              ldi 2
+  0449:95 00             lati 0
+  044b:02                 add 
+  044c:65 10             aTop 10
+  044e:35 03              ldi 3
+  0450:9d 00             lsti 0
+  0452:35 0f              ldi f
+  0454:02                 add 
+  0455:36                push 
+  0456:35 10              ldi 10
+  0458:08                 div 
+  0459:36                push 
+  045a:35 10              ldi 10
+  045c:06                 mul 
+  045d:36                push 
+  045e:35 03              ldi 3
+  0460:b5 00             sati 0
+  0462:35 03              ldi 3
+  0464:9d 00             lsti 0
+  0466:63 0e             pToa e
+  0468:02                 add 
+  0469:65 12             aTop 12
+  046b:48                 ret 
+    )
+)
+
+// 050e
+(class DEdit of 
+    (properties
+        type $3
+        state $1
+        nsTop $0
+        nsLeft $0
+        nsBottom $0
+        nsRight $0
+        key $0
+        said $0
+        value $0
+        text $0
+        font $0
+        max $0
+        cursor $0
+    )
+    (method (track) // method_04c0
+  04c0:7a               push2 
+  04c1:7c               pushSelf 
+  04c2:8f 01              lsp 1
+  04c4:43 19 04         callk 19 4
+  04c7:5c               selfID 
+  04c8:48                 ret 
+    )
+    (method (setSize) // method_04c9
+  04c9:3f 04             link 4
+  04cb:81 55              lag 55
+  04cd:65 1c             aTop 1c
+  04cf:39 05            pushi 5
+  04d1:35 00              ldi 0
+  04d3:5b 14 00           lea 14 0
+  04d6:36                push 
+  04d7:72 1909          lofsa stringconst_1909
+  04da:36                push 
+  04db:67 1c             pTos 1c
+  04dd:76               push0 
+  04de:76               push0 
+  04df:43 1a 0a         callk 1a a
+  04e2:67 0c             pTos c
+  04e4:35 02              ldi 2
+  04e6:95 00             lati 0
+  04e8:02                 add 
+  04e9:65 10             aTop 10
+  04eb:67 0e             pTos e
+  04ed:35 03              ldi 3
+  04ef:9d 00             lsti 0
+  04f1:63 1e             pToa 1e
+  04f3:06                 mul 
+  04f4:36                push 
+  04f5:35 03              ldi 3
+  04f7:06                 mul 
+  04f8:36                push 
+  04f9:35 04              ldi 4
+  04fb:08                 div 
+  04fc:02                 add 
+  04fd:65 12             aTop 12
+  04ff:78               push1 
+  0500:67 1a             pTos 1a
+  0502:43 46 02         callk 46 2
+  0505:65 20             aTop 20
+  0507:48                 ret 
+    )
+)
+
+// 081a
+(class DSelector of 
+    (properties
+        type $6
+        state $0
+        nsTop $0
+        nsLeft $0
+        nsBottom $0
+        nsRight $0
+        key $0
+        said $0
+        value $0
+        font $0
+        x $14
+        y $6
+        text $0
+        cursor $0
+        topString $0
+        mark $0
+    )
+    (method (handleEvent) // method_0696
+  0696:3f 09             link 9
+  0698:39 4c            pushi 4c
+  069a:76               push0 
+  069b:87 01              lap 1
+  069d:4a 04             send 4
+
+  069f:30 0003            bnt code_06a5
+  06a2:35 00              ldi 0
+  06a4:48                 ret 
+    )
+    (method (setSize) // method_05ae
+  05ae:3f 04             link 4
+  05b0:39 05            pushi 5
+  05b2:35 00              ldi 0
+  05b4:5b 14 00           lea 14 0
+  05b7:36                push 
+  05b8:72 1909          lofsa stringconst_1909
+  05bb:36                push 
+  05bc:67 1a             pTos 1a
+  05be:76               push0 
+  05bf:76               push0 
+  05c0:43 1a 0a         callk 1a a
+  05c3:67 0c             pTos c
+  05c5:35 14              ldi 14
+  05c7:02                 add 
+  05c8:36                push 
+  05c9:35 02              ldi 2
+  05cb:9d 00             lsti 0
+  05cd:63 1e             pToa 1e
+  05cf:06                 mul 
+  05d0:02                 add 
+  05d1:65 10             aTop 10
+  05d3:67 0e             pTos e
+  05d5:35 03              ldi 3
+  05d7:9d 00             lsti 0
+  05d9:63 1c             pToa 1c
+  05db:06                 mul 
+  05dc:36                push 
+  05dd:35 03              ldi 3
+  05df:06                 mul 
+  05e0:36                push 
+  05e1:35 04              ldi 4
+  05e3:08                 div 
+  05e4:02                 add 
+  05e5:65 12             aTop 12
+  05e7:63 20             pToa 20
+  05e9:65 22             aTop 22
+  05eb:65 24             aTop 24
+  05ed:35 00              ldi 0
+  05ef:65 26             aTop 26
+  05f1:48                 ret 
+    )
+    (method (indexOf) // method_0568
+  0568:3f 02             link 2
+  056a:63 20             pToa 20
+  056c:a5 00              sat 0
+  056e:35 00              ldi 0
+  0570:a5 01              sat 1
+        code_0572
+  0572:8d 01              lst 1
+  0574:34 2c 01           ldi 2c 1
+  0577:22                 lt? 
+  0578:30 0029            bnt code_05a4
+  057b:76               push0 
+  057c:78               push1 
+  057d:8d 00              lst 0
+  057f:43 46 02         callk 46 2
+  0582:1a                 eq? 
+  0583:30 0003            bnt code_0589
+  0586:35 ff              ldi ff
+  0588:48                 ret 
+    )
+    (method (at) // method_05a5
+  05a5:67 20             pTos 20
+  05a7:67 1c             pTos 1c
+  05a9:87 01              lap 1
+  05ab:06                 mul 
+  05ac:02                 add 
+  05ad:48                 ret 
+    )
+    (method (advance) // method_0639
+  0639:3f 01             link 1
+  063b:7a               push2 
+  063c:67 22             pTos 22
+  063e:76               push0 
+  063f:43 62 04         callk 62 4
+  0642:18                 not 
+  0643:30 0001            bnt code_0647
+  0646:48                 ret 
+    )
+    (method (retreat) // method_05f2
+  05f2:3f 01             link 1
+  05f4:35 00              ldi 0
+  05f6:a5 00              sat 0
+        code_05f8
+  05f8:87 01              lap 1
+  05fa:30 002f            bnt code_062c
+  05fd:67 22             pTos 22
+  05ff:63 20             pToa 20
+  0601:1c                 ne? 
+  0602:30 0027            bnt code_062c
+  0605:35 01              ldi 1
+  0607:a5 00              sat 0
+  0609:67 22             pTos 22
+  060b:63 1c             pToa 1c
+  060d:04                 sub 
+  060e:65 22             aTop 22
+  0610:63 26             pToa 26
+  0612:30 0005            bnt code_061a
+  0615:6d 26            dpToa 26
+  0617:32 0007            jmp code_0621
+        code_061a
+  061a:67 24             pTos 24
+  061c:63 1c             pToa 1c
+  061e:04                 sub 
+  061f:65 24             aTop 24
+        code_0621
+  0621:e7 01              -ap 1
+  0623:32 ffd2            jmp code_05f8
+  0626:32 0003            jmp code_062c
+  0629:32 ffcc            jmp code_05f8
+        code_062c
+  062c:85 00              lat 0
+  062e:30 0007            bnt code_0638
+  0631:39 53            pushi 53
+  0633:76               push0 
+  0634:54 04             self 4
+
+  0636:35 01              ldi 1
+        code_0638
+  0638:48                 ret 
+    )
+)
+
+// 0fde
+(class Dialog of List
+    (properties
+        elements $0
+        size $0
+        text $0
+        window $0
+        theItem $0
+        nsTop $0
+        nsLeft $0
+        nsBottom $0
+        nsRight $0
+        time $0
+        busy $0
+        caller $0
+        seconds $0
+        lastSeconds $0
+    )
+    (method (doit) // method_08f3
+  08f3:3f 05             link 5
+  08f5:89 56              lsg 56
+  08f7:76               push0 
+  08f8:43 42 00         callk 42 0
+  08fb:02                 add 
+  08fc:a1 58              sag 58
+  08fe:35 00              ldi 0
+  0900:a5 00              sat 0
+  0902:35 01              ldi 1
+  0904:65 1c             aTop 1c
+  0906:39 74            pushi 74
+  0908:78               push1 
+  0909:39 6b            pushi 6b
+  090b:54 06             self 6
+
+  090d:63 10             pToa 10
+  090f:30 0007            bnt code_0919
+  0912:38 00a8          pushi a8
+  0915:78               push1 
+  0916:76               push0 
+  0917:4a 06             send 6
+
+        code_0919
+  0919:87 00              lap 0
+  091b:30 000a            bnt code_0928
+  091e:87 01              lap 1
+  0920:30 0005            bnt code_0928
+  0923:87 01              lap 1
+  0925:32 0009            jmp code_0931
+        code_0928
+  0928:39 75            pushi 75
+  092a:7a               push2 
+  092b:38 00af          pushi af
+  092e:78               push1 
+  092f:54 08             self 8
+
+        code_0931
+  0931:65 10             aTop 10
+  0933:63 10             pToa 10
+  0935:30 0007            bnt code_093f
+  0938:38 00a8          pushi a8
+  093b:78               push1 
+  093c:78               push1 
+  093d:4a 06             send 6
+
+        code_093f
+  093f:63 10             pToa 10
+  0941:18                 not 
+  0942:30 000d            bnt code_0952
+  0945:81 4f              lag 4f
+  0947:a5 03              sat 3
+  0949:76               push0 
+  094a:43 42 00         callk 42 0
+  094d:a5 04              sat 4
+  094f:32 0004            jmp code_0956
+        code_0952
+  0952:35 00              ldi 0
+  0954:a5 03              sat 3
+        code_0956
+  0956:35 00              ldi 0
+  0958:a5 02              sat 2
+        code_095a
+  095a:85 02              lat 2
+  095c:18                 not 
+  095d:30 008e            bnt code_09ee
+  0960:89 56              lsg 56
+  0962:76               push0 
+  0963:43 42 00         callk 42 0
+  0966:02                 add 
+  0967:a1 58              sag 58
+  0969:39 74            pushi 74
+  096b:78               push1 
+  096c:38 00b0          pushi b0
+  096f:54 06             self 6
+
+  0971:38 0090          pushi 90
+  0974:76               push0 
+  0975:39 6a            pushi 6a
+  0977:76               push0 
+  0978:51 07            class 7
+  097a:4a 04             send 4
+
+  097c:4a 04             send 4
+
+  097e:a5 01              sat 1
+  0980:85 03              lat 3
+  0982:30 002e            bnt code_09b3
+  0985:e5 03              -at 3
+  0987:39 22            pushi 22
+  0989:76               push0 
+  098a:85 01              lat 1
+  098c:4a 04             send 4
+
+  098e:36                push 
+  098f:35 01              ldi 1
+  0991:1a                 eq? 
+  0992:30 0008            bnt code_099d
+  0995:39 22            pushi 22
+  0997:78               push1 
+  0998:76               push0 
+  0999:85 01              lat 1
+  099b:4a 06             send 6
+
+        code_099d
+  099d:8d 04              lst 4
+  099f:76               push0 
+  09a0:43 42 00         callk 42 0
+  09a3:1a                 eq? 
+  09a4:30 0006            bnt code_09ad
+  09a7:32 fff3            jmp code_099d
+  09aa:32 fff0            jmp code_099d
+        code_09ad
+  09ad:76               push0 
+  09ae:43 42 00         callk 42 0
+  09b1:a5 04              sat 4
+        code_09b3
+  09b3:38 0081          pushi 81
+  09b6:78               push1 
+  09b7:8d 01              lst 1
+  09b9:54 06             self 6
+
+  09bb:a5 02              sat 2
+  09bd:39 6c            pushi 6c
+  09bf:76               push0 
+  09c0:85 01              lat 1
+  09c2:4a 04             send 4
+
+  09c4:38 00a4          pushi a4
+  09c7:76               push0 
+  09c8:54 04             self 4
+
+  09ca:8d 02              lst 2
+  09cc:35 ff              ldi ff
+  09ce:1a                 eq? 
+  09cf:2e 03 00            bt 3 0
+  09d2:63 1c             pToa 1c
+  09d4:18                 not 
+  09d5:30 000e            bnt code_09e6
+  09d8:35 00              ldi 0
+  09da:a5 02              sat 2
+  09dc:7a               push2 
+  09dd:67 10             pTos 10
+  09df:76               push0 
+  09e0:43 19 04         callk 19 4
+  09e3:32 0008            jmp code_09ee
+        code_09e6
+  09e6:78               push1 
+  09e7:78               push1 
+  09e8:43 41 02         callk 41 2
+  09eb:32 ff6c            jmp code_095a
+        code_09ee
+  09ee:35 00              ldi 0
+  09f0:65 1c             aTop 1c
+  09f2:85 02              lat 2
+  09f4:48                 ret 
+    )
+    (method (dispose) // method_0a2d
+  0a2d:3f 01             link 1
+  0a2f:39 74            pushi 74
+  0a31:78               push1 
+  0a32:39 6c            pushi 6c
+  0a34:39 7a            pushi 7a
+  0a36:76               push0 
+  0a37:54 0a             self a
+
+  0a39:7c               pushSelf 
+  0a3a:81 19              lag 19
+  0a3c:1a                 eq? 
+  0a3d:30 000e            bnt code_0a4e
+  0a40:78               push1 
+  0a41:89 29              lsg 29
+  0a43:43 15 02         callk 15 2
+  0a46:35 00              ldi 0
+  0a48:a1 19              sag 19
+  0a4a:35 00              ldi 0
+  0a4c:a1 29              sag 29
+        code_0a4e
+  0a4e:63 0e             pToa e
+  0a50:30 0005            bnt code_0a58
+  0a53:39 6c            pushi 6c
+  0a55:76               push0 
+  0a56:4a 04             send 4
+
+        code_0a58
+  0a58:35 00              ldi 0
+  0a5a:65 0e             aTop e
+  0a5c:65 10             aTop 10
+  0a5e:63 1e             pToa 1e
+  0a60:a5 00              sat 0
+  0a62:39 6c            pushi 6c
+  0a64:76               push0 
+  0a65:57 03 04         super 3 4
+
+  0a68:85 00              lat 0
+  0a6a:30 0006            bnt code_0a73
+  0a6d:38 008d          pushi 8d
+  0a70:76               push0 
+  0a71:4a 04             send 4
+
+        code_0a73
+  0a73:48                 ret 
+    )
+    (method (open) // method_0890
+  0890:76               push0 
+  0891:43 0a 00         callk a 0
+  0894:30 0012            bnt code_08a9
+  0897:81 05              lag 5
+  0899:30 000d            bnt code_08a9
+  089c:7a               push2 
+  089d:39 1b            pushi 1b
+  089f:76               push0 
+  08a0:81 05              lag 5
+  08a2:4a 04             send 4
+
+  08a4:36                push 
+  08a5:76               push0 
+  08a6:43 0b 04         callk b 4
+        code_08a9
+  08a9:39 6a            pushi 6a
+  08ab:76               push0 
+  08ac:63 0e             pToa e
+  08ae:4a 04             send 4
+
+  08b0:65 0e             aTop e
+  08b2:38 00b7          pushi b7
+  08b5:78               push1 
+  08b6:67 12             pTos 12
+  08b8:38 00b8          pushi b8
+  08bb:78               push1 
+  08bc:67 14             pTos 14
+  08be:38 00b9          pushi b9
+  08c1:78               push1 
+  08c2:67 16             pTos 16
+  08c4:38 00ba          pushi ba
+  08c7:78               push1 
+  08c8:67 18             pTos 18
+  08ca:39 50            pushi 50
+  08cc:78               push1 
+  08cd:67 0c             pTos c
+  08cf:39 22            pushi 22
+  08d1:78               push1 
+  08d2:8f 01              lsp 1
+  08d4:39 3f            pushi 3f
+  08d6:78               push1 
+  08d7:8f 02              lsp 2
+  08d9:38 00b5          pushi b5
+  08dc:76               push0 
+  08dd:63 0e             pToa e
+  08df:4a 2e             send 2e
+
+  08e1:63 1a             pToa 1a
+  08e3:65 20             aTop 20
+  08e5:39 53            pushi 53
+  08e7:76               push0 
+  08e8:54 04             self 4
+
+  08ea:48                 ret 
+    )
+    (method (draw) // method_08eb
+  08eb:39 74            pushi 74
+  08ed:78               push1 
+  08ee:39 53            pushi 53
+  08f0:54 06             self 6
+
+  08f2:48                 ret 
+    )
+    (method (cue) // method_0a1a
+  0a1a:63 1c             pToa 1c
+  0a1c:18                 not 
+  0a1d:30 0008            bnt code_0a28
+  0a20:39 6c            pushi 6c
+  0a22:76               push0 
+  0a23:54 04             self 4
+
+  0a25:32 0004            jmp code_0a2c
+        code_0a28
+  0a28:35 00              ldi 0
+  0a2a:65 1c             aTop 1c
+        code_0a2c
+  0a2c:48                 ret 
+    )
+    (method (advance) // method_0a74
+  0a74:3f 02             link 2
+  0a76:63 10             pToa 10
+  0a78:30 007f            bnt code_0afa
+  0a7b:38 00a8          pushi a8
+  0a7e:78               push1 
+  0a7f:76               push0 
+  0a80:4a 06             send 6
+
+  0a82:39 77            pushi 77
+  0a84:78               push1 
+  0a85:67 10             pTos 10
+  0a87:54 06             self 6
+
+  0a89:a5 01              sat 1
+        code_0a8b
+  0a8b:39 44            pushi 44
+  0a8d:78               push1 
+  0a8e:8d 01              lst 1
+  0a90:54 06             self 6
+
+  0a92:a5 01              sat 1
+  0a94:18                 not 
+  0a95:30 0007            bnt code_0a9f
+  0a98:39 79            pushi 79
+  0a9a:76               push0 
+  0a9b:54 04             self 4
+
+  0a9d:a5 01              sat 1
+        code_0a9f
+  0a9f:78               push1 
+  0aa0:8d 01              lst 1
+  0aa2:43 36 02         callk 36 2
+  0aa5:65 10             aTop 10
+  0aa7:39 20            pushi 20
+  0aa9:76               push0 
+  0aaa:63 10             pToa 10
+  0aac:4a 04             send 4
+
+  0aae:36                push 
+  0aaf:35 01              ldi 1
+  0ab1:12                 and 
+  0ab2:30 ffd6            bnt code_0a8b
+  0ab5:32 0003            jmp code_0abb
+  0ab8:32 ffd0            jmp code_0a8b
+        code_0abb
+  0abb:38 00a8          pushi a8
+  0abe:78               push1 
+  0abf:78               push1 
+  0ac0:63 10             pToa 10
+  0ac2:4a 06             send 6
+
+  0ac4:38 00bb          pushi bb
+  0ac7:39 04            pushi 4
+  0ac9:89 13              lsg 13
+  0acb:78               push1 
+  0acc:39 0a            pushi a
+  0ace:76               push0 
+  0acf:63 10             pToa 10
+  0ad1:4a 04             send 4
+
+  0ad3:36                push 
+  0ad4:39 0c            pushi c
+  0ad6:76               push0 
+  0ad7:63 10             pToa 10
+  0ad9:4a 04             send 4
+
+  0adb:36                push 
+  0adc:39 0a            pushi a
+  0ade:76               push0 
+  0adf:63 10             pToa 10
+  0ae1:4a 04             send 4
+
+  0ae3:04                 sub 
+  0ae4:36                push 
+  0ae5:35 02              ldi 2
+  0ae7:08                 div 
+  0ae8:02                 add 
+  0ae9:36                push 
+  0aea:39 0b            pushi b
+  0aec:76               push0 
+  0aed:63 10             pToa 10
+  0aef:4a 04             send 4
+
+  0af1:36                push 
+  0af2:35 03              ldi 3
+  0af4:04                 sub 
+  0af5:36                push 
+  0af6:81 01              lag 1
+  0af8:4a 0c             send c
+
+        code_0afa
+  0afa:48                 ret 
+    )
+    (method (retreat) // method_0afb
+  0afb:3f 02             link 2
+  0afd:63 10             pToa 10
+  0aff:30 007f            bnt code_0b81
+  0b02:38 00a8          pushi a8
+  0b05:78               push1 
+  0b06:76               push0 
+  0b07:4a 06             send 6
+
+  0b09:39 77            pushi 77
+  0b0b:78               push1 
+  0b0c:67 10             pTos 10
+  0b0e:54 06             self 6
+
+  0b10:a5 01              sat 1
+        code_0b12
+  0b12:39 7c            pushi 7c
+  0b14:78               push1 
+  0b15:8d 01              lst 1
+  0b17:54 06             self 6
+
+  0b19:a5 01              sat 1
+  0b1b:18                 not 
+  0b1c:30 0007            bnt code_0b26
+  0b1f:39 7b            pushi 7b
+  0b21:76               push0 
+  0b22:54 04             self 4
+
+  0b24:a5 01              sat 1
+        code_0b26
+  0b26:78               push1 
+  0b27:8d 01              lst 1
+  0b29:43 36 02         callk 36 2
+  0b2c:65 10             aTop 10
+  0b2e:39 20            pushi 20
+  0b30:76               push0 
+  0b31:63 10             pToa 10
+  0b33:4a 04             send 4
+
+  0b35:36                push 
+  0b36:35 01              ldi 1
+  0b38:12                 and 
+  0b39:30 ffd6            bnt code_0b12
+  0b3c:32 0003            jmp code_0b42
+  0b3f:32 ffd0            jmp code_0b12
+        code_0b42
+  0b42:38 00a8          pushi a8
+  0b45:78               push1 
+  0b46:78               push1 
+  0b47:63 10             pToa 10
+  0b49:4a 06             send 6
+
+  0b4b:38 00bb          pushi bb
+  0b4e:39 04            pushi 4
+  0b50:89 13              lsg 13
+  0b52:78               push1 
+  0b53:39 0a            pushi a
+  0b55:76               push0 
+  0b56:63 10             pToa 10
+  0b58:4a 04             send 4
+
+  0b5a:36                push 
+  0b5b:39 0c            pushi c
+  0b5d:76               push0 
+  0b5e:63 10             pToa 10
+  0b60:4a 04             send 4
+
+  0b62:36                push 
+  0b63:39 0a            pushi a
+  0b65:76               push0 
+  0b66:63 10             pToa 10
+  0b68:4a 04             send 4
+
+  0b6a:04                 sub 
+  0b6b:36                push 
+  0b6c:35 02              ldi 2
+  0b6e:08                 div 
+  0b6f:02                 add 
+  0b70:36                push 
+  0b71:39 0b            pushi b
+  0b73:76               push0 
+  0b74:63 10             pToa 10
+  0b76:4a 04             send 4
+
+  0b78:36                push 
+  0b79:35 03              ldi 3
+  0b7b:04                 sub 
+  0b7c:36                push 
+  0b7d:81 01              lag 1
+  0b7f:4a 0c             send c
+
+        code_0b81
+  0b81:48                 ret 
+    )
+    (method (move) // method_0e8a
+  0e8a:67 18             pTos 18
+  0e8c:87 01              lap 1
+  0e8e:02                 add 
+  0e8f:65 18             aTop 18
+  0e91:67 14             pTos 14
+  0e93:87 01              lap 1
+  0e95:02                 add 
+  0e96:65 14             aTop 14
+  0e98:67 12             pTos 12
+  0e9a:87 02              lap 2
+  0e9c:02                 add 
+  0e9d:65 12             aTop 12
+  0e9f:67 16             pTos 16
+  0ea1:87 02              lap 2
+  0ea3:02                 add 
+  0ea4:65 16             aTop 16
+  0ea6:48                 ret 
+    )
+    (method (moveTo) // method_0ea7
+  0ea7:38 00ab          pushi ab
+  0eaa:7a               push2 
+  0eab:8f 01              lsp 1
+  0ead:63 14             pToa 14
+  0eaf:04                 sub 
+  0eb0:36                push 
+  0eb1:8f 02              lsp 2
+  0eb3:63 12             pToa 12
+  0eb5:04                 sub 
+  0eb6:36                push 
+  0eb7:54 08             self 8
+
+  0eb9:48                 ret 
+    )
+    (method (center) // method_0eba
+  0eba:38 00ac          pushi ac
+  0ebd:7a               push2 
+  0ebe:39 14            pushi 14
+  0ec0:76               push0 
+  0ec1:63 0e             pToa e
+  0ec3:4a 04             send 4
+
+  0ec5:36                push 
+  0ec6:39 16            pushi 16
+  0ec8:76               push0 
+  0ec9:63 0e             pToa e
+  0ecb:4a 04             send 4
+
+  0ecd:36                push 
+  0ece:39 14            pushi 14
+  0ed0:76               push0 
+  0ed1:63 0e             pToa e
+  0ed3:4a 04             send 4
+
+  0ed5:04                 sub 
+  0ed6:36                push 
+  0ed7:67 18             pTos 18
+  0ed9:63 14             pToa 14
+  0edb:04                 sub 
+  0edc:04                 sub 
+  0edd:36                push 
+  0ede:35 02              ldi 2
+  0ee0:08                 div 
+  0ee1:02                 add 
+  0ee2:36                push 
+  0ee3:39 13            pushi 13
+  0ee5:76               push0 
+  0ee6:63 0e             pToa e
+  0ee8:4a 04             send 4
+
+  0eea:36                push 
+  0eeb:39 15            pushi 15
+  0eed:76               push0 
+  0eee:63 0e             pToa e
+  0ef0:4a 04             send 4
+
+  0ef2:36                push 
+  0ef3:39 13            pushi 13
+  0ef5:76               push0 
+  0ef6:63 0e             pToa e
+  0ef8:4a 04             send 4
+
+  0efa:04                 sub 
+  0efb:36                push 
+  0efc:67 16             pTos 16
+  0efe:63 12             pToa 12
+  0f00:04                 sub 
+  0f01:04                 sub 
+  0f02:36                push 
+  0f03:35 02              ldi 2
+  0f05:08                 div 
+  0f06:02                 add 
+  0f07:36                push 
+  0f08:54 08             self 8
+
+  0f0a:48                 ret 
+    )
+    (method (setSize) // method_0f0b
+  0f0b:3f 06             link 6
+  0f0d:63 0c             pToa c
+  0f0f:30 002c            bnt code_0f3e
+  0f12:39 05            pushi 5
+  0f14:35 00              ldi 0
+  0f16:5b 14 02           lea 14 2
+  0f19:36                push 
+  0f1a:67 0c             pTos c
+  0f1c:76               push0 
+  0f1d:39 ff            pushi ff
+  0f1f:76               push0 
+  0f20:43 1a 0a         callk 1a a
+  0f23:35 00              ldi 0
+  0f25:95 02             lati 2
+  0f27:65 12             aTop 12
+  0f29:35 01              ldi 1
+  0f2b:95 02             lati 2
+  0f2d:65 14             aTop 14
+  0f2f:35 02              ldi 2
+  0f31:95 02             lati 2
+  0f33:65 16             aTop 16
+  0f35:35 03              ldi 3
+  0f37:95 02             lati 2
+  0f39:65 18             aTop 18
+  0f3b:32 000a            jmp code_0f48
+        code_0f3e
+  0f3e:35 00              ldi 0
+  0f40:65 12             aTop 12
+  0f42:65 14             aTop 14
+  0f44:65 16             aTop 16
+  0f46:65 18             aTop 18
+        code_0f48
+  0f48:39 79            pushi 79
+  0f4a:76               push0 
+  0f4b:54 04             self 4
+
+  0f4d:a5 00              sat 0
+        code_0f4f
+  0f4f:85 00              lat 0
+  0f51:30 006d            bnt code_0fc1
+  0f54:78               push1 
+  0f55:36                push 
+  0f56:43 36 02         callk 36 2
+  0f59:a5 01              sat 1
+  0f5b:39 0a            pushi a
+  0f5d:76               push0 
+  0f5e:4a 04             send 4
+
+  0f60:36                push 
+  0f61:63 14             pToa 14
+  0f63:22                 lt? 
+  0f64:30 0009            bnt code_0f70
+  0f67:39 0a            pushi a
+  0f69:76               push0 
+  0f6a:85 01              lat 1
+  0f6c:4a 04             send 4
+
+  0f6e:65 14             aTop 14
+        code_0f70
+  0f70:39 09            pushi 9
+  0f72:76               push0 
+  0f73:85 01              lat 1
+  0f75:4a 04             send 4
+
+  0f77:36                push 
+  0f78:63 12             pToa 12
+  0f7a:22                 lt? 
+  0f7b:30 0009            bnt code_0f87
+  0f7e:39 09            pushi 9
+  0f80:76               push0 
+  0f81:85 01              lat 1
+  0f83:4a 04             send 4
+
+  0f85:65 12             aTop 12
+        code_0f87
+  0f87:39 0c            pushi c
+  0f89:76               push0 
+  0f8a:85 01              lat 1
+  0f8c:4a 04             send 4
+
+  0f8e:36                push 
+  0f8f:63 18             pToa 18
+  0f91:1e                 gt? 
+  0f92:30 0009            bnt code_0f9e
+  0f95:39 0c            pushi c
+  0f97:76               push0 
+  0f98:85 01              lat 1
+  0f9a:4a 04             send 4
+
+  0f9c:65 18             aTop 18
+        code_0f9e
+  0f9e:39 0b            pushi b
+  0fa0:76               push0 
+  0fa1:85 01              lat 1
+  0fa3:4a 04             send 4
+
+  0fa5:36                push 
+  0fa6:63 16             pToa 16
+  0fa8:1e                 gt? 
+  0fa9:30 0009            bnt code_0fb5
+  0fac:39 0b            pushi b
+  0fae:76               push0 
+  0faf:85 01              lat 1
+  0fb1:4a 04             send 4
+
+  0fb3:65 16             aTop 16
+        code_0fb5
+  0fb5:39 44            pushi 44
+  0fb7:78               push1 
+  0fb8:8d 00              lst 0
+  0fba:54 06             self 6
+
+  0fbc:a5 00              sat 0
+  0fbe:32 ff8e            jmp code_0f4f
+        code_0fc1
+  0fc1:67 18             pTos 18
+  0fc3:35 04              ldi 4
+  0fc5:02                 add 
+  0fc6:65 18             aTop 18
+  0fc8:67 16             pTos 16
+  0fca:35 04              ldi 4
+  0fcc:02                 add 
+  0fcd:65 16             aTop 16
+  0fcf:38 00ac          pushi ac
+  0fd2:7a               push2 
+  0fd3:76               push0 
+  0fd4:76               push0 
+  0fd5:54 08             self 8
+
+  0fd7:48                 ret 
+    )
+    (method (handleEvent) // method_0b82
+  0b82:3f 01             link 1
+  0b84:39 22            pushi 22
+  0b86:76               push0 
+  0b87:87 01              lap 1
+  0b89:4a 04             send 4
+
+  0b8b:36                push 
+  0b8c:35 40              ldi 40
+  0b8e:12                 and 
+  0b8f:30 006b            bnt code_0bfd
+  0b92:39 22            pushi 22
+  0b94:78               push1 
+  0b95:39 04            pushi 4
+  0b97:87 01              lap 1
+  0b99:4a 06             send 6
+
+  0b9b:39 28            pushi 28
+  0b9d:76               push0 
+  0b9e:87 01              lap 1
+  0ba0:4a 04             send 4
+
+  0ba2:36                push 
+  0ba3:3c                 dup 
+  0ba4:35 05              ldi 5
+  0ba6:1a                 eq? 
+  0ba7:30 000d            bnt code_0bb7
+  0baa:39 28            pushi 28
+  0bac:78               push1 
+  0bad:38 5000          pushi 5000
+  0bb0:87 01              lap 1
+  0bb2:4a 06             send 6
+
+  0bb4:32 0045            jmp code_0bfc
+        code_0bb7
+  0bb7:3c                 dup 
+  0bb8:35 01              ldi 1
+  0bba:1a                 eq? 
+  0bbb:30 000d            bnt code_0bcb
+  0bbe:39 28            pushi 28
+  0bc0:78               push1 
+  0bc1:38 4800          pushi 4800
+  0bc4:87 01              lap 1
+  0bc6:4a 06             send 6
+
+  0bc8:32 0031            jmp code_0bfc
+        code_0bcb
+  0bcb:3c                 dup 
+  0bcc:35 07              ldi 7
+  0bce:1a                 eq? 
+  0bcf:30 000d            bnt code_0bdf
+  0bd2:39 28            pushi 28
+  0bd4:78               push1 
+  0bd5:38 4b00          pushi 4b00
+  0bd8:87 01              lap 1
+  0bda:4a 06             send 6
+
+  0bdc:32 001d            jmp code_0bfc
+        code_0bdf
+  0bdf:3c                 dup 
+  0be0:35 03              ldi 3
+  0be2:1a                 eq? 
+  0be3:30 000d            bnt code_0bf3
+  0be6:39 28            pushi 28
+  0be8:78               push1 
+  0be9:38 4d00          pushi 4d00
+  0bec:87 01              lap 1
+  0bee:4a 06             send 6
+
+  0bf0:32 0009            jmp code_0bfc
+        code_0bf3
+  0bf3:39 22            pushi 22
+  0bf5:78               push1 
+  0bf6:39 40            pushi 40
+  0bf8:87 01              lap 1
+  0bfa:4a 06             send 6
+
+        code_0bfc
+  0bfc:3a                toss 
+        code_0bfd
+  0bfd:39 4c            pushi 4c
+  0bff:76               push0 
+  0c00:87 01              lap 1
+  0c02:4a 04             send 4
+
+  0c04:2e 3f 00            bt 3f 0
+  0c07:39 22            pushi 22
+  0c09:76               push0 
+  0c0a:87 01              lap 1
+  0c0c:4a 04             send 4
+
+  0c0e:36                push 
+  0c0f:35 00              ldi 0
+  0c11:1a                 eq? 
+  0c12:2e 31 00            bt 31 0
+  0c15:78               push1 
+  0c16:39 22            pushi 22
+  0c18:76               push0 
+  0c19:87 01              lap 1
+  0c1b:4a 04             send 4
+
+  0c1d:1c                 ne? 
+  0c1e:30 0033            bnt code_0c54
+  0c21:39 04            pushi 4
+  0c23:39 22            pushi 22
+  0c25:76               push0 
+  0c26:87 01              lap 1
+  0c28:4a 04             send 4
+
+  0c2a:1c                 ne? 
+  0c2b:30 0026            bnt code_0c54
+  0c2e:39 40            pushi 40
+  0c30:39 22            pushi 22
+  0c32:76               push0 
+  0c33:87 01              lap 1
+  0c35:4a 04             send 4
+
+  0c37:1c                 ne? 
+  0c38:30 0019            bnt code_0c54
+  0c3b:38 0100          pushi 100
+  0c3e:39 22            pushi 22
+  0c40:76               push0 
+  0c41:87 01              lap 1
+  0c43:4a 04             send 4
+
+  0c45:1c                 ne? 
+  0c46:30 000b            bnt code_0c54
+  0c49:7a               push2 
+  0c4a:67 10             pTos 10
+  0c4c:8f 01              lsp 1
+  0c4e:43 19 04         callk 19 4
+  0c51:35 00              ldi 0
+  0c53:48                 ret 
+    )
+    (method (check) // method_09f5
+  09f5:3f 01             link 1
+  09f7:63 20             pToa 20
+  09f9:30 001d            bnt code_0a19
+  09fc:78               push1 
+  09fd:78               push1 
+  09fe:43 42 02         callk 42 2
+  0a01:a5 00              sat 0
+  0a03:67 22             pTos 22
+  0a05:1c                 ne? 
+  0a06:30 0010            bnt code_0a19
+  0a09:85 00              lat 0
+  0a0b:65 22             aTop 22
+  0a0d:6d 20            dpToa 20
+  0a0f:18                 not 
+  0a10:30 0006            bnt code_0a19
+  0a13:38 008d          pushi 8d
+  0a16:76               push0 
+  0a17:54 04             self 4
+
+        code_0a19
+  0a19:48                 ret 
+    )
+)
+
+// 10b6
+(class Controls of List
+    (properties
+        elements $0
+        size $0
+    )
+    (method (draw) // method_1068
+  1068:39 74            pushi 74
+  106a:78               push1 
+  106b:38 00aa          pushi aa
+  106e:54 06             self 6
+
+  1070:39 74            pushi 74
+  1072:78               push1 
+  1073:39 53            pushi 53
+  1075:54 06             self 6
+
+  1077:48                 ret 
+    )
+    (method (handleEvent) // method_1078
+  1078:3f 01             link 1
+  107a:39 4c            pushi 4c
+  107c:76               push0 
+  107d:87 01              lap 1
+  107f:4a 04             send 4
+
+  1081:30 0003            bnt code_1087
+  1084:35 00              ldi 0
+  1086:48                 ret 
+    )
+)
