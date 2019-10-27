@@ -19,12 +19,14 @@ namespace RobinHoodWeb.Controllers
 
             var query_low = q.ToLower();
             return Ok(Global.AllStrings
-                .Where(s => (lang == null || s.Ru == isRu) && s.Text.ToLower().Contains(query_low))
+                .Where(s => ((lang == null || !isRu) && s.En.ToLower().Contains(query_low))
+                         || ((lang == null ||  isRu) && s.Ru.ToLower().Contains(query_low))
+                )
                 .Take(100)
                 .Select(s=> new {
-                    ru = s.Ru,
                     res = s.Resource,
-                    text = AddSpan(s.Text, q)
+                    en_text = AddSpan(s.En, q),
+                    ru_text = AddSpan(s.Ru, q)
                 }));
         }
 

@@ -36,45 +36,59 @@ namespace RobinHoodWeb
 
         public class StringRes
         {
-            public bool Ru;
             public string Resource;
-            public string Text;
+            public string En;
+            public string Ru;
         }
 
-        static IEnumerable<StringRes> ExtractStringsText(IEnumerable<Resource> texts, bool translate)
+        static IEnumerable<StringRes> ExtractStringsText(SCIPackage package)
         {
-            return texts.SelectMany(s => s.GetText(translate)
-                                          .Select(l => new StringRes { 
-                                              Ru = translate, 
-                                              Resource = s.ToString(), 
-                                              Text = l 
-                                          })
-            );
+            List<StringRes> list = new List<StringRes>();
+            foreach (var t in package.Texts)
+            {
+                var en = t.GetText(false);
+                var ru = t.GetText(true);
+
+                for (int i = 0; i < en.Length; i++)
+                {
+                    list.Add(new StringRes
+                    {
+                        Resource = t.ToString(),
+                        En = en[i],
+                        Ru = ru[i]
+                    });
+                }
+            }
+            return list;
         }
 
-        static IEnumerable<StringRes> ExtractStringsScript(IEnumerable<Resource> scripts, bool translate)
+        static IEnumerable<StringRes> ExtractStringsScript(SCIPackage package)
         {
-            return scripts.SelectMany(s => s.GetScript(translate)
-                                            .AllStrings
-                                            .Where(s => !s.IsClassName)
-                                            .Select(c => new StringRes {
-                                                Ru = translate,
-                                                Resource = s.ToString(), 
-                                                Text = c.Value 
-                                            })
-            );
+            List<StringRes> list = new List<StringRes>();
+            foreach (var s in package.Scripts)
+            {
+                var en = s.GetScript(false).AllStrings.Where(s => !s.IsClassName).ToArray();
+                var ru = s.GetScript(true).AllStrings.Where(s => !s.IsClassName).ToArray();
+
+                for (int i = 0; i < en.Length; i++)
+                {
+                    list.Add(new StringRes
+                    {
+                        Resource = s.ToString(),
+                        En = en[i].Value,
+                        Ru = ru[i].Value
+                    });
+                }
+            }
+            return list;
         }
 
         public static void UpdateStrings()
         {
             SCIPackage package = new SCIPackage(TranslateBuilder.GAME_DIR);
-            var texts = package.Texts;
-            var scripts = package.Scripts;
 
-            AllStrings = ExtractStringsText(texts, false)
-                .Union(ExtractStringsText(texts, true))
-                .Union(ExtractStringsScript(scripts, false))
-                .Union(ExtractStringsScript(scripts, true))
+            AllStrings = ExtractStringsText(package)
+                .Union(ExtractStringsScript(package))
                 .ToList();
         }
     }
