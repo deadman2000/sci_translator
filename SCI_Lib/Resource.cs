@@ -67,23 +67,23 @@ namespace SCI_Translator
             {
                 switch (Map.Type)
                 {
-                    case ResType.View: return "v56";
-                    case ResType.Picture: return "p56";
-                    case ResType.Script: return "scr";
-                    case ResType.Text: return "tex";
-                    case ResType.Sound: return "snd";
-                    case ResType.Vocabulary: return "voc";
-                    case ResType.Font: return "fon";
-                    case ResType.Cursor: return "cur";
-                    case ResType.AudioPath: return "pat";
-                    case ResType.Bitmap: return "bit";
-                    case ResType.Palette: return "pal";
-                    case ResType.CDAudio: return "cda";
-                    case ResType.Audio: return "aud";
-                    case ResType.Sync: return "syn";
-                    case ResType.Message: return "msg";
-                    case ResType.Map: return "map";
-                    case ResType.Heap: return "hep";
+                    case ResType.View: return "V56";
+                    case ResType.Picture: return "P56";
+                    case ResType.Script: return "SCR";
+                    case ResType.Text: return "TEX";
+                    case ResType.Sound: return "SND";
+                    case ResType.Vocabulary: return "VOC";
+                    case ResType.Font: return "FON";
+                    case ResType.Cursor: return "CUR";
+                    case ResType.AudioPath: return "PAT";
+                    case ResType.Bitmap: return "BIT";
+                    case ResType.Palette: return "PAL";
+                    case ResType.CDAudio: return "CDA";
+                    case ResType.Audio: return "AUD";
+                    case ResType.Sync: return "SYN";
+                    case ResType.Message: return "MSG";
+                    case ResType.Map: return "MAP";
+                    case ResType.Heap: return "HEP";
                     default: throw new NotImplementedException();
                 }
             }
@@ -157,6 +157,10 @@ namespace SCI_Translator
 
         public void SaveTranslate(byte[] data)
         {
+            var lower = Path.Combine(TranslateDir, FileName.ToLower());
+            if (File.Exists(lower))
+                File.Delete(lower);
+
             using (FileStream fs = File.Create(Path.Combine(TranslateDir, FileName)))
             {
                 fs.WriteByte((byte)Map.Type);
