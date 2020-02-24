@@ -23,7 +23,7 @@ namespace RobinHoodWeb
         public static void PackageZIP()
         {
             File.Delete(TRANSLATED_ZIP_PATH);
-            ZipFile.CreateFromDirectory(TranslateBuilder.TRANSLATE_GAME_DIR, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, true);
+            ZipFile.CreateFromDirectory(TranslateBuilder.TRANSLATE_GAME_DIR, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, false);
             UpdateCreateDate();
         }
 

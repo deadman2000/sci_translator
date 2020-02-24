@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
+import {
+    Switch,
+    Route,
+} from "react-router-dom";
 
 import './custom.css'
-
-import { TranslateBuilder } from './components/TranslateBuilder';
-import { Search } from './components/Search';
-import { Container } from 'react-bootstrap';
+import Home from './components/Home';
+import Game from './components/Game';
 
 export default class App extends Component {
     static displayName = App.name;
 
     render() {
         return (
-            <Container>
-                <h1>Conquests of the Longbow: The Legend of Robin Hood</h1>
-                <TranslateBuilder />
-                <hr />
-                <Search />
-            </Container>
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/game" component={Game} />
+            </Switch>
         );
     }
 }

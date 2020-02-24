@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -94,6 +95,10 @@ namespace RobinHoodWeb.Controllers
             if (await Global.Builder.Build())
             {
                 Global.UpdateStrings();
+                Global.PackageZIP();
+            }
+            else if (!File.Exists(Global.TRANSLATED_ZIP_PATH))
+            {
                 Global.PackageZIP();
             }
 
