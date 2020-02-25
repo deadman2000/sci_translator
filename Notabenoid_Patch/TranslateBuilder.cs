@@ -238,11 +238,12 @@ namespace Notabenoid_Patch
             {
                 var id = (a.Parent.Parent as IHtmlElement).Id;
                 var changed = (document.QuerySelector($"tr#{id} td:nth-child(3) span") as IHtmlElement).Title;
+                var name = a.Text.ToUpper();
 
-                partsLinks[a.Text] = new Part
+                partsLinks[name] = new Part
                 {
                     Id = id,
-                    Name = a.Text,
+                    Name = name,
                     URL = a.Href,
                     DateChange = changed
                 };

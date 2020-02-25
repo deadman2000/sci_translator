@@ -11,17 +11,18 @@ export default function Game() {
             const ciPromise = window.Dos(ref.current, {
                 wdosboxUrl: "https://js-dos.com/6.22/current/wdosbox.js",
                 autolock: true,
-                cycles: "max"
+                cycles: "auto"
             }).then(({ fs, main }) => {
-                fs.createFile("dosbox.conf", `
-                    [autoexec]
-                    mount c .
-                    c:
-                    asdsd
-                `);
+                /*fs.createFile("dosbox.conf", `
+[sdl]
+fullscreen=true
+[autoexec]
+mount c .
+c:
+                `);*/
 
                 return fs.extract("/download/CONQUESTS.ZIP").then(() => {
-                    return main(); // ["-c", "DIR"] SCIDHUV.EXE
+                    return main(["-c", "SCIDHUV.EXE"]); // ["-c", "DIR"] SCIDHUV.EXE
                 });
             });
 
