@@ -12,7 +12,7 @@ namespace Notabenoid
 {
     internal class Program
     {
-        private const string GAME_DIR = @"..\..\..\..\Conquest\";
+        private static string GAME_DIR = @"..\..\..\..\Conquest\";
         private static string Login;
         private static string Password;
         private const string BOOK_URL = "http://notabenoid.org/book/77921/";
@@ -21,6 +21,9 @@ namespace Notabenoid
         {
             Login = args[0];
             Password = args[1];
+
+            if (args.Length > 2)
+                GAME_DIR = args[2];
 
             ImportTranslate().Wait();
 
