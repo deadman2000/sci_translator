@@ -43,10 +43,11 @@ namespace YandexTranslate
         {
             if (s.Length == 0) return "";
 
-            WebRequest request = WebRequest.Create("https://translate.yandex.net/api/v1.5/tr.json/translate?"
+            var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?"
                 + "key=" + YandexApiKey
                 + "&text=" + s
-                + "&lang=ru");
+                + "&lang=ru";
+            WebRequest request = WebRequest.Create(url);
 
             WebResponse response = request.GetResponse();
 
@@ -79,6 +80,8 @@ namespace YandexTranslate
 
         private void OnExecute()
         {
+            Console.WriteLine(Translate("It is heavily fortified and filled with his men, as corrupt a band of rogues as I have ever seen."));
+
             string destFile = "ytrans.json";
 
             List<GameTranslate> translatedList = new List<GameTranslate>();
@@ -113,6 +116,7 @@ namespace YandexTranslate
                     var ru = ruLines[i];
 
                     if (en.Trim().Length == 0) continue; // Пустые строки
+                    if (en.Contains("%")) continue; // Системные сообщения
                     if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
 
                     if (!translations.TryGetValue(en, out string tr))

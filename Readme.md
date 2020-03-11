@@ -27,3 +27,5 @@
 ## Полезные ссылки
 
 http://wiki.scummvm.org/index.php/SCI/Specifications
+
+https://conquests.fandom.com/wiki/Conquests_Omnipedia
