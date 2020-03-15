@@ -353,6 +353,6 @@ MigrationBackup/
 .ionide/
 
 .idea/
-/Notabenoid_Patch/Properties/launchSettings.json
 
 LONGBOWS.*
+launchSettings.json

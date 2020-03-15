@@ -19,6 +19,8 @@ namespace Notabenoid_Patch
         const string CACHE_FILE = "parts.cache";
 
         public static string GAME_DIR = Environment.GetEnvironmentVariable("GAME_DIR") ?? "../Conquest/";
+        public static string NN_LOGIN = Environment.GetEnvironmentVariable("NN_LOGIN");
+        public static string NN_PASSWORD = Environment.GetEnvironmentVariable("NN_PASSWORD");
 
         public static string TRANSLATE_GAME_DIR => Path.Combine(GAME_DIR, "TRANSLATE");
 
@@ -30,12 +32,32 @@ namespace Notabenoid_Patch
 
         public bool IsBuild { get; private set; }
 
+        private async Task CreateContext()
+        {
+            if (context != null) return;
+
+            var requester = new DefaultHttpRequester();
+            requester.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
+
+            context = BrowsingContext.New(Configuration.Default.With(requester).WithDefaultLoader().WithDefaultCookies());
+
+            // Login
+            {
+                var queryDocument = await context.OpenAsync("http://notabenoid.org/");
+                var form = queryDocument.QuerySelector<IHtmlFormElement>("form");
+                await form.SubmitAsync(new Dictionary<string, string> {
+                    { "login[login]", NN_LOGIN },
+                    { "login[pass]", NN_PASSWORD },
+                });
+            }
+        }
+
         public async Task<bool> Build()
         {
             IsBuild = true;
             try
             {
-                context = await CreateContext();
+                await CreateContext();
                 var parts = await GetParts();
                 if (parts == null)
                     return false;
@@ -196,26 +218,6 @@ namespace Notabenoid_Patch
             }
         }
 
-        private async Task<IBrowsingContext> CreateContext()
-        {
-            var requester = new DefaultHttpRequester();
-            requester.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
-
-            var context = BrowsingContext.New(Configuration.Default.With(requester).WithDefaultLoader().WithDefaultCookies());
-
-            // Login
-            {
-                var queryDocument = await context.OpenAsync("http://notabenoid.org/");
-                var form = queryDocument.QuerySelector<IHtmlFormElement>("form");
-                await form.SubmitAsync(new Dictionary<string, string> {
-                    { "login[login]", Environment.GetEnvironmentVariable("NN_LOGIN") },
-                    { "login[pass]", Environment.GetEnvironmentVariable("NN_PASSWORD")},
-                });
-            }
-
-            return context;
-        }
-
         class Part
         {
             public string Id;
@@ -284,6 +286,23 @@ namespace Notabenoid_Patch
             }
 
             return translates;
+        }
+
+        public async Task<Dictionary<string, string>> GetDict()
+        {
+            await CreateContext();
+
+            var dict = new Dictionary<string, string>();
+
+            var document = await context.OpenAsync(BOOK_URL + "dict?ajax=1");
+            foreach (var div in document.QuerySelectorAll("div"))
+            {
+                var en = div.QuerySelector("span.o").Text();
+                var ru = div.QuerySelector("span.t").Text();
+                dict.Add(en, ru);
+            }
+
+            return dict;
         }
     }
 }
