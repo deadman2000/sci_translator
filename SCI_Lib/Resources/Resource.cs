@@ -1,5 +1,4 @@
 ﻿using SCI_Translator.Decompression;
-using System;
 using System.IO;
 
 namespace SCI_Translator.Resources

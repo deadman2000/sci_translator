@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using SCI_Translator;
 using SCI_Translator.Resources;
 using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Elements;
