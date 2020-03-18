@@ -27,6 +27,10 @@ namespace SCI_Translator.Resources.SCI1
             public int RecordsCount { get; set; }
         }
 
+
+        const bool SCI_11 = false;
+        int EntriesSize = SCI_11 ? 5 : 6;
+
         // https://wiki.scummvm.org/index.php?title=SCI/Specifications/Resource_files/SCI1_resources
         // http://sci.sierrahelp.com/Documentation/SCISpecifications/09-SCI1Resources.html
         protected override void ReadMap(FileStream fs)
@@ -36,9 +40,13 @@ namespace SCI_Translator.Resources.SCI1
             ResMapOffset off = null;
             while (true)
             {
-                ResType type = (ResType)fs.ReadByte();
+                int t = fs.ReadByte();
+                if ((t < 0x80 || t > 0x91) && t != 0xff)
+                    throw new Exception("Wrong format");
+
+                ResType type = (ResType)t;
                 ushort offset = fs.ReadUShortBE();
-                if (off != null) off.RecordsCount = (offset - off.Offset) / 6;
+                if (off != null) off.RecordsCount = (offset - off.Offset) / EntriesSize; // Высчитываем количество записей исходя из границ блоков
 
                 if (type == ResType.End) break;
 
@@ -53,9 +61,21 @@ namespace SCI_Translator.Resources.SCI1
                 for (int j = 0; j < offsets[i].RecordsCount; j++)
                 {
                     ushort num = fs.ReadUShortBE();
-                    int address = fs.ReadIntBE();
-                    byte resNum = (byte)((address >> 28) & 0x0F);
-                    int offset = address & 0x0FFFFFFF;
+                    int offset;
+                    byte resNum = 0;
+
+                    if (SCI_11)
+                    {
+                        offset = fs.ReadUShortBE();
+                        offset |= fs.ReadByte() << 16;
+                        offset <<= 1;
+                    }
+                    else
+                    {
+                        int address = fs.ReadIntBE();
+                        resNum = (byte)((address >> 28) & 0x0F);
+                        offset = address & 0x0FFFFFFF;
+                    }
 
                     Resource res = LoadRes(offsets[i].Type);
                     res.Load(this, offsets[i].Type, num, resNum, offset);

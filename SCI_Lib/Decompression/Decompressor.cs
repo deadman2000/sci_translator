@@ -11,6 +11,7 @@ namespace SCI_Translator.Decompression
         public static DecompressorLZW LZW1 = new DecompressorLZW(LZWCompression.CompLZW1);
         public static DecompressorLZW LZW = new DecompressorLZW(LZWCompression.CompLZW);
         public static DecompressorHuffman Huffman = new DecompressorHuffman();
+        public static DecompressorDCL DCL = new DecompressorDCL();
 
         uint _dwBits;		///< bits buffer
         byte _nBits;		///< number of unread bits in _dwBits
@@ -106,5 +107,9 @@ namespace SCI_Translator.Decompression
             return ret;
         }
 
+        protected byte getByteLSB()
+        {
+            return (byte)getBitsLSB(8);
+        }
     }
 }

@@ -27,6 +27,9 @@ namespace SCI_Translator.Resources.SCI1
             {
                 case 2:
                 case 3: return Decompressor.LZW1;
+                case 18:
+                case 19:
+                case 20: return Decompressor.DCL;
                 default: throw new NotImplementedException();
             }
         }
