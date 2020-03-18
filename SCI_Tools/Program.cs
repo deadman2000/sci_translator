@@ -52,6 +52,9 @@ namespace SCI_Tools
             {
                 base.OnExecute();
 
+                var mess = package.GetResouce<ResMessage>(1);
+                mess.Read(false);
+
                 Console.ReadKey();
             }
         }

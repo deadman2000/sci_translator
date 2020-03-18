@@ -44,13 +44,13 @@ namespace SCI_Translator.Resources
 
             var data = GetContent(false);
 
-            ushort count = Helpers.GetShortBE(data, 0);
+            ushort count = Helpers.GetUShortBE(data, 0);
             string[] names = new string[count];
 
             for (int i = 0; i < count; i++)
             {
-                ushort addr = Helpers.GetShortBE(data, i * 2 + 2);
-                ushort len = Helpers.GetShortBE(data, addr);
+                ushort addr = Helpers.GetUShortBE(data, i * 2 + 2);
+                ushort len = Helpers.GetUShortBE(data, addr);
                 string name = Helpers.GetStringEscape(data, addr + 2, len);
                 names[i] = name;
             }
@@ -64,13 +64,13 @@ namespace SCI_Translator.Resources
 
             var data = GetContent(false);
 
-            ushort count = Helpers.GetShortBE(data, 0);
+            ushort count = Helpers.GetUShortBE(data, 0);
             Dictionary<byte, OpCode> opcodes = new Dictionary<byte, OpCode>();
             for (byte i = 0; i < count; i++)
             {
-                ushort addr = Helpers.GetShortBE(data, i * 2 + 2);
-                ushort len = Helpers.GetShortBE(data, addr);
-                ushort type = Helpers.GetShortBE(data, addr + 2);
+                ushort addr = Helpers.GetUShortBE(data, i * 2 + 2);
+                ushort len = Helpers.GetUShortBE(data, addr);
+                ushort type = Helpers.GetUShortBE(data, addr + 2);
                 string name = Helpers.GetStringEscape(data, addr + 4, len - 2);
                 opcodes.Add(i, new OpCode(type, name));
             }

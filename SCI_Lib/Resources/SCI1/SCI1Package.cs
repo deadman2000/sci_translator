@@ -92,6 +92,7 @@ namespace SCI_Translator.Resources.SCI1
                 case ResType.Vocabulary: return new ResVocab();
                 case ResType.Script: return new ResScript1();
                 case ResType.Font: return new ResFont();
+                case ResType.Message: return new ResMessage();
                 default: return new Resource();
             }
         }

@@ -78,6 +78,9 @@
     <Compile Include="ResView\HexViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ResView\MsgView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ResView\ResViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -111,6 +114,9 @@
     </Compile>
     <EmbeddedResource Include="ResView\FontView.resx">
       <DependentUpon>FontView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ResView\MsgView.resx">
+      <DependentUpon>MsgView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ResView\ScriptView.resx">
       <DependentUpon>ScriptView.cs</DependentUpon>

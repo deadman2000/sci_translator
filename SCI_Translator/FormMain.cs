@@ -16,6 +16,7 @@ namespace SCI_Translator
         FontView fontView;
         ScriptView scriptView;
         VocabView vocabView;
+        MsgView msgView;
 
         public FormMain(SCIPackage package)
         {
@@ -32,6 +33,7 @@ namespace SCI_Translator
             sc.Panel2.Controls.Add(fontView = new FontView());
             sc.Panel2.Controls.Add(scriptView = new ScriptView());
             sc.Panel2.Controls.Add(vocabView = new VocabView());
+            sc.Panel2.Controls.Add(msgView = new MsgView());
 
             foreach (ResType resType in Enum.GetValues(typeof(ResType)))
             {
@@ -112,6 +114,7 @@ namespace SCI_Translator
                 case ResType.Font: _currentViewer = fontView; break;
                 case ResType.Script: _currentViewer = scriptView; break;
                 case ResType.Vocabulary: _currentViewer = vocabView; break;
+                case ResType.Message: _currentViewer = msgView; break;
                 default: _currentViewer = hexViewer; break;
             }
 

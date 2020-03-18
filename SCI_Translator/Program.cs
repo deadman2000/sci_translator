@@ -22,7 +22,7 @@ namespace SCI_Translator
             SCIPackage package;
             try
             {
-                package = SCIPackage.Load(dir);
+                package = SCIPackage.Load(dir, translate);
             }
             catch (Exception ex)
             {

@@ -32,7 +32,7 @@ namespace SCI_Translator
             return data[offset] | (data[offset + 1] << 8) | (data[offset + 2] << 16) | (data[offset + 3] << 24);
         }
 
-        public static ushort GetShortBE(byte[] data, int offset)
+        public static ushort GetUShortBE(byte[] data, int offset)
         {
             return (ushort)(data[offset] | (data[offset + 1] << 8));
         }

@@ -1,33 +1,29 @@
-﻿using SCI_Translator.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using SCI_Translator.Resources;
 
 namespace SCI_Translator.ResView
 {
-    class TextViewer : ResViewer
+    class MsgView : ResViewer
     {
         private DataGridViewTextBoxColumn colTexID;
         private DataGridViewTextBoxColumn colTexVal;
         private System.Windows.Forms.DataGridView dgvText;
 
-        public TextViewer()
+        public MsgView()
         {
             InitializeComponent();
         }
 
         protected override void ShowResource(Resource res, bool translated)
         {
-            ResText txt = (ResText)res;
-            var lines = txt.GetText(translated);
+            ResMessage msg = (ResMessage)res;
+            var messages = msg.GetMessages(translated);
 
             dgvText.Rows.Clear();
 
-            for (int i = 0; i < lines.Length; i++)
+            for (int i = 0; i < messages.Count; i++)
             {
-                dgvText.Rows.Add(i, lines[i]);
+                dgvText.Rows.Add(i, messages[i].Text);
             }
         }
 
@@ -35,13 +31,13 @@ namespace SCI_Translator.ResView
         {
             dgvText.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
-            string[] lines = new string[dgvText.Rows.Count];
+            /*string[] lines = new string[dgvText.Rows.Count];
             for (int r = 0; r < dgvText.Rows.Count; r++)
             {
                 lines[r] = (string)dgvText[1, r].Value;
             }
 
-            ((ResText)_res).SetText(lines);
+            ((ResText)_res).SetText(lines);*/
         }
 
         private void InitializeComponent()
