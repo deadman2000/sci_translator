@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
+using SCI_Translator.Pictures;
 
 namespace SCI_Translator.ImageEditor
 {

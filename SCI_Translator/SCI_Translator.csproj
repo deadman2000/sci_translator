@@ -69,8 +69,6 @@
     <Compile Include="ImageEditor\PixelPictureViewer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ImageEditor\Sprite.cs" />
-    <Compile Include="ImageEditor\SpriteFrame.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
