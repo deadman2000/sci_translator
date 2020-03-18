@@ -1,4 +1,5 @@
-﻿using SCI_Translator.Scripts;
+﻿using SCI_Translator.Resources;
+using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Builders;
 using SCI_Translator.Scripts.Elements;
 using System;
@@ -34,7 +35,9 @@ namespace SCI_Translator.ResView
 
         protected override void ShowResource(Resource res, bool translated)
         {
-            script = res.GetScript(translated);
+            var resScript = (ResScript)res;
+
+            script = resScript.GetScript(translated);
 
             if (script == null)
             {
@@ -42,14 +45,14 @@ namespace SCI_Translator.ResView
                 return;
             }
 
-            this.SuspendLayout();
+            SuspendLayout();
 
             dgvStrings.Rows.Clear();
             tbASM.Clear();
             tbHex.Clear();
 
             if (translated)
-                orig = res.GetScript(false).AllStrings.ToArray();
+                orig = resScript.GetScript(false).AllStrings.ToArray();
 
             int i = 0;
             foreach (StringConst sc in script.AllStrings)
@@ -73,8 +76,8 @@ namespace SCI_Translator.ResView
             tbASM.Text = new SimpeScriptBuilder().Decompile(script);
             tbASMC.Text = new CompanionBuilder().Decompile(script);
 
-            this.ResumeLayout();
-            this.PerformLayout();
+            ResumeLayout();
+            PerformLayout();
         }
 
         private void FillRow(DataGridViewRow row, StringConst sc)

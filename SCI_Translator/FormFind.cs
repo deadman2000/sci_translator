@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SCI_Translator.Resources;
+using SCI_Translator.Resources.SCI1;
 using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
@@ -33,52 +35,30 @@ namespace SCI_Translator
             lbResults.Items.Clear();
             pattern = tbPattern.Text.ToLower();
 
-            foreach (ResMapOffset fld in _package.Resources)
-            {
-                foreach (Resource res in fld.Resources)
-                {
-                    if (res.Type == ResType.Text)
-                    {
-                        FindText(res);
-                    }
-                    else if (res.Type == ResType.Script)
-                    {
-                        FindScript(res);
-                    }
-                }
-            }
+            foreach (var txt in _package.Texts)
+                FindText(txt);
+
+            foreach (var scr in _package.Scripts)
+                FindScript(scr);
         }
 
-        void FindText(Resource res)
+        void FindText(ResText txt)
         {
-            byte[] data = res.GetContent(_translate);
-            if (data == null) return;
-
-            int s = 0;
-            int ind = 0;
-
-            for (int i = 0; i < data.Length; i++)
+            var lines = txt.GetText(_translate);
+            for (int i = 0; i < lines.Length; i++)
             {
-                if (data[i] == 0x00)
+                var str = lines[i];
+                if (str.ToLower().Contains(pattern))
                 {
-                    string str = Helpers.GetStringEscape(data, s, i - s);
-                    if (str.ToLower().Contains(pattern))
-                    {
-                        lbResults.Items.Add(new SearchResult(res.FileName, ind, str));
-                    }
-
-                    ind++;
-                    s = i + 1;
+                    lbResults.Items.Add(new SearchResult(txt.FileName, i, str));
                 }
             }
         }
 
-        private void FindScript(Resource res)
+        private void FindScript(ResScript res)
         {
             var script = res.GetScript(_translate);
-
             var sections = script.Get<StringSection>();
-
             foreach (var sec in sections)
                 for (int ind = 0; ind < sec.Strings.Count; ind++)
                 {

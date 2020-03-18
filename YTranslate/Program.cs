@@ -3,13 +3,11 @@ using Newtonsoft.Json;
 using Notabenoid_Patch;
 using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
-using SCI_Translator;
+using SCI_Translator.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace YTranslate
@@ -102,7 +100,7 @@ namespace YTranslate
                 translations = translatedList.ToDictionary(t => t.en, t => t.ru);
             }
 
-            SCIPackage package = new SCIPackage(GameDir);
+            SCIPackage package = SCIPackage.Load(GameDir);
             var texts = package.Texts;
             var scripts = package.Scripts;
 
@@ -208,7 +206,7 @@ namespace YTranslate
                 }
 
                 if (isChanged)
-                    r.SetText(ruLines, false);
+                    r.SetText(ruLines);
             }
 
             foreach (var r in scripts)

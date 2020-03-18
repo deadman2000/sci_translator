@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCI_Translator.Resources;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -15,11 +16,13 @@ namespace SCI_Translator
         {
             string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             if (args.Length > 0) dir = args[0];
+            string translate = null;
+            if (args.Length > 1) translate = args[1];
 
             SCIPackage package;
             try
             {
-                package = new SCIPackage(dir);
+                package = SCIPackage.Load(dir);
             }
             catch (Exception ex)
             {

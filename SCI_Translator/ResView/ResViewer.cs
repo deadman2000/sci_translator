@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SCI_Translator.Resources;
 
 namespace SCI_Translator.ResView
 {

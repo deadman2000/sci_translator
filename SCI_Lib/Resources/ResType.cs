@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SCI_Translator
+﻿namespace SCI_Translator.Resources
 {
     public enum ResType : byte
     {
@@ -25,7 +20,14 @@ namespace SCI_Translator
         Map = 0x90,
         Heap = 0x91,
 
-        End = 0xFF
-    }
+        End = 0xFF,
 
+
+        Memory = 0x0,
+        Patch = 0x1,
+        Audio36 = 0x2,
+        Sync36 = 0x3,
+        Translation = 0x4,
+        Rave = 0x5
+    }
 }

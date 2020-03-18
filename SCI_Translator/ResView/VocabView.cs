@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SCI_Translator.Resources;
+using SCI_Translator.Resources.SCI1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,11 +48,13 @@ namespace SCI_Translator.ResView
         {
             var data = res.GetContent(translated);
 
+            var vocab = (ResVocab)res;
+
             tbHex.Text = Helpers.ByteToHexTable(data);
 
             if (res.Number == 997)
             {
-                var strings = res.GetVocabNames();
+                var strings = vocab.GetVocabNames();
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < strings.Length; i++)
                     sb.AppendFormat("{0:x3}: {1}", i, strings[i]).AppendLine();
@@ -58,7 +62,7 @@ namespace SCI_Translator.ResView
             }
             else if (res.Number == 998)
             {
-                var opcodes = res.GetVocabOpcodes();
+                var opcodes = vocab.GetVocabOpcodes();
                 StringBuilder sb = new StringBuilder();
                 foreach (var kv in opcodes)
                     sb.AppendFormat("{0:x2}: {1} {2}", kv.Key, kv.Value.Type, kv.Value.Name).AppendLine();
@@ -66,7 +70,7 @@ namespace SCI_Translator.ResView
             }
             else if (res.Number == 999)
             {
-                var lines = res.GetText(translated);
+                var lines = vocab.GetText();
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < lines.Length; i++)
                     sb.AppendLine($"{i,-3}: {lines[i]}");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCI_Translator.Resources;
+using System;
 
 namespace SCI_Translator.Scripts.Sections
 {

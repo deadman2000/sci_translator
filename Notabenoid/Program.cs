@@ -3,6 +3,7 @@ using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Io;
 using SCI_Translator;
+using SCI_Translator.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,10 +61,10 @@ namespace Notabenoid
                 var url = "http://notabenoid.org/book/77921/453699/";
                 var document = await context.OpenAsync(url);
 
-                SCIPackage package = new SCIPackage(GAME_DIR);
-                var resources = package.Resources.FindAll(r => r.Type == ResType.Text).SelectMany(r => r.Resources);
+                SCIPackage package = SCIPackage.Load(GAME_DIR);
+                var resources = package.Texts;
 
-                var res = resources.First(r => r.ToString().Equals("0.tex"));
+                var res = resources.First(r => r.ToString().ToLower().Equals("0.tex"));
 
                 Dictionary<string, string> enIds = new Dictionary<string, string>();
 
@@ -159,8 +160,8 @@ namespace Notabenoid
 
             // Translate
             Dictionary<string, string> translate = new Dictionary<string, string>();
-            SCIPackage package = new SCIPackage(GAME_DIR);
-            var resources = package.Resources.FindAll(r => r.Type == ResType.Text).SelectMany(res => res.Resources);
+            SCIPackage package = SCIPackage.Load(GAME_DIR);
+            var resources = package.Texts;
             foreach (var r in resources)
             {
                 Console.WriteLine(r);

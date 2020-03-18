@@ -3,6 +3,7 @@ using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Io;
 using SCI_Translator;
+using SCI_Translator.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -70,7 +71,7 @@ namespace Notabenoid_Patch
                 else
                     cache = new Dictionary<string, string>();
 
-                SCIPackage package = new SCIPackage(GAME_DIR);
+                SCIPackage package = SCIPackage.Load(GAME_DIR, TRANSLATE_GAME_DIR);
                 var texts = package.Texts;
                 var scripts = package.Scripts;
 
@@ -132,7 +133,7 @@ namespace Notabenoid_Patch
                     if (hasTranslate)
                     {
                         Console.WriteLine(r);
-                        r.SetText(ruLines, false);
+                        r.SetText(ruLines);
                         hasChanges = true;
                     }
                 }

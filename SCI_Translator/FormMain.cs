@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using System.IO;
 using SCI_Translator.ResView;
+using SCI_Translator.Resources;
+using System.Linq;
 
 namespace SCI_Translator
 {
@@ -20,6 +22,9 @@ namespace SCI_Translator
             _package = package;
 
             InitializeComponent();
+
+            Text = package.GameDirectory;
+
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 
             sc.Panel2.Controls.Add(hexViewer = new HexViewer());
@@ -28,17 +33,19 @@ namespace SCI_Translator
             sc.Panel2.Controls.Add(scriptView = new ScriptView());
             sc.Panel2.Controls.Add(vocabView = new VocabView());
 
-            foreach (ResMapOffset fldr in package.Resources)
+            foreach (ResType resType in Enum.GetValues(typeof(ResType)))
             {
-                TreeNode tnRes = tv.Nodes.Add(fldr.ToString());
+                var resources = package.GetResouces(resType);
+                if (!resources.Any()) continue;
+
+                TreeNode tnRes = tv.Nodes.Add(ResTypeName(resType));
                 tnRes.ImageKey = "folder";
                 tnRes.SelectedImageKey = tnRes.ImageKey;
-                tnRes.Tag = fldr;
 
-                foreach (Resource res in fldr.Resources)
+                foreach (var res in resources)
                 {
                     TreeNode tnRec = tnRes.Nodes.Add(res.ToString());
-                    tnRec.ImageKey = res.Map.GetTypeKey();
+                    tnRec.ImageKey = ResTypeKey(resType);
                     tnRec.SelectedImageKey = tnRec.ImageKey;
                     tnRec.Tag = res;
                 }
@@ -49,6 +56,35 @@ namespace SCI_Translator
                 tsbTranslated.Checked = false;
                 tsbTranslated.Visible = false;
                 tsbSave.Visible = false;
+            }
+        }
+
+        string ResTypeName(ResType type)
+        {
+            switch (type)
+            {
+                case ResType.AudioPath: return "Audio path";
+                case ResType.CDAudio: return "CD Audio";
+                default: return type.ToString();
+            }
+        }
+
+        string ResTypeKey(ResType type)
+        {
+            switch (type)
+            {
+                case ResType.View: return "character";
+                case ResType.Picture: return "image";
+                case ResType.Script: return "script";
+                case ResType.Text: return "book";
+                case ResType.Sound: return "music";
+                case ResType.Audio:
+                case ResType.AudioPath:
+                case ResType.CDAudio: return "sound";
+                case ResType.Font: return "font";
+                case ResType.Cursor: return "cursor";
+                case ResType.Palette: return "palette";
+                default: return "file";
             }
         }
 
@@ -67,9 +103,10 @@ namespace SCI_Translator
         ResViewer _currentViewer;
         private void ShowResource(Resource res, bool translated)
         {
-            tsslResourceInfo.Text = String.Format("{0}  {1} ({2:X8}h)  res_t:{3:X2} res_nr:{4} comp_size:{5} decomp_size:{6} method:{7}", res.Map.Type, res.ResourceFileName, res.Offset, res.ResT, res.ResNr, res.CompSize, res.DecompSize, res.Method);
+            var info = res.GetInfo();
+            tsslResourceInfo.Text = String.Format("{0}  {1} ({2:X8}h)  {3}", res.Type, res.ResourceFileName, res.Offset, info);
 
-            switch (res.Map.Type)
+            switch (res.Type)
             {
                 case ResType.Text: _currentViewer = textViewer; break;
                 case ResType.Font: _currentViewer = fontView; break;

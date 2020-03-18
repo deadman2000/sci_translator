@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using SCI_Translator;
+using SCI_Translator.Resources;
 using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
@@ -41,23 +42,25 @@ namespace Tests
             }
         }
 
+        private SCIPackage Load() => SCIPackage.Load(GAME_DIR);
+
 
         [Test]
         public void DisassembleAll()
         {
-            CheckPackage(new SCIPackage(GAME_DIR), false);
+            CheckPackage(Load(), false);
         }
 
         [Test]
         public void DisassembleAllRus()
         {
-            CheckPackage(new SCIPackage(GAME_DIR), true);
+            CheckPackage(Load(), true);
         }
 
         [Test]
         public void ParseAndBack()
         {
-            SCIPackage package = new SCIPackage(GAME_DIR);
+            SCIPackage package = Load();
 
             foreach (var res in package.Scripts)
             {
@@ -71,7 +74,7 @@ namespace Tests
         [Test]
         public void SetAddressOnWrite()
         {
-            SCIPackage package = new SCIPackage(GAME_DIR);
+            SCIPackage package = Load();
             
             foreach (var r in package.Scripts)
             {
@@ -89,7 +92,7 @@ namespace Tests
         [Test]
         public void RefsLifeCycle()
         {
-            SCIPackage package = new SCIPackage(GAME_DIR);
+            SCIPackage package = Load();
 
             foreach (var res in package.Scripts)
             {

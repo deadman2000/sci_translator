@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 
 namespace SCI_Translator.Decompression
 {
-    class DecompressorLZW : Decompressor
+    public class DecompressorLZW : Decompressor
     {
         ushort _numbits;
         ushort _curtoken, _endtoken;
@@ -45,7 +42,6 @@ namespace SCI_Translator.Decompression
         private void UnpackLZW()
         {
             ushort token; // The last received value
-            ushort tokenlastlength = 0;
 
             ushort[] tokenlist = new ushort[4096];
             ushort[] tokenlengthlist = new ushort[4096];
@@ -67,6 +63,7 @@ namespace SCI_Translator.Decompression
                 }
                 else
                 {
+                    ushort tokenlastlength;
                     if (token > 0xff)
                     {
                         if (token >= _curtoken)
@@ -212,7 +209,7 @@ namespace SCI_Translator.Decompression
         };
     }
 
-    enum LZWCompression
+    public enum LZWCompression
     {
         CompLZW,
         CompLZW1,

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace SCI_Translator.Decompression
 {
-    class DecompressorHuffman : Decompressor
+    public class DecompressorHuffman : Decompressor
     {
         protected byte[] _nodes;
 

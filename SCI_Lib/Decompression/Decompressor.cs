@@ -6,8 +6,12 @@ using System.IO;
 
 namespace SCI_Translator.Decompression
 {
-    abstract class Decompressor
+    public abstract class Decompressor
     {
+        public static DecompressorLZW LZW1 = new DecompressorLZW(LZWCompression.CompLZW1);
+        public static DecompressorLZW LZW = new DecompressorLZW(LZWCompression.CompLZW);
+        public static DecompressorHuffman Huffman = new DecompressorHuffman();
+
         uint _dwBits;		///< bits buffer
         byte _nBits;		///< number of unread bits in _dwBits
         int _szPacked;	///< size of the compressed data

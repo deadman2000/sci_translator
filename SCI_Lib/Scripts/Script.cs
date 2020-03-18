@@ -1,4 +1,5 @@
-﻿using SCI_Translator.Scripts.Elements;
+﻿using SCI_Translator.Resources;
+using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
 using System;
 using System.Collections.Generic;

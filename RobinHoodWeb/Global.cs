@@ -1,5 +1,6 @@
 ﻿using Notabenoid_Patch;
 using SCI_Translator;
+using SCI_Translator.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -85,7 +86,7 @@ namespace RobinHoodWeb
 
         public static void UpdateStrings()
         {
-            SCIPackage package = new SCIPackage(TranslateBuilder.GAME_DIR);
+            SCIPackage package = SCIPackage.Load(TranslateBuilder.GAME_DIR);
 
             AllStrings = ExtractStringsText(package)
                 .Union(ExtractStringsScript(package))

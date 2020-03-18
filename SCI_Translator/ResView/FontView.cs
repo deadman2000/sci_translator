@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using SCI_Translator.ImageEditor;
 using System.Windows.Forms;
 using System.IO;
+using SCI_Translator.Resources;
 
 namespace SCI_Translator.ResView
 {
