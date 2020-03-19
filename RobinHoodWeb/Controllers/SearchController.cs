@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RobinHoodWeb.Services;
 using System;
 using System.Linq;
 
@@ -7,8 +8,14 @@ namespace RobinHoodWeb.Controllers
     [ApiController]
     [Route("[controller]")]
     public class SearchController : ControllerBase
-
     {
+        private readonly TranslateService _translateService;
+
+        public SearchController(TranslateService translateService)
+        {
+            _translateService = translateService;
+        }
+
         [HttpGet]
         public IActionResult Get(string q, string lang)
         {
@@ -18,7 +25,7 @@ namespace RobinHoodWeb.Controllers
             bool isRu = "ru".Equals(lang);
 
             var query_low = q.ToLower();
-            return Ok(Global.AllStrings
+            return Ok(_translateService.AllStrings
                 .Where(s => ((lang == null || !isRu) && s.En.ToLower().Contains(query_low))
                          || ((lang == null ||  isRu) && s.Ru.ToLower().Contains(query_low))
                 )

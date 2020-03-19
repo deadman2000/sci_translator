@@ -19,11 +19,19 @@ namespace Notabenoid_Patch
 
         const string CACHE_FILE = "parts.cache";
 
-        public static string GAME_DIR = Environment.GetEnvironmentVariable("GAME_DIR") ?? "../Conquest/";
-        public static string NN_LOGIN = Environment.GetEnvironmentVariable("NN_LOGIN");
-        public static string NN_PASSWORD = Environment.GetEnvironmentVariable("NN_PASSWORD");
+        public string _notabenoidLogin;
+        public string _notabenoidPassword;
 
-        public static string TRANSLATE_GAME_DIR => Path.Combine(GAME_DIR, "TRANSLATE");
+        public string GameDir { get; internal set; }
+        public string TranslateDir { get; internal set; }
+
+        public TranslateBuilder(string notabenoidLogin, string notabenoidPassword, string gameDir, string translateDir = null)
+        {
+            _notabenoidLogin = notabenoidLogin;
+            _notabenoidPassword = notabenoidPassword;
+            GameDir = gameDir;
+            TranslateDir = translateDir ?? Path.Combine(GameDir, "TRANSLATE");
+        }
 
         private IBrowsingContext context;
         internal static bool NO_CACHE;
@@ -46,9 +54,9 @@ namespace Notabenoid_Patch
             {
                 var queryDocument = await context.OpenAsync("http://notabenoid.org/");
                 var form = queryDocument.QuerySelector<IHtmlFormElement>("form");
-                await form.SubmitAsync(new Dictionary<string, string> {
-                    { "login[login]", NN_LOGIN },
-                    { "login[pass]", NN_PASSWORD },
+                var result = await form.SubmitAsync(new Dictionary<string, string> {
+                    { "login[login]", _notabenoidLogin },
+                    { "login[pass]", _notabenoidPassword },
                 });
             }
         }
@@ -71,7 +79,7 @@ namespace Notabenoid_Patch
                 else
                     cache = new Dictionary<string, string>();
 
-                SCIPackage package = SCIPackage.Load(GAME_DIR, TRANSLATE_GAME_DIR);
+                SCIPackage package = SCIPackage.Load(GameDir, TranslateDir);
                 var texts = package.Texts;
                 var scripts = package.Scripts;
 

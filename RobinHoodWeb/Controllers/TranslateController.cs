@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RobinHoodWeb.Services;
 using System;
 using System.IO;
 using System.Net.WebSockets;
@@ -14,6 +15,13 @@ namespace RobinHoodWeb.Controllers
     [Route("[controller]")]
     public class TranslateController : ControllerBase
     {
+        private readonly TranslateService _translateService;
+
+        public TranslateController(TranslateService translateService)
+        {
+            _translateService = translateService;
+        }
+
         [HttpGet]
         public async Task Get()
         {
@@ -23,7 +31,7 @@ namespace RobinHoodWeb.Controllers
             if (isSocketRequest)
             {
                 WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                var conn = new TranslateConnection(webSocket);
+                var conn = new TranslateConnection(_translateService, webSocket);
                 await conn.ReadCycle();
             }
             else
@@ -36,9 +44,11 @@ namespace RobinHoodWeb.Controllers
     internal class TranslateConnection
     {
         private readonly WebSocket webSocket;
+        private readonly TranslateService _translateService;
 
-        public TranslateConnection(WebSocket webSocket)
+        public TranslateConnection(TranslateService translateService, WebSocket webSocket)
         {
+            _translateService = translateService;
             this.webSocket = webSocket;
         }
 
@@ -46,11 +56,11 @@ namespace RobinHoodWeb.Controllers
         {
             await Send(new
             {
-                update_date = Global.UPDATE_DATE,
-                building = Global.Builder.IsBuild
+                update_date = _translateService.UpdateDate,
+                building = _translateService.Builder.IsBuild
             });
 
-            Global.Builder.ReportProgress += ReportProgress;
+            _translateService.Builder.ReportProgress += ReportProgress;
 
             try
             {
@@ -68,7 +78,7 @@ namespace RobinHoodWeb.Controllers
             catch { }
             finally
             {
-                Global.Builder.ReportProgress -= ReportProgress;
+                _translateService.Builder.ReportProgress -= ReportProgress;
             }
         }
 
@@ -90,16 +100,16 @@ namespace RobinHoodWeb.Controllers
 
         private async Task Build()
         {
-            if (Global.Builder.IsBuild) return;
+            if (_translateService.Builder.IsBuild) return;
 
-            if (await Global.Builder.Build())
+            if (await _translateService.Builder.Build())
             {
-                Global.UpdateStrings();
-                Global.PackageZIP();
+                _translateService.UpdateStrings();
+                _translateService.PackageZIP();
             }
-            else if (!File.Exists(Global.TRANSLATED_ZIP_PATH))
+            else if (!File.Exists(TranslateService.TRANSLATED_ZIP_PATH))
             {
-                Global.PackageZIP();
+                _translateService.PackageZIP();
             }
 
             Finished();
@@ -107,7 +117,7 @@ namespace RobinHoodWeb.Controllers
 
         private async void ReportProgress(int progress) => await Send(new { progress });
 
-        private async void Finished() => await Send(new { building = false, update_date = Global.UPDATE_DATE });
+        private async void Finished() => await Send(new { building = false, update_date = _translateService.UpdateDate });
 
     }
 }

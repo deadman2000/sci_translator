@@ -13,8 +13,6 @@ namespace RobinHoodWeb
     {
         public static void Main(string[] args)
         {
-            Global.UpdateStrings();
-
             CreateWebHostBuilder(args).Build().Run();
         }
 

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using RobinHoodWeb.Services;
 using System.IO;
 
 namespace RobinHoodWeb
@@ -23,6 +24,11 @@ namespace RobinHoodWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            IConfigurationSection sec = Configuration.GetSection("Translate");
+            services.Configure<TranslateOptions>(sec);
+
+            services.AddSingleton<TranslateService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -43,10 +49,10 @@ namespace RobinHoodWeb
                 app.UseExceptionHandler("/Error");
             }
 
-            Directory.CreateDirectory(Global.DOWNLOAD_DIR);
+            Directory.CreateDirectory(TranslateService.DOWNLOAD_DIR);
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(Global.DOWNLOAD_DIR),
+                FileProvider = new PhysicalFileProvider(TranslateService.DOWNLOAD_DIR),
                 RequestPath = new PathString("/download")
             });
 

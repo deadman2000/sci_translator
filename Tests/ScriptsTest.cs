@@ -64,8 +64,7 @@ namespace Tests
             foreach (var res in package.Scripts)
             {
                 var bytes = res.GetContent(false);
-                var scr = new Script(res, bytes);
-                var newbytes = scr.GetBytes();
+                var newbytes = res.GetScript(false).GetBytes();
                 CollectionAssert.AreEqual(bytes, newbytes);
             }
         }
@@ -95,8 +94,7 @@ namespace Tests
 
             foreach (var res in package.Scripts)
             {
-                var bytes = res.GetContent(false);
-                var scr = new Script(res, bytes);
+                var scr = res.GetScript(false);
                 scr.GetBytes();
 
                 foreach (var r in scr.AllRefs)

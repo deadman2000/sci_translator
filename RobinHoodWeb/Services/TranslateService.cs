@@ -1,48 +1,49 @@
-﻿using Notabenoid_Patch;
-using SCI_Translator;
+﻿using Microsoft.Extensions.Options;
+using Notabenoid_Patch;
+using RobinHoodWeb.Model;
 using SCI_Translator.Resources;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace RobinHoodWeb
+namespace RobinHoodWeb.Services
 {
-    public static class Global
+    public class TranslateService
     {
         public static readonly string DOWNLOAD_DIR = Path.Combine(Directory.GetCurrentDirectory(), @"downloads");
+
         public static readonly string TRANSLATED_ZIP_PATH = Path.Combine(DOWNLOAD_DIR, "CONQUESTS.ZIP");
 
-        public static readonly TranslateBuilder Builder = new TranslateBuilder();
+        public TranslateBuilder Builder { get; internal set; }
 
-        public static string UPDATE_DATE = UpdateCreateDate();
+        public List<StringRes> AllStrings { get; internal set; } = new List<StringRes>();
 
-        public static List<StringRes> AllStrings = new List<StringRes>();
+        public string UpdateDate { get; internal set; }
 
-        public static void PackageZIP()
+        public TranslateService(IOptions<TranslateOptions> op)
+        {
+            Builder = new TranslateBuilder(op.Value.NotabenoidLogin, op.Value.NotabenoidPassword, op.Value.GameDir, op.Value.TranslateDir);
+            UpdateDate = UpdateCreateDate();
+            UpdateStrings();
+        }
+
+
+        public void PackageZIP()
         {
             File.Delete(TRANSLATED_ZIP_PATH);
-            ZipFile.CreateFromDirectory(TranslateBuilder.TRANSLATE_GAME_DIR, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, false);
+            ZipFile.CreateFromDirectory(Builder.TranslateDir, TRANSLATED_ZIP_PATH, CompressionLevel.Optimal, false);
             UpdateCreateDate();
         }
 
-        private static string UpdateCreateDate()
+        private string UpdateCreateDate()
         {
             if (!File.Exists(TRANSLATED_ZIP_PATH))
                 return null;
-            return UPDATE_DATE = new FileInfo(TRANSLATED_ZIP_PATH).CreationTimeUtc.ToString();
+            return UpdateDate = new FileInfo(TRANSLATED_ZIP_PATH).CreationTimeUtc.ToString();
         }
 
-        public class StringRes
-        {
-            public string Resource;
-            public string En;
-            public string Ru;
-        }
-
-        static IEnumerable<StringRes> ExtractStringsText(SCIPackage package)
+        private IEnumerable<StringRes> ExtractStringsText(SCIPackage package)
         {
             List<StringRes> list = new List<StringRes>();
             foreach (var t in package.Texts)
@@ -63,7 +64,7 @@ namespace RobinHoodWeb
             return list;
         }
 
-        static IEnumerable<StringRes> ExtractStringsScript(SCIPackage package)
+        private IEnumerable<StringRes> ExtractStringsScript(SCIPackage package)
         {
             List<StringRes> list = new List<StringRes>();
             foreach (var s in package.Scripts)
@@ -84,9 +85,9 @@ namespace RobinHoodWeb
             return list;
         }
 
-        public static void UpdateStrings()
+        public void UpdateStrings()
         {
-            SCIPackage package = SCIPackage.Load(TranslateBuilder.GAME_DIR);
+            SCIPackage package = SCIPackage.Load(Builder.GameDir, Builder.TranslateDir);
 
             AllStrings = ExtractStringsText(package)
                 .Union(ExtractStringsScript(package))

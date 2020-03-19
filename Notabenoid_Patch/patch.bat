@@ -1,2 +1,2 @@
 @echo off
-call Notabenoid_Patch.exe login password
+call Notabenoid_Patch.exe -nl login -np password -d Conquest

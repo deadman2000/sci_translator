@@ -71,9 +71,7 @@ namespace YTranslate
 
         private async Task OnExecute()
         {
-            TranslateBuilder.NN_LOGIN = NotabenoidLogin;
-            TranslateBuilder.NN_PASSWORD = NotabenoidPassword;
-            var builder = new TranslateBuilder();
+            var builder = new TranslateBuilder(NotabenoidLogin, NotabenoidPassword, GameDir);
             var dict = await builder.GetDict();
             glossary = new GlossaryConfig
             {
