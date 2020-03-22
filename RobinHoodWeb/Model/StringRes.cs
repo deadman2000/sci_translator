@@ -11,5 +11,6 @@ namespace RobinHoodWeb.Model
         public string En { get; set; }
         public string Ru { get; set; }
         public string Link { get; set; }
+        public string YTrans { get; set; }
     }
 }

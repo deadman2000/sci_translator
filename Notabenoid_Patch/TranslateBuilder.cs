@@ -2,7 +2,6 @@
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Io;
-using SCI_Translator;
 using SCI_Translator.Resources;
 using System;
 using System.Collections.Generic;

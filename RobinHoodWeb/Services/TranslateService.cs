@@ -8,6 +8,7 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
+using YTranslate;
 
 namespace RobinHoodWeb.Services
 {
@@ -22,6 +23,8 @@ namespace RobinHoodWeb.Services
         public List<StringRes> AllStrings { get; internal set; } = new List<StringRes>();
 
         public string UpdateDate { get; internal set; }
+
+        private Dictionary<string, string> YTranslate;
 
         public TranslateService(IOptions<TranslateOptions> op)
         {
@@ -91,9 +94,17 @@ namespace RobinHoodWeb.Services
         {
             SCIPackage package = SCIPackage.Load(Builder.GameDir, Builder.TranslateDir);
 
+            if (YTranslate == null)
+                LoadYTranslate();
+
             AllStrings = ExtractStringsText(package)
                 .Union(ExtractStringsScript(package))
                 .ToList();
+            AllStrings.ForEach(s =>
+            {
+                s.YTrans = YTranslate.GetValueOrDefault(s.En.Trim());
+                //if (s.YTrans == null) Console.WriteLine($"No YTrans: {s.En}");
+            });
 
             if (Builder.Links != null)
             {
@@ -105,6 +116,13 @@ namespace RobinHoodWeb.Services
             }
         }
 
+        private void LoadYTranslate()
+        {
+            var tranlations = GameTranslate.Load("ytrans.json");
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            tranlations.ForEach(t => dict[t.en] = t.ru);
+            YTranslate = dict;
+        }
 
         public async Task Build()
         {
@@ -112,7 +130,7 @@ namespace RobinHoodWeb.Services
 
             if (await Builder.Build() || !Builder.Links.Any())
             {
-                await Builder.PrepareLinks();
+                //await Builder.PrepareLinks();
 
                 UpdateStrings();
                 PackageZIP();

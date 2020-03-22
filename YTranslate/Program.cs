@@ -61,13 +61,6 @@ namespace YTranslate
             return (await Translate(new string[] { s }))[0];
         }
 
-        class GameTranslate
-        {
-            public string en { get; set; }
-
-            public string ru { get; set; }
-        }
-
         private async Task OnExecute()
         {
             var builder = new TranslateBuilder(NotabenoidLogin, NotabenoidPassword, GameDir);
@@ -93,7 +86,7 @@ namespace YTranslate
             Dictionary<string, string> translations = new Dictionary<string, string>();
             if (File.Exists(destFile))
             {
-                translatedList = JsonConvert.DeserializeObject<List<GameTranslate>>(File.ReadAllText(destFile));
+                translatedList = GameTranslate.Load(destFile);
                 translations = translatedList.ToDictionary(t => t.en, t => t.ru);
             }
 
@@ -103,7 +96,7 @@ namespace YTranslate
 
             Console.WriteLine("Gathering english");
 
-            HashSet<string> toTranslate = new HashSet<string>();
+            HashSet<string> toTranslate = new HashSet<string>(); // Множество всех оригинальных фраз
             foreach (var r in texts)
             {
                 var enLines = r.GetText(false); // Оригинальный текст
@@ -122,7 +115,7 @@ namespace YTranslate
 
                     if (en.Trim().Length == 0) continue; // Пустые строки
                     if (en.Contains("%")) continue; // Системные сообщения
-                    if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
+                    //if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
 
                     if (!translations.ContainsKey(en) && !toTranslate.Contains(en))
                         toTranslate.Add(en);
@@ -144,7 +137,7 @@ namespace YTranslate
 
                     if (en.Trim().Length == 0) continue; // Пустые строки
                     if (en.Contains("%")) continue; // Системные сообщения
-                    if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
+                    //if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
 
                     if (!translations.ContainsKey(en) && !toTranslate.Contains(en))
                         toTranslate.Add(en);
@@ -152,6 +145,21 @@ namespace YTranslate
             }
 
             Console.WriteLine("Translate");
+
+            async Task TranslatePart(List<string> txt)
+            {
+                var tr = await Translate(txt.ToArray());
+                if (txt.Count != tr.Length)
+                {
+                    Console.WriteLine("Translate Error");
+                }
+                for (int n = 0; n < tr.Length; n++)
+                {
+                    translations[txt[n]] = tr[n];
+                    translatedList.Add(new GameTranslate { en = txt[n], ru = tr[n] });
+                }
+            }
+
             var arr = toTranslate.ToArray();
             int len = 0;
             List<string> txt = new List<string>();
@@ -162,7 +170,7 @@ namespace YTranslate
 
                 if (len + val.Length > 10000)
                 {
-                    await TranslatePart(txt, translations);
+                    await TranslatePart(txt);
                     txt.Clear();
                     len = 0;
                 }
@@ -171,11 +179,11 @@ namespace YTranslate
                 txt.Add(val);
 
                 if (i == arr.Length - 1)
-                    await TranslatePart(txt, translations);
+                    await TranslatePart(txt);
             }
             
 
-            Console.WriteLine("Apply translate");
+            /*Console.WriteLine("Apply translate");
 
             foreach (var r in texts)
             {
@@ -233,24 +241,12 @@ namespace YTranslate
 
                 if (isChanged)
                     r.SaveTranslate(ruScr.GetBytes());
-            }
+            }*/
 
             File.WriteAllText(destFile, JsonConvert.SerializeObject(translatedList, Formatting.None));
 
             Console.WriteLine("Completed");
         }
 
-        private async Task TranslatePart(List<string> txt, Dictionary<string, string> translations)
-        {
-            var tr = await Translate(txt.ToArray());
-            if (txt.Count != tr.Length)
-            {
-                Console.WriteLine("Translate Error");
-            }
-            for (int n = 0; n < tr.Length; n++)
-            {
-                translations[txt[n]] = tr[n];
-            }
-        }
     }
 }

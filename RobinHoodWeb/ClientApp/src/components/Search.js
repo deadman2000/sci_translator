@@ -63,6 +63,7 @@ export class Search extends Component {
                                 <td>{r.link ? (<a href={"http://notabenoid.org" + r.link}>{r.res}</a>) : r.res}</td>
                                 <td dangerouslySetInnerHTML={{ __html: r.en_text }} />
                                 <td dangerouslySetInnerHTML={{ __html: r.ru_text }} />
+                                <td>{r.yTrans}</td>
                             </tr>
                         ))}
                     </tbody>
