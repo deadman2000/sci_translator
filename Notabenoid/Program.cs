@@ -26,7 +26,8 @@ namespace Notabenoid
             if (args.Length > 2)
                 GAME_DIR = args[2];
 
-            ImportTranslate().Wait();
+            //ImportTranslate().Wait();
+            Test2().Wait();
 
             Console.WriteLine("Completed");
             Console.ReadKey();
@@ -35,7 +36,7 @@ namespace Notabenoid
         private static async Task<IBrowsingContext> CreateContext()
         {
             var requester = new DefaultHttpRequester();
-            requester.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
+            //requester.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
 
             var context = BrowsingContext.New(Configuration.Default.With(requester).WithDefaultLoader().WithDefaultCookies());
 
@@ -93,6 +94,41 @@ namespace Notabenoid
                         Console.WriteLine($"Not found for {l}");
                     }
                 }
+            }
+        }
+
+        private static async Task Test2()
+        {
+            var context = await CreateContext();
+            string url = "http://notabenoid.org/book/77921/453789";
+
+            var document = await context.OpenAsync(url);
+
+            while (true)
+            {
+                foreach (var td in document.QuerySelectorAll("td.o")) // Ячейки с оригинальным текстом
+                {
+                    var id = ((IHtmlElement)td.Parent).Id;
+                    var enEl = td.QuerySelector("p.text");
+                    var link = td.QuerySelector("a.ord").GetAttribute("href");
+
+                    var ruEl = document.QuerySelectorAll($"tr#{id} td.t p.text").LastOrDefault();
+                    if (ruEl == null)
+                    {
+                        //translates[en] = null;
+                        continue;
+                    }
+
+                    var en = enEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
+                    var ru = ruEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
+                    Console.WriteLine($"{en}: {ru}  {link}");
+                }
+
+                var a = document.QuerySelector("#pages-bottom p.n a") as IHtmlAnchorElement;
+                if (a == null)
+                    break;
+
+                document = await context.OpenAsync(a.Href);
             }
         }
 

@@ -9,6 +9,8 @@ namespace SCI_Translator.Decompression
     public abstract class Decompressor
     {
         public static DecompressorLZW LZW1 = new DecompressorLZW(LZWCompression.CompLZW1);
+        public static DecompressorLZW LZW1View = new DecompressorLZW(LZWCompression.CompLZW1View);
+        public static DecompressorLZW LZW1Pic = new DecompressorLZW(LZWCompression.CompLZW1Pic);
         public static DecompressorLZW LZW = new DecompressorLZW(LZWCompression.CompLZW);
         public static DecompressorHuffman Huffman = new DecompressorHuffman();
         public static DecompressorDCL DCL = new DecompressorDCL();

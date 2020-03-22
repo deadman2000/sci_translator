@@ -25,10 +25,12 @@ namespace Notabenoid_Patch
         [Required]
         public string NotabenoidPassword { get; set; }
 
+        [Option(Description = "Disable translate lock", LongName = "no-lock")]
+        public bool NoLock { get; set; } = false;
 
         private async Task OnExecute()
         {
-            TranslateBuilder.NO_CACHE = Environment.GetEnvironmentVariable("NN_NOCACHE") != null;
+            TranslateBuilder.NO_CACHE = NoLock;
 
             var builder = new TranslateBuilder(NotabenoidLogin, NotabenoidPassword, GameDir, TranslateDir);
             await builder.Build();

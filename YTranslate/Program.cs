@@ -49,10 +49,9 @@ namespace YTranslate
             };
             var request = new RestRequest(Method.POST);
             request.AddJsonBody(data);
-            //var response = await rest.PostAsync<YTranslateResponse>(request);
-            var response = rest.Post<YTranslateResponse>(request);
-            Console.WriteLine($"{response.StatusCode}");
-            return response.Data.Translations.Select(t => t.Text).ToArray();
+            var response = await rest.PostAsync<YTranslateResponse>(request);
+            //var response = rest.Post<YTranslateResponse>(request);
+            return response.Translations.Select(t => t.Text).ToArray();
         }
 
         public async Task<string> Translate(string s)

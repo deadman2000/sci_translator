@@ -60,7 +60,7 @@ export class Search extends Component {
                     <tbody>
                         {result.map((r, i) => (
                             <tr key={i}>
-                                <td>{r.res}</td>
+                                <td>{r.link ? (<a href={"http://notabenoid.org" + r.link}>{r.res}</a>) : r.res}</td>
                                 <td dangerouslySetInnerHTML={{ __html: r.en_text }} />
                                 <td dangerouslySetInnerHTML={{ __html: r.ru_text }} />
                             </tr>

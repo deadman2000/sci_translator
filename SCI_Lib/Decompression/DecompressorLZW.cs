@@ -194,12 +194,12 @@ namespace SCI_Translator.Decompression
 
         private void reorderView()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // TODO
         }
 
         private void reorderPic()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); // TODO
         }
 
         struct Tokenlist

@@ -27,15 +27,22 @@ namespace SCI_Translator.ResView
 
         protected override void ShowResource(Resource res, bool translated)
         {
-            byte[] data = res.GetContent(translated);
-
-            if (data == null)
+            try
             {
-                tbHexView.Text = "Unsupported compression method";
-                return;
+                byte[] data = res.GetContent(translated);
+
+                if (data == null)
+                {
+                    tbHexView.Text = "Unsupported compression method";
+                    return;
+                }
+
+                tbHexView.Text = Helpers.ByteToHexTable(data);
             }
-            
-            tbHexView.Text = Helpers.ByteToHexTable(data);
+            catch (Exception ex)
+            {
+                tbHexView.Text = ex.ToString();
+            }
         }
     }
 }

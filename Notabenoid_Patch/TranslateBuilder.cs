@@ -54,10 +54,25 @@ namespace Notabenoid_Patch
             {
                 var queryDocument = await context.OpenAsync("http://notabenoid.org/");
                 var form = queryDocument.QuerySelector<IHtmlFormElement>("form");
-                var result = await form.SubmitAsync(new Dictionary<string, string> {
+                await form.SubmitAsync(new Dictionary<string, string> {
                     { "login[login]", _notabenoidLogin },
                     { "login[pass]", _notabenoidPassword },
                 });
+            }
+        }
+
+        public Dictionary<string, Dictionary<string, string>> Links { get; set; } = new Dictionary<string, Dictionary<string, string>>();
+
+        public async Task PrepareLinks()
+        {
+            await CreateContext();
+            var parts = await GetParts();
+
+            foreach (var kv in parts)
+            {
+                if (Links.ContainsKey(kv.Key)) continue;
+
+                await GetTranslates(kv.Key, kv.Value.URL); // При запросе перевода обновляется Links
             }
         }
 
@@ -99,7 +114,7 @@ namespace Notabenoid_Patch
                     if (String.IsNullOrEmpty(part.DateChange)) // Пропускаем части без перевода
                         continue;
 
-                    if (cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange))
+                    if (cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange)) // Пропускаем неизмененные части
                         continue;
 
                     var enLines = r.GetText(false); // Оригинальный текст
@@ -111,7 +126,7 @@ namespace Notabenoid_Patch
                         continue;
                     }
 
-                    var translates = await GetTranslates(part.URL);
+                    var translates = await GetTranslates(r.ToString(), part.URL);
                     bool hasTranslate = false;
 
                     for (int i = 0; i < enLines.Length; i++)
@@ -119,7 +134,7 @@ namespace Notabenoid_Patch
                         var en = enLines[i];
                         if (String.IsNullOrEmpty(en)) continue;
 
-                        if (!translates.TryGetValue(en, out string tr))
+                        if (!translates.TryGetValue(en, out var tr))
                             en = en.Replace("\n", "\r\n");
 
                         if (!translates.TryGetValue(en, out tr))
@@ -127,6 +142,7 @@ namespace Notabenoid_Patch
                             //Console.WriteLine($"Missing tex {r} - {en}");
                             continue;
                         }
+
                         if (tr == null) continue;
 
                         var ru = ruLines[i];
@@ -157,7 +173,7 @@ namespace Notabenoid_Patch
                     if (String.IsNullOrEmpty(part.DateChange)) // Пропускаем части без перевода
                         continue;
 
-                    if (cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange))
+                    if (cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange)) // Пропускаем неизмененные части
                         continue;
 
                     var enScr = r.GetScript(false);
@@ -166,7 +182,7 @@ namespace Notabenoid_Patch
                     var enStrings = enScr.AllStrings.Where(s => !s.IsClassName).ToArray();
                     var ruStrings = ruScr.AllStrings.Where(s => !s.IsClassName).ToArray();
 
-                    var translates = await GetTranslates(part.URL);
+                    var translates = await GetTranslates(r.ToString(), part.URL);
                     bool hasTranslate = false;
 
                     for (int i = 0; i < enStrings.Length; i++)
@@ -174,12 +190,7 @@ namespace Notabenoid_Patch
                         var en = enStrings[i].Value;
                         if (String.IsNullOrEmpty(en)) continue;
 
-                        if (!translates.TryGetValue(en, out string tr))
-                        {
-                            //Console.WriteLine($"Missing scr {r} - {en}");
-                            continue;
-                        }
-                        if (tr == null) continue;
+                        if (!translates.TryGetValue(en, out var tr)) continue;
                         
                         var ru = ruStrings[i].Value;
                         if (tr.Equals(ru)) // Пропускаем старый перевод
@@ -235,7 +246,10 @@ namespace Notabenoid_Patch
             public string DateChange;
         }
 
-
+        /// <summary>
+        /// Получает список всех глав перевода
+        /// </summary>
+        /// <returns></returns>
         private async Task<Dictionary<string, Part>> GetParts()
         {
             var partsLinks = new Dictionary<string, Part>();
@@ -263,27 +277,43 @@ namespace Notabenoid_Patch
             return partsLinks;
         }
 
-        private async Task<Dictionary<string, string>> GetTranslates(string url)
+        /// <summary>
+        /// Выгружает все переводы из главы
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private async Task<Dictionary<string, string>> GetTranslates(string res, string url)
         {
+            res = res.ToLower();
             var translates = new Dictionary<string, string>();
 
             var document = await context.OpenAsync(url);
 
+            if (!Links.TryGetValue(res, out var links))
+            {
+                links = new Dictionary<string, string>();
+                Links.Add(res, links);
+            }
+
             while (true)
             {
-                foreach (var e in document.QuerySelectorAll("td.o p.text"))
+                foreach (var td in document.QuerySelectorAll("td.o")) // Ячейки с оригинальным текстом
                 {
-                    var id = ((IHtmlElement)e.Parent.Parent.Parent).Id;
+                    var id = ((IHtmlElement)td.Parent).Id;
+
+                    var enEl = td.QuerySelector("p.text");
+                    var en = enEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
+
+                    var link = td.QuerySelector("a.ord").GetAttribute("href");
+                    links[en] = link;
+
                     var ruEl = document.QuerySelectorAll($"tr#{id} td.t p.text").LastOrDefault();
                     if (ruEl == null)
                     {
-                        //translates[en] = null;
                         continue;
                     }
 
-                    var en = e.Text().Replace('_', ' ').Replace("\n", "\r\n");
                     var ru = ruEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
-
                     translates[en] = ru;
                 }
 

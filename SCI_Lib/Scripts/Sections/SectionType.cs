@@ -2,6 +2,7 @@
 {
     public enum SectionType : ushort
     {
+        None = 0,
         Object = 1,
         Code = 2,
         String = 5,

@@ -69,7 +69,7 @@ namespace RobinHoodWeb.Controllers
                 while (!result.CloseStatus.HasValue)
                 {
                     var message = Encoding.UTF8.GetString(buffer, 0, result.Count);
-                    await ProcessMessage(message);
+                    ProcessMessage(message);
 
                     result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
                 }
@@ -88,36 +88,22 @@ namespace RobinHoodWeb.Controllers
             await webSocket.SendAsync(arraySegment, WebSocketMessageType.Text, true, CancellationToken.None);
         }
 
-        private async Task ProcessMessage(string message)
+        private void ProcessMessage(string message)
         {
             switch (message)
             {
                 case "build":
-                    await Build();
+                    new Task(async () =>
+                    {
+                        await _translateService.Build();
+                        Finished();
+                    }).Start();
                     break;
             }
-        }
-
-        private async Task Build()
-        {
-            if (_translateService.Builder.IsBuild) return;
-
-            if (await _translateService.Builder.Build())
-            {
-                _translateService.UpdateStrings();
-                _translateService.PackageZIP();
-            }
-            else if (!File.Exists(TranslateService.TRANSLATED_ZIP_PATH))
-            {
-                _translateService.PackageZIP();
-            }
-
-            Finished();
         }
 
         private async void ReportProgress(int progress) => await Send(new { progress });
 
         private async void Finished() => await Send(new { building = false, update_date = _translateService.UpdateDate });
-
     }
 }

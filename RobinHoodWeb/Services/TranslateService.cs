@@ -2,10 +2,12 @@
 using Notabenoid_Patch;
 using RobinHoodWeb.Model;
 using SCI_Translator.Resources;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RobinHoodWeb.Services
 {
@@ -92,6 +94,33 @@ namespace RobinHoodWeb.Services
             AllStrings = ExtractStringsText(package)
                 .Union(ExtractStringsScript(package))
                 .ToList();
+
+            if (Builder.Links != null)
+            {
+                AllStrings.ForEach(s =>
+                {
+                    if (Builder.Links.TryGetValue(s.Resource.ToLower(), out var lines) && lines.TryGetValue(s.En, out var link))
+                        s.Link = link;
+                });
+            }
+        }
+
+
+        public async Task Build()
+        {
+            if (Builder.IsBuild) return;
+
+            if (await Builder.Build() || !Builder.Links.Any())
+            {
+                await Builder.PrepareLinks();
+
+                UpdateStrings();
+                PackageZIP();
+            }
+            else if (!File.Exists(TRANSLATED_ZIP_PATH))
+            {
+                PackageZIP();
+            }
         }
     }
 }

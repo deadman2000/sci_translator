@@ -11,26 +11,46 @@ namespace SCI_Translator.Scripts
         private Dictionary<ushort, BaseElement> _elements = new Dictionary<ushort, BaseElement>();
         private readonly StringSection _strings;
 
+        const bool SCI1_1 = false;
+
         public Script(Resource res, byte[] data)
         {
             Resource = res;
             SourceData = data;
 
-            ushort i = 0;
-            while (i < data.Length)
+            if (SCI1_1)
             {
-                ushort type = (ushort)(data[i] | (data[i + 1] << 8));
-                if (type == 0) break;
+                // https://github.com/scummvm/scummvm/blob/master/engines/sci/engine/script.cpp#L390
+                // https://github.com/icefallgames/SCICompanion/blob/master/SCICompanionLib/Src/Compile/CompiledScript.cpp#L226
+                int i = 0;
+                var endOfStringOffset = Helpers.GetUShortBE(data, i);
+                var objectStartOffset = Helpers.GetUShortBE(data, i + 2) * 2 + 4;
+                i = objectStartOffset;
+                while (i < data.Length)
+                {
+                    SectionType type = (SectionType)Helpers.GetUShortBE(data, i);
+                    if (type == SectionType.None) break;
+                    i += 2;
+                }
+            }
+            else
+            {
+                ushort i = 0;
+                while (i < data.Length)
+                {
+                    SectionType type = (SectionType)Helpers.GetUShortBE(data, i);
+                    if (type == SectionType.None) break;
 
-                ushort size = (ushort)((data[i + 2] | (data[i + 3] << 8)) - 4);
-                i += 4;
+                    ushort size = (ushort)(Helpers.GetUShortBE(data, i + 2) - 4);
+                    i += 4;
 
-                Section sec = Section.Create(this, (SectionType)type, data, i, size);
-                Sections.Add(sec);
-                i += size;
+                    Section sec = Section.Create(this, type, data, i, size);
+                    Sections.Add(sec);
+                    i += size;
 
-                if (sec is StringSection)
-                    _strings = (StringSection)sec;
+                    if (sec is StringSection)
+                        _strings = (StringSection)sec;
+                }
             }
 
             foreach (var sec in Sections)
