@@ -1,14 +1,27 @@
 ﻿using SCI_Translator.Scripts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SCI_Translator.Resources
 {
-    public abstract class ResScript : Resource
+    public class ResScript : Resource
     {
-        public abstract Script GetScript(bool translate);
+        private Script _script;
+        private Script _scriptTrans;
+
+        public Script GetScript(bool translate)
+        {
+            if (Package.SeparateHeapResources)
+                return null;
+
+            if (translate)
+            {
+                if (_scriptTrans != null) return _scriptTrans;
+                return _scriptTrans = new Script(this, true);
+            }
+            else
+            {
+                if (_script != null) return _script;
+                return _script = new Script(this, false);
+            }
+        }
     }
 }

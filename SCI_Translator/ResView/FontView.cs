@@ -218,7 +218,7 @@ namespace SCI_Translator.ResView
 
         private void tsbExchange_Click(object sender, EventArgs e)
         {
-            if (spr.Frames.Count < 0x80)
+            if (spr.Frames.Count <= 0x80)
             {
                 for (int i = 0x80; i <= 0xF3; i++)
                 {

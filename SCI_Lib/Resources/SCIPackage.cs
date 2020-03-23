@@ -54,6 +54,20 @@ namespace SCI_Translator.Resources
 
         protected abstract void ReadMap(FileStream fs);
 
+        protected virtual Resource LoadRes(ResType type)
+        {
+            switch (type)
+            {
+                case ResType.Text: return new ResText();
+                case ResType.Vocabulary: return new ResVocab();
+                case ResType.Script: return new ResScript();
+                case ResType.Font: return new ResFont();
+                case ResType.Message: return new ResMessage();
+                default: return new Resource();
+            }
+        }
+
+
         public bool HasTranslate() => Directory.Exists(TranslateDirectory);
 
         private IEnumerable<Script> _scriptsCache;
@@ -80,6 +94,8 @@ namespace SCI_Translator.Resources
         public IEnumerable<ResText> Texts => GetResouces<ResText>();
 
         public IEnumerable<ResScript> Scripts => GetResouces<ResScript>();
+
+        public IEnumerable<ResMessage> Messages => GetResouces<ResMessage>();
 
         public bool SeparateHeapResources { get; set; }
 

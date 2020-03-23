@@ -80,6 +80,12 @@ namespace SCI_Translator.ResView
             PerformLayout();
         }
 
+        public override void FocusRow(int value)
+        {
+            tc.SelectedTab = tabPage1;
+            dgvStrings.CurrentCell = dgvStrings.Rows[value].Cells[0];
+        }
+
         private void FillRow(DataGridViewRow row, StringConst sc)
         {
             string str = sc.GetStringEscape();

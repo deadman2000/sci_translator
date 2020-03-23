@@ -41,17 +41,6 @@ namespace SCI_Translator.Resources.SCI0
             }
         }
 
-        private Resource LoadRes(ResType type)
-        {
-            switch (type)
-            {
-                case ResType.Text: return new ResText();
-                case ResType.Vocabulary: return new ResVocab();
-                case ResType.Font: return new ResFont();
-                default: return new Resource();
-            }
-        }
-
         public override ResourceFileInfo LoadResourceInfo(string resourceFileName, int offset)
         {
             return new ResourceFileInfo0(Path.Combine(GameDirectory, resourceFileName), offset);

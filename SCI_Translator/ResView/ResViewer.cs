@@ -51,6 +51,10 @@ namespace SCI_Translator.ResView
         {
         }
 
+        public virtual void FocusRow(int value)
+        {
+        }
+
         /// <summary> 
         /// Требуется переменная конструктора.
         /// </summary>

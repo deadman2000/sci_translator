@@ -18,6 +18,8 @@ namespace SCI_Translator
         VocabView vocabView;
         MsgView msgView;
 
+        private int? SelectRow;
+
         public FormMain(SCIPackage package)
         {
             _package = package;
@@ -119,6 +121,11 @@ namespace SCI_Translator
             }
 
             _currentViewer.Activate(res, translated);
+            if (SelectRow.HasValue)
+            {
+                _currentViewer.FocusRow(SelectRow.Value);
+                SelectRow = null;
+            }
             _currentViewer.BringToFront();
         }
 
@@ -145,15 +152,29 @@ namespace SCI_Translator
             fmFind.Show();
         }
 
-        public void SelectFile(string fileName)
+        public void SelectFile(string fileName, int rowNum)
         {
+            if (_currentViewer != null && _currentViewer.Resource.FileName == fileName)
+            {
+                _currentViewer.FocusRow(rowNum);
+                return;
+            }
+
             foreach (TreeNode tn in tv.Nodes)
             {
                 foreach (TreeNode tnFile in tn.Nodes)
                 {
                     if (tnFile.Text.Equals(fileName))
                     {
-                        tv.SelectedNode = tnFile;
+                        if (tv.SelectedNode == tnFile)
+                        {
+                            _currentViewer.FocusRow(rowNum);
+                        }
+                        else
+                        {
+                            SelectRow = rowNum;
+                            tv.SelectedNode = tnFile;
+                        }
                         return;
                     }
                 }

@@ -31,6 +31,11 @@ namespace SCI_Translator.ResView
             }
         }
 
+        public override void FocusRow(int value)
+        {
+            dgvText.CurrentCell = dgvText.Rows[value].Cells[0];
+        }
+
         protected override void SaveContent()
         {
             dgvText.CommitEdit(DataGridViewDataErrorContexts.Commit);

@@ -84,19 +84,6 @@ namespace SCI_Translator.Resources.SCI1
             }
         }
 
-        private Resource LoadRes(ResType type)
-        {
-            switch (type)
-            {
-                case ResType.Text: return new ResText();
-                case ResType.Vocabulary: return new ResVocab();
-                case ResType.Script: return new ResScript1();
-                case ResType.Font: return new ResFont();
-                case ResType.Message: return new ResMessage();
-                default: return new Resource();
-            }
-        }
-
         public override ResourceFileInfo LoadResourceInfo(string resourceFileName, int offset)
         {
             return new ResourceFileInfo1(Path.Combine(GameDirectory, resourceFileName), offset);

@@ -7,6 +7,7 @@ using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
 using SCI_Translator.Scripts1_1;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
@@ -48,7 +49,11 @@ namespace SCI_Tools
 
                 Do();
 
-                if (!NoWait) Console.ReadKey();
+                if (!NoWait)
+                {
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                }
             }
 
             protected abstract void Do();
@@ -63,7 +68,7 @@ namespace SCI_Tools
             }
         }
 
-        // compare -d D:\Dos\GAMES\QG_VGA\ -t D:\Dos\GAMES\QG_VGA_RUS\ -d2 D:\Dos\GAMES\QG_EGA\
+        // compare -d D:\Dos\GAMES\QG_VGA\ -t D:\Dos\GAMES\QG_VGA_RUS\ -d2 D:\Dos\GAMES\QG_EGA\ -t2 d:\Dos\Games\QG_EGA_RUS\
         [Command("compare", Description = "Compare two translated games")]
         class CompareTranslates : PackageCommand
         {
@@ -79,6 +84,82 @@ namespace SCI_Tools
             protected override void Do()
             {
                 package2 = SCIPackage.Load(SecondGameDir, SecondTranslateDir);
+
+                Console.WriteLine("Translate gathering...");
+
+                Dictionary<string, string> translates = new Dictionary<string, string>();
+                foreach (var mess in package.Messages)
+                {
+                    var enMess = mess.GetMessages(false);
+                    var ruMess = mess.GetMessages(true);
+                    if (enMess.Count != ruMess.Count)
+                    {
+                        Console.WriteLine($"{mess.FileName} Lines mismatch");
+                        continue;
+                    }
+
+                    for (int i = 0; i < enMess.Count; i++)
+                    {
+                        var en = enMess[i].Text;
+                        var ru = ruMess[i].Text;
+                        if (en.Equals(ru))
+                            continue; // Пропускаем строки без перевода
+
+                        /*if (translates.TryGetValue(en, out var tr) && !tr.Equals(ru))
+                        {
+                            Console.WriteLine($"Multiple tr: {en} {mess.FileName}");
+                            Console.WriteLine("====================");
+                            Console.WriteLine(tr);
+                            Console.WriteLine("====================");
+                            Console.WriteLine(ru);
+                            Console.WriteLine();
+                        }*/
+
+                        translates[en] = ru;
+                    }
+                }
+
+                Console.WriteLine("Translating...");
+
+                foreach(var txt in package2.Texts)
+                {
+                    var enTxt = txt.GetText(false);
+                    var ruTxt = txt.GetText(true);
+
+                    bool hasTranslate = false;
+
+                    for (int i = 0; i < enTxt.Length; i++)
+                    {
+                        var en = enTxt[i];
+
+                        if (translates.TryGetValue(en, out var tr))
+                        {
+                            ruTxt[i] = tr;
+                            hasTranslate = true;
+                        }
+                        else
+                        {
+                            // Пытаемся найти без учета регистра и пробелов по краям
+                            var res = translates.Keys.FirstOrDefault(k => k.Trim().ToLower().Equals(en.ToLower().Trim()));
+                            if (res != null)
+                            {
+                                ruTxt[i] = translates[res].Trim();
+                                hasTranslate = true;
+                                /*Console.WriteLine($"{txt.FileName}");
+                                Console.WriteLine(en);
+                                Console.WriteLine("===============");
+                                Console.WriteLine(res);
+                                Console.WriteLine();*/
+                            }
+                        }
+                    }
+
+                    if (hasTranslate)
+                    {
+                        txt.SetText(ruTxt);
+                        txt.SaveTranslate();
+                    }
+                }
             }
         }
 

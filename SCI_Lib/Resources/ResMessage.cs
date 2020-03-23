@@ -20,7 +20,6 @@ namespace SCI_Translator.Resources
                 stream.Seek(0, SeekOrigin.Begin);
 
                 var ver = stream.ReadUIntBE() / 1000;
-                Console.WriteLine($"Version: {ver}");
 
                 switch (ver)
                 {

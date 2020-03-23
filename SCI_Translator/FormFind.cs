@@ -36,36 +36,66 @@ namespace SCI_Translator
             pattern = tbPattern.Text.ToLower();
 
             foreach (var txt in _package.Texts)
-                FindText(txt);
+                try
+                {
+                    FindText(txt);
+                }
+                catch { }
 
             foreach (var scr in _package.Scripts)
-                FindScript(scr);
+                try
+                {
+                    FindScript(scr);
+                }
+                catch { }
+
+            foreach (var msg in _package.Messages)
+                try
+                {
+                    FindMessage(msg);
+                }
+                catch { }
         }
 
-        void FindText(ResText txt)
+        private void FindText(ResText txt)
         {
             var lines = txt.GetText(_translate);
             for (int i = 0; i < lines.Length; i++)
             {
-                var str = lines[i];
-                if (str.ToLower().Contains(pattern))
-                {
-                    lbResults.Items.Add(new SearchResult(txt.FileName, i, str));
-                }
+                if (IsPass(lines[i]))
+                    AddResult(txt, i, lines[i]);
             }
         }
 
         private void FindScript(ResScript res)
         {
             var script = res.GetScript(_translate);
+            if (script == null) return;
             var sections = script.Get<StringSection>();
             foreach (var sec in sections)
                 for (int ind = 0; ind < sec.Strings.Count; ind++)
                 {
                     StringConst str = sec.Strings[ind];
-                    if (str.Value.ToLower().Contains(pattern))
-                        lbResults.Items.Add(new SearchResult(res.FileName, ind, str.Value));
+                    if (IsPass(str.Value))
+                        AddResult(res, ind, str.Value);
                 }
+        }
+
+        private void FindMessage(ResMessage msg)
+        {
+            var messages = msg.GetMessages(_translate);
+            for (int i = 0; i < messages.Count; i++)
+            {
+                if (IsPass(messages[i].Text))
+                    AddResult(msg, i, messages[i].Text);
+            }
+        }
+
+        private bool IsPass(string txt) => txt.ToLower().Contains(pattern);
+
+        private void AddResult(Resource res, int ind, string txt)
+        {
+            lbResults.Items.Add(new SearchResult(res.FileName, ind, txt));
         }
 
         class SearchResult
@@ -91,7 +121,7 @@ namespace SCI_Translator
             if (lbResults.SelectedItem != null)
             {
                 SearchResult sr = (SearchResult)lbResults.SelectedItem;
-                _main.SelectFile(sr.FileName);
+                _main.SelectFile(sr.FileName, sr.Index);
             }
         }
 
