@@ -5,6 +5,7 @@ using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Builders;
 using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
+using SCI_Translator.Scripts1_1;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -27,7 +28,7 @@ namespace SCI_Tools
             return 1;
         }
 
-        class PackageCommand
+        abstract class PackageCommand
         {
             [Option(Description = "Original game directory", ShortName = "d", LongName = "dir")]
             [Required]
@@ -36,23 +37,29 @@ namespace SCI_Tools
             [Option(Description = "Translated game directory", ShortName = "t", LongName = "trans")]
             public string TranslateDir { get; set; }
 
+            [Option(Description = "Disable read key pause", LongName = "no-wait")]
+            public bool NoWait { get; set; }
+
             protected SCIPackage package;
 
-            protected virtual void OnExecute()
+            protected void OnExecute()
             {
                 package = SCIPackage.Load(GameDir, TranslateDir);
+
+                Do();
+
+                if (!NoWait) Console.ReadKey();
             }
+
+            protected abstract void Do();
         }
 
         // test -d D:\Dos\GAMES\QG_EGA\
         [Command("test", Description = "for testing")]
         class Test : PackageCommand
         {
-            protected override void OnExecute()
+            protected override void Do()
             {
-                base.OnExecute();
-
-                Console.ReadKey();
             }
         }
 
@@ -69,21 +76,14 @@ namespace SCI_Tools
 
             protected SCIPackage package2;
 
-            protected override void OnExecute()
+            protected override void Do()
             {
-                base.OnExecute();
-
                 package2 = SCIPackage.Load(SecondGameDir, SecondTranslateDir);
-
-                Console.ReadKey();
             }
         }
 
-        
-        
-        
-        
-        
+
+
         class Unsorted : PackageCommand // TODO разбить все необходимое на комманды, лишнее удалить
         {
             void CompareNewLines()
@@ -296,6 +296,11 @@ namespace SCI_Tools
                             stream.Write(ReplaceSpaces(s.Value) + "\n\n");
                     }
                 }
+            }
+
+            protected override void Do()
+            {
+                throw new NotImplementedException();
             }
         }
     }

@@ -1,7 +1,9 @@
 ﻿using SCI_Translator.Resources;
 using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace SCI_Translator.Scripts
@@ -10,52 +12,36 @@ namespace SCI_Translator.Scripts
     {
         private Dictionary<ushort, BaseElement> _elements = new Dictionary<ushort, BaseElement>();
         private readonly StringSection _strings;
+        private bool _translated;
 
-        const bool SCI1_1 = false;
-
-        public Script(Resource res, byte[] data)
+        public Script(Resource res, bool translated)
         {
             Resource = res;
-            SourceData = data;
+            _translated = translated;
+            
+            SourceData = res.GetContent(translated);
 
-            if (SCI1_1)
+            ushort i = 0;
+            while (i < SourceData.Length)
             {
-                // https://github.com/scummvm/scummvm/blob/master/engines/sci/engine/script.cpp#L390
-                // https://github.com/icefallgames/SCICompanion/blob/master/SCICompanionLib/Src/Compile/CompiledScript.cpp#L226
-                int i = 0;
-                var endOfStringOffset = Helpers.GetUShortBE(data, i);
-                var objectStartOffset = Helpers.GetUShortBE(data, i + 2) * 2 + 4;
-                i = objectStartOffset;
-                while (i < data.Length)
-                {
-                    SectionType type = (SectionType)Helpers.GetUShortBE(data, i);
-                    if (type == SectionType.None) break;
-                    i += 2;
-                }
-            }
-            else
-            {
-                ushort i = 0;
-                while (i < data.Length)
-                {
-                    SectionType type = (SectionType)Helpers.GetUShortBE(data, i);
-                    if (type == SectionType.None) break;
+                SectionType type = (SectionType)Helpers.GetUShortBE(SourceData, i);
+                if (type == SectionType.None) break;
 
-                    ushort size = (ushort)(Helpers.GetUShortBE(data, i + 2) - 4);
-                    i += 4;
+                ushort size = (ushort)(Helpers.GetUShortBE(SourceData, i + 2) - 4);
+                i += 4;
 
-                    Section sec = Section.Create(this, type, data, i, size);
-                    Sections.Add(sec);
-                    i += size;
+                Section sec = Section.Create(this, type, SourceData, i, size);
+                Sections.Add(sec);
+                i += size;
 
-                    if (sec is StringSection)
-                        _strings = (StringSection)sec;
-                }
+                if (sec is StringSection)
+                    _strings = (StringSection)sec;
             }
 
             foreach (var sec in Sections)
                 sec.SetupByOffset();
         }
+
 
         public void Register(BaseElement el) => _elements[el.Address] = el;
 

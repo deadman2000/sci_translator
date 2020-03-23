@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace SCI_Translator
 {
@@ -34,5 +35,16 @@ namespace SCI_Translator
             return (uint)((fs.ReadByte() << 24) | (fs.ReadByte() << 16) | (fs.ReadByte() << 8) | fs.ReadByte());
         }
 
+        public static string ReadString(this Stream fs)
+        {
+            List<byte> buff = new List<byte>();
+            while (true)
+            {
+                var b = fs.ReadByte();
+                if (b == 0) break;
+                buff.Add((byte)b);
+            }
+            return Helpers.GetString(buff.ToArray());
+        }
     }
 }

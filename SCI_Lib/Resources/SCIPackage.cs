@@ -1,10 +1,8 @@
-﻿using SCI_Translator.Resources;
-using SCI_Translator.Resources.SCI0;
+﻿using SCI_Translator.Resources.SCI0;
 using SCI_Translator.Resources.SCI1;
 using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -49,6 +47,7 @@ namespace SCI_Translator.Resources
             }
 
             Resources = Resources.OrderBy(r => r.Type).ThenBy(r => r.Number).ToList();
+            SeparateHeapResources = Resources.Any(r => r.Type == ResType.Heap);
         }
 
         public abstract ResourceFileInfo LoadResourceInfo(string resourceFileName, int offset);
@@ -81,6 +80,8 @@ namespace SCI_Translator.Resources
         public IEnumerable<ResText> Texts => GetResouces<ResText>();
 
         public IEnumerable<ResScript> Scripts => GetResouces<ResScript>();
+
+        public bool SeparateHeapResources { get; set; }
 
         public IEnumerable<Resource> GetResouces(ResType resType) => Resources.FindAll(r => r.Type == resType);
 

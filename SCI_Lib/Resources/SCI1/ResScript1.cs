@@ -12,12 +12,12 @@ namespace SCI_Translator.Resources.SCI1
             if (translate)
             {
                 if (_scriptTrans != null) return _scriptTrans;
-                return _scriptTrans = new Script(this, GetContent(true));
+                return _scriptTrans = new Script(this, true);
             }
             else
             {
                 if (_script != null) return _script;
-                return _script = new Script(this, GetContent(false));
+                return _script = new Script(this, false);
             }
         }
     }
