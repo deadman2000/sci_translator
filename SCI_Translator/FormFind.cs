@@ -18,16 +18,14 @@ namespace SCI_Translator
     {
         SCIPackage _package;
         FormMain _main;
-        bool _translate;
 
         string pattern;
 
-        public FormFind(FormMain main, SCIPackage package, bool translate)
+        public FormFind(FormMain main, SCIPackage package)
         {
             InitializeComponent();
             _package = package;
             _main = main;
-            _translate = translate;
         }
 
         private void btFind_Click(object sender, EventArgs e)
@@ -59,17 +57,22 @@ namespace SCI_Translator
 
         private void FindText(ResText txt)
         {
-            var lines = txt.GetText(_translate);
+            var lines = txt.GetText(false);
+            var tr = txt.GetText(true);
             for (int i = 0; i < lines.Length; i++)
             {
                 if (IsPass(lines[i]))
                     AddResult(txt, i, lines[i]);
+                else if (IsPass(tr[i]))
+                    AddResult(txt, i, tr[i]);
             }
         }
 
         private void FindScript(ResScript res)
         {
-            var script = res.GetScript(_translate);
+            var script = res.GetScript(false);
+            var tr = res.GetScript(true);
+
             if (script == null) return;
             var sections = script.Get<StringSection>();
             foreach (var sec in sections)
@@ -83,11 +86,14 @@ namespace SCI_Translator
 
         private void FindMessage(ResMessage msg)
         {
-            var messages = msg.GetMessages(_translate);
+            var messages = msg.GetMessages(false);
+            var tr= msg.GetMessages(true);
             for (int i = 0; i < messages.Count; i++)
             {
                 if (IsPass(messages[i].Text))
                     AddResult(msg, i, messages[i].Text);
+                else if (IsPass(tr[i].Text))
+                    AddResult(msg, i, tr[i].Text);
             }
         }
 
@@ -125,5 +131,14 @@ namespace SCI_Translator
             }
         }
 
+        private void FormFind_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void FormFind_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Close();
+        }
     }
 }

@@ -65,6 +65,7 @@ namespace SCI_Translator.Resources
             public override string ToString() => $"noun: {Noun} verb:{Verb} cond:{Cond} seq:{Seq} talker:{Talker} unknown:{Unknown} text: {Text}";
         }
 
+
         private List<MessageRecord> ReadV3(Stream stream)
         {
             ushort end = stream.ReadUShortBE();
@@ -74,6 +75,10 @@ namespace SCI_Translator.Resources
             for (int i = 0; i < count; i++)
                 records.Add(new RecordV3(stream));
             return records;
+        }
+
+        public void SetMessages(List<MessageRecord> tr)
+        {
         }
     }
 }

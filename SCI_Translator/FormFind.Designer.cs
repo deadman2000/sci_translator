@@ -37,9 +37,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 13);
+            this.label1.Size = new System.Drawing.Size(39, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Text:";
             // 
@@ -47,17 +48,19 @@
             // 
             this.tbPattern.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbPattern.Location = new System.Drawing.Point(12, 25);
+            this.tbPattern.Location = new System.Drawing.Point(16, 31);
+            this.tbPattern.Margin = new System.Windows.Forms.Padding(4);
             this.tbPattern.Name = "tbPattern";
-            this.tbPattern.Size = new System.Drawing.Size(336, 20);
+            this.tbPattern.Size = new System.Drawing.Size(532, 22);
             this.tbPattern.TabIndex = 1;
             // 
             // btFind
             // 
             this.btFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btFind.Location = new System.Drawing.Point(354, 25);
+            this.btFind.Location = new System.Drawing.Point(557, 31);
+            this.btFind.Margin = new System.Windows.Forms.Padding(4);
             this.btFind.Name = "btFind";
-            this.btFind.Size = new System.Drawing.Size(75, 23);
+            this.btFind.Size = new System.Drawing.Size(100, 28);
             this.btFind.TabIndex = 2;
             this.btFind.Text = "Find";
             this.btFind.UseVisualStyleBackColor = true;
@@ -69,25 +72,30 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbResults.FormattingEnabled = true;
-            this.lbResults.Location = new System.Drawing.Point(12, 54);
+            this.lbResults.ItemHeight = 16;
+            this.lbResults.Location = new System.Drawing.Point(16, 66);
+            this.lbResults.Margin = new System.Windows.Forms.Padding(4);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(417, 277);
+            this.lbResults.Size = new System.Drawing.Size(640, 580);
             this.lbResults.TabIndex = 3;
             this.lbResults.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbResults_MouseDoubleClick);
             // 
             // FormFind
             // 
             this.AcceptButton = this.btFind;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 356);
+            this.ClientSize = new System.Drawing.Size(673, 684);
             this.Controls.Add(this.lbResults);
             this.Controls.Add(this.btFind);
             this.Controls.Add(this.tbPattern);
             this.Controls.Add(this.label1);
+            this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormFind";
             this.ShowIcon = false;
             this.Text = "Search";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormFind_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

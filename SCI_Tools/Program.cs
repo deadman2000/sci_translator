@@ -88,6 +88,7 @@ namespace SCI_Tools
                 Console.WriteLine("Translate gathering...");
 
                 Dictionary<string, string> translates = new Dictionary<string, string>();
+                Dictionary<string, string> translatesSimple = new Dictionary<string, string>();
                 foreach (var mess in package.Messages)
                 {
                     var enMess = mess.GetMessages(false);
@@ -116,12 +117,13 @@ namespace SCI_Tools
                         }*/
 
                         translates[en] = ru;
+                        translatesSimple[Simple(en)] = ru;
                     }
                 }
 
                 Console.WriteLine("Translating...");
 
-                foreach(var txt in package2.Texts)
+                foreach (var txt in package2.Texts)
                 {
                     var enTxt = txt.GetText(false);
                     var ruTxt = txt.GetText(true);
@@ -140,10 +142,9 @@ namespace SCI_Tools
                         else
                         {
                             // Пытаемся найти без учета регистра и пробелов по краям
-                            var res = translates.Keys.FirstOrDefault(k => k.Trim().ToLower().Equals(en.ToLower().Trim()));
-                            if (res != null)
+                            if (translatesSimple.TryGetValue(Simple(en), out tr))
                             {
-                                ruTxt[i] = translates[res].Trim();
+                                ruTxt[i] = tr;
                                 hasTranslate = true;
                                 /*Console.WriteLine($"{txt.FileName}");
                                 Console.WriteLine(en);
@@ -157,9 +158,21 @@ namespace SCI_Tools
                     if (hasTranslate)
                     {
                         txt.SetText(ruTxt);
-                        txt.SaveTranslate();
                     }
                 }
+            }
+
+            // Удаляет лишние пробелы, приводит к нижнему регистру
+            private string Simple(string str)
+            {
+                int oldLen;
+                do
+                {
+                    oldLen = str.Length;
+                    str = str.Replace("  ", " ");
+                }
+                while (oldLen != str.Length);
+                return str.ToLower();
             }
         }
 

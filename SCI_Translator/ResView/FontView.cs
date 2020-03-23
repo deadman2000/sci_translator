@@ -292,7 +292,7 @@ namespace SCI_Translator.ResView
             lvChars.Items.Clear();
             ilChars.Images.Clear();
 
-            for (byte i = 0; i < spr.Frames.Count; i++)
+            for (int i = 0; i < spr.Frames.Count; i++)
             {
                 string name = String.Format("0x{0:X2} {1}", i, Helpers.Chars866[i]);
                 tscbChar.Items.Add(name);

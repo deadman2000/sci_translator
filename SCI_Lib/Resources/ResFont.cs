@@ -1,4 +1,6 @@
 ﻿using SCI_Translator.Pictures;
+using System;
+using System.IO;
 
 namespace SCI_Translator.Resources
 {
@@ -9,52 +11,64 @@ namespace SCI_Translator.Resources
             byte[] data = GetContent(translated);
             if (data == null) return null;
 
-            ushort charCount = (ushort)(data[1] * 256 + data[2]);
-            var spr = new SCIFont();
-            spr.FontHeight = (ushort)(data[3] * 256 + data[4]);
-
-            byte bit;
-            byte c;
-
-            for (byte i = 0; i < charCount; i++)
+            using (var stream = new MemoryStream(data.Length))
             {
-                ushort offset = (ushort)(data[6 + i * 2] + data[6 + i * 2 + 1] * 256);
-                byte w = data[offset];
-                byte h = data[offset + 1];
+                stream.Write(data, 0, data.Length);
+                stream.Seek(0, SeekOrigin.Begin);
 
-                offset += 2;
+                var zero = stream.ReadUShortBE();
+                if (zero != 0) throw new Exception("Wrong font format");
 
-                SpriteFrame frm = new SpriteFrame(w, h);
-                for (int y = 0; y < h; y++)
+                var charCount = stream.ReadUShortBE();
+                var spr = new SCIFont();
+                spr.FontHeight = stream.ReadUShortBE();
+
+                ushort[] offsets = new ushort[charCount];
+                for (int i = 0; i < charCount; i++)
+                    offsets[i] = stream.ReadUShortBE();
+
+                byte bit;
+                byte c;
+
+                for (int i = 0; i < charCount; i++)
                 {
-                    bit = 0;
+                    stream.Seek(offsets[i], SeekOrigin.Begin);
 
-                    for (byte x = 0; x < w; x++)
+                    byte w = (byte)stream.ReadByte();
+                    byte h = (byte)stream.ReadByte();
+
+                    SpriteFrame frm = new SpriteFrame(w, h);
+                    var val = stream.ReadByte();
+                    for (int y = 0; y < h; y++)
                     {
-                        if ((data[offset] & (1 << (7 - bit))) > 0)
-                            c = 1;
-                        else
-                            c = 0;
+                        bit = 0;
 
-                        frm[x, y] = c;
-
-                        bit++;
-                        if (bit == 8)
+                        for (byte x = 0; x < w; x++)
                         {
-                            bit = 0;
-                            offset++;
+                            if ((val & (1 << (7 - bit))) > 0)
+                                c = 1;
+                            else
+                                c = 0;
+
+                            frm[x, y] = c;
+
+                            bit++;
+                            if (bit == 8)
+                            {
+                                bit = 0;
+                                val = stream.ReadByte();
+                            }
                         }
+
+                        if (bit != 0)
+                            val = stream.ReadByte();
                     }
 
-                    if (bit != 0)
-                        offset++;
+                    spr.Frames.Add(frm);
                 }
 
-                spr.Frames.Add(frm);
-
+                return spr;
             }
-
-            return spr;
         }
 
         public void SetFont(SCIFont spr)

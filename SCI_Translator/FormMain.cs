@@ -137,7 +137,7 @@ namespace SCI_Translator
 
         private void tsbTranslated_CheckedChanged(object sender, EventArgs e)
         {
-            if (_currentViewer != null)
+            if (_currentViewer != null && _currentViewer.DiffTranslate)
             {
                 _currentViewer.Save();
                 ShowResource(_currentViewer.Resource, tsbTranslated.Checked);
@@ -148,7 +148,7 @@ namespace SCI_Translator
 
         private void tsbFind_Click(object sender, EventArgs e)
         {
-            FormFind fmFind = new FormFind(this, _package, tsbTranslated.Checked);
+            FormFind fmFind = new FormFind(this, _package);
             fmFind.Show();
         }
 

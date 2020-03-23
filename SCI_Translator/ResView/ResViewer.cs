@@ -26,7 +26,7 @@ namespace SCI_Translator.ResView
 
         protected virtual void SaveContent()
         {
-            _res.SaveTranslate();
+            //_res.SaveTranslate();
         }
 
         public ResViewer()
@@ -34,6 +34,12 @@ namespace SCI_Translator.ResView
             InitializeComponent();
             Dock = DockStyle.Fill;
         }
+
+        /// <summary>
+        /// true - форма показывает только один вариант (исходный/перевод)
+        /// false - на форме оригинал и перевод одновременно
+        /// </summary>
+        public virtual bool DiffTranslate => true;
 
         public void Activate(Resource res, bool translated)
         {

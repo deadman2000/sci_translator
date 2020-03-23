@@ -23,5 +23,5 @@ Patching 213.tex failed - resource type mismatch
 
 QG
 Поддержка скриптов
-Поддержка шрифтов
 Проверка на "похожий" текст
+Сохранение msg формата
