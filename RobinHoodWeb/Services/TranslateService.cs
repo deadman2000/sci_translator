@@ -106,6 +106,8 @@ namespace RobinHoodWeb.Services
                 //if (s.YTrans == null) Console.WriteLine($"No YTrans: {s.En}");
             });
 
+            Builder.LoadLinks();
+
             if (Builder.Links != null)
             {
                 AllStrings.ForEach(s =>
@@ -128,14 +130,15 @@ namespace RobinHoodWeb.Services
         {
             if (Builder.IsBuild) return;
 
-            if (await Builder.Build() || !Builder.Links.Any())
-            {
-                //await Builder.PrepareLinks();
+            var updated = await Builder.Build();
 
+            if (updated || !Builder.LinksCreated)
+            {
+                await Builder.PrepareLinks();
                 UpdateStrings();
-                PackageZIP();
             }
-            else if (!File.Exists(TRANSLATED_ZIP_PATH))
+
+            if (updated || !File.Exists(TRANSLATED_ZIP_PATH))
             {
                 PackageZIP();
             }

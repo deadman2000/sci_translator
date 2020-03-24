@@ -1,6 +1,7 @@
-﻿В файле patch.bat заменить login и password на свои логин и пароль с notabenoid.org
-
-Запускать patch.bat
+﻿Подставить свой логин и пароль от Notabenoid:
+```
+Notabenoid_Patch.exe -nl login -np password -d Conquest
+```
 
 Перевод применяется к игре в папке Conquest\TRANSLATE\
 

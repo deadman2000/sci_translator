@@ -34,6 +34,7 @@ namespace Notabenoid_Patch
 
             var builder = new TranslateBuilder(NotabenoidLogin, NotabenoidPassword, GameDir, TranslateDir);
             await builder.Build();
+            //await builder.PrepareLinks();
 
             Console.WriteLine("Completed");
             Console.ReadKey();
