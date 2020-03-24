@@ -9,5 +9,7 @@
         public string NotabenoidLogin { get; set; }
 
         public string NotabenoidPassword { get; set; }
+
+        public string BookId { get; set; }
     }
 }

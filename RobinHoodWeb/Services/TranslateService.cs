@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
-using Notabenoid_Patch;
+using Notabenoid;
 using RobinHoodWeb.Model;
 using SCI_Translator.Resources;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -28,7 +27,7 @@ namespace RobinHoodWeb.Services
 
         public TranslateService(IOptions<TranslateOptions> op)
         {
-            Builder = new TranslateBuilder(op.Value.NotabenoidLogin, op.Value.NotabenoidPassword, op.Value.GameDir, op.Value.TranslateDir);
+            Builder = new TranslateBuilder(op.Value.NotabenoidLogin, op.Value.NotabenoidPassword, op.Value.BookId, op.Value.GameDir, op.Value.TranslateDir);
             UpdateDate = UpdateCreateDate();
             UpdateStrings();
         }
@@ -106,16 +105,10 @@ namespace RobinHoodWeb.Services
                 //if (s.YTrans == null) Console.WriteLine($"No YTrans: {s.En}");
             });
 
-            Builder.LoadLinks();
-
-            if (Builder.Links != null)
+            AllStrings.ForEach(s =>
             {
-                AllStrings.ForEach(s =>
-                {
-                    if (Builder.Links.TryGetValue(s.Resource.ToLower(), out var lines) && lines.TryGetValue(s.En, out var link))
-                        s.Link = link;
-                });
-            }
+                s.Link = Builder.Book.GetLink(s.Resource, s.En);
+            });
         }
 
         private void LoadYTranslate()
@@ -132,11 +125,8 @@ namespace RobinHoodWeb.Services
 
             var updated = await Builder.Build();
 
-            if (updated || !Builder.LinksCreated)
-            {
-                await Builder.PrepareLinks();
+            if (updated)
                 UpdateStrings();
-            }
 
             if (updated || !File.Exists(TRANSLATED_ZIP_PATH))
             {

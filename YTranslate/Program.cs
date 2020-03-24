@@ -1,11 +1,12 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using Newtonsoft.Json;
-using Notabenoid_Patch;
+using Notabenoid;
 using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 using SCI_Translator.Resources;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,16 +21,24 @@ namespace YTranslate
             => CommandLineApplication.Execute<Program>(args);
 
         [Option(Description = "Game path", ShortName = "d")]
+        [Required]
         public string GameDir { get; set; }
 
         [Option(Description = "Key for Yandex Transkate", ShortName = "k")]
+        [Required]
         public string YandexApiKey { get; set; }
 
         [Option(Description = "Login for notabenoid", ShortName = "nl")]
+        [Required]
         public string NotabenoidLogin { get; set; }
 
         [Option(Description = "Password for notabenoid", ShortName = "np")]
+        [Required]
         public string NotabenoidPassword { get; set; }
+
+        [Option(Description = "Book ID", ShortName = "b")]
+        [Required]
+        public string BookId { get; set; }
 
         private RestClient rest;
 
@@ -63,8 +72,8 @@ namespace YTranslate
 
         private async Task OnExecute()
         {
-            var builder = new TranslateBuilder(NotabenoidLogin, NotabenoidPassword, GameDir);
-            var dict = await builder.GetDict();
+            var book = new NbBook(NotabenoidLogin, NotabenoidPassword, BookId);
+            var dict = await book.GetDict();
             glossary = new GlossaryConfig
             {
                 GlossaryData = new GlossaryData

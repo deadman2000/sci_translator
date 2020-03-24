@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Notabenoid_Patch\Notabenoid_Patch.csproj" />
+    <ProjectReference Include="..\Notabenoid\Notabenoid.csproj" />
     <ProjectReference Include="..\SCI_Lib\SCI_Lib.csproj" />
     <ProjectReference Include="..\YTranslate\YTranslate.csproj" />
   </ItemGroup>

@@ -2,23 +2,21 @@
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Io;
-using SCI_Translator;
 using SCI_Translator.Resources;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Notabenoid
 {
-    internal class Program
+    internal class ProgramLegacy
     {
         private static string GAME_DIR = @"..\..\..\..\Conquest\";
         private static string Login;
         private static string Password;
         private const string BOOK_URL = "http://notabenoid.org/book/77921/";
 
-        private static void Main(string[] args)
+        /*private static void Main(string[] args)
         {
             Login = args[0];
             Password = args[1];
@@ -31,7 +29,7 @@ namespace Notabenoid
 
             Console.WriteLine("Completed");
             Console.ReadKey();
-        }
+        }*/
 
         private static async Task<IBrowsingContext> CreateContext()
         {
@@ -52,84 +50,6 @@ namespace Notabenoid
             }
 
             return context;
-        }
-
-        private static async Task Test()
-        {
-            var context = await CreateContext();
-
-            {
-                var url = "http://notabenoid.org/book/77921/453699/";
-                var document = await context.OpenAsync(url);
-
-                SCIPackage package = SCIPackage.Load(GAME_DIR);
-                var resources = package.Texts;
-
-                var res = resources.First(r => r.ToString().ToLower().Equals("0.tex"));
-
-                Dictionary<string, string> enIds = new Dictionary<string, string>();
-
-                foreach (var e in document.QuerySelectorAll("td.o p.text"))
-                {
-                    var id = ((IHtmlElement)e.Parent.Parent.Parent).Id.TrimStart('o');
-                    var en = e.Text();
-                    enIds[en] = id;
-
-                    var ruEl = document.QuerySelector($"tr#o{id} td.t p.text");
-                    var ru = ruEl?.Text() ?? "null";
-
-                    Console.WriteLine($"{id} - {en} - {ru}");
-                }
-
-                Console.WriteLine();
-                Console.WriteLine("Checking...");
-                var lines = res.GetText(false);
-                foreach (var l in lines)
-                {
-                    var t = l.Trim();
-                    if (t.Length == 0) continue;
-
-                    if (!enIds.TryGetValue(t, out string id))
-                    {
-                        Console.WriteLine($"Not found for {l}");
-                    }
-                }
-            }
-        }
-
-        private static async Task Test2()
-        {
-            var context = await CreateContext();
-            string url = "http://notabenoid.org/book/77921/453789";
-
-            var document = await context.OpenAsync(url);
-
-            while (true)
-            {
-                foreach (var td in document.QuerySelectorAll("td.o")) // Ячейки с оригинальным текстом
-                {
-                    var id = ((IHtmlElement)td.Parent).Id;
-                    var enEl = td.QuerySelector("p.text");
-                    var link = td.QuerySelector("a.ord").GetAttribute("href");
-
-                    var ruEl = document.QuerySelectorAll($"tr#{id} td.t p.text").LastOrDefault();
-                    if (ruEl == null)
-                    {
-                        //translates[en] = null;
-                        continue;
-                    }
-
-                    var en = enEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
-                    var ru = ruEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
-                    Console.WriteLine($"{en}: {ru}  {link}");
-                }
-
-                var a = document.QuerySelector("#pages-bottom p.n a") as IHtmlAnchorElement;
-                if (a == null)
-                    break;
-
-                document = await context.OpenAsync(a.Href);
-            }
         }
 
         /*private static async Task UploadPart(IBrowsingContext context, Resource r)
