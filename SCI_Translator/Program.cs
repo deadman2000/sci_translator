@@ -1,7 +1,6 @@
-﻿using SCI_Translator.Resources;
+﻿using Microsoft.Win32;
+using SCI_Translator.Resources;
 using System;
-using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace SCI_Translator
@@ -14,15 +13,37 @@ namespace SCI_Translator
         [STAThread]
         private static void Main(string[] args)
         {
-            string dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (args.Length > 0) dir = args[0];
-            string translate = null;
-            if (args.Length > 1) translate = args[1];
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            string gameDir, translateDir;
+
+            if (args.Length == 0)
+            {
+                var form = new FormSelectDir();
+
+                RegistryKey key = Registry.CurrentUser.CreateSubKey("SCI_Translator");
+                form.GameDir = key.GetValue("LastGameDir")?.ToString();
+                form.TranslateDir = key.GetValue("LastTranslateDir")?.ToString();
+                key.Close();
+
+
+                if (form.ShowDialog() != DialogResult.OK) return;
+
+                gameDir = form.GameDir;
+                translateDir = form.TranslateDir;
+                if (translateDir.Length == 0) translateDir = null;
+            }
+            else
+            {
+                gameDir = args[0];
+                translateDir = args.Length > 1 ? args[1] : null;
+            }
 
             SCIPackage package;
             try
             {
-                package = SCIPackage.Load(dir, translate);
+                package = SCIPackage.Load(gameDir, translateDir);
             }
             catch (Exception ex)
             {
@@ -30,8 +51,6 @@ namespace SCI_Translator
                 return;
             }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormMain(package));
         }
     }

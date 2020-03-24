@@ -55,6 +55,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSelectDir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelectDir.Designer.cs">
+      <DependentUpon>FormSelectDir.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageEditor\BaseInstrument.cs" />
     <Compile Include="ImageEditor\EditAction.cs" />
     <Compile Include="ImageEditor\InstrPencil.cs" />
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelectDir.resx">
+      <DependentUpon>FormSelectDir.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImageEditor\NewSizeDialog.resx">
       <DependentUpon>NewSizeDialog.cs</DependentUpon>
