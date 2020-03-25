@@ -14,7 +14,7 @@ namespace Notabenoid
         private static string GAME_DIR = @"..\..\..\..\Conquest\";
         private static string Login;
         private static string Password;
-        private const string BOOK_URL = "http://notabenoid.org/book/77921/";
+        private const string BOOK_URL = "http://notabenoid.org/book/0/";
 
         /*private static void Main(string[] args)
         {
@@ -51,53 +51,6 @@ namespace Notabenoid
 
             return context;
         }
-
-        /*private static async Task UploadPart(IBrowsingContext context, Resource r)
-        {
-            var document = await context.OpenAsync(BOOK_URL);
-
-            var form = document.CreateElement<IHtmlFormElement>();
-            form.Method = "POST";
-            form.Action = "0/edit";
-            document.Body.AppendElement(form);
-
-            foreach (var n in new[] { "Chapter[title]", "Chapter[status]" })
-            {
-                var input = document.CreateElement("input") as IHtmlInputElement;
-                input.Name = n;
-                form.AppendElement(input);
-            }
-
-            var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
-                { "Chapter[title]", r.ToString() },
-                { "Chapter[status]", "0" }
-            });
-
-            if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                Console.WriteLine(resultDocument.StatusCode);
-            }
-
-            document = await context.OpenAsync(BOOK_URL);
-
-            var a = document.QuerySelectorAll("td.t a").First(e => e.Text().Equals(r.ToString())) as IHtmlAnchorElement;
-            if (a == null)
-                throw new Exception($"Part {r} create error");
-
-            //a.Href + "/import"
-        }
-
-        private static async Task UploadOriginal()
-        {
-            var context = await CreateContext();
-
-            SCIPackage package = new SCIPackage(GAME_DIR);
-            var resources = package.Resources.FindAll(r => r.Type == ResType.Text).SelectMany(r => r.Resources);
-
-            var res = resources.First(r => r.ToString().Equals("11.tex"));
-
-            await UploadPart(context, res);
-        }*/
 
         private static async Task ImportTranslate()
         {

@@ -3,10 +3,12 @@ using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Io;
 using Newtonsoft.Json;
+using SCI_Translator.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Notabenoid
@@ -73,7 +75,7 @@ namespace Notabenoid
             foreach (IHtmlAnchorElement a in rows)
             {
                 var id = (a.Parent.Parent as IHtmlElement).Id;
-                var changed = (document.QuerySelector($"tr#{id} td:nth-child(3) span") as IHtmlElement).Title;
+                var changed = (document.QuerySelector($"tr#{id} td:nth-child(3) span") as IHtmlElement)?.Title;
                 var name = a.Text.ToUpper();
 
                 volumes.Add(new NbVolume
@@ -233,6 +235,233 @@ namespace Notabenoid
         private string Escape(string str)
         {
             return str.Replace("\r", "\\r").Replace("\n", "\\n");
+        }
+
+        #endregion
+
+        #region Upload
+
+        class ResStrings
+        {
+            public Resource Resource;
+            public string[] En;
+            public string[] Tr;
+            public string Url;
+        }
+
+
+        /// <summary>
+        /// Загружает исходный текст с переводом в кингу
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
+        public async Task Upload(SCIPackage package)
+        {
+            await CreateContext();
+
+            await ReadVolumes();
+
+            var document = await context.OpenAsync(_bookUrl);
+
+            Console.WriteLine("Getting strings");
+            var resources = package.Texts.Cast<Resource>()
+                .Union(package.Scripts.Cast<Resource>())
+                .Union(package.Messages.Cast<Resource>());
+
+            List<ResStrings> resStrings = new List<ResStrings>();
+            foreach (var res in resources)
+            {
+                var en = res.GetStrings(false);
+                if (en == null || en.Length == 0) continue;
+                if (!en.Any(s => s.Length > 0)) continue; // Full empty resource
+
+                var tr = res.GetStrings(true);
+                resStrings.Add(new ResStrings { Resource = res, En = en, Tr = tr });
+            }
+
+            resStrings = resStrings.OrderBy(r => r.Resource.Type)
+                                   .ThenBy(r => r.Resource.Number)
+                                   .ToList();
+
+            resStrings = resStrings.Take(10).ToList(); // DEBUG!!
+
+            Console.WriteLine($"Create {resStrings.Count} volumes");
+            foreach (var res in resStrings)
+            {
+                var vol = Volumes.FirstOrDefault(v => v.Name.Equals(res.Resource.FileName, StringComparison.OrdinalIgnoreCase));
+                if (vol != null)
+                    res.Url = vol.URL;
+                else
+                    res.Url = await CreateVolume(document, res.Resource.FileName);
+            }
+
+            var tasks = resStrings
+                .Select(r => UploadRes(r))
+                .ToArray();
+            await Task.WhenAll(tasks);
+        }
+
+        /// <summary>
+        /// Создает раздел в книге
+        /// </summary>
+        /// <param name="volumeName"></param>
+        /// <returns>Ссылка на новый раздел</returns>
+        private async Task<string> CreateVolume(IDocument document, string volumeName)
+        {
+            Console.WriteLine($"Create volume {volumeName}");
+
+            var form = document.CreateElement<IHtmlFormElement>();
+            form.Method = "POST";
+            form.Action = "0/edit";
+            document.Body.AppendElement(form);
+
+            foreach (var n in new[] { "Chapter[title]", "Chapter[status]" })
+            {
+                var input = document.CreateElement("input") as IHtmlInputElement;
+                input.Name = n;
+                form.AppendElement(input);
+            }
+
+            var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
+                { "Chapter[title]", volumeName },
+                { "Chapter[status]", "0" }
+            });
+
+            if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                Console.WriteLine(resultDocument.StatusCode);
+            }
+
+            document = await context.OpenAsync(_bookUrl);
+
+            var a = document.QuerySelectorAll("td.t>a").First(e => e.Text().Equals(volumeName)) as IHtmlAnchorElement;
+            if (a == null)
+                throw new Exception($"Part {volumeName} create error");
+
+            return a.Href;
+        }
+
+        private async Task UploadRes(ResStrings r)
+        {
+            Console.WriteLine($"Upload strings for {r.Resource.FileName}");
+
+            var document = await context.OpenAsync(r.Url);
+
+            var form = document.CreateElement<IHtmlFormElement>();
+            form.Method = "POST";
+            form.Action = r.Url + "/import_text_save";
+            document.Body.AppendElement(form);
+
+            var added = new HashSet<string>();
+
+            int i = 0;
+            foreach (var en in r.En)
+            {
+                if (added.Contains(en)) continue; // Пропускаем повторяющиеся строки в главе
+                added.Add(en);
+
+                var input = document.CreateElement("input") as IHtmlInputElement;
+                input.Name = $"t[txt][{i}]";
+                input.Value = ReplaceSpaces(en);
+                form.AppendElement(input);
+                i++;
+            }
+
+            var resultDocument = await form.SubmitAsync();
+
+            if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+                Console.WriteLine($"{document.Url} {resultDocument.StatusCode}");
+        }
+
+        /*private async Task ApplyTranslate(ResStrings r)
+        {
+            var document = await context.OpenAsync(r.Url);
+
+            Dictionary<string, string> enIds = new Dictionary<string, string>();
+
+            while (true)
+            {
+                foreach (var e in document.QuerySelectorAll("td.o p.text"))
+                {
+                    var id = ((IHtmlElement)e.Parent.Parent.Parent).Id.TrimStart('o');
+
+                    var ruEl = document.QuerySelector($"tr#o{id} td.t p.text");
+                    if (ruEl != null)
+                        continue; // Skipping translated
+
+                    enIds[e.Text()] = id;
+                }
+
+                var a = document.QuerySelector("#pages-bottom p.n a") as IHtmlAnchorElement;
+                if (a == null)
+                    break;
+
+                document = await context.OpenAsync(a.Href);
+            }
+
+            foreach (var kv in translate)
+            {
+                if (!enIds.TryGetValue(kv.Key, out string id))
+                {
+                    Console.WriteLine($"Id not found {kv}");
+                    continue;
+                }
+
+                var ruEl = document.QuerySelector($"tr#o{id} td.t p.text");
+                if (ruEl != null)
+                    continue; // Skipping translated
+
+                while (true)
+                {
+                    var form = document.CreateElement<IHtmlFormElement>();
+                    form.Method = "POST";
+                    form.Action = id + "/translate";
+                    document.Body.AppendElement(form);
+
+                    var input = document.CreateElement("input") as IHtmlInputElement;
+                    input.Name = "Translation[body]";
+                    form.AppendElement(input);
+
+                    try
+                    {
+                        var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
+                            { "Translation[body]", kv.Value },
+                        });
+                        if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+                        {
+                            Console.WriteLine(resultDocument.StatusCode);
+                            continue;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                    break;
+                }
+            }
+        }*/
+
+        private string ReplaceSpaces(string str)
+        {
+            var chars = str.ToCharArray();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (chars[i] == ' ')
+                    chars[i] = '_';
+                else
+                    break;
+            }
+
+            for (int i = chars.Length - 1; i >= 0; i--)
+            {
+                if (chars[i] == ' ')
+                    chars[i] = '_';
+                else
+                    break;
+            }
+
+            return new string(chars);
         }
 
         #endregion

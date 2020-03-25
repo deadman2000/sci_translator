@@ -37,6 +37,11 @@ namespace SCI_Translator.Resources
             return records;
         }
 
+        public override string[] GetStrings(bool translate)
+        {
+            return GetMessages(translate).Select(m => m.Text).ToArray();
+        }
+
         class RecordV3 : MessageRecord
         {
             public byte Noun { get; set; }

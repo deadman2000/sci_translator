@@ -13,7 +13,7 @@ namespace SCI_Tools
         {
             protected override async Task Do()
             {
-                NbBook book = new NbBook("dead_man", "***", "77921");
+                NbBook book = new NbBook("dead_man", "***", "0");
                 book.LoadLinks(@"D:\Projects\SCI_Translator\RobinHoodWeb\links.json");
 
                 foreach (var res in package.Texts)

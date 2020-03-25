@@ -7,7 +7,8 @@ namespace SCI_Tools
         typeof(CompareTranslates),
         typeof(Test),
         typeof(NotaPatch),
-        typeof(NotaLinks)
+        typeof(NotaLinks),
+        typeof(NotaUpload)
     )]
     partial class Program
     {

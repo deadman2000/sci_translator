@@ -1,4 +1,5 @@
 ﻿using SCI_Translator.Decompression;
+using System;
 using System.IO;
 
 namespace SCI_Translator.Resources
@@ -100,6 +101,11 @@ namespace SCI_Translator.Resources
                 fs.WriteByte(0);
                 fs.Write(data, 0, data.Length);
             }
+        }
+
+        public virtual string[] GetStrings(bool translate)
+        {
+            return null;
         }
     }
 }

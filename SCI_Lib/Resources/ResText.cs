@@ -38,5 +38,10 @@ namespace SCI_Translator.Resources
 
             SaveTranslate(bb.GetArray());
         }
+
+        public override string[] GetStrings(bool translate)
+        {
+            return GetText(translate);
+        }
     }
 }

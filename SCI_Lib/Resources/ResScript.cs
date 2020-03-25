@@ -1,4 +1,6 @@
-﻿using SCI_Translator.Scripts;
+﻿
+using SCI_Translator.Scripts;
+using System.Linq;
 
 namespace SCI_Translator.Resources
 {
@@ -22,6 +24,11 @@ namespace SCI_Translator.Resources
                 if (_script != null) return _script;
                 return _script = new Script(this, false);
             }
+        }
+
+        public override string[] GetStrings(bool translate)
+        {
+            return GetScript(translate)?.AllStrings.Select(s => s.Value).ToArray();
         }
     }
 }

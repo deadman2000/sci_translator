@@ -1,14 +1,16 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using Notabenoid;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SCI_Tools
 {
-    // nota_links -nl dead_man -np **** -b 0
-    [Command("nota_links", Description = "Collect and save links from notabenoid.org to file")]
-    class NotaLinks
+    // nota_upload -d D:\Dos\GAMES\QG_VGA\ -t D:\Dos\GAMES\QG_VGA_RUS\ -nl dead_man -np **** -b 0
+    [Command("nota_upload", Description = "Upload texts from source and translated games to notabenoid.org")]
+    class NotaUpload : PackageCommand
     {
         [Option(Description = "Login for notabenoid", ShortName = "nl")]
         [Required]
@@ -22,16 +24,10 @@ namespace SCI_Tools
         [Required]
         public string BookId { get; set; }
 
-        [Option(Description = "Output file (default links.json)", ShortName = "o")]
-        public string Output { get; set; } = "links.json";
-
-        protected async Task OnExecute()
+        protected override async Task Do()
         {
             NbBook book = new NbBook(NotabenoidLogin, NotabenoidPassword, BookId);
-            await book.GatheringLinks(Output);
-
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            await book.Upload(package);
         }
     }
 }
