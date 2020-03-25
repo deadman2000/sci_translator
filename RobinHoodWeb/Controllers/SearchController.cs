@@ -32,8 +32,9 @@ namespace RobinHoodWeb.Controllers
                 .Take(100)
                 .Select(s=> new {
                     res = s.Resource,
-                    en_text = AddSpan(s.En, q),
-                    ru_text = AddSpan(s.Ru, q),
+                    s.En,
+                    en_html = AddSpan(s.En, q),
+                    ru_html = AddSpan(s.Ru, q),
                     s.Link,
                     s.YTrans
                 }));

@@ -147,5 +147,11 @@ namespace SCI_Translator.Resources
             return GetResouce<ResVocab>(997).GetVocabNames();
         }
 
+        public IEnumerable<Resource> GetTextResources()
+        {
+            return GetResouces(ResType.Text)
+                .Union(GetResouces(ResType.Script))
+                .Union(GetResouces(ResType.Message));
+        }
     }
 }

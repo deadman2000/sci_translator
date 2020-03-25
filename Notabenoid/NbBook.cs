@@ -317,9 +317,7 @@ namespace Notabenoid
             var document = await context.OpenAsync(_bookUrl);
 
             Console.WriteLine("Getting strings");
-            var resources = package.Texts.Cast<Resource>()
-                .Union(package.Scripts.Cast<Resource>())
-                .Union(package.Messages.Cast<Resource>());
+            var resources = package.GetTextResources();
 
             List<ResStrings> resStrings = new List<ResStrings>();
             foreach (var res in resources)

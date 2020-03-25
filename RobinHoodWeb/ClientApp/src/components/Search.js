@@ -4,10 +4,74 @@ import axios from 'axios';
 
 import './Search.css';
 
+class TranslateRow extends Component {
+    state = {
+        edit: undefined
+    }
+
+    constructor(props) {
+        super(props)
+
+        this.handleTranslateChange = this.handleTranslateChange.bind(this);
+        this.addTranslate = this.addTranslate.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.state.edit && nextProps.res !== this.props.res) {
+            this.setState({ edit: false });
+        }
+    }
+
+    addTranslate() {
+        const { res } = this.props
+        let { tr } = this.state
+
+        if (!tr) {
+            tr = res.yTrans
+        }
+
+        axios.post('/translate', { volume: res.res, en: res.en, tr })
+            .then(() => this.setState({ edit: false }))
+    }
+
+    handleTranslateChange(event) {
+        this.setState({ tr: event.target.value });
+    }
+
+    render() {
+        const { res } = this.props
+        const { edit } = this.state
+
+        return (
+            <tr>
+                <td>{res.link ? (<a href={"http://notabenoid.org" + res.link}>{res.res}</a>) : res.res}</td>
+                <td dangerouslySetInnerHTML={{ __html: res.en_html }} />
+                <td dangerouslySetInnerHTML={{ __html: res.ru_html }} />
+                {edit ?
+                    <td><textarea defaultValue={res.yTrans} onChange={this.handleTranslateChange} />
+                        <div className="btn-group btn-group-sm" role="group">
+                            <button className="btn btn-secondary" type="button" onClick={() => this.setState({ edit: false })}>
+                                Отмена
+                            </button>
+                            <button className="btn btn-primary" type="button" onClick={this.addTranslate}>
+                                Перевести
+                            </button>
+                        </div>
+                    </td>
+                :
+                    <td onClick={() => this.setState({ edit: true })}>{res.yTrans}</td>
+                }
+            </tr>
+        )
+    }
+}
+
 export class Search extends Component {
     static displayName = Search.name;
 
-    state = { result: [] }
+    state = {
+        result: []
+    }
 
     constructor(props) {
         super(props)
@@ -15,7 +79,7 @@ export class Search extends Component {
     }
 
     render() {
-        const { result } = this.state;
+        const { result } = this.state
 
         return (
             <div>
@@ -57,19 +121,22 @@ export class Search extends Component {
                     </Form.Row>
                 </Form>
                 <Table className="searchResult">
+                    <thead>
+                        <tr>
+                            <td>Ресурс</td>
+                            <td>Оригинал</td>
+                            <td>Перевод</td>
+                            <td>Yandex Translate</td>
+                        </tr>
+                    </thead>
                     <tbody>
                         {result.map((r, i) => (
-                            <tr key={i}>
-                                <td>{r.link ? (<a href={"http://notabenoid.org" + r.link}>{r.res}</a>) : r.res}</td>
-                                <td dangerouslySetInnerHTML={{ __html: r.en_text }} />
-                                <td dangerouslySetInnerHTML={{ __html: r.ru_text }} />
-                                <td>{r.yTrans}</td>
-                            </tr>
+                            <TranslateRow key={i} res={r}/>
                         ))}
                     </tbody>
                 </Table>
             </div>
-        );
+        )
     }
 
 

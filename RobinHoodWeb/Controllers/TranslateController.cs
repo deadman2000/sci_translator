@@ -39,6 +39,21 @@ namespace RobinHoodWeb.Controllers
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
             }
         }
+
+        public class TranslateRequest
+        {
+            public string Volume { get; set; }
+
+            public string En { get; set; }
+
+            public string Tr { get; set; }
+        }
+
+        [HttpPost]
+        public async Task Post([FromBody] TranslateRequest request)
+        {
+            await _translateService.AddTranslate(request.Volume, request.En, request.Tr);
+        }
     }
 
     internal class TranslateConnection

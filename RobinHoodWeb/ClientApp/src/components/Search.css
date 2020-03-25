@@ -1,3 +1,7 @@
 ﻿.searchResult span {
     background-color: sandybrown;
 }
+
+.searchResult textarea {
+    width: 100%;
+}

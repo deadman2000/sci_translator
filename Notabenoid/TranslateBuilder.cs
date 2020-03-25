@@ -37,6 +37,11 @@ namespace Notabenoid
         private int _total;
         private bool _hasChanges = false;
 
+        public SCIPackage GetPackage()
+        {
+            return SCIPackage.Load(GameDir, TranslateDir);
+        }
+
         public async Task<bool> Build()
         {
             IsBuild = true;
@@ -45,7 +50,7 @@ namespace Notabenoid
                 await Book.ReadVolumes();
                 ReadCache();
 
-                SCIPackage package = SCIPackage.Load(GameDir, TranslateDir);
+                var package = GetPackage();
                 var texts = package.Texts;
                 var scripts = package.Scripts;
 

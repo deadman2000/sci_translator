@@ -2,6 +2,7 @@
 using Notabenoid;
 using RobinHoodWeb.Model;
 using SCI_Translator.Resources;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -47,6 +48,14 @@ namespace RobinHoodWeb.Services
             return UpdateDate = new FileInfo(TRANSLATED_ZIP_PATH).CreationTimeUtc.ToString();
         }
 
+        public async Task AddTranslate(string volume, string en, string tr)
+        {
+            await Builder.Book.AddTranslate(volume, en, tr);
+
+            var package = Builder.GetPackage();
+            //Resource res = package.GetResouce(volume);
+        }
+
         private IEnumerable<StringRes> ExtractStringsText(SCIPackage package)
         {
             List<StringRes> list = new List<StringRes>();
@@ -73,8 +82,8 @@ namespace RobinHoodWeb.Services
             List<StringRes> list = new List<StringRes>();
             foreach (var s in package.Scripts)
             {
-                var en = s.GetScript(false).AllStrings.Where(s => !s.IsClassName).ToArray();
-                var ru = s.GetScript(true).AllStrings.Where(s => !s.IsClassName).ToArray();
+                var en = s.GetScript(false).AllStrings.ToArray();
+                var ru = s.GetScript(true).AllStrings.ToArray();
 
                 for (int i = 0; i < en.Length; i++)
                 {
@@ -91,14 +100,22 @@ namespace RobinHoodWeb.Services
 
         public void UpdateStrings()
         {
-            SCIPackage package = SCIPackage.Load(Builder.GameDir, Builder.TranslateDir);
+            SCIPackage package = Builder.GetPackage();
 
             if (YTranslate == null)
                 LoadYTranslate();
 
-            AllStrings = ExtractStringsText(package)
-                .Union(ExtractStringsScript(package))
-                .ToList();
+            AllStrings = package.GetTextResources().SelectMany(r =>
+            {
+                return r.GetStrings(false)
+                    .Zip(r.GetStrings(true))
+                    .Select(z => new StringRes
+                        {
+                            Resource = r.ToString(),
+                            En = z.First,
+                            Ru = z.Second
+                        });
+            }).ToList();
             AllStrings.ForEach(s =>
             {
                 s.YTrans = YTranslate.GetValueOrDefault(s.En.Trim());
