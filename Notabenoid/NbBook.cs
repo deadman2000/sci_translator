@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Notabenoid
@@ -108,7 +108,7 @@ namespace Notabenoid
                     var id = ((IHtmlElement)td.Parent).Id;
 
                     var enEl = td.QuerySelector("p.text");
-                    var en = enEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
+                    var en = UnreplaceSpaces(enEl.Text());
 
                     var ruEl = document.QuerySelectorAll($"tr#{id} td.t p.text").LastOrDefault();
                     if (ruEl == null)
@@ -116,7 +116,7 @@ namespace Notabenoid
                         continue;
                     }
 
-                    var ru = ruEl.Text().Replace('_', ' ').Replace("\n", "\r\n");
+                    var ru = UnreplaceSpaces(ruEl.Text());
                     translates[en] = ru;
                 }
 
@@ -145,6 +145,65 @@ namespace Notabenoid
             }
 
             return dict;
+        }
+
+        /// <summary>
+        /// Добавляет в главу перевод
+        /// </summary>
+        /// <param name="volumeName"></param>
+        /// <param name="en"></param>
+        /// <param name="tr"></param>
+        /// <returns></returns>
+        public async Task AddTranslate(string volumeName, string en, string tr)
+        {
+            await CreateContext();
+            await ReadVolumes();
+
+            var volume = Volumes.Find(v => v.Name.Equals(volumeName, StringComparison.OrdinalIgnoreCase));
+
+            var document = await context.OpenAsync(volume.URL);
+
+            while (true)
+            {
+                foreach (var td in document.QuerySelectorAll("td.o")) // Ячейки с оригинальным текстом
+                {
+                    var id = ((IHtmlElement)td.Parent).Id.Substring(1);
+
+                    var enEl = td.QuerySelector("p.text");
+                    var enRow = UnreplaceSpaces(enEl.Text());
+                    if (enRow.Equals(en))
+                    {
+                        await TranslateRow(document, id, tr);
+                    }
+                }
+
+                var a = document.QuerySelector("#pages-bottom p.n a") as IHtmlAnchorElement;
+                if (a == null)
+                    break;
+
+                document = await context.OpenAsync(a.Href);
+            }
+        }
+
+        private async Task TranslateRow(IDocument document, string id, string tr)
+        {
+            var form = document.CreateElement<IHtmlFormElement>();
+            form.Method = "POST";
+            form.Action = document.BaseUri + "/" + id + "/translate";
+            document.Body.AppendElement(form);
+
+            var input = document.CreateElement("input") as IHtmlInputElement;
+            input.Name = "Translation[body]";
+            input.Value = tr;
+            form.AppendElement(input);
+
+            var resultDocument = await form.SubmitAsync();
+            if (resultDocument.StatusCode != HttpStatusCode.OK)
+            {
+                Console.WriteLine(resultDocument.Body.Text());
+                throw new Exception("Status: " + resultDocument.StatusCode);
+            }
+
         }
 
         #region Links
@@ -187,11 +246,8 @@ namespace Notabenoid
 
             if (!_links.TryGetValue(res, out var links))
             {
-                //lock (_links)
-                {
-                    links = new Dictionary<string, string>();
-                    _links.Add(res, links);
-                }
+                links = new Dictionary<string, string>();
+                _links.Add(res, links);
             }
 
             while (true)
@@ -201,14 +257,11 @@ namespace Notabenoid
                     var id = ((IHtmlElement)td.Parent).Id;
 
                     var enEl = td.QuerySelector("p.text");
-                    var en = enEl.Text().Replace('_', ' ');
+                    var en = UnreplaceSpaces(enEl.Text());
 
                     var link = td.QuerySelector("a.ord").GetAttribute("href");
 
-                    //lock (links)
-                    {
-                        links[Escape(en)] = link;
-                    }
+                    links[EscapeNewLine(en)] = link;
                 }
 
                 var a = document.QuerySelector("#pages-bottom p.n a") as IHtmlAnchorElement;
@@ -227,12 +280,12 @@ namespace Notabenoid
         /// <returns></returns>
         public string GetLink(string resource, string en)
         {
-            if (_links.TryGetValue(resource.ToLower(), out var rows) && rows.TryGetValue(Escape(en), out var link))
+            if (_links.TryGetValue(resource.ToLower(), out var rows) && rows.TryGetValue(EscapeNewLine(en), out var link))
                 return link;
             return null;
         }
 
-        private string Escape(string str)
+        private string EscapeNewLine(string str)
         {
             return str.Replace("\r", "\\r").Replace("\n", "\\n");
         }
@@ -327,7 +380,7 @@ namespace Notabenoid
                 { "Chapter[status]", "0" }
             });
 
-            if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+            if (resultDocument.StatusCode != HttpStatusCode.OK)
             {
                 Console.WriteLine(resultDocument.StatusCode);
             }
@@ -369,7 +422,7 @@ namespace Notabenoid
 
             var resultDocument = await form.SubmitAsync();
 
-            if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+            if (resultDocument.StatusCode != HttpStatusCode.OK)
                 Console.WriteLine($"{document.Url} {resultDocument.StatusCode}");
         }
 
@@ -427,7 +480,7 @@ namespace Notabenoid
                         var resultDocument = await form.SubmitAsync(new Dictionary<string, string> {
                             { "Translation[body]", kv.Value },
                         });
-                        if (resultDocument.StatusCode != System.Net.HttpStatusCode.OK)
+                        if (resultDocument.StatusCode != HttpStatusCode.OK)
                         {
                             Console.WriteLine(resultDocument.StatusCode);
                             continue;
@@ -463,6 +516,8 @@ namespace Notabenoid
 
             return new string(chars);
         }
+
+        private string UnreplaceSpaces(string str) => str.Replace('_', ' ').Replace("\n", "\r\n");
 
         #endregion
     }
