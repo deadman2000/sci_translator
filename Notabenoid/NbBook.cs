@@ -80,7 +80,7 @@ namespace Notabenoid
 
                 volumes.Add(new NbVolume
                 {
-                    Id = id,
+                    Id = id.Substring(2),
                     Name = name,
                     URL = a.Href,
                     DateChange = changed
@@ -128,6 +128,45 @@ namespace Notabenoid
             }
 
             return translates;
+        }
+
+        public async Task<List<NbPart>> GetParts(NbVolume vol)
+        {
+            var parts = new List<NbPart>();
+
+            var document = await context.OpenAsync(vol.URL);
+
+            while (true)
+            {
+                foreach (var td in document.QuerySelectorAll("td.o")) // Ячейки с оригинальным текстом
+                {
+                    var id = ((IHtmlElement)td.Parent).Id;
+
+                    var enEl = td.QuerySelector("p.text");
+
+                    var part = new NbPart
+                    {
+                        Volume = vol,
+                        Id = id.Substring(1),
+                        En = UnreplaceSpaces(enEl.Text()),
+                        Url = td.QuerySelector("a.ord").GetAttribute("href")
+                    };
+
+                    var ruEl = document.QuerySelectorAll($"tr#{id} td.t p.text").LastOrDefault();
+                    if (ruEl != null)
+                        part.Tr = UnreplaceSpaces(ruEl.Text());
+
+                    parts.Add(part);
+                }
+
+                var a = document.QuerySelector("#pages-bottom p.n a") as IHtmlAnchorElement;
+                if (a == null)
+                    break;
+
+                document = await context.OpenAsync(a.Href);
+            }
+
+            return parts;
         }
 
         public async Task<Dictionary<string, string>> GetDict()
@@ -518,5 +557,18 @@ namespace Notabenoid
         private string UnreplaceSpaces(string str) => str.Replace('_', ' ').Replace("\n", "\r\n");
 
         #endregion
+
+        public async Task Remove(NbPart part)
+        {
+            var cookie = context.GetCookie(new Url(_bookUrl));
+            var url = $"{_bookUrl}{part.Volume.Id}/{part.Id}/remove";
+
+            WebRequest request = WebRequest.Create(url);
+            request.Method = "POST";
+            request.Headers[HttpRequestHeader.Cookie] = cookie;
+            await request.GetResponseAsync();
+
+            part.Removed = true;
+        }
     }
 }

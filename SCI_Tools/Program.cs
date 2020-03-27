@@ -8,7 +8,8 @@ namespace SCI_Tools
         typeof(Test),
         typeof(NotaPatch),
         typeof(NotaLinks),
-        typeof(NotaUpload)
+        typeof(NotaUpload),
+        typeof(NotaFindDublicates)
     )]
     partial class Program
     {
