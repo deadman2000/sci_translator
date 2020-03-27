@@ -330,7 +330,7 @@ namespace SCI_Translator.ResView
         {
             if (lvChars.SelectedItems.Count > 0)
             {
-                byte i = (byte)lvChars.SelectedItems[0].Tag;
+                int i = (int)lvChars.SelectedItems[0].Tag;
                 tscbChar.SelectedIndex = i;
             }
         }
