@@ -50,7 +50,7 @@ namespace SCI_Translator.ResView
                 lines[r] = (string)dgvText[2, r].Value;
             }
 
-            ((ResText)_res).SetText(lines);
+            ((ResText)_res).SetTranslate(lines);
         }
 
         private void InitializeComponent()

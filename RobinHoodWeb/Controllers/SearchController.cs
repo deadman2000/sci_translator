@@ -6,7 +6,7 @@ using System.Linq;
 namespace RobinHoodWeb.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class SearchController : ControllerBase
     {
         private readonly TranslateService _translateService;
@@ -31,12 +31,12 @@ namespace RobinHoodWeb.Controllers
                 )
                 .Take(100)
                 .Select(s=> new {
-                    res = s.Resource,
+                    s.Res,
                     s.En,
+                    s.Link,
+                    s.YTrans,
                     en_html = AddSpan(s.En, q),
                     ru_html = AddSpan(s.Ru, q),
-                    s.Link,
-                    s.YTrans
                 }));
         }
 

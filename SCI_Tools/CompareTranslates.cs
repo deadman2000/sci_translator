@@ -96,7 +96,7 @@ namespace SCI_Tools
 
                 if (hasTranslate)
                 {
-                    txt.SetText(ruTxt);
+                    txt.SetTranslate(ruTxt);
                 }
             }
         }

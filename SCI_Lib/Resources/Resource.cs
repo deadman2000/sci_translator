@@ -84,9 +84,23 @@ namespace SCI_Translator.Resources
             }
         }
 
-        public void SaveTranslate()
+        public void Translate(string en, string tr)
         {
-            SaveTranslate(GetContent(true));
+            var sources = GetStrings(false);
+            if (sources == null)
+                throw new NotImplementedException();
+
+            var translates = GetStrings(true);
+
+            for (int i = 0; i < sources.Length; i++)
+            {
+                if (sources[i] == en)
+                {
+                    translates[i] = tr;
+                }
+            }
+
+            SetTranslate(translates);
         }
 
         public void SaveTranslate(byte[] data)
@@ -106,6 +120,11 @@ namespace SCI_Translator.Resources
         public virtual string[] GetStrings(bool translate)
         {
             return null;
+        }
+
+        public virtual void SetTranslate(string[] strings)
+        {
+            throw new NotImplementedException();
         }
     }
 }

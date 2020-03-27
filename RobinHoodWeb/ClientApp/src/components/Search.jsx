@@ -1,70 +1,9 @@
 ﻿import React, { Component } from 'react';
 import { InputGroup, FormControl, Button, Table, Form } from 'react-bootstrap';
 import axios from 'axios';
+import TranslateRow from './TranslateRow'
 
 import './Search.css';
-
-class TranslateRow extends Component {
-    state = {
-        edit: undefined
-    }
-
-    constructor(props) {
-        super(props)
-
-        this.handleTranslateChange = this.handleTranslateChange.bind(this);
-        this.addTranslate = this.addTranslate.bind(this);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.state.edit && nextProps.res !== this.props.res) {
-            this.setState({ edit: false });
-        }
-    }
-
-    addTranslate() {
-        const { res } = this.props
-        let { tr } = this.state
-
-        if (!tr) {
-            tr = res.yTrans
-        }
-
-        axios.post('/translate', { volume: res.res, en: res.en, tr })
-            .then(() => this.setState({ edit: false }))
-    }
-
-    handleTranslateChange(event) {
-        this.setState({ tr: event.target.value });
-    }
-
-    render() {
-        const { res } = this.props
-        const { edit } = this.state
-
-        return (
-            <tr>
-                <td>{res.link ? (<a href={"http://notabenoid.org" + res.link}>{res.res}</a>) : res.res}</td>
-                <td dangerouslySetInnerHTML={{ __html: res.en_html }} />
-                <td dangerouslySetInnerHTML={{ __html: res.ru_html }} />
-                {edit ?
-                    <td><textarea defaultValue={res.yTrans} onChange={this.handleTranslateChange} />
-                        <div className="btn-group btn-group-sm" role="group">
-                            <button className="btn btn-secondary" type="button" onClick={() => this.setState({ edit: false })}>
-                                Отмена
-                            </button>
-                            <button className="btn btn-primary" type="button" onClick={this.addTranslate}>
-                                Перевести
-                            </button>
-                        </div>
-                    </td>
-                :
-                    <td onClick={() => this.setState({ edit: true })}>{res.yTrans}</td>
-                }
-            </tr>
-        )
-    }
-}
 
 export class Search extends Component {
     static displayName = Search.name;
@@ -149,7 +88,7 @@ export class Search extends Component {
             lang: lang.value
         };
 
-        axios.get('/search', { params })
+        axios.get('/api/search', { params })
             .then(response => this.setState({ result: response.data || [] }))
     }
 }

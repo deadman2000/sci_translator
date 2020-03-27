@@ -134,7 +134,7 @@ namespace Notabenoid
                 if (hasTranslate)
                 {
                     Console.WriteLine(r);
-                    r.SetText(ruLines);
+                    r.SetTranslate(ruLines);
                     _hasChanges = true;
                 }
             }

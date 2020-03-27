@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SCI_Translator.Resources
 {
@@ -25,23 +26,28 @@ namespace SCI_Translator.Resources
             return lines.ToArray();
         }
 
-        public void SetText(string[] lines)
+        public override string[] GetStrings(bool translate)
         {
+            return GetText(translate);
+        }
+
+        public override void SetTranslate(string[] strings)
+        {
+            var oldStrings = GetStrings(true);
+
+            if (strings.Length != oldStrings.Length)
+                throw new Exception("Line count mismatch");
+
             ByteBuilder bb = new ByteBuilder();
 
-            for (int r = 0; r < lines.Length; r++)
+            for (int r = 0; r < strings.Length; r++)
             {
-                var bytes = Helpers.GetBytes(lines[r]);
+                var bytes = Helpers.GetBytes(strings[r]);
                 bb.AddBytes(bytes);
                 bb.AddByte(0);
             }
 
             SaveTranslate(bb.GetArray());
-        }
-
-        public override string[] GetStrings(bool translate)
-        {
-            return GetText(translate);
         }
     }
 }

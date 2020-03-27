@@ -53,7 +53,8 @@ namespace RobinHoodWeb.Services
             await Builder.Book.AddTranslate(volume, en, tr);
 
             var package = Builder.GetPackage();
-            //Resource res = package.GetResouce(volume);
+            Resource res = package.GetResouce(volume);
+            res.Translate(en, tr);
         }
 
         private IEnumerable<StringRes> ExtractStringsText(SCIPackage package)
@@ -68,7 +69,7 @@ namespace RobinHoodWeb.Services
                 {
                     list.Add(new StringRes
                     {
-                        Resource = t.ToString(),
+                        Res = t.ToString(),
                         En = en[i],
                         Ru = ru[i]
                     });
@@ -89,7 +90,7 @@ namespace RobinHoodWeb.Services
                 {
                     list.Add(new StringRes
                     {
-                        Resource = s.ToString(),
+                        Res = s.ToString(),
                         En = en[i].Value,
                         Ru = ru[i].Value
                     });
@@ -111,7 +112,7 @@ namespace RobinHoodWeb.Services
                     .Zip(r.GetStrings(true))
                     .Select(z => new StringRes
                         {
-                            Resource = r.ToString(),
+                            Res = r.ToString(),
                             En = z.First,
                             Ru = z.Second
                         });
@@ -124,7 +125,7 @@ namespace RobinHoodWeb.Services
 
             AllStrings.ForEach(s =>
             {
-                s.Link = Builder.Book.GetLink(s.Resource, s.En);
+                s.Link = Builder.Book.GetLink(s.Res, s.En);
             });
         }
 

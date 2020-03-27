@@ -42,6 +42,19 @@ namespace SCI_Translator.Resources
             return GetMessages(translate).Select(m => m.Text).ToArray();
         }
 
+        public override void SetTranslate(string[] strings)
+        {
+            var messages = GetMessages(true);
+            if (strings.Length != messages.Count)
+                throw new Exception("Line count mismatch");
+
+            for (int i = 0; i < strings.Length; i++)
+                messages[i].Text = strings[i];
+
+            throw new NotImplementedException();
+            //SaveTranslate()
+        }
+
         class RecordV3 : MessageRecord
         {
             public byte Noun { get; set; }

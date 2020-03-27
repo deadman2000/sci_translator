@@ -2,6 +2,7 @@
 using Notabenoid;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace SCI_Tools
@@ -27,8 +28,11 @@ namespace SCI_Tools
 
         protected async Task OnExecute()
         {
+            var path = Path.GetFullPath(Output);
+
             NbBook book = new NbBook(NotabenoidLogin, NotabenoidPassword, BookId);
-            await book.GatheringLinks(Output);
+            await book.GatheringLinks(path);
+            Console.WriteLine(path);
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();

@@ -7,7 +7,7 @@ namespace RobinHoodWeb.Model
 {
     public class StringRes
     {
-        public string Resource { get; set; }
+        public string Res { get; set; }
         public string En { get; set; }
         public string Ru { get; set; }
         public string Link { get; set; }

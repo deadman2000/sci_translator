@@ -7,6 +7,7 @@ import {
 import './custom.css'
 import Home from './components/Home';
 import Game from './components/Game';
+import Volume from './components/Volume';
 
 export default class App extends Component {
     static displayName = App.name;
@@ -16,6 +17,7 @@ export default class App extends Component {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/game" component={Game} />
+                <Route path="/volume/:volumeName" component={Volume} />
             </Switch>
         );
     }

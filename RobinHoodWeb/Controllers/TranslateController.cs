@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace RobinHoodWeb.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class TranslateController : ControllerBase
     {
         private readonly TranslateService _translateService;
@@ -53,6 +53,7 @@ namespace RobinHoodWeb.Controllers
         public async Task Post([FromBody] TranslateRequest request)
         {
             await _translateService.AddTranslate(request.Volume, request.En, request.Tr);
+            _translateService.UpdateStrings();
         }
     }
 

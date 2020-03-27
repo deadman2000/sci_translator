@@ -3,6 +3,7 @@ using SCI_Translator.Resources.SCI1;
 using SCI_Translator.Scripts;
 using SCI_Translator.Scripts.Elements;
 using SCI_Translator.Scripts.Sections;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -104,6 +105,8 @@ namespace SCI_Translator.Resources
         public IEnumerable<T> GetResouces<T>() where T : Resource => Resources.FindAll(r => r is T).Cast<T>();
 
         public Resource GetResouce(ResType type, ushort number) => Resources.FirstOrDefault(r => r.Type == type && r.Number == number);
+
+        public Resource GetResouce(string fileName) => Resources.FirstOrDefault(r => r.FileName.Equals(fileName, StringComparison.OrdinalIgnoreCase));
 
         public T GetResouce<T>(ushort number) where T : Resource => Resources.FirstOrDefault(r => r is T && r.Number == number) as T;
 

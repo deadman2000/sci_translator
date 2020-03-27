@@ -17,10 +17,7 @@
 Patching 621.tex failed - resource type mismatch
 Patching 213.tex failed - resource type mismatch
 
-Применять перевод из Яндекса в Notabenoid
-	сразу менять перевод в таблице и в игре
-Список всех глав/частей в главе
-Удалить дубликаты строк в частях
+Список всех глав
 
 QG
 Поддержка скриптов
