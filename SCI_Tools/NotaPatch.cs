@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SCI_Tools
 {
-    // nota_patch -nl dead_man -np **** -b 0
+    // nota_patch -d D:\Projects\SCI_Translator\Conquest\ -nl dead_man -np **** -b 0
     [Command("nota_patch", Description = "Apply translate from notabenoid.org to game")]
     class NotaPatch : PackageCommand
     {
