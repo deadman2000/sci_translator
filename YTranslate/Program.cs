@@ -226,7 +226,7 @@ namespace YTranslate
                     }
 
                     if (isChanged)
-                        r.SetText(ruLines);
+                        r.SetTranslate(ruLines);
                 }
 
                 foreach (var r in scripts)
