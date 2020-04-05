@@ -40,6 +40,9 @@ namespace YTranslate
         [Required]
         public string BookId { get; set; }
 
+        [Option(Description = "Apply translate to game")]
+        public bool Apply { get; set; }
+
         private RestClient rest;
 
         private GlossaryConfig glossary;
@@ -78,7 +81,9 @@ namespace YTranslate
             {
                 GlossaryData = new GlossaryData
                 {
-                    GlossaryPairs = dict.Select(kv => new GlossaryPair { SourceText = kv.Key, TranslatedText = kv.Value }).ToArray()
+                    GlossaryPairs = dict.Where(kv => !kv.Key.StartsWith('-'))
+                                        .Select(kv => new GlossaryPair { SourceText = kv.Key, TranslatedText = kv.Value })
+                                        .ToArray()
                 }
             };
 
@@ -190,67 +195,69 @@ namespace YTranslate
                 if (i == arr.Length - 1)
                     await TranslatePart(txt);
             }
-            
 
-            /*Console.WriteLine("Apply translate");
-
-            foreach (var r in texts)
+            if (Apply)
             {
-                bool isChanged = false;
-                var enLines = r.GetText(false); // Оригинальный текст
-                var ruLines = r.GetText(true);  // Уже переведенный текст
+                Console.WriteLine("Apply translate");
 
-                if (enLines.Length != ruLines.Length)
-                    continue;
-
-                for (int i = 0; i < enLines.Length; i++)
+                foreach (var r in texts)
                 {
-                    var en = enLines[i];
-                    var ru = ruLines[i];
+                    bool isChanged = false;
+                    var enLines = r.GetText(false); // Оригинальный текст
+                    var ruLines = r.GetText(true);  // Уже переведенный текст
 
-                    if (en.Trim().Length == 0) continue; // Пустые строки
-                    if (en.Contains("%")) continue; // Системные сообщения
-                    if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
+                    if (enLines.Length != ruLines.Length)
+                        continue;
 
-                    if (translations.TryGetValue(en, out string tr))
+                    for (int i = 0; i < enLines.Length; i++)
                     {
-                        ruLines[i] = tr;
-                        isChanged = true;
+                        var en = enLines[i];
+                        var ru = ruLines[i];
+
+                        if (en.Trim().Length == 0) continue; // Пустые строки
+                        if (en.Contains("%")) continue; // Системные сообщения
+                        if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
+
+                        if (translations.TryGetValue(en, out string tr))
+                        {
+                            ruLines[i] = tr;
+                            isChanged = true;
+                        }
                     }
+
+                    if (isChanged)
+                        r.SetText(ruLines);
                 }
 
-                if (isChanged)
-                    r.SetText(ruLines);
+                foreach (var r in scripts)
+                {
+                    bool isChanged = false;
+                    var enScr = r.GetScript(false);
+                    var ruScr = r.GetScript(true);
+
+                    var enStrings = enScr.AllStrings.Where(s => !s.IsClassName).ToArray();
+                    var ruStrings = ruScr.AllStrings.Where(s => !s.IsClassName).ToArray();
+
+                    for (int i = 0; i < enStrings.Length; i++)
+                    {
+                        var en = enStrings[i].Value;
+                        var ru = ruStrings[i].Value;
+
+                        if (en.Trim().Length == 0) continue; // Пустые строки
+                        if (en.Contains("%")) continue; // Системные сообщения
+                        if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
+
+                        if (translations.TryGetValue(en, out string tr))
+                        {
+                            ruStrings[i].Value = tr;
+                            isChanged = true;
+                        }
+                    }
+
+                    if (isChanged)
+                        r.SaveTranslate(ruScr.GetBytes());
+                }
             }
-
-            foreach (var r in scripts)
-            {
-                bool isChanged = false;
-                var enScr = r.GetScript(false);
-                var ruScr = r.GetScript(true);
-
-                var enStrings = enScr.AllStrings.Where(s => !s.IsClassName).ToArray();
-                var ruStrings = ruScr.AllStrings.Where(s => !s.IsClassName).ToArray();
-
-                for (int i = 0; i < enStrings.Length; i++)
-                {
-                    var en = enStrings[i].Value;
-                    var ru = ruStrings[i].Value;
-
-                    if (en.Trim().Length == 0) continue; // Пустые строки
-                    if (en.Contains("%")) continue; // Системные сообщения
-                    if (!ru.Equals(en)) continue; // Пропускаем уже готовый перевод
-
-                    if (translations.TryGetValue(en, out string tr))
-                    {
-                        ruStrings[i].Value = tr;
-                        isChanged = true;
-                    }
-                }
-
-                if (isChanged)
-                    r.SaveTranslate(ruScr.GetBytes());
-            }*/
 
             File.WriteAllText(destFile, JsonConvert.SerializeObject(translatedList, Formatting.None));
 
