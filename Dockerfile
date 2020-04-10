@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
 
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 # Node.js
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 RUN apt-get install -y nodejs
@@ -11,7 +11,8 @@ RUN apt-get install -y nodejs
 WORKDIR /src
 COPY ["RobinHoodWeb/*.csproj", "RobinHoodWeb/"]
 COPY ["SCI_Lib/*.csproj", "SCI_Lib/"]
-COPY ["Notabenoid_Patch/*.csproj", "Notabenoid_Patch/"]
+COPY ["Notabenoid/*.csproj", "Notabenoid/"]
+COPY ["YTranslate/*.csproj", "YTranslate/"]
 RUN dotnet restore "RobinHoodWeb/RobinHoodWeb.csproj"
 COPY . .
 WORKDIR "/src/RobinHoodWeb"
