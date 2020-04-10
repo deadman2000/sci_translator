@@ -1,9 +1,9 @@
 ﻿import React, { Component } from 'react';
 import { InputGroup, FormControl, Button, Table, Form } from 'react-bootstrap';
 import axios from 'axios';
-import TranslateRow from './TranslateRow'
 
 import './Search.css';
+import SearchRow from './SearchRow';
 
 export class Search extends Component {
     static displayName = Search.name;
@@ -65,12 +65,11 @@ export class Search extends Component {
                             <td>Ресурс</td>
                             <td>Оригинал</td>
                             <td>Перевод</td>
-                            <td>Yandex Translate</td>
                         </tr>
                     </thead>
                     <tbody>
                         {result.map((r, i) => (
-                            <TranslateRow key={i} res={r}/>
+                            <SearchRow key={i} res={r} />
                         ))}
                     </tbody>
                 </Table>
