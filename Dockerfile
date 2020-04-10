@@ -24,7 +24,6 @@ RUN dotnet publish "RobinHoodWeb.csproj" -c Release -o /app/publish
 
 
 FROM base AS final
-WORKDIR /app
 COPY --from=publish /app/publish .
 
 COPY ./Conquest ./Conquest
