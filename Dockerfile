@@ -29,6 +29,7 @@ COPY --from=publish /app/publish .
 
 COPY ./Conquest ./Conquest
 
-ENV GAME_DIR /app/Conquest
+ENV Translate__GameDir /app/Conquest
+ENV Translate__BookId 77921
 
 ENTRYPOINT ["dotnet", "RobinHoodWeb.dll"]

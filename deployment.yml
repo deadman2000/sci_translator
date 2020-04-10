@@ -30,12 +30,12 @@ spec:
         image: docker.dev.ask-glonass.ru/sci_translator:latest
         imagePullPolicy: Always
         env:
-        - name: NN_LOGIN
+        - name: Translate__NotabenoidLogin
           valueFrom:
             secretKeyRef:
               name: nnsecret
               key: username
-        - name: NN_PASSWORD
+        - name: Translate__NotabenoidPassword
           valueFrom:
             secretKeyRef:
               name: nnsecret
