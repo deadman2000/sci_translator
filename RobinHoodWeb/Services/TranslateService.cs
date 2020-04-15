@@ -2,7 +2,6 @@
 using Notabenoid;
 using RobinHoodWeb.Model;
 using SCI_Translator.Resources;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -55,48 +54,6 @@ namespace RobinHoodWeb.Services
             var package = Builder.GetPackage();
             Resource res = package.GetResouce(volume);
             res.Translate(en, tr);
-        }
-
-        private IEnumerable<StringRes> ExtractStringsText(SCIPackage package)
-        {
-            List<StringRes> list = new List<StringRes>();
-            foreach (var t in package.Texts)
-            {
-                var en = t.GetText(false);
-                var ru = t.GetText(true);
-
-                for (int i = 0; i < en.Length; i++)
-                {
-                    list.Add(new StringRes
-                    {
-                        Res = t.ToString(),
-                        En = en[i],
-                        Ru = ru[i]
-                    });
-                }
-            }
-            return list;
-        }
-
-        private IEnumerable<StringRes> ExtractStringsScript(SCIPackage package)
-        {
-            List<StringRes> list = new List<StringRes>();
-            foreach (var s in package.Scripts)
-            {
-                var en = s.GetScript(false).AllStrings.ToArray();
-                var ru = s.GetScript(true).AllStrings.ToArray();
-
-                for (int i = 0; i < en.Length; i++)
-                {
-                    list.Add(new StringRes
-                    {
-                        Res = s.ToString(),
-                        En = en[i].Value,
-                        Ru = ru[i].Value
-                    });
-                }
-            }
-            return list;
         }
 
         public void UpdateStrings()

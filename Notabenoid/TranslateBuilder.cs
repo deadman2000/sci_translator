@@ -211,7 +211,7 @@ namespace Notabenoid
 
         private void ReadCache()
         {
-            if (_cache == null && !NO_CACHE && File.Exists(CACHE_FILE))
+            if (!NO_CACHE && File.Exists(CACHE_FILE))
             {
                 _cache = File.ReadAllLines(CACHE_FILE)
                     .Select(l => l.Split(':', 2))
