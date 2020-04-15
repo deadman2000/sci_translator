@@ -23,15 +23,21 @@ namespace SCI_Translator.ResView
 
         protected override void ShowResource(Resource res, bool translated)
         {
-            ResText txt = (ResText)res;
-            var en = txt.GetText(false);
-            var ru = txt.GetText(true);
-
             dgvText.Rows.Clear();
 
-            for (int i = 0; i < en.Length; i++)
+            ResText txt = (ResText)res;
+            var en = txt.GetText(false);
+
+            if (res.Package.HasTranslate())
             {
-                dgvText.Rows.Add(i, en[i], ru[i]);
+                var ru = txt.GetText(true);
+                for (int i = 0; i < en.Length; i++)
+                    dgvText.Rows.Add(i, en[i], ru[i]);
+            }
+            else;
+            {
+                for (int i = 0; i < en.Length; i++)
+                    dgvText.Rows.Add(i, en[i], "");
             }
         }
 

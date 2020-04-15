@@ -16,7 +16,7 @@ namespace SCI_Translator.Resources
             {
                 if (data[i] == 0x00)
                 {
-                    lines.Add(Helpers.GetString(data, s, i - s));
+                    lines.Add(GameEncoding.GetString(data, s, i - s));
 
                     ind++;
                     s = i + 1;
@@ -42,7 +42,7 @@ namespace SCI_Translator.Resources
 
             for (int r = 0; r < strings.Length; r++)
             {
-                var bytes = Helpers.GetBytes(strings[r]);
+                var bytes = GameEncoding.GetBytes(strings[r]);
                 bb.AddBytes(bytes);
                 bb.AddByte(0);
             }

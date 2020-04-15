@@ -94,8 +94,9 @@ namespace Notabenoid
         /// Выгружает все переводы из главы
         /// </summary>
         /// <param name="url"></param>
+        /// <param name="withNotCompleted">Добавить строки без перевода</param>
         /// <returns></returns>
-        public async Task<Dictionary<string, string>> GetTranslates(string url)
+        public async Task<Dictionary<string, string>> GetTranslates(string url, bool withNotCompleted = false)
         {
             var translates = new Dictionary<string, string>();
 
@@ -113,6 +114,7 @@ namespace Notabenoid
                     var ruEl = document.QuerySelectorAll($"tr#{id} td.t p.text").LastOrDefault();
                     if (ruEl == null)
                     {
+                        if (withNotCompleted && !translates.ContainsKey(en)) translates.Add(en, null);
                         continue;
                     }
 

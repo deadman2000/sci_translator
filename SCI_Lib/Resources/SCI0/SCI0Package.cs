@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace SCI_Translator.Resources.SCI0
 {
     public class SCI0Package : SCIPackage
     {
-        public SCI0Package(string directory, string translate = null)
-            : base(directory, translate)
+        public SCI0Package(string directory, string translate, Encoding enc)
+            : base(directory, translate, enc)
         {
         }
 

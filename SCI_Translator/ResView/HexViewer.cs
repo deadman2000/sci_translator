@@ -37,7 +37,7 @@ namespace SCI_Translator.ResView
                     return;
                 }
 
-                tbHexView.Text = Helpers.ByteToHexTable(data);
+                tbHexView.Text = GameEncoding.ByteToHexTable(data);
             }
             catch (Exception ex)
             {

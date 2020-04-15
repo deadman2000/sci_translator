@@ -19,6 +19,8 @@ namespace SCI_Translator.Resources
 
         public SCIPackage Package { get; private set; }
 
+        public GameEncoding GameEncoding => Package.GameEncoding;
+
         public ResType Type { get; private set; }
 
         public ushort Number { get; private set; }

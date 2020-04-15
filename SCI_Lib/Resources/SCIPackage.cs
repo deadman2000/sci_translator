@@ -7,18 +7,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace SCI_Translator.Resources
 {
     public abstract class SCIPackage
     {
-        public static SCIPackage Load(string directory, string translate = null)
+        public static SCIPackage Load(string directory, string translate = null, Encoding enc = null)
         {
             string mapFile = Path.Combine(directory, "RESOURCE.MAP");
             if (IsSCI0(mapFile))
-                return new SCI0Package(directory, translate);
+                return new SCI0Package(directory, translate, enc);
             else
-                return new SCI1Package(directory, translate);
+                return new SCI1Package(directory, translate, enc);
         }
 
         private static bool IsSCI0(string mapFile)
@@ -35,8 +36,17 @@ namespace SCI_Translator.Resources
 
         public abstract string GetResFileName(Resource resource);
 
-        public SCIPackage(string directory, string translate = null)
+        public SCIPackage(string directory, string translate, Encoding enc)
         {
+            if (enc == null)
+            {
+#if NETSTANDARD
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+#endif
+                enc = Encoding.GetEncoding(866);
+            }
+            GameEncoding = new GameEncoding(enc);
+
             GameDirectory = directory;
             TranslateDirectory = translate ?? Path.Combine(GameDirectory, "TRANSLATE");
 
@@ -68,8 +78,13 @@ namespace SCI_Translator.Resources
             }
         }
 
-
-        public bool HasTranslate() => Directory.Exists(TranslateDirectory);
+        private bool? _hasTranslate;
+        public bool HasTranslate()
+        {
+            if (!_hasTranslate.HasValue)
+                _hasTranslate = Directory.Exists(TranslateDirectory);
+            return _hasTranslate.Value;
+        }
 
         private IEnumerable<Script> _scriptsCache;
 
@@ -85,6 +100,8 @@ namespace SCI_Translator.Resources
             }
             return null;
         }
+
+        public GameEncoding GameEncoding { get; private set; }
 
         public string GameDirectory { get; }
 

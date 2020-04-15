@@ -32,7 +32,7 @@ namespace SCI_Translator.Resources
             }
             foreach (var r in records)
             {
-                r.ReadText(data);
+                r.ReadText(data, GameEncoding);
             }
             return records;
         }

@@ -14,15 +14,15 @@ namespace SCI_Translator.Scripts.Elements
 
         public string Value
         {
-            get { return Helpers.GetString(Bytes); }
-            set { Bytes = Helpers.GetBytes(value); }
+            get { return GameEncoding.GetString(Bytes); }
+            set { Bytes = GameEncoding.GetBytes(value); }
         }
 
         public bool IsClassName { get; set; } = false;
 
-        public void SetValueUnescape(string val) => Bytes = Helpers.Unescape(Helpers.GetBytes(val));
+        public void SetValueUnescape(string val) => Bytes = GameEncoding.Unescape(GameEncoding.GetBytes(val));
 
-        public string GetStringEscape() => Helpers.GetStringEscape(Bytes);
+        public string GetStringEscape() => GameEncoding.GetStringEscape(Bytes);
 
         public override string ToString() => $"string_{Address:x4} = {Value}";
 

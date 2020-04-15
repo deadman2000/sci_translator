@@ -49,7 +49,7 @@ namespace SCI_Translator.Scripts1_1
 
             var pos = heap.Position;
             heap.Seek(propertyValues[8].Value, SeekOrigin.Begin);
-            Name = heap.ReadString();
+            Name = heap.ReadString(_script.Package.GameEncoding);
             heap.Seek(pos, SeekOrigin.Begin);
 
             stream.Seek(methodsOffset, SeekOrigin.Begin);

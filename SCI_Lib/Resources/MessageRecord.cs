@@ -12,13 +12,13 @@ namespace SCI_Translator.Resources
 
         public string Text { get; set; }
 
-        public void ReadText(byte[] data)
+        public void ReadText(byte[] data, GameEncoding encoding)
         {
             for (int i = TextOffset; i < data.Length; i++)
             {
                 if (data[i] == 0)
                 {
-                    Text = Helpers.GetString(data, TextOffset, i - TextOffset);
+                    Text = encoding.GetString(data, TextOffset, i - TextOffset);
                     return;
                 }
             }

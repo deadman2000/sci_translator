@@ -50,7 +50,7 @@ namespace SCI_Translator.ResView
 
             var vocab = (ResVocab)res;
 
-            tbHex.Text = Helpers.ByteToHexTable(data);
+            tbHex.Text = GameEncoding.ByteToHexTable(data);
 
             if (res.Number == 997)
             {

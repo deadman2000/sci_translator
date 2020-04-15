@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using SCI_Translator.Resources;
 using System;
+using System.Text;
 using System.Windows.Forms;
 
 namespace SCI_Translator
@@ -17,6 +18,7 @@ namespace SCI_Translator
             Application.SetCompatibleTextRenderingDefault(false);
 
             string gameDir, translateDir;
+            Encoding enc = null;
 
             if (args.Length == 0)
             {
@@ -33,6 +35,8 @@ namespace SCI_Translator
                 gameDir = form.GameDir;
                 translateDir = form.TranslateDir;
                 if (translateDir.Length == 0) translateDir = null;
+
+                enc = form.Encoding;
             }
             else
             {
@@ -43,7 +47,7 @@ namespace SCI_Translator
             SCIPackage package;
             try
             {
-                package = SCIPackage.Load(gameDir, translateDir);
+                package = SCIPackage.Load(gameDir, translateDir, enc);
             }
             catch (Exception ex)
             {

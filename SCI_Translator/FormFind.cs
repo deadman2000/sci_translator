@@ -58,12 +58,14 @@ namespace SCI_Translator
         private void FindText(ResText txt)
         {
             var lines = txt.GetText(false);
-            var tr = txt.GetText(true);
+            string[] tr = null;
+            if (_package.HasTranslate())
+                tr = txt.GetText(true);
             for (int i = 0; i < lines.Length; i++)
             {
                 if (IsPass(lines[i]))
                     AddResult(txt, i, lines[i]);
-                else if (IsPass(tr[i]))
+                else if (tr != null && IsPass(tr[i]))
                     AddResult(txt, i, tr[i]);
             }
         }
@@ -71,28 +73,41 @@ namespace SCI_Translator
         private void FindScript(ResScript res)
         {
             var script = res.GetScript(false);
-            var tr = res.GetScript(true);
-
-            if (script == null) return;
             var sections = script.Get<StringSection>();
-            foreach (var sec in sections)
+
+            List<StringSection> trSections = null;
+            if (_package.HasTranslate())
+            {
+                var tr = res.GetScript(true);
+                trSections = tr.Get<StringSection>();
+            }
+
+            for (int i = 0; i < sections.Count; i++)
+            {
+                var sec = sections[i];
                 for (int ind = 0; ind < sec.Strings.Count; ind++)
                 {
                     StringConst str = sec.Strings[ind];
                     if (IsPass(str.Value))
                         AddResult(res, ind, str.Value);
+                    else if (trSections != null && IsPass(trSections[i].Strings[ind].Value))
+                        AddResult(res, ind, trSections[i].Strings[ind].Value);
                 }
+            }
         }
 
         private void FindMessage(ResMessage msg)
         {
             var messages = msg.GetMessages(false);
-            var tr= msg.GetMessages(true);
+            List<MessageRecord> tr = null;
+            if (_package.HasTranslate())
+                tr = msg.GetMessages(true);
+
             for (int i = 0; i < messages.Count; i++)
             {
                 if (IsPass(messages[i].Text))
                     AddResult(msg, i, messages[i].Text);
-                else if (IsPass(tr[i].Text))
+                else if (tr != null && IsPass(tr[i].Text))
                     AddResult(msg, i, tr[i].Text);
             }
         }

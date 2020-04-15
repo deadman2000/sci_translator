@@ -223,7 +223,7 @@ namespace SCI_Translator.ResView
                 for (int i = 0x80; i <= 0xF3; i++)
                 {
                     char or = (char)0;
-                    switch (Helpers.Chars866[i])
+                    switch (GameEncoding.AllChars[i])
                     {
                         case 'а': or = 'a'; break;
                         case 'А': or = 'A'; break;
@@ -294,7 +294,7 @@ namespace SCI_Translator.ResView
 
             for (int i = 0; i < spr.Frames.Count; i++)
             {
-                string name = String.Format("0x{0:X2} {1}", i, Helpers.Chars866[i]);
+                string name = String.Format("0x{0:X2} {1}", i, GameEncoding.AllChars[i]);
                 tscbChar.Items.Add(name);
 
                 Bitmap b = viewer.CreateBitmap(i);

@@ -7,8 +7,12 @@ namespace SCI_Translator.Scripts.Builders
     {
         StringBuilder sb = new StringBuilder();
 
+        private GameEncoding gameEncoding;
+
         public string Decompile(Script script)
         {
+            gameEncoding = script.Package.GameEncoding;
+
             foreach (var sec in script.Sections)
             {
                 sb.Append(String.Format("Type: {0} Size: {1}\r\n", sec.Type, sec.Size));
@@ -30,7 +34,7 @@ namespace SCI_Translator.Scripts.Builders
                 else
                     l = 16;
 
-                string str = String.Format("{0:X8}: {1,-48}  {2}\r\n", i, Helpers.ByteToHex(data, i, l), Helpers.PrintableString(data, i, l));
+                string str = String.Format("{0:X8}: {1,-48}  {2}\r\n", i, Helpers.ByteToHex(data, i, l), gameEncoding.PrintableString(data, i, l));
                 sb.Append(str);
                 i += 16;
             }

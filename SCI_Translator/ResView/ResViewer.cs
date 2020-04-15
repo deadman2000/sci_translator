@@ -29,6 +29,8 @@ namespace SCI_Translator.ResView
             //_res.SaveTranslate();
         }
 
+        public GameEncoding GameEncoding => Resource.Package.GameEncoding;
+
         public ResViewer()
         {
             InitializeComponent();

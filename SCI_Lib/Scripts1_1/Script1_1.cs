@@ -88,7 +88,7 @@ namespace SCI_Translator.Scripts1_1
                     do
                     {
                         var offs = (ushort)heap.Position;
-                        var str = heap.ReadString();
+                        var str = heap.ReadString(Resource.GameEncoding);
                         List<ushort> stringsOffset = new List<ushort>();
                         if (str.Length > 0 || heap.Position < stringOffset)
                         {

@@ -27,7 +27,7 @@ namespace SCI_Translator.Resources
             {
                 if (data[i] == 0x00)
                 {
-                    string strRes = Helpers.GetString(data, s, i - s);
+                    string strRes = GameEncoding.GetString(data, s, i - s);
                     lines.Add(strRes);
                     ind++;
                     s = i + 1;
@@ -51,7 +51,7 @@ namespace SCI_Translator.Resources
             {
                 ushort addr = Helpers.GetUShortBE(data, i * 2 + 2);
                 ushort len = Helpers.GetUShortBE(data, addr);
-                string name = Helpers.GetStringEscape(data, addr + 2, len);
+                string name = GameEncoding.GetStringEscape(data, addr + 2, len);
                 names[i] = name;
             }
 
@@ -71,7 +71,7 @@ namespace SCI_Translator.Resources
                 ushort addr = Helpers.GetUShortBE(data, i * 2 + 2);
                 ushort len = Helpers.GetUShortBE(data, addr);
                 ushort type = Helpers.GetUShortBE(data, addr + 2);
-                string name = Helpers.GetStringEscape(data, addr + 4, len - 2);
+                string name = GameEncoding.GetStringEscape(data, addr + 4, len - 2);
                 opcodes.Add(i, new OpCode(type, name));
             }
 

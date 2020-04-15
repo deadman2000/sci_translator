@@ -20,6 +20,8 @@ namespace SCI_Translator.Scripts.Elements
 
         public Script Script { get; private set; }
 
+        public GameEncoding GameEncoding => Script.Package.GameEncoding;
+
         public List<RefToElement> XRefs { get; } = new List<RefToElement>();
 
         public virtual ushort Address
