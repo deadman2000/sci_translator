@@ -47,7 +47,10 @@ namespace Notabenoid
             IsBuild = true;
             try
             {
-                await Book.ReadVolumes();
+                if (Book.Volumes == null)
+                    await Book.ReadVolumes();
+                else
+                    await Book.UpdateDates();
                 ReadCache();
 
                 var package = GetPackage();

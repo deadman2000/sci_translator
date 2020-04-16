@@ -91,6 +91,31 @@ namespace Notabenoid
         }
 
         /// <summary>
+        /// Обновление дат изменения для томов
+        /// </summary>
+        /// <returns></returns>
+        public async Task UpdateDates()
+        {
+            if (Volumes == null) return;
+            Console.WriteLine("Notabenoid Update dates");
+
+            var document = await context.OpenAsync(_bookUrl);
+            if (!document.BaseUri.Equals(_bookUrl))
+                throw new Exception("Проблемы с авторизацией");
+
+            var rows = document.QuerySelectorAll("td.t>a");
+            foreach (IHtmlAnchorElement a in rows)
+            {
+                var id = (a.Parent.Parent as IHtmlElement).Id;
+                var changed = (document.QuerySelector($"tr#{id} td:nth-child(3) span") as IHtmlElement)?.Title;
+                var name = a.Text.ToUpper();
+                var vol = Volumes.Find(v => v.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+                if (vol != null)
+                    vol.DateChange = changed;
+            }
+        }
+
+        /// <summary>
         /// Выгружает все переводы из главы
         /// </summary>
         /// <param name="url"></param>
