@@ -42,6 +42,8 @@ namespace SCI_Translator
             {
                 gameDir = args[0];
                 translateDir = args.Length > 1 ? args[1] : null;
+                if (args.Length > 2)
+                    enc = Encoding.GetEncoding(int.Parse(args[2]));
             }
 
             SCIPackage package;

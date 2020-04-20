@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Notabenoid
@@ -28,6 +29,22 @@ namespace Notabenoid
             _bookUrl = $"http://notabenoid.org/book/{bookId}/";
         }
 
+        private async Task<IDocument> GetDocumentAsync(string url)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                var document = await context.OpenAsync(url);
+                if (document.StatusCode != HttpStatusCode.OK)
+                {
+                    await Task.Delay(100);
+                    continue;
+                }
+                return document;
+            }
+
+            return null;
+        }
+
         private async Task CreateContext()
         {
             if (context != null) return;
@@ -41,7 +58,7 @@ namespace Notabenoid
 
             // Login
             {
-                var queryDocument = await context.OpenAsync("http://notabenoid.org/");
+                var queryDocument = await GetDocumentAsync("http://notabenoid.org/");
                 var form = queryDocument.QuerySelector<IHtmlFormElement>("form");
                 await form.SubmitAsync(new Dictionary<string, string> {
                     { "login[login]", _notabenoidLogin },
@@ -67,7 +84,7 @@ namespace Notabenoid
             Console.WriteLine("Notabenoid Read volumes");
             var volumes = new List<NbVolume>();
 
-            var document = await context.OpenAsync(_bookUrl);
+            var document = await GetDocumentAsync(_bookUrl);
             if (!document.BaseUri.Equals(_bookUrl))
                 throw new Exception("Проблемы с авторизацией");
 
@@ -99,7 +116,7 @@ namespace Notabenoid
             if (Volumes == null) return;
             Console.WriteLine("Notabenoid Update dates");
 
-            var document = await context.OpenAsync(_bookUrl);
+            var document = await GetDocumentAsync(_bookUrl);
             if (!document.BaseUri.Equals(_bookUrl))
                 throw new Exception("Проблемы с авторизацией");
 
@@ -125,7 +142,7 @@ namespace Notabenoid
         {
             var translates = new Dictionary<string, string>();
 
-            var document = await context.OpenAsync(url);
+            var document = await GetDocumentAsync(url);
 
             while (true)
             {
@@ -151,7 +168,7 @@ namespace Notabenoid
                 if (a == null)
                     break;
 
-                document = await context.OpenAsync(a.Href);
+                document = await GetDocumentAsync(a.Href);
             }
 
             return translates;
@@ -161,7 +178,7 @@ namespace Notabenoid
         {
             var parts = new List<NbPart>();
 
-            var document = await context.OpenAsync(vol.URL);
+            var document = await GetDocumentAsync(vol.URL);
 
             while (true)
             {
@@ -190,7 +207,7 @@ namespace Notabenoid
                 if (a == null)
                     break;
 
-                document = await context.OpenAsync(a.Href);
+                document = await GetDocumentAsync(a.Href);
             }
 
             return parts;
@@ -202,7 +219,7 @@ namespace Notabenoid
 
             var dict = new Dictionary<string, string>();
 
-            var document = await context.OpenAsync(_bookUrl + "dict?ajax=1");
+            var document = await GetDocumentAsync(_bookUrl + "dict?ajax=1");
             foreach (var div in document.QuerySelectorAll("div"))
             {
                 var en = div.QuerySelector("span.o").Text();
@@ -227,7 +244,7 @@ namespace Notabenoid
 
             var volume = Volumes.Find(v => v.Name.Equals(volumeName, StringComparison.OrdinalIgnoreCase));
 
-            var document = await context.OpenAsync(volume.URL);
+            var document = await GetDocumentAsync(volume.URL);
 
             while (true)
             {
@@ -247,7 +264,7 @@ namespace Notabenoid
                 if (a == null)
                     break;
 
-                document = await context.OpenAsync(a.Href);
+                document = await GetDocumentAsync(a.Href);
             }
         }
 
@@ -297,6 +314,7 @@ namespace Notabenoid
             await ReadVolumes();
 
             _links = new Dictionary<string, Dictionary<string, string>>();
+
             var tasks = Volumes.Select(v => GatherLinks(v.Name, v.URL));
             await Task.WhenAll(tasks.ToArray());
 
@@ -305,15 +323,22 @@ namespace Notabenoid
 
         private async Task GatherLinks(string res, string url)
         {
-            Console.WriteLine(url);
+            Console.WriteLine($"{res} - {url}");
             res = res.ToLower();
 
-            var document = await context.OpenAsync(url);
+            var document = await GetDocumentAsync(url);
 
-            if (!_links.TryGetValue(res, out var links))
+            Console.WriteLine($"{document.StatusCode} {document.Title}");
+
+            Dictionary<string, string> links;
+
+            lock (_links)
             {
-                links = new Dictionary<string, string>();
-                _links.Add(res, links);
+                if (!_links.TryGetValue(res, out links))
+                {
+                    links = new Dictionary<string, string>();
+                    _links.Add(res, links);
+                }
             }
 
             while (true)
@@ -334,7 +359,7 @@ namespace Notabenoid
                 if (a == null)
                     break;
 
-                document = await context.OpenAsync(a.Href);
+                document = await GetDocumentAsync(a.Href);
             }
         }
 
@@ -380,7 +405,7 @@ namespace Notabenoid
 
             await ReadVolumes();
 
-            var document = await context.OpenAsync(_bookUrl);
+            var document = await GetDocumentAsync(_bookUrl);
 
             Console.WriteLine("Getting strings");
             var resources = package.GetTextResources();
@@ -449,7 +474,7 @@ namespace Notabenoid
                 Console.WriteLine(resultDocument.StatusCode);
             }
 
-            document = await context.OpenAsync(_bookUrl);
+            document = await GetDocumentAsync(_bookUrl);
 
             var a = document.QuerySelectorAll("td.t>a").First(e => e.Text().Equals(volumeName)) as IHtmlAnchorElement;
             if (a == null)
@@ -462,7 +487,7 @@ namespace Notabenoid
         {
             Console.WriteLine($"Upload strings for {r.Resource.FileName}");
 
-            var document = await context.OpenAsync(r.Url);
+            var document = await GetDocumentAsync(r.Url);
 
             var form = document.CreateElement<IHtmlFormElement>();
             form.Method = "POST";
@@ -492,7 +517,7 @@ namespace Notabenoid
 
         /*private async Task ApplyTranslate(ResStrings r)
         {
-            var document = await context.OpenAsync(r.Url);
+            var document = await GetDocumentAsync(r.Url);
 
             Dictionary<string, string> enIds = new Dictionary<string, string>();
 
@@ -513,7 +538,7 @@ namespace Notabenoid
                 if (a == null)
                     break;
 
-                document = await context.OpenAsync(a.Href);
+                document = await GetDocumentAsync(a.Href);
             }
 
             foreach (var kv in translate)
