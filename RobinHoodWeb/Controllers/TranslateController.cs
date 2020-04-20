@@ -110,7 +110,11 @@ namespace RobinHoodWeb.Controllers
                 case "build":
                     new Task(async () =>
                     {
-                        await _translateService.Build();
+                        try
+                        {
+                            await _translateService.Build();
+                        }
+                        catch { }
                         Finished();
                     }).Start();
                     break;
