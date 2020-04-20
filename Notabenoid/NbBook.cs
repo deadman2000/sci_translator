@@ -36,7 +36,7 @@ namespace Notabenoid
                 var document = await context.OpenAsync(url);
                 if (document.StatusCode != HttpStatusCode.OK)
                 {
-                    Console.WriteLine($"{url} returns {document.StatusCode}");
+                    //Console.WriteLine($"{url} returns {document.StatusCode}");
                     await Task.Delay(200);
                     continue;
                 }
@@ -328,6 +328,8 @@ namespace Notabenoid
             res = res.ToLower();
 
             var document = await GetDocumentAsync(url);
+            if (document == null)
+                Console.WriteLine($"Can't get {url}");
 
             Console.WriteLine($"{document.StatusCode} {document.Title}");
 
@@ -372,14 +374,15 @@ namespace Notabenoid
         /// <returns></returns>
         public string GetLink(string resource, string en)
         {
-            if (_links.TryGetValue(resource.ToLower(), out var rows) && rows.TryGetValue(EscapeNewLine(en), out var link))
-                return link;
+            if (_links.TryGetValue(resource.ToLower(), out var rows))
+                if (rows.TryGetValue(EscapeNewLine(en), out var link))
+                    return link;
             return null;
         }
 
         private string EscapeNewLine(string str)
         {
-            return str.Replace("\r", "\\r").Replace("\n", "\\n");
+            return str.Replace("\r", "").Replace("\n", "\\n");
         }
 
         #endregion
