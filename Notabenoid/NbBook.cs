@@ -31,18 +31,18 @@ namespace Notabenoid
 
         private async Task<IDocument> GetDocumentAsync(string url)
         {
+            IDocument document = null;
             for (int i = 0; i < 20; i++)
             {
-                var document = await context.OpenAsync(url);
+                document = await context.OpenAsync(url);
                 if (document.StatusCode != HttpStatusCode.OK)
                 {
-                    //Console.WriteLine($"{url} returns {document.StatusCode}");
                     await Task.Delay(200);
                     continue;
                 }
                 return document;
             }
-
+            Console.WriteLine($"{url} returns {document.StatusCode}");
             return null;
         }
 
