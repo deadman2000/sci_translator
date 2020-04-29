@@ -40,7 +40,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  volumeName: db-volume
+  volumeName: translate-volume
 ---
 
 # Web
@@ -179,7 +179,7 @@ spec:
   ports:
     - protocol: TCP
       name: mongodb
-      port: 27017
+      port: 27018
       targetPort: 27017
   selector:
     app: mongodb
