@@ -27,6 +27,10 @@ namespace SCI_Translator
                 RegistryKey key = Registry.CurrentUser.CreateSubKey("SCI_Translator");
                 form.GameDir = key.GetValue("LastGameDir")?.ToString();
                 form.TranslateDir = key.GetValue("LastTranslateDir")?.ToString();
+
+                var lastEnc = key.GetValue("LastEncoding");
+                if (lastEnc != null)
+                    form.Encoding = Encoding.GetEncoding(int.Parse(lastEnc.ToString()));
                 key.Close();
 
 

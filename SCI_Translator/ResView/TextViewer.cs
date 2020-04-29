@@ -34,7 +34,7 @@ namespace SCI_Translator.ResView
                 for (int i = 0; i < en.Length; i++)
                     dgvText.Rows.Add(i, en[i], ru[i]);
             }
-            else;
+            else
             {
                 for (int i = 0; i < en.Length; i++)
                     dgvText.Rows.Add(i, en[i], "");

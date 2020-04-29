@@ -25,10 +25,13 @@ namespace RobinHoodWeb
         {
             services.AddControllersWithViews();
 
-            IConfigurationSection sec = Configuration.GetSection("Translate");
-            services.Configure<TranslateOptions>(sec);
-
+            services.Configure<TranslateOptions>(Configuration.GetSection("Translate"));
             services.AddSingleton<TranslateService>();
+
+            services.Configure<MongoDBSettings>(Configuration.GetSection("Mongo"));
+            services.AddSingleton<MongoService>();
+
+            services.AddSingleton<TranslateStoreService>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

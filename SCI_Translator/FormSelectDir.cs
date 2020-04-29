@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,11 +24,14 @@ namespace SCI_Translator
             public Encoding Encoding => _info.GetEncoding();
         }
 
+        List<EncodingWrapper> Encodings;
+
         public FormSelectDir()
         {
             InitializeComponent();
 
-            cbEncoding.DataSource = Encoding.GetEncodings().Select(e => new EncodingWrapper(e)).ToList();
+            Encodings = Encoding.GetEncodings().Select(e => new EncodingWrapper(e)).ToList();
+            cbEncoding.DataSource = Encodings;
         }
 
         public string GameDir
@@ -45,6 +49,7 @@ namespace SCI_Translator
         public Encoding Encoding
         {
             get => ((EncodingWrapper)cbEncoding.SelectedItem).Encoding;
+            set => cbEncoding.SelectedItem = Encodings.Find(e => e.Encoding == value);
         }
 
         private void btOpen_Click(object sender, EventArgs e)
@@ -54,6 +59,7 @@ namespace SCI_Translator
             RegistryKey key = Registry.CurrentUser.CreateSubKey("SCI_Translator");
             key.SetValue("LastGameDir", GameDir);
             key.SetValue("LastTranslateDir", TranslateDir);
+            key.SetValue("LastEncoding", Encoding.CodePage.ToString());
             key.Close();
 
             DialogResult = DialogResult.OK;
