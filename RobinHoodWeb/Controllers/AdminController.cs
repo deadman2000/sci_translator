@@ -65,15 +65,16 @@ namespace RobinHoodWeb.Controllers
 
             List<TranslateString> strings = await _store.GetStrings("robin");
 
-            foreach (var res in strings)
+            foreach (var s in strings)
             {
-                if (res.En.Length < 4) continue;
+                if (s.En.Length < 4) continue;
 
+                Console.WriteLine($"{s.Res} {s.Index}");
                 await client.IndexDocumentAsync(new
                 {
-                    Resource = res.ToString(),
-                    Line = res.Index,
-                    Text = res.En
+                    Resource = s.Res,
+                    Line = s.Index,
+                    Text = s.En
                 });
             }
 

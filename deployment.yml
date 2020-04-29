@@ -1,5 +1,5 @@
 # kubectl create secret generic nnsecret --from-literal=username=dead_man --from-literal=password='***' --namespace translate
-# kubectl create secret generic mongo --from-literal=username='***' --from-literal=password='***' --namespace translate
+# kubectl create secret generic mongo --from-literal=username='***' --from-literal=password='***' --from-literal=url='mongodb://***:***@mongodb' --namespace translate
 # kubectl delete ingressroutes.traefik.containo.us web --namespace translate
 
 # Namespace
@@ -74,6 +74,11 @@ spec:
             secretKeyRef:
               name: nnsecret
               key: password
+        - name: Mongo__ConnectionString
+          valueFrom:
+            secretKeyRef:
+              name: mongo
+              key: url
         ports:
         - name: web
           containerPort: 80
