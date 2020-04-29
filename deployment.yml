@@ -77,6 +77,14 @@ spec:
         ports:
         - name: web
           containerPort: 80
+        volumeMounts:
+        - mountPath: /data/
+          name: static
+          subPath: static
+      volumes:
+      - name: static
+        persistentVolumeClaim:
+          claimName: translate-data
 ---
 
 apiVersion: v1
@@ -185,3 +193,45 @@ spec:
     app: mongodb
   externalIPs:
     - 95.216.44.142
+---
+
+# Video processing
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: translate
+  name: video
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: video
+  template:
+    metadata:
+      labels:
+        app: video
+    spec:
+      containers:
+      - name: video
+        image: docker.dev.ask-glonass.ru/video:latest
+        env:
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo
+              key: username
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo
+              key: password
+        - name: FRAMES_DIR
+          value: /data/frames
+        volumeMounts:
+        - mountPath: /data/
+          name: static
+          subPath: static
+      volumes:
+      - name: static
+        persistentVolumeClaim:
+          claimName: translate-data
