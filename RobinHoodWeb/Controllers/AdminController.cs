@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Nest;
-using RobinHoodWeb.Filters;
 using RobinHoodWeb.Model;
 using RobinHoodWeb.Services;
 using System;
