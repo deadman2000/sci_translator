@@ -66,3 +66,49 @@ spec:
   tls:
     certResolver: default
 
+
+# elastichq
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: translate
+  name: elastichq
+  labels:
+    app: elastichq
+spec:
+  containers:
+  - name: elastichq
+    image: elastichq/elasticsearch-hq
+    ports:
+    - containerPort: 5000
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: translate
+  name: elastichq-service
+spec:
+  ports:
+  - port: 5000
+  selector:
+    app: elastichq
+---
+
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  namespace: translate
+  name: elastichq-route
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`elastictr.ml.ask-glonass.ru`)
+    kind: Rule
+    services:
+    - name: elastichq-service
+      port: 5000
+  tls:
+    certResolver: default
+
