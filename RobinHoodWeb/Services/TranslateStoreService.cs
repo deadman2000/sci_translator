@@ -17,6 +17,9 @@ namespace RobinHoodWeb.Services
         {
             _stringsCollection = mongoService.Database.GetCollection<TranslateString>("Strings");
             _videos = mongoService.Database.GetCollection<Video>("Videos");
+
+            // db.getCollection('Strings').createIndex({ "En": "text" })
+            // db.getCollection('Strings').createIndex({ "Tr": "text" })
         }
 
         public async Task AddString(string game, string resource, int index, string en, string tr)
@@ -37,10 +40,30 @@ namespace RobinHoodWeb.Services
             return await cursor.ToListAsync();
         }
 
+        public async Task<List<TranslateString>> GetStrings(string game, string resource)
+        {
+            var cursor = await _stringsCollection.FindAsync(s => s.Game == game && s.Res == resource);
+            return await cursor.ToListAsync();
+        }
+
+        public async Task<IEnumerable<TranslateString>> Search(string game, string query, bool? isEn)
+        {
+            var query_low = query.ToLower();
+
+            var strings = await GetStrings(game);
+            var filtered = strings.Where(s => ((!isEn.HasValue || isEn == true) && s.En.ToLower().Contains(query_low))
+                                           || ((!isEn.HasValue || isEn == false) && s.Tr != null && s.Tr.ToLower().Contains(query_low)));
+
+            return filtered.Take(100);
+        }
+
+
         public async Task Update<T>(TranslateString str, Expression<Func<TranslateString, T>> field, T value)
         {
             await _stringsCollection.UpdateOneAsync(s => s.Id == str.Id, Builders<TranslateString>.Update.Set(field, value));
         }
+
+
 
         public async Task AddVideo(string game, string videoId)
         {

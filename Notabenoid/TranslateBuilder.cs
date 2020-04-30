@@ -115,12 +115,13 @@ namespace Notabenoid
                     if (String.IsNullOrEmpty(en)) continue;
 
                     if (!translates.TryGetValue(en, out var tr))
-                        en = en.Replace("\n", "\r\n");
-
-                    if (!translates.TryGetValue(en, out tr))
                     {
-                        //Console.WriteLine($"Missing tex {r} - {en}");
-                        continue;
+                        en = en.Replace("\n", "\r\n");
+                        if (!translates.TryGetValue(en, out tr))
+                        {
+                            //Console.WriteLine($"Missing tex {r} - {en}");
+                            continue;
+                        }
                     }
 
                     if (tr == null) continue;
@@ -152,14 +153,14 @@ namespace Notabenoid
         {
             try
             {
-                var part = Book.GetVolume(r.ToString());
-                if (part == null) // Ресурс без перевода
+                var vol = Book.GetVolume(r.ToString());
+                if (vol == null) // Ресурс без перевода
                     return;
 
-                if (String.IsNullOrEmpty(part.DateChange)) // Пропускаем части без перевода
+                if (String.IsNullOrEmpty(vol.DateChange)) // Пропускаем части без перевода
                     return;
 
-                if (_cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange)) // Пропускаем неизмененные части
+                if (_cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(vol.DateChange)) // Пропускаем неизмененные части
                     return;
 
                 var enScr = r.GetScript(false);
@@ -168,7 +169,7 @@ namespace Notabenoid
                 var enStrings = enScr.AllStrings.Where(s => !s.IsClassName).ToArray();
                 var ruStrings = ruScr.AllStrings.Where(s => !s.IsClassName).ToArray();
 
-                var translates = await Book.GetTranslates(part.URL);
+                var translates = await Book.GetTranslates(vol.URL);
                 bool hasTranslate = false;
 
                 for (int i = 0; i < enStrings.Length; i++)

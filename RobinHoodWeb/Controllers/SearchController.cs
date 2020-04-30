@@ -2,6 +2,7 @@
 using RobinHoodWeb.Services;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace RobinHoodWeb.Controllers
 {
@@ -9,39 +10,38 @@ namespace RobinHoodWeb.Controllers
     [Route("/api/[controller]")]
     public class SearchController : ControllerBase
     {
-        private readonly TranslateService _translateService;
+        private readonly TranslateStoreService _store;
 
-        public SearchController(TranslateService translateService)
+        public SearchController(TranslateStoreService store)
         {
-            _translateService = translateService;
+            _store = store;
         }
 
         [HttpGet]
-        public IActionResult Get(string q, string lang)
+        public async Task<IActionResult> Get(string q, string lang)
         {
             if (q == null)
                 return Ok();
 
-            bool isRu = "ru".Equals(lang);
+            bool? lng = lang?.Equals("en");
 
-            var query_low = q.ToLower();
-            return Ok(_translateService.AllStrings
-                .Where(s => ((lang == null || !isRu) && s.En.ToLower().Contains(query_low))
-                         || ((lang == null ||  isRu) && s.Ru.ToLower().Contains(query_low))
-                )
-                .Take(100)
-                .Select(s=> new {
-                    s.Res,
-                    s.En,
-                    s.Link,
-                    s.YTrans,
-                    en_html = AddSpan(s.En, q),
-                    ru_html = AddSpan(s.Ru, q),
-                }));
+            var res = await _store.Search("robin", q, lng);
+
+            return Ok(res.Select(s => new {
+                s.Res,
+                s.En,
+                s.NotaLink,
+                s.YTrans,
+                s.Videos,
+                en_html = AddSpan(s.En, q),
+                tr_html = AddSpan(s.Tr, q),
+            }));
         }
 
         private string AddSpan(string text, string substring)
         {
+            if (String.IsNullOrEmpty(text)) return "";
+
             int start = 0;
 
             while (true)

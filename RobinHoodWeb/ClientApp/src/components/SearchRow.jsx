@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import VideosList from './VideosList';
 
 export default class SearchRow extends Component {
     render() {
@@ -8,12 +9,13 @@ export default class SearchRow extends Component {
             <tr>
                 <td>
                     <a href={`/volume/${res.res}`}>{res.res}</a>&nbsp;
-                    {!!res.link && (<a href={"http://notabenoid.org" + res.link} target="_blank"><img src="/notabenoid.png" /></a>)}
+                    {!!res.notaLink && (<a href={"http://notabenoid.org" + res.notaLink} target="_blank"><img src="/notabenoid.png" /></a>)}
                 </td>
-                {res.en_html ? <td dangerouslySetInnerHTML={{ __html: res.en_html }} />
-                    : <td>{res.en}</td>}
-                {res.ru_html ? <td dangerouslySetInnerHTML={{ __html: res.ru_html }} />
-                    : <td>{res.ru}</td>}
+                {res.en_html ? <td dangerouslySetInnerHTML={{ __html: res.en_html }} /> : <td>{res.en}</td>}
+                {res.tr_html ? <td dangerouslySetInnerHTML={{ __html: res.tr_html }} /> : <td>{res.tr}</td>}
+                <td>
+                    {res.videos && <VideosList videos={res.videos} /> }
+                </td>
             </tr>
         )
     }

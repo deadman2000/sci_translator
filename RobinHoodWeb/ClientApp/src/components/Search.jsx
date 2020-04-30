@@ -65,6 +65,7 @@ export class Search extends Component {
                             <td>Ресурс</td>
                             <td>Оригинал</td>
                             <td>Перевод</td>
+                            <td>Видео</td>
                         </tr>
                     </thead>
                     <tbody>

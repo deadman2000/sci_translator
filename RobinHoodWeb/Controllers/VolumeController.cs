@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RobinHoodWeb.Services;
-using System;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace RobinHoodWeb.Controllers
 {
@@ -9,17 +8,17 @@ namespace RobinHoodWeb.Controllers
     [Route("/api/[controller]")]
     public class VolumeController : ControllerBase
     {
-        private readonly TranslateService _translateService;
+        private readonly TranslateStoreService _store;
 
-        public VolumeController(TranslateService translateService)
+        public VolumeController(TranslateStoreService store)
         {
-            _translateService = translateService;
+            _store = store;
         }
 
         [HttpGet("{volumeName}")]
-        public IActionResult Get(string volumeName)
+        public async Task<IActionResult> Get(string volumeName)
         {
-            var rows = _translateService.AllStrings.Where(s => s.Res.Equals(volumeName, StringComparison.OrdinalIgnoreCase));
+            var rows = await _store.GetStrings("robin", volumeName);
             return Ok(rows);
         }
     }

@@ -22,10 +22,11 @@ export default class Volume extends Component {
             <Table>
                 <thead>
                     <tr>
+                        <td>#</td>
                         <td>Ссылки</td>
                         <td>Оригинал</td>
                         <td>Перевод</td>
-                        <td>Yandex Translate</td>
+                        <td>Видео</td>
                     </tr>
                 </thead>
                 <tbody>

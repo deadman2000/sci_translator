@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Notabenoid
@@ -18,14 +17,18 @@ namespace Notabenoid
     {
         private IBrowsingContext context;
 
-        public string _notabenoidLogin;
-        public string _notabenoidPassword;
+        private string _notabenoidLogin;
+        private string _notabenoidPassword;
         private string _bookUrl;
+
+        public string BookId { get; }
 
         public NbBook(string notabenoidLogin, string notabenoidPassword, string bookId)
         {
             _notabenoidLogin = notabenoidLogin;
             _notabenoidPassword = notabenoidPassword;
+            BookId = bookId;
+
             _bookUrl = $"http://notabenoid.org/book/{bookId}/";
         }
 
@@ -292,7 +295,7 @@ namespace Notabenoid
 
         #region Links
 
-        private Dictionary<string, Dictionary<string, string>> _links;
+        public Dictionary<string, Dictionary<string, string>> Links { get; internal set; }
 
         /// <summary>
         /// Считывает ссылки на ресурсы из JSON-файла
@@ -301,7 +304,7 @@ namespace Notabenoid
         public void LoadLinks(string file)
         {
             if (File.Exists(file))
-                _links = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(File.ReadAllText(file));
+                Links = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(File.ReadAllText(file));
         }
 
         /// <summary>
@@ -314,12 +317,12 @@ namespace Notabenoid
             await CreateContext();
             await ReadVolumes();
 
-            _links = new Dictionary<string, Dictionary<string, string>>();
+            Links = new Dictionary<string, Dictionary<string, string>>();
 
             var tasks = Volumes.Select(v => GatherLinks(v.Name, v.URL));
             await Task.WhenAll(tasks.ToArray());
 
-            File.WriteAllText(file, JsonConvert.SerializeObject(_links, Formatting.Indented));
+            File.WriteAllText(file, JsonConvert.SerializeObject(Links, Formatting.Indented));
         }
 
         private async Task GatherLinks(string res, string url)
@@ -335,12 +338,12 @@ namespace Notabenoid
 
             Dictionary<string, string> links;
 
-            lock (_links)
+            lock (Links)
             {
-                if (!_links.TryGetValue(res, out links))
+                if (!Links.TryGetValue(res, out links))
                 {
                     links = new Dictionary<string, string>();
-                    _links.Add(res, links);
+                    Links.Add(res, links);
                 }
             }
 
@@ -374,7 +377,7 @@ namespace Notabenoid
         /// <returns></returns>
         public string GetLink(string resource, string en)
         {
-            if (_links.TryGetValue(resource.ToLower(), out var rows))
+            if (Links.TryGetValue(resource.ToLower(), out var rows))
                 if (rows.TryGetValue(EscapeNewLine(en), out var link))
                     return link;
             return null;

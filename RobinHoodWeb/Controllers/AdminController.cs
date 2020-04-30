@@ -29,7 +29,7 @@ namespace RobinHoodWeb.Controllers
         [HttpPost("tomongo")]
         public async Task<IActionResult> ToMongo()
         {
-            var package = _translateService.Builder.GetPackage();
+            var package = _translateService.GetPackage();
 
             List<TranslateString> strings = await _store.GetStrings("robin");
 
@@ -101,9 +101,12 @@ namespace RobinHoodWeb.Controllers
         {
             List<TranslateString> strings = await _store.GetStrings("robin");
 
+            if (_translateService.Book.Links == null)
+                _translateService.Book.LoadLinks("links.json");
+
             foreach (var s in strings)
             {
-                var link = _translateService.Builder.Book.GetLink(s.Res, s.En);
+                var link = _translateService.Book.GetLink(s.Res, s.En);
                 if (link != null)
                 {
                     await _store.Update(s, s => s.NotaLink, link);

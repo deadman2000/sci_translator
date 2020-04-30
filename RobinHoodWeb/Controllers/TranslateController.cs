@@ -52,7 +52,6 @@ namespace RobinHoodWeb.Controllers
         public async Task Post([FromBody] TranslateRequest request)
         {
             await _translateService.AddTranslate(request.Volume, request.En, request.Tr);
-            _translateService.UpdateStrings();
         }
     }
 
@@ -72,10 +71,10 @@ namespace RobinHoodWeb.Controllers
             await Send(new
             {
                 update_date = _translateService.UpdateDate,
-                building = _translateService.Builder.IsBuild
+                building = _translateService.IsBuild
             });
 
-            _translateService.Builder.ReportProgress += ReportProgress;
+            _translateService.ReportProgress += ReportProgress;
 
             try
             {
@@ -93,7 +92,7 @@ namespace RobinHoodWeb.Controllers
             catch { }
             finally
             {
-                _translateService.Builder.ReportProgress -= ReportProgress;
+                _translateService.ReportProgress -= ReportProgress;
             }
         }
 
