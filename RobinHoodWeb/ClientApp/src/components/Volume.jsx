@@ -3,6 +3,8 @@ import { Table } from 'react-bootstrap';
 import axios from 'axios';
 import TranslateRow from './TranslateRow'
 
+import './Search.css';
+
 export default class Volume extends Component {
     state = {
         rows: []

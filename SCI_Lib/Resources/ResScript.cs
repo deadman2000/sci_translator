@@ -41,7 +41,10 @@ namespace SCI_Translator.Resources
                 throw new Exception("Line count mismatch");
 
             for (int i = 0; i < strings.Length; i++)
-                scriptStrings[i].Value = strings[i];
+            {
+                if (strings[i] != null)
+                    scriptStrings[i].Value = strings[i];
+            }
 
             SaveTranslate(trScr.GetBytes());
         }

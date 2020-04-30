@@ -113,8 +113,14 @@ namespace RobinHoodWeb.Controllers
                         {
                             await _translateService.Build();
                         }
-                        catch { }
-                        Finished();
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        finally
+                        {
+                            Finished();
+                        }
                     }).Start();
                     break;
             }

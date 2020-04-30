@@ -49,7 +49,7 @@ namespace RobinHoodWeb.Services
             Book = new NbBook(op.Value.NotabenoidLogin, op.Value.NotabenoidPassword, op.Value.BookId);
 
             _gameDir = op.Value.GameDir;
-            _translateDir = op.Value.TranslateDir;
+            _translateDir = op.Value.TranslateDir ?? Path.Combine(_gameDir, "TRANSLATE");
             _notaCache = mongo.Database.GetCollection<NotaCache>("NotaCache");
             _store = store;
 
@@ -113,7 +113,7 @@ namespace RobinHoodWeb.Services
                 {
                     var dbStr = resStrings.Find(r => r.Index == i);
 
-                    if (strings[i] != dbStr.Tr)
+                    if (!String.IsNullOrEmpty(dbStr.Tr) && strings[i] != dbStr.Tr)
                     {
                         Console.WriteLine($"Apply {res} {i}");
                         strings[i] = dbStr.Tr;
@@ -168,6 +168,13 @@ namespace RobinHoodWeb.Services
                         if (cacheDict.ContainsKey(vol.Name))
                             await _notaCache.UpdateOneAsync(c => c.BookId == Book.BookId && c.Res == vol.Name,
                                 Builders<NotaCache>.Update.Set(c => c.Date, vol.DateChange));
+                        else
+                            await _notaCache.InsertOneAsync(new NotaCache
+                            {
+                                BookId = Book.BookId,
+                                Res = vol.Name,
+                                Date = vol.DateChange
+                            });
                     }
                     catch (Exception ex)
                     {
@@ -180,6 +187,7 @@ namespace RobinHoodWeb.Services
                     }
                 }
 
+                Console.WriteLine("Nota sync completed");
                 return true;
             }
             catch (Exception ex)

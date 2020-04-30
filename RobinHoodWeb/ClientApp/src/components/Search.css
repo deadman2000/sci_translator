@@ -1,8 +1,16 @@
-﻿.searchResult span {
+﻿.searchText span {
     background-color: sandybrown;
 }
 
-.video_preview img  {
+.video_preview div {
     width: 160px;
     height: 120px;
+    background-repeat: no-repeat;
+    background-size: 160px 120px;
+}
+
+.video_preview div span {
+    color: white;
+    font-size: 7pt;
+    padding-left: 4px;
 }

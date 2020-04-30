@@ -49,7 +49,10 @@ namespace SCI_Translator.Resources
                 throw new Exception("Line count mismatch");
 
             for (int i = 0; i < strings.Length; i++)
-                messages[i].Text = strings[i];
+            {
+                if (strings[i] != null)
+                    messages[i].Text = strings[i];
+            }
 
             throw new NotImplementedException();
             //SaveTranslate()

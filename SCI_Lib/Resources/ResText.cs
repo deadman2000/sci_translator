@@ -42,7 +42,10 @@ namespace SCI_Translator.Resources
 
             for (int r = 0; r < strings.Length; r++)
             {
-                var bytes = GameEncoding.GetBytes(strings[r]);
+                var tr = strings[r];
+                if (tr == null) tr = oldStrings[r];
+
+                var bytes = GameEncoding.GetBytes(tr);
                 bb.AddBytes(bytes);
                 bb.AddByte(0);
             }
