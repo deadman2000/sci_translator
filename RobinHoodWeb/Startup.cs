@@ -31,6 +31,9 @@ namespace RobinHoodWeb
             services.Configure<MongoDBSettings>(Configuration.GetSection("Mongo"));
             services.AddSingleton<MongoService>();
 
+            services.Configure<ElasticSettings>(Configuration.GetSection("Elastic"));
+            services.AddSingleton<ElasticService>();
+
             services.AddSingleton<TranslateStoreService>();
 
             // In production, the React files will be served from this directory
@@ -59,6 +62,13 @@ namespace RobinHoodWeb
                 RequestPath = new PathString("/download")
             });
 
+            var mediaDir = Path.GetFullPath("./media");
+            Directory.CreateDirectory(mediaDir);
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(mediaDir),
+                RequestPath = new PathString("/media")
+            });
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();

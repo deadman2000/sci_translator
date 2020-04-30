@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nest;
 using RobinHoodWeb.Model;
 using RobinHoodWeb.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using YTranslate;
 
@@ -55,28 +55,19 @@ namespace RobinHoodWeb.Controllers
             return Ok();
         }
 
-        [HttpPost("toelastic")]
-        public async Task<IActionResult> ToElastic()
+        [HttpPost("toelastic/{game}")]
+        public async Task<IActionResult> ToElastic(string game, [FromServices] ElasticService elastic)
         {
-            var settings = new ConnectionSettings(new Uri("http://elastic:9200"))
-                .DefaultIndex("robin");
+            var strings = await _store.GetStrings(game);
 
-            var client = new ElasticClient(settings);
-
-            List<TranslateString> strings = await _store.GetStrings("robin");
-
-            foreach (var s in strings)
-            {
-                if (s.En.Length < 4) continue;
-
-                Console.WriteLine($"{s.Res} {s.Index}");
-                await client.IndexDocumentAsync(new
+            await elastic.Index(game, strings
+                .Where(s => s.En.Length >= 4)
+                .Select(s => new
                 {
                     Resource = s.Res,
                     Line = s.Index,
                     Text = s.En
-                });
-            }
+                }));
 
             return Ok();
         }
@@ -125,7 +116,7 @@ namespace RobinHoodWeb.Controllers
         [HttpPost("add_video/{game}/{video_id}")]
         public async Task<IActionResult> AddVideo(string game, string video_id)
         {
-            var video = await  _store.GetVideo(game, video_id);
+            var video = await _store.GetVideo(game, video_id);
             if (video != null)
                 return BadRequest("Video exists");
 
