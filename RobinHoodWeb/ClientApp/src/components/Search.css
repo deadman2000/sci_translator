@@ -7,11 +7,11 @@
     height: 120px;
     background-repeat: no-repeat;
     background-size: 160px 120px;
+    display: inline-block;
 }
 
 .video_preview div span {
     color: white;
     font-size: 7pt;
     padding-left: 4px;
-    display: inline-block;
 }
