@@ -17,10 +17,9 @@ namespace RobinHoodWeb.Services
         {
             _stringsCollection = mongoService.Database.GetCollection<TranslateString>("Strings");
             _videos = mongoService.Database.GetCollection<Video>("Videos");
-
-            // db.getCollection('Strings').createIndex({ "En": "text" })
-            // db.getCollection('Strings').createIndex({ "Tr": "text" })
         }
+
+        public IMongoCollection<TranslateString> Strings => _stringsCollection;
 
         public async Task AddString(string game, string resource, int index, string en, string tr)
         {

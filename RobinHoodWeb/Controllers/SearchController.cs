@@ -29,6 +29,7 @@ namespace RobinHoodWeb.Controllers
 
             return Ok(res.Select(s => new {
                 s.Res,
+                s.Index,
                 s.En,
                 s.NotaLink,
                 s.YTrans,

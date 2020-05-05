@@ -34,13 +34,17 @@ namespace RobinHoodWeb.Model
             [BsonElement("url")]
             public string Url { get; set; }
 
-            [BsonElement("score")]
-            public double Score { get; set; }
-
             [BsonElement("time")]
             public int Time { get; set; }
 
             public string Image => $"/media/frames/{VideoId}/{Time}.png";
+
+            [BsonElement("score")]
+            public double Score { get; set; }
+
+            [BsonElement("txt")]
+            public string Txt { get; set; }
+
         }
 
         public List<StringVideo> Videos { get; set; }

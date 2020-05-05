@@ -8,7 +8,7 @@ export default class SearchRow extends Component {
         return (
             <tr>
                 <td>
-                    <a href={`/volume/${res.res}`}>{res.res}</a>&nbsp;
+                    <a href={`/volume/${res.res}`}>{res.res}:{res.index}</a>&nbsp;
                     {!!res.notaLink && (<a href={"http://notabenoid.org" + res.notaLink} target="_blank"><img src="/notabenoid.png" /></a>)}
                 </td>
                 {res.en_html ? <td dangerouslySetInnerHTML={{ __html: res.en_html }} className="searchText" /> : <td>{res.en}</td>}

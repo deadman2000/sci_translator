@@ -12,7 +12,8 @@ namespace SCI_Tools
         typeof(NotaFindDublicates),
         typeof(ExtractEnWords),
         typeof(TranslatedToText),
-        typeof(ElasticExport)
+        typeof(ElasticExport),
+        typeof(FontExport)
     )]
     partial class Program
     {
