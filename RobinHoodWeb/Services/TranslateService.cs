@@ -149,6 +149,7 @@ namespace RobinHoodWeb.Services
 
                 BuildProgress = 0;
                 Total = Book.Volumes.Count;
+                string tr;
 
                 foreach (var vol in volumes)
                 {
@@ -159,7 +160,11 @@ namespace RobinHoodWeb.Services
                         var strings = await _store.GetStrings(GameId, vol.Name);
                         foreach (var s in strings)
                         {
-                            if (translates.TryGetValue(s.En, out var tr) && tr != s.Tr)
+                            if (!translates.TryGetValue(s.En, out tr))
+                                if (!translates.TryGetValue(s.En.Replace("\n", "\r\n"), out tr))
+                                    continue;
+
+                            if (tr != s.Tr)
                             {
                                 await _store.Update(s, s => s.Tr, tr);
                             }
