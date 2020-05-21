@@ -19,7 +19,6 @@ namespace Notabenoid
         public TranslateBuilder(string notabenoidLogin, string notabenoidPassword, string bookId, string gameDir, string translateDir)
         {
             Book = new NbBook(notabenoidLogin, notabenoidPassword, bookId);
-            Book.LoadLinks("links.json"); // Загружаем ссылки на ресурсы
             GameDir = gameDir;
             TranslateDir = translateDir ?? Path.Combine(GameDir, "TRANSLATE");
         }
@@ -83,6 +82,18 @@ namespace Notabenoid
             }
         }
 
+        public async Task Build(string resourceName)
+        {
+            await Book.ReadVolumes();
+
+            var package = GetPackage();
+            var res = package.GetResouce(resourceName);
+            if (res is ResText t)
+                await ApplyTranslate(t);
+            else if (res is ResScript s)
+                await ApplyTranslate(s);
+        }
+
         private async Task ApplyTranslate(ResText r)
         {
             try
@@ -94,7 +105,7 @@ namespace Notabenoid
                 if (String.IsNullOrEmpty(part.DateChange)) // Пропускаем части без перевода
                     return;
 
-                if (_cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange)) // Пропускаем неизмененные части
+                if (_cache != null && _cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(part.DateChange)) // Пропускаем неизмененные части
                     return;
 
                 var enLines = r.GetText(false); // Оригинальный текст
@@ -108,6 +119,8 @@ namespace Notabenoid
 
                 var translates = await Book.GetTranslates(part.URL);
                 bool hasTranslate = false;
+
+                var notaEn = translates.Keys.ToHashSet();
 
                 for (int i = 0; i < enLines.Length; i++)
                 {
@@ -126,6 +139,8 @@ namespace Notabenoid
 
                     if (tr == null) continue;
 
+                    notaEn.Remove(en);
+
                     var ru = ruLines[i];
                     if (tr.Equals(ru)) // Пропускаем старый перевод
                         continue;
@@ -133,6 +148,15 @@ namespace Notabenoid
                     hasTranslate = true;
 
                     ruLines[i] = tr;
+                }
+
+                if (notaEn.Count > 0)
+                {
+                    Console.WriteLine($"Not found nota in {r.FileName}");
+                    foreach (var nota in notaEn)
+                    {
+                        Console.WriteLine(nota);
+                    }
                 }
 
                 if (hasTranslate)
@@ -160,7 +184,7 @@ namespace Notabenoid
                 if (String.IsNullOrEmpty(vol.DateChange)) // Пропускаем части без перевода
                     return;
 
-                if (_cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(vol.DateChange)) // Пропускаем неизмененные части
+                if (_cache != null && _cache.TryGetValue(r.ToString(), out string changed) && changed.Equals(vol.DateChange)) // Пропускаем неизмененные части
                     return;
 
                 var enScr = r.GetScript(false);
@@ -172,12 +196,24 @@ namespace Notabenoid
                 var translates = await Book.GetTranslates(vol.URL);
                 bool hasTranslate = false;
 
+                var notaEn = translates.Keys.ToHashSet();
+
                 for (int i = 0; i < enStrings.Length; i++)
                 {
                     var en = enStrings[i].Value;
                     if (String.IsNullOrEmpty(en)) continue;
 
-                    if (!translates.TryGetValue(en, out var tr)) continue;
+                    if (!translates.TryGetValue(en, out var tr))
+                    {
+                        en = en.Replace("\n", "\r\n");
+                        if (!translates.TryGetValue(en, out tr))
+                        {
+                            //Console.WriteLine($"Missing tex {r} - {en}");
+                            continue;
+                        }
+                    }
+
+                    notaEn.Remove(en);
 
                     var ru = ruStrings[i].Value;
                     if (tr.Equals(ru)) // Пропускаем старый перевод
@@ -186,6 +222,15 @@ namespace Notabenoid
                     hasTranslate = true;
 
                     ruStrings[i].Value = tr;
+                }
+
+                if (notaEn.Count > 0)
+                {
+                    Console.WriteLine($"Not found nota in {r.FileName}");
+                    foreach (var nota in notaEn)
+                    {
+                        Console.WriteLine(nota);
+                    }
                 }
 
                 if (hasTranslate)

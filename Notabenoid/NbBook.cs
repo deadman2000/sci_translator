@@ -295,35 +295,7 @@ namespace Notabenoid
 
         #region Links
 
-        public Dictionary<string, Dictionary<string, string>> Links { get; internal set; }
-
-        /// <summary>
-        /// Считывает ссылки на ресурсы из JSON-файла
-        /// </summary>
-        /// <param name="file">Путь к загружаемому JSON-файлу</param>
-        public void LoadLinks(string file)
-        {
-            if (File.Exists(file))
-                Links = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(File.ReadAllText(file));
-        }
-
-        /// <summary>
-        /// Собирает все ссылки на ресурсы из данной книги и сохраняет в файл
-        /// </summary>
-        /// <param name="file">Путь к сохраняемому JSON-файлу</param>
-        /// <returns></returns>
-        public async Task GatheringLinks(string file)
-        {
-            await CreateContext();
-            await ReadVolumes();
-
-            Links = new Dictionary<string, Dictionary<string, string>>();
-
-            var tasks = Volumes.Select(v => GatherLinks(v.Name, v.URL));
-            await Task.WhenAll(tasks.ToArray());
-
-            File.WriteAllText(file, JsonConvert.SerializeObject(Links, Formatting.Indented));
-        }
+        public Dictionary<string, Dictionary<string, string>> Links { get; internal set; } = new Dictionary<string, Dictionary<string, string>>();
 
         private async Task GatherLinks(string res, string url)
         {
@@ -375,8 +347,18 @@ namespace Notabenoid
         /// <param name="resource"></param>
         /// <param name="en"></param>
         /// <returns></returns>
-        public string GetLink(string resource, string en)
+        public async Task<string> GetLink(string resource, string en)
         {
+            await ReadVolumes();
+
+            if (!Links.ContainsKey(resource.ToLower()))
+            {
+                var vol = GetVolume(resource);
+                if (vol == null) return null;
+
+                await GatherLinks(resource, vol.URL);
+            }
+
             if (Links.TryGetValue(resource.ToLower(), out var rows))
                 if (rows.TryGetValue(EscapeNewLine(en), out var link))
                     return link;
@@ -443,6 +425,44 @@ namespace Notabenoid
                 else
                     res.Url = await CreateVolume(document, res.Resource.FileName);
             }
+
+            var tasks = resStrings
+                .Select(r => UploadRes(r))
+                .ToArray();
+            await Task.WhenAll(tasks);
+        }
+
+        /// <summary>
+        /// Загружает исходный текст с переводом в кингу
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
+        public async Task Upload(SCIPackage package, string resourceName)
+        {
+            await CreateContext();
+
+            await ReadVolumes();
+
+            var document = await GetDocumentAsync(_bookUrl);
+
+            Console.WriteLine("Getting strings");
+            var res = package.GetResouce(resourceName);
+
+            List<ResStrings> resStrings = new List<ResStrings>();
+            var en = res.GetStrings(false);
+            if (en == null || en.Length == 0) return;
+            if (!en.Any(s => s.Length > 0)) return; // Full empty resource
+
+            var tr = res.GetStrings(true);
+            var str = new ResStrings { Resource = res, En = en, Tr = tr };
+            resStrings.Add(str);
+
+            Console.WriteLine($"Create {resStrings.Count} volumes");
+            var vol = Volumes.FirstOrDefault(v => v.Name.Equals(res.FileName, StringComparison.OrdinalIgnoreCase));
+            if (vol != null)
+                str.Url = vol.URL;
+            else
+                str.Url = await CreateVolume(document, res.FileName);
 
             var tasks = resStrings
                 .Select(r => UploadRes(r))

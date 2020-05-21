@@ -1,9 +1,7 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using SCI_Translator.Resources;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SCI_Tools

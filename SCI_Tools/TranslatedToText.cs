@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SCI_Tools
 {
-    // tr_to_txt -d D:\Dos\GAMES\QG_VGA\ -t D:\Dos\GAMES\QG_VGA_RUS\
+    // tr_to_txt -d D:\Projects\SCI_Translator\Conquest\ -t D:\Projects\SCI_Translator\Conquest\TRANSLATE\
     [Command("tr_to_txt", Description = "Extract translate to text file")]
     class TranslatedToText : PackageCommand
     {

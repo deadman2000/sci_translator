@@ -7,7 +7,6 @@ namespace SCI_Tools
         typeof(CompareTranslates),
         typeof(Test),
         typeof(NotaPatch),
-        typeof(NotaLinks),
         typeof(NotaUpload),
         typeof(NotaFindDublicates),
         typeof(ExtractEnWords),

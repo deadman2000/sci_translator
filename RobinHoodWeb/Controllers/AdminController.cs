@@ -96,20 +96,21 @@ namespace RobinHoodWeb.Controllers
             return Ok();
         }
 
-        [HttpPost("notalinks")]
-        public async Task<IActionResult> NotaLinks()
+        [HttpPost("notalinks/{game}")]
+        public async Task<IActionResult> NotaLinks(string game)
         {
-            List<TranslateString> strings = await _store.GetStrings("robin");
+            var strings = await _store.GetStrings(game);
 
-            if (_translateService.Book.Links == null)
-                _translateService.Book.LoadLinks("links.json");
-
-            foreach (var s in strings)
+            foreach (var s in strings.Where(s => String.IsNullOrEmpty(s.NotaLink)))
             {
-                var link = _translateService.Book.GetLink(s.Res, s.En);
+                var link = await _translateService.Book.GetLink(s.Res, s.En);
                 if (link != null)
                 {
                     await _store.Update(s, s => s.NotaLink, link);
+                }
+                else
+                {
+                    Console.WriteLine($"{s.Res} {s.En}");
                 }
             }
 

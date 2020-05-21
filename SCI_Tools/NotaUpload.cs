@@ -24,10 +24,17 @@ namespace SCI_Tools
         [Required]
         public string BookId { get; set; }
 
+        [Option(Description = "Resource name", ShortName = "r")]
+        public string Resource { get; set; }
+
         protected override async Task Do()
         {
             NbBook book = new NbBook(NotabenoidLogin, NotabenoidPassword, BookId);
-            await book.Upload(package);
+
+            if (Resource != null)
+                await book.Upload(package, Resource);
+            else
+                await book.Upload(package);
         }
     }
 }
