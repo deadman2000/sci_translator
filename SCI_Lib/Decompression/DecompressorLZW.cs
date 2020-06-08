@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace SCI_Translator.Decompression
@@ -194,11 +195,17 @@ namespace SCI_Translator.Decompression
 
         private void reorderView()
         {
+#if DEBUG
+            Debugger.Break();
+#endif
             throw new NotImplementedException(); // TODO
         }
 
         private void reorderPic()
         {
+#if DEBUG
+            //Debugger.Break();
+#endif
             throw new NotImplementedException(); // TODO
         }
 

@@ -1,50 +1,105 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SCI_Translator
 {
     public static class StreamExtensions
     {
-        public static ushort ReadUShortBE(this Stream fs)
+        public static ushort ReadUShortBE(this Stream stream)
         {
-            return (ushort)(fs.ReadByte() | (fs.ReadByte() << 8));
+            return (ushort)(stream.ReadByte() | (stream.ReadByte() << 8));
         }
 
-        public static ushort ReadUShortLE(this Stream fs)
+        public static ushort ReadUShortLE(this Stream stream)
         {
-            return (ushort)((fs.ReadByte() << 8) | fs.ReadByte());
+            return (ushort)((stream.ReadByte() << 8) | stream.ReadByte());
         }
 
-        public static int Read3ByteBE(this Stream fs)
+        public static int Read3ByteBE(this Stream stream)
         {
-            return fs.ReadByte() | (fs.ReadByte() << 8) | (fs.ReadByte() << 16);
+            return stream.ReadByte() | (stream.ReadByte() << 8) | (stream.ReadByte() << 16);
         }
 
-        public static int ReadIntBE(this Stream fs)
+        public static int ReadIntBE(this Stream stream)
         {
-            return fs.ReadByte() | (fs.ReadByte() << 8) | (fs.ReadByte() << 16) | (fs.ReadByte() << 24);
+            return stream.ReadByte() | (stream.ReadByte() << 8) | (stream.ReadByte() << 16) | (stream.ReadByte() << 24);
         }
 
-        public static uint ReadUIntBE(this Stream fs)
+        public static uint ReadUIntBE(this Stream stream)
         {
-            return (uint)(fs.ReadByte() | (fs.ReadByte() << 8) | (fs.ReadByte() << 16) | (fs.ReadByte() << 24));
+            return (uint)(stream.ReadByte() | (stream.ReadByte() << 8) | (stream.ReadByte() << 16) | (stream.ReadByte() << 24));
         }
 
-        public static uint ReadUIntLE(this Stream fs)
+        public static uint ReadUIntLE(this Stream stream)
         {
-            return (uint)((fs.ReadByte() << 24) | (fs.ReadByte() << 16) | (fs.ReadByte() << 8) | fs.ReadByte());
+            return (uint)((stream.ReadByte() << 24) | (stream.ReadByte() << 16) | (stream.ReadByte() << 8) | stream.ReadByte());
         }
 
-        public static string ReadString(this Stream fs, GameEncoding encoding)
+        public static string ReadString(this Stream stream, GameEncoding encoding)
         {
             List<byte> buff = new List<byte>();
             while (true)
             {
-                var b = fs.ReadByte();
+                var b = stream.ReadByte();
                 if (b == 0) break;
                 buff.Add((byte)b);
             }
             return encoding.GetString(buff.ToArray());
         }
+
+        public static byte[] ReadBytes(this Stream stream, int length)
+        {
+            byte[] bytes = new byte[length];
+            if (stream.Read(bytes, 0, length) != length)
+                throw new FormatException();
+
+            return bytes;
+        }
+
+        public static byte ReadB(this Stream stream)
+        {
+            var b = stream.ReadByte();
+            if (b < 0 || b > 255) throw new FormatException();
+            return (byte)b;
+        }
+
+        public static byte Peek(this Stream stream)
+        {
+            var pos = stream.Position;
+            var b = stream.ReadB();
+            stream.Seek(pos, SeekOrigin.Begin);
+            return b;
+        }
+
+        public static PointShort ReadPicAbsCoord(this Stream stream)
+        {
+            var prefix = stream.ReadB();
+            PointShort p;
+            p.X = (ushort)(stream.ReadB() + ((prefix & 0xf0) << 4));
+            p.Y = (ushort)(stream.ReadB() + ((prefix & 0x0f) << 8));
+            return p;
+        }
+
+        public static PointShort ReadPicRelCoord(this Stream stream, PointShort orig)
+        {
+            var i = stream.ReadB();
+            if ((i & 0x80) == 0x80)
+                orig.X = (ushort)(orig.X - ((i >> 4) & 0xf));
+            else
+                orig.X = (ushort)(orig.X + ((i >> 4) & 0xf));
+
+            if ((i & 0x08) == 0x08)
+                orig.Y = (ushort)(orig.Y - (i & 7));
+            else
+                orig.Y = (ushort)(orig.Y + (i & 7));
+            return orig;
+        }
+    }
+
+    public struct PointShort
+    {
+        public ushort X;
+        public ushort Y;
     }
 }

@@ -74,6 +74,7 @@ namespace SCI_Translator.Resources
                 case ResType.Script: return new ResScript();
                 case ResType.Font: return new ResFont();
                 case ResType.Message: return new ResMessage();
+                case ResType.Picture: return new ResPicture();
                 default: return new Resource();
             }
         }

@@ -20,7 +20,7 @@ namespace SCI_Tools
 
         protected SCIPackage package2;
 
-        protected override async Task Do()
+        protected override Task Do()
         {
             package2 = SCIPackage.Load(SecondGameDir, SecondTranslateDir);
 
@@ -99,6 +99,8 @@ namespace SCI_Tools
                     txt.SetTranslate(ruTxt);
                 }
             }
+
+            return Task.CompletedTask;
         }
 
         // Удаляет лишние пробелы, приводит к нижнему регистру

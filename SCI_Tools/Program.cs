@@ -12,7 +12,9 @@ namespace SCI_Tools
         typeof(ExtractEnWords),
         typeof(TranslatedToText),
         typeof(ElasticExport),
-        typeof(FontExport)
+        typeof(FontExport),
+        typeof(ReplacePic),
+        typeof(ExtractPic)
     )]
     partial class Program
     {

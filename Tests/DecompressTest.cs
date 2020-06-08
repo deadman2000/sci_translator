@@ -19,7 +19,7 @@ namespace Tests
         [Test]
         public async Task DecompressConquest()
         {
-            await CheckDecompress("../../../../Conquest/", Path.Combine(ASSETS, "Conquest_res"));
+            await CheckDecompress(Utils.ConquestPath, Path.Combine(ASSETS, "Conquest_res"));
         }
 
         private async Task CheckDecompress(string mapPath, string uncompDir)

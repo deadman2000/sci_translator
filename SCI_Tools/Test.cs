@@ -11,8 +11,9 @@ namespace SCI_Tools
         [Command("test", Description = "for testing")]
         class Test : PackageCommand
         {
-            protected override async Task Do()
+            protected override Task Do()
             {
+            return Task.CompletedTask;
             }
         }
     }

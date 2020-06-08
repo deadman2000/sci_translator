@@ -9,8 +9,6 @@ namespace Tests
 {
     public class ScriptsTest
     {
-        private const string GAME_DIR = @"..\..\..\..\Conquest\";
-
         [SetUp]
         public void Setup()
         {
@@ -41,25 +39,22 @@ namespace Tests
             }
         }
 
-        private SCIPackage Load() => SCIPackage.Load(GAME_DIR);
-
-
         [Test]
         public void DisassembleAll()
         {
-            CheckPackage(Load(), false);
+            CheckPackage(Utils.LoadPackage(), false);
         }
 
         [Test]
         public void DisassembleAllRus()
         {
-            CheckPackage(Load(), true);
+            CheckPackage(Utils.LoadPackage(), true);
         }
 
         [Test]
         public void ParseAndBack()
         {
-            SCIPackage package = Load();
+            SCIPackage package = Utils.LoadPackage();
 
             foreach (var res in package.Scripts)
             {
@@ -72,7 +67,7 @@ namespace Tests
         [Test]
         public void SetAddressOnWrite()
         {
-            SCIPackage package = Load();
+            SCIPackage package = Utils.LoadPackage();
             
             foreach (var r in package.Scripts)
             {
@@ -90,7 +85,7 @@ namespace Tests
         [Test]
         public void RefsLifeCycle()
         {
-            SCIPackage package = Load();
+            SCIPackage package = Utils.LoadPackage();
 
             foreach (var res in package.Scripts)
             {

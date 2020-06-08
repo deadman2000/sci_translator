@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SCI_Translator
 {
@@ -45,6 +43,14 @@ namespace SCI_Translator
             _bytes.Add((byte)(val >> 8));
         }
 
+        internal void AddIntBE(int val)
+        {
+            _bytes.Add((byte)(val & 0xFF));
+            _bytes.Add((byte)(val >> 8));
+            _bytes.Add((byte)(val >> 16));
+            _bytes.Add((byte)(val >> 24));
+        }
+
 
         public void SetByte(int offset, byte val)
         {
@@ -57,5 +63,16 @@ namespace SCI_Translator
             _bytes[offset + 1] = (byte)(val >> 8);
         }
 
+
+        public void WritePicAbsCoord(ref PointShort p)
+        {
+            /*  var prefix = stream.ReadB();
+                p.X = (ushort)(stream.ReadB() + ((prefix & 0xf0) << 4));
+                p.Y = (ushort)(stream.ReadB() + ((prefix & 0x0f) << 8)); */
+            byte prefix = (byte)((((p.X >> 8) & 0xf) << 4) | ((p.Y >> 8) & 0xf));
+            AddByte(prefix);
+            AddByte((byte)(p.X & 0xff));
+            AddByte((byte)(p.Y & 0xff));
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace SCI_Translator
         ScriptView scriptView;
         VocabView vocabView;
         MsgView msgView;
+        PicView picView;
 
         private int? SelectRow;
 
@@ -36,6 +37,7 @@ namespace SCI_Translator
             sc.Panel2.Controls.Add(scriptView = new ScriptView());
             sc.Panel2.Controls.Add(vocabView = new VocabView());
             sc.Panel2.Controls.Add(msgView = new MsgView());
+            sc.Panel2.Controls.Add(picView = new PicView());
 
             foreach (ResType resType in Enum.GetValues(typeof(ResType)))
             {
@@ -110,16 +112,7 @@ namespace SCI_Translator
             var info = res.GetInfo();
             tsslResourceInfo.Text = String.Format("{0}  {1} ({2:X8}h)  {3}", res.Type, res.ResourceFileName, res.Offset, info);
 
-            switch (res.Type)
-            {
-                case ResType.Text: _currentViewer = textViewer; break;
-                case ResType.Font: _currentViewer = fontView; break;
-                case ResType.Script: _currentViewer = scriptView; break;
-                case ResType.Vocabulary: _currentViewer = vocabView; break;
-                case ResType.Message: _currentViewer = msgView; break;
-                default: _currentViewer = hexViewer; break;
-            }
-
+            _currentViewer = GetViewer(res);
             _currentViewer.Activate(res, translated);
             if (SelectRow.HasValue)
             {
@@ -127,6 +120,20 @@ namespace SCI_Translator
                 SelectRow = null;
             }
             _currentViewer.BringToFront();
+        }
+
+        private ResViewer GetViewer(Resource res)
+        {
+            switch (res.Type)
+            {
+                case ResType.Text: return textViewer;
+                case ResType.Font: return fontView;
+                case ResType.Script: return scriptView;
+                case ResType.Vocabulary: return vocabView;
+                case ResType.Message: return msgView;
+                case ResType.Picture: return picView;
+                default: return hexViewer;
+            }
         }
 
         private void tsbSave_Click(object sender, EventArgs e)
