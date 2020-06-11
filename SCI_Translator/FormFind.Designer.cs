@@ -32,6 +32,8 @@
             this.tbPattern = new System.Windows.Forms.TextBox();
             this.btFind = new System.Windows.Forms.Button();
             this.lbResults = new System.Windows.Forms.ListBox();
+            this.chbExact = new System.Windows.Forms.CheckBox();
+            this.chbMatchCase = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -57,7 +59,7 @@
             // btFind
             // 
             this.btFind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btFind.Location = new System.Drawing.Point(557, 31);
+            this.btFind.Location = new System.Drawing.Point(556, 28);
             this.btFind.Margin = new System.Windows.Forms.Padding(4);
             this.btFind.Name = "btFind";
             this.btFind.Size = new System.Drawing.Size(100, 28);
@@ -73,19 +75,41 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbResults.FormattingEnabled = true;
             this.lbResults.ItemHeight = 16;
-            this.lbResults.Location = new System.Drawing.Point(16, 66);
+            this.lbResults.Location = new System.Drawing.Point(16, 115);
             this.lbResults.Margin = new System.Windows.Forms.Padding(4);
             this.lbResults.Name = "lbResults";
-            this.lbResults.Size = new System.Drawing.Size(640, 580);
+            this.lbResults.Size = new System.Drawing.Size(640, 500);
             this.lbResults.TabIndex = 3;
             this.lbResults.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lbResults_MouseDoubleClick);
+            // 
+            // chbExact
+            // 
+            this.chbExact.AutoSize = true;
+            this.chbExact.Location = new System.Drawing.Point(16, 60);
+            this.chbExact.Name = "chbExact";
+            this.chbExact.Size = new System.Drawing.Size(64, 21);
+            this.chbExact.TabIndex = 4;
+            this.chbExact.Text = "Exact";
+            this.chbExact.UseVisualStyleBackColor = true;
+            // 
+            // chbMatchCase
+            // 
+            this.chbMatchCase.AutoSize = true;
+            this.chbMatchCase.Location = new System.Drawing.Point(16, 87);
+            this.chbMatchCase.Name = "chbMatchCase";
+            this.chbMatchCase.Size = new System.Drawing.Size(102, 21);
+            this.chbMatchCase.TabIndex = 5;
+            this.chbMatchCase.Text = "Match case";
+            this.chbMatchCase.UseVisualStyleBackColor = true;
             // 
             // FormFind
             // 
             this.AcceptButton = this.btFind;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 684);
+            this.ClientSize = new System.Drawing.Size(673, 632);
+            this.Controls.Add(this.chbMatchCase);
+            this.Controls.Add(this.chbExact);
             this.Controls.Add(this.lbResults);
             this.Controls.Add(this.btFind);
             this.Controls.Add(this.tbPattern);
@@ -107,5 +131,7 @@
         private System.Windows.Forms.TextBox tbPattern;
         private System.Windows.Forms.Button btFind;
         private System.Windows.Forms.ListBox lbResults;
+        private System.Windows.Forms.CheckBox chbExact;
+        private System.Windows.Forms.CheckBox chbMatchCase;
     }
 }

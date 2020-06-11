@@ -19,7 +19,9 @@ namespace SCI_Translator
         SCIPackage _package;
         FormMain _main;
 
-        string pattern;
+        string _pattern;
+        bool _exact;
+        bool _matchCase;
 
         public FormFind(FormMain main, SCIPackage package)
         {
@@ -31,7 +33,13 @@ namespace SCI_Translator
         private void btFind_Click(object sender, EventArgs e)
         {
             lbResults.Items.Clear();
-            pattern = tbPattern.Text.ToLower();
+
+            _exact = chbExact.Checked;
+            _matchCase = chbMatchCase.Checked;
+
+            _pattern = tbPattern.Text;
+            if (!_matchCase)
+                _pattern = _pattern.ToLower();
 
             foreach (var txt in _package.Texts)
                 try
@@ -112,7 +120,16 @@ namespace SCI_Translator
             }
         }
 
-        private bool IsPass(string txt) => txt.ToLower().Contains(pattern);
+        private bool IsPass(string txt)
+        {
+            if (!_matchCase)
+                txt = txt.ToLower();
+
+            if (_exact)
+                return txt.Equals(_pattern);
+
+            return txt.Contains(_pattern);
+        }
 
         private void AddResult(Resource res, int ind, string txt)
         {

@@ -35,7 +35,7 @@ namespace Notabenoid
         private async Task<IDocument> GetDocumentAsync(string url)
         {
             IDocument document = null;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 50; i++)
             {
                 document = await context.OpenAsync(url);
                 if (document.StatusCode != HttpStatusCode.OK)

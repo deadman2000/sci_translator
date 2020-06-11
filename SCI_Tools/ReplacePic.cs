@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace SCI_Tools
 {
+    // replace_pic -p 100 -b D:\Projects\map_ru_2.bmp
     [Command("replace_pic", Description = "Replace picture background")]
     class ReplacePic : PackageCommand
     {
@@ -17,7 +18,6 @@ namespace SCI_Tools
         protected override Task Do()
         {
             var bmp = new Bitmap(BitmapPath);
-            //var bmp = Image.FromFile(BitmapPath);
             
             var res = package.GetResouce<ResPicture>(Picture);
             var pic = res.GetPicture(false);

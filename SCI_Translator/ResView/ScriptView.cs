@@ -83,6 +83,9 @@ namespace SCI_Translator.ResView
         public override void FocusRow(int value)
         {
             tc.SelectedTab = tabPage1;
+
+            if (dgvStrings.Rows.Count <= value) return;
+
             dgvStrings.CurrentCell = dgvStrings.Rows[value].Cells[0];
         }
 
