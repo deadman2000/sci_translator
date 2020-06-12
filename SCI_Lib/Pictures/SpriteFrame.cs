@@ -92,20 +92,24 @@ namespace SCI_Translator.Pictures
                 _pixelMap[x, 0] = c;
         }
 
-        public void ExportToImage(string imagePath)
+        public void Draw(Bitmap bitmap, int tx, int ty)
         {
-            var bitmap = new Bitmap(Width, Height);
-            var g = Graphics.FromImage(bitmap);
-            g.FillRectangle(new SolidBrush(Color.White), 0, 0, Width, Height);
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
                 {
                     if (this[x, y] == 1)
-                        bitmap.SetPixel(x, y, Color.Black);
+                        bitmap.SetPixel(tx + x, ty + y, Color.Black);
                 }
             }
+        }
 
+        public void ExportToImage(string imagePath)
+        {
+            var bitmap = new Bitmap(Width, Height);
+            var g = Graphics.FromImage(bitmap);
+            g.FillRectangle(new SolidBrush(Color.White), 0, 0, Width, Height);
+            Draw(bitmap, 0, 0);
             bitmap.Save(imagePath);
         }
     }

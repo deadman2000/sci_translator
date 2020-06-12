@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YTranslate", "YTranslate\YT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notabenoid", "Notabenoid\Notabenoid.csproj", "{548D4971-031D-40C2-A352-C52C553B60A6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBoxEditor", "MessageBoxEditor\MessageBoxEditor.csproj", "{594C5BCF-6453-4E6D-9DEB-320E93DD123E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{548D4971-031D-40C2-A352-C52C553B60A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{548D4971-031D-40C2-A352-C52C553B60A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{548D4971-031D-40C2-A352-C52C553B60A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{594C5BCF-6453-4E6D-9DEB-320E93DD123E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{594C5BCF-6453-4E6D-9DEB-320E93DD123E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{594C5BCF-6453-4E6D-9DEB-320E93DD123E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{594C5BCF-6453-4E6D-9DEB-320E93DD123E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

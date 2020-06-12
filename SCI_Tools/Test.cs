@@ -13,7 +13,20 @@ namespace SCI_Tools
         {
             protected override Task Do()
             {
-            return Task.CompletedTask;
+                foreach (var res in package.GetTextResources())
+                {
+                    foreach (var s in res.GetStrings(true))
+                    {
+                        if (s.EndsWith('\r') || s.EndsWith('\n'))
+                        {
+                            Console.WriteLine(res);
+                            Console.WriteLine(s);
+                            Console.WriteLine();
+                        }
+                    }
+                }
+
+                return Task.CompletedTask;
             }
         }
     }
