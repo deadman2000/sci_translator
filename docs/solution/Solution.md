@@ -214,13 +214,13 @@
   
 | Герб                         | Значение
 |------------------------------|-----------
-| ![Sheild](images/sheild1.png)| asdasdasd
-| ![Sheild](images/sheild2.png)| asdasdasd
-| ![Sheild](images/sheild3.png)| asdasdasd
-| ![Sheild](images/sheild4.png)| asdasdasd
-| ![Sheild](images/sheild5.png)| asdasdasd
-| ![Sheild](images/sheild6.png)| asdasdasd
-| ![Sheild](images/sheild7.png)| asdasdasd
+| ![Sheild](images/shield1.png)| asdasdasd
+| ![Sheild](images/shield2.png)| asdasdasd
+| ![Sheild](images/shield3.png)| asdasdasd
+| ![Sheild](images/shield4.png)| asdasdasd
+| ![Sheild](images/shield5.png)| asdasdasd
+| ![Sheild](images/shield6.png)| asdasdasd
+| ![Sheild](images/shield7.png)| asdasdasd
 
 </details>
 
