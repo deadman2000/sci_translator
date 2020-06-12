@@ -55,7 +55,7 @@ namespace SCI_Translator.Scripts
 
         public List<Section> Sections { get; } = new List<Section>();
 
-        public IEnumerable<StringConst> AllStrings => Sections.OfType<StringSection>().SelectMany(s => s.Strings); // .Where(s => !s.IsClassName);
+        public IEnumerable<StringConst> AllStrings => Sections.OfType<StringSection>().SelectMany(s => s.Strings).Where(s => !s.IsClassName);
 
         public IEnumerable<BaseElement> AllElements => _elements.Values.Where(e => !(e is StringPart));
 
@@ -63,8 +63,7 @@ namespace SCI_Translator.Scripts
 
         public BaseElement GetElement(ushort offset)
         {
-            BaseElement el;
-            if (_elements.TryGetValue(offset, out el)) return el;
+            if (_elements.TryGetValue(offset, out var el)) return el;
             return null;
         }
 

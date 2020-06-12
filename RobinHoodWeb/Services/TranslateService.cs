@@ -105,6 +105,7 @@ namespace RobinHoodWeb.Services
             foreach (var res in package.GetTextResources())
             {
                 var resStrings = dbAllStrings.FindAll(s => s.Res == res.ToString());
+                if (resStrings == null) continue;
 
                 var strings = res.GetStrings(true);
                 bool changed = false;
