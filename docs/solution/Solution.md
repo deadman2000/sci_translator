@@ -212,15 +212,20 @@
 <details>
   <summary>Гербы</summary>
   
-| Герб                         | Значение
-|------------------------------|-----------
-| ![Sheild](images/shield1.png)| asdasdasd
-| ![Sheild](images/shield2.png)| asdasdasd
-| ![Sheild](images/shield3.png)| asdasdasd
-| ![Sheild](images/shield4.png)| asdasdasd
-| ![Sheild](images/shield5.png)| asdasdasd
-| ![Sheild](images/shield6.png)| asdasdasd
-| ![Sheild](images/shield7.png)| asdasdasd
+| Герб                          | Значение
+|-------------------------------|-----------------------
+| ![Sheild](images/shield1.png) | Короли Андегавионские
+| ![Sheild](images/shield2.png) | Короли Нормандские
+| ![Sheild](images/shield3.png) | Монархи Саксонские
+| ![Sheild](images/shield4.png) | Христиане Уэссексцы
+| ![Sheild](images/shield5.png) | Христиане Британцы
+| ![Sheild](images/shield6.png) | Южные Саксы
+| ![Sheild](images/shield7.png) | Восточные Саксы
+| ![Sheild](images/shield8.png) | Короли Мерсийские
+| ![Sheild](images/shield9.png) | Короли Датские
+| ![Sheild](images/shield10.png)| Король о. Мэн
+| ![Sheild](images/shield11.png)| Короли Корнуолльские
+| ![Sheild](images/shield12.png)| Короли Ирландские
 
 </details>
 
