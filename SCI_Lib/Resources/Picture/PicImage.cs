@@ -13,6 +13,7 @@ namespace SCI_Translator.Resources.Picture
         public byte[] Image { get; set; }
 
         private static bool LOG = false;
+        private static bool WRITE_BY_ROW = true; // Построчная запись
 
         public PicImage(Stream stream) : base(0x01)
         {
@@ -102,30 +103,49 @@ namespace SCI_Translator.Resources.Picture
             WriteImageData(bb);
 
             var endPos = bb.Position;
-            var size = (ushort)(endPos - sizePos - 2);
+            var size = endPos - sizePos - 2;
+            if (size > 0xffff)
+                throw new FormatException("Too big image data");
 
-            bb.SetShortBE(sizePos, size);
+            bb.SetShortBE(sizePos, (ushort)size);
         }
 
         static bool USE_ADD_COUNT = false;
 
         private void WriteImageData(ByteBuilder bb)
         {
-            for (int i = 0; i < Image.Length; i++) // Current pixel
+            if (WRITE_BY_ROW)
             {
-                var curr = Image[i];
-
-                if (i + 1 < Image.Length) // Это не последний пиксель 
+                for (int y = 0; y < Height; y++)
                 {
-                    if (Image[i + 1] == curr) // ... и есть повторения
+                    byte[] row = new byte[Width];
+                    Array.Copy(Image, y * Width, row, 0, Width);
+                    WriteImageRow(bb, row);
+                }
+            }
+            else
+            {
+                    WriteImageRow(bb, Image);
+            }
+        }
+
+        private void WriteImageRow(ByteBuilder bb, byte[] row)
+        {
+            for (int i = 0; i < row.Length; i++) // Current pixel
+            {
+                var curr = row[i];
+
+                if (i + 1 < row.Length) // Это не последний пиксель 
+                {
+                    if (row[i + 1] == curr) // ... и есть повторения
                     {
                         var end = i + 1;
-                        while (end + 1 < Image.Length && Image[end + 1] == curr && (USE_ADD_COUNT || end - i + 1 < 0x3f)) end++; // Двигаемся вперед пока пиксели совпадают
+                        while (end + 1 < row.Length && row[end + 1] == curr && (USE_ADD_COUNT || end - i + 1 < 0x3f)) end++; // Двигаемся вперед пока пиксели совпадают
                         // На выходе end - указатель на последний повторяющийся пиксель, который мы будем записывать
 
                         int cnt = end - i + 1;
 
-                        if (end >= Image.Length)
+                        if (end >= row.Length)
                             throw new Exception();
 
                         if (curr == _transpCol)
@@ -148,9 +168,8 @@ namespace SCI_Translator.Resources.Picture
                         // Двигаемся вперед пока пиксели меняются
                         var end = i + 1;
                         int cnt = 2;
-                        while (end + 1 < Image.Length
-                            //&& (end + 2 == Image.Length - 1 || Image[end + 2] != Image[end + 1]) // Мы на краю или следующий пиксель другой
-                            && (!IsEquals(end + 1, cnt < 3 ? 2 : 3))
+                        while (end + 1 < row.Length
+                            && (!IsEquals(row, end + 1, cnt < 3 ? 2 : 3))
                             && (USE_ADD_COUNT || end - i + 1 < 0x3f))
                         {
                             end++;
@@ -161,8 +180,8 @@ namespace SCI_Translator.Resources.Picture
                         if (LOG) Console.Write("[");
                         for (int n = i; n <= end; n++)
                         {
-                            bb.AddByte(Image[n]);
-                            if (LOG) Console.Write($"{Image[n]:X2} ");
+                            bb.AddByte(row[n]);
+                            if (LOG) Console.Write($"{row[n]:X2} ");
                         }
                         if (LOG) Console.WriteLine("]");
 
@@ -194,12 +213,12 @@ namespace SCI_Translator.Resources.Picture
         /// <param name="index"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        private bool IsEquals(int index, int count)
+        private bool IsEquals(byte[] row, int index, int count)
         {
-            if (index + count >= Image.Length) return false;
-            var c = Image[index];
+            if (index + count >= row.Length) return false;
+            var c = row[index];
             for (int i = index + 1; i < index + count; i++)
-                if (Image[i] != c) return false;
+                if (row[i] != c) return false;
 
             return true;
         }

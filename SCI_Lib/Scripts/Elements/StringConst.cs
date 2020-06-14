@@ -28,7 +28,7 @@ namespace SCI_Translator.Scripts.Elements
 
         public override void Write(ByteBuilder bb)
         {
-            Address = bb.Position;
+            Address = (ushort)bb.Position;
             bb.AddBytes(Bytes);
             bb.AddByte(0);
         }

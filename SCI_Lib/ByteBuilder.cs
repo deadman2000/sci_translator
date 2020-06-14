@@ -7,7 +7,7 @@ namespace SCI_Translator
     {
         private List<byte> _bytes = new List<byte>();
 
-        public ushort Position { get { return (ushort)_bytes.Count; } }
+        public int Position => _bytes.Count;
 
 
         public byte[] GetArray()

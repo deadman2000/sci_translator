@@ -92,7 +92,7 @@ namespace SCI_Translator.Resources
                 SpriteFrame frm = spr[i];
                 byte w = (byte)frm.Width;
                 byte h = (byte)frm.Height;
-                ushort offset = bb.Position;
+                ushort offset = (ushort)bb.Position;
 
                 bb.SetShortBE(6 + i * 2, offset);
 

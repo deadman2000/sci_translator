@@ -97,7 +97,7 @@ namespace SCI_Translator.Scripts.Elements
         public override void Write(ByteBuilder bb)
         {
             IsWrited = true;
-            Address = bb.Position;
+            Address = (ushort)bb.Position;
             switch (Size)
             {
                 case 1: bb.AddByte(0); break;

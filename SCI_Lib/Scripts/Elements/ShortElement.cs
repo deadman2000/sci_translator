@@ -12,7 +12,7 @@
 
         public override void Write(ByteBuilder bb)
         {
-            Address = bb.Position;
+            Address = (ushort)bb.Position;
             bb.AddShortBE(Value);
         }
 

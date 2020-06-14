@@ -15,7 +15,7 @@ namespace Tests
             var package = Utils.LoadPackage();
 
             var res = package.GetResouce<ResPicture>(100);
-            var pic = res.GetPicture(true);
+            var pic = res.GetPicture(false);
 
             var newPic = new SCIPicture(pic.GetBytes());
 

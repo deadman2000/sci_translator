@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SCI_Tools
 {
-    // replace_pic -p 100 -b D:\Projects\map_ru_2.bmp
+    // replace_pic -p 100 -b D:\Projects\map_ru_2.bmp -d D:\Projects\SCI_Translator\Conquest\
     [Command("replace_pic", Description = "Replace picture background")]
     class ReplacePic : PackageCommand
     {
