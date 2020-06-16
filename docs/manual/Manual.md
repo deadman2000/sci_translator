@@ -1,5 +1,7 @@
 # Conquests of the Longbow: The Legend of Robin Hood. Руководство пользователя
 
+![Hand](images/hand.png)
+
 ## Содержание
 
 - [Введение](#введение)
