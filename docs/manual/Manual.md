@@ -219,7 +219,7 @@ Coarsegold, CA 93614
 |-|-|-|-|
 | ![Shield6](images/shield6.png) | ![Shield5](images/shield5.png) | ![Shield7](images/shield7.png)   | ![Shield10](images/shield10.png) |
 | ЮЖНЫЕ САКСЫ                    | ХРИСТИАНЕ БРИТАНЦЫ             | ВОСТОЧНЫЕ САКСЫ                  | КОРОЛЬ О. МЭН                    |
-| ![Shield4](images/shield4.png) | ![Shield3](images/shield3.png) | ![Shield12](images/shield12.png) | ![Shield8](images/shield10.png)  |
+| ![Shield4](images/shield4.png) | ![Shield3](images/shield3.png) | ![Shield12](images/shield12.png) | ![Shield8](images/shield8.png)   |
 | ХРИСТИАНЕ УЭССЕКСЦЫ            | МОНАРХИ САКСОНСКИЕ             | КОРОЛИ ИРЛАНДСКИЕ                | КОРОЛИ МЕРСИЙСКИЕ                |
 | ![Shield2](images/shield2.png) | ![Shield1](images/shield1.png) | ![Shield9](images/shield9.png)   | ![Shield11](images/shield11.png) |
 | КОРОЛИ НОРМАНДСКИЕ             | КОРОЛИ АНДЕГАВИОНСКИЕ          | КОРОЛИ ДАТСКИЕ                   | КОРОЛИ КОРНУОЛЛЬСКИЕ             |
