@@ -36,8 +36,8 @@ namespace SCI_Translator.Resources.SCI0
                 var resNum = (byte)(fnOffset >> 26);
                 var offset = (int)(fnOffset & 0x3ffffff);
 
-                var res = LoadRes(type);
-                res.Load(this, type, num, resNum, offset);
+                var res = CreateRes(type);
+                res.Init(this, type, num, resNum, offset);
                 Resources.Add(res);
             }
         }

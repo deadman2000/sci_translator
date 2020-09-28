@@ -78,8 +78,8 @@ namespace SCI_Translator.Resources.SCI1
                         offset = address & 0x0FFFFFFF;
                     }
 
-                    Resource res = LoadRes(offsets[i].Type);
-                    res.Load(this, offsets[i].Type, num, resNum, offset);
+                    Resource res = CreateRes(offsets[i].Type);
+                    res.Init(this, offsets[i].Type, num, resNum, offset);
                     Resources.Add(res);
                 }
             }

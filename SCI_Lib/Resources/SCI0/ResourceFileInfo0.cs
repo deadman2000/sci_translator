@@ -1,4 +1,5 @@
-﻿using SCI_Translator.Decompression;
+﻿using SCI_Translator.Compression;
+using SCI_Translator.Decompression;
 using System;
 using System.IO;
 
@@ -26,8 +27,18 @@ namespace SCI_Translator.Resources.SCI0
         {
             switch (Method)
             {
-                case 1: return Decompressor.LZW;
-                case 2: return Decompressor.Huffman;
+                case 1: return new DecompressorLZW0();
+                case 2: return new DecompressorHuffman();
+                default: throw new NotImplementedException();
+            }
+        }
+
+        public override Compressor GetCompressor()
+        {
+            switch (Method)
+            {
+                case 1: return new CompressorLZW0();
+                case 2: return new CompressorHuffman();
                 default: throw new NotImplementedException();
             }
         }

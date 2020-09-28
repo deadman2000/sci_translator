@@ -1,4 +1,5 @@
-﻿using SCI_Translator.Decompression;
+﻿using SCI_Translator.Compression;
+using SCI_Translator.Decompression;
 using System;
 using System.IO;
 
@@ -8,7 +9,7 @@ namespace SCI_Translator.Resources
     {
         private ResourceFileInfo _info;
 
-        public void Load(SCIPackage package, ResType type, ushort number, byte resNum, int offset)
+        public void Init(SCIPackage package, ResType type, ushort number, byte resNum, int offset)
         {
             Package = package;
             Type = type;
@@ -86,6 +87,19 @@ namespace SCI_Translator.Resources
             }
         }
 
+        public byte[] GetCompressed()
+        {
+            var info = GetInfo();
+
+            byte[] data = new byte[info.CompSize];
+            using (FileStream fs = File.OpenRead(Path.Combine(Package.GameDirectory, ResourceFileName)))
+            {
+                fs.Position = Offset + info.HeadSize;
+                fs.Read(data, 0, data.Length);
+            }
+            return data;
+        }
+
         public void Translate(string en, string tr)
         {
             var sources = GetStrings(false);
@@ -127,6 +141,34 @@ namespace SCI_Translator.Resources
         public virtual void SetTranslate(string[] strings)
         {
             throw new NotImplementedException();
+        }
+
+        public void Pack(Stream stream)
+        {
+            var info = GetInfo();
+            var path = Path.Combine(TranslateDir, FileName);
+            if (!File.Exists(path)) // Файл не был распакован, считываем запакованный и так же складываем
+            {
+                using (FileStream fs = File.OpenRead(Path.Combine(TranslateDir, ResourceFileName)))
+                {
+                    fs.Position = Offset + info.HeadSize;
+
+                    byte[] buff = new byte[info.CompSize];
+                    fs.Read(buff, 0, buff.Length);
+
+                    stream.Write(buff, 0, buff.Length);
+                }
+            }
+            else
+            {
+                byte[] data = ReadContent(TranslateDir);
+
+                Compressor comp = info.GetCompressor();
+                int size = comp.Pack(data, stream);
+
+                info.DecompSize = data.Length;
+                info.CompSize = size;
+            }
         }
     }
 }

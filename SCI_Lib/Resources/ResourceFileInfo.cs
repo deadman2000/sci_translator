@@ -1,4 +1,5 @@
-﻿using SCI_Translator.Decompression;
+﻿using SCI_Translator.Compression;
+using SCI_Translator.Decompression;
 using System;
 
 namespace SCI_Translator.Resources
@@ -9,9 +10,9 @@ namespace SCI_Translator.Resources
 
         public int ResNr { get; protected set; }
 
-        public int CompSize { get; protected set; }
+        public int CompSize { get; set; }
 
-        public int DecompSize { get; protected set; }
+        public int DecompSize { get; set; }
 
         public int Method { get; protected set; }
 
@@ -20,5 +21,7 @@ namespace SCI_Translator.Resources
         public override string ToString() => String.Format("res_t:{0:X2} res_nr:{1} comp_size:{2} decomp_size:{3} method:{4}", ResT, ResNr, CompSize, DecompSize, Method);
 
         public abstract Decompressor GetDecompressor();
+
+        public abstract Compressor GetCompressor();
     }
 }

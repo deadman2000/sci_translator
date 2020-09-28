@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using SCI_Translator.Utils;
 
 namespace SCI_Translator.Decompression
 {
-    public class DecompressorHuffman : Decompressor
+    class DecompressorHuffman : Decompressor
     {
         protected byte[] _nodes;
+        private BitReaderMSB reader;
 
         protected override void GoUnpack()
         {
+            reader = new BitReaderMSB(_stream);
+
             byte numnodes;
             short c;
             ushort terminator;
@@ -32,11 +36,11 @@ namespace SCI_Translator.Decompression
             short next;
             while (_nodes[i + 1] > 0)
             {
-                if (getBitsMSB(1) > 0)
+                if (reader.GetBits(1) > 0)
                 {
                     next = (short)(_nodes[i + 1] & 0x0F); // use lower 4 bits
                     if (next == 0)
-                        return (short)(getByteMSB() | 0x100);
+                        return (short)(reader.GetByte() | 0x100);
                 }
                 else
                     next = (short)(_nodes[i + 1] >> 4); // use higher 4 bits

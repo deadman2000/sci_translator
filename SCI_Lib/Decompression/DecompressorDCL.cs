@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SCI_Translator.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SCI_Translator.Decompression
 {
-    public class DecompressorDCL : Decompressor
+    class DecompressorDCL : Decompressor
     {
         // https://github.com/scummvm/scummvm/blob/master/common/dcl.cpp#L337
         // https://wiki.scummvm.org/index.php?title=SCI/Specifications/Resource_files/Decompression_algorithms/DCL-EXPLODE
@@ -14,11 +15,15 @@ namespace SCI_Translator.Decompression
         const int DCL_BINARY_MODE = 0;
         const int DCL_ASCII_MODE = 1;
 
+        private BitReaderLSB reader;
+
         protected override void GoUnpack()
         {
+            reader = new BitReaderLSB(_stream);
+
             byte[] dictionary = new byte[4096];
-            var mode = getByteLSB();
-            var dictionaryType = getByteLSB();
+            var mode = reader.GetByte();
+            var dictionaryType = reader.GetByte();
             int dictionaryPos = 0;
             ushort tokenOffset;
 
@@ -45,7 +50,7 @@ namespace SCI_Translator.Decompression
 
             while (_dwWrote < _szUnpacked)
             {
-                if (getBitsLSB(1) == 1)
+                if (reader.GetBits(1) == 1)
                 {
                     var value = huffman_lookup(length_tree);
 
@@ -53,7 +58,7 @@ namespace SCI_Translator.Decompression
                     if (value < 8)
                         tokenLength = (ushort)(value + 2);
                     else
-                        tokenLength = (ushort)(8 + (1 << (value - 7)) + getBitsLSB(value - 7));
+                        tokenLength = (ushort)(8 + (1 << (value - 7)) + reader.GetBits(value - 7));
 
                     if (tokenLength == 519)
                         break; // End of stream signal
@@ -61,9 +66,9 @@ namespace SCI_Translator.Decompression
                     value = huffman_lookup(distance_tree);
 
                     if (tokenLength == 2)
-                        tokenOffset = (ushort)((value << 2) | (ushort)getBitsLSB(2));
+                        tokenOffset = (ushort)((value << 2) | (ushort)reader.GetBits(2));
                     else
-                        tokenOffset = (ushort)((value << dictionaryType) | (ushort)getBitsLSB(dictionaryType));
+                        tokenOffset = (ushort)((value << dictionaryType) | (ushort)reader.GetBits(dictionaryType));
                     tokenOffset++;
 
                     if (tokenLength + _dwWrote > _szUnpacked)
@@ -106,7 +111,7 @@ namespace SCI_Translator.Decompression
                     if (mode == DCL_ASCII_MODE)
                         value = (byte)huffman_lookup(ascii_tree);
                     else
-                        value = getByteLSB();
+                        value = reader.GetByte();
                     PutByte(value);
 
                     dictionary[dictionaryPos] = value;
@@ -125,7 +130,7 @@ namespace SCI_Translator.Decompression
 
             while ((tree[pos] & HUFFMAN_LEAF) == 0)
             {
-                var bit = getBitsLSB(1);
+                var bit = reader.GetBits(1);
                 pos = bit == 1 ? tree[pos] & 0xFFF : tree[pos] >> 12;
             }
 

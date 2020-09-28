@@ -65,7 +65,7 @@ namespace SCI_Translator.Resources
 
         protected abstract void ReadMap(FileStream fs);
 
-        protected virtual Resource LoadRes(ResType type)
+        protected virtual Resource CreateRes(ResType type)
         {
             switch (type)
             {
@@ -173,6 +173,31 @@ namespace SCI_Translator.Resources
             return GetResouces(ResType.Text)
                 .Union(GetResouces(ResType.Script))
                 .Union(GetResouces(ResType.Message));
+        }
+
+        public void Pack(string directory)
+        {
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+
+            var byResNum = Resources.GroupBy(r => r.ResourceFileNumber);
+            foreach (var gr in byResNum)
+            {
+                var num = gr.Key;
+
+                var resources = gr.OrderBy(r => r.Offset);
+
+                var filePath = Path.Combine(directory, $"RESOURCE.{num:D3}");
+                using (var fs = File.OpenWrite(filePath))
+                {
+                    foreach (var r in resources)
+                    {
+                        r.Pack(fs);
+                    }
+                }
+            }
+
+            // TODO RESOURCE.MAP saving
         }
     }
 }
