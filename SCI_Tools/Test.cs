@@ -15,17 +15,18 @@ namespace SCI_Tools
         {
             protected override Task Do()
             {
-                var res = package.GetResouce("50.p56");
-                //foreach (var res in package.Resources)
+                //var res = package.GetResouce("95.p56");
+                foreach (var res in package.Resources)
                 {
                     var info = res.GetInfo();
                     if (info.Method == 2)
                     {
-                        Console.WriteLine(res);
+                        //Console.WriteLine(res);
+                        res.GetContent(false);
 
                         //Decompress(res);
                         //Compress(res);
-                        CompDecomp(res);
+                        //CompDecomp(res);
 
                         //break;
                     }

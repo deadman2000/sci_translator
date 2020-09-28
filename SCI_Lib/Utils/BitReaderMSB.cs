@@ -18,6 +18,8 @@ namespace SCI_Translator.Utils
 
         internal static bool DEBUG = false;
 
+        public int Position => (int)(_stream.Position - _startPos);
+
         public uint GetBits(ushort n)
         {
             while (_nBits < n)

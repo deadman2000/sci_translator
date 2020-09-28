@@ -28,6 +28,7 @@ namespace SCI_Translator.Compression
         int pos = 0;
         ushort curtoken = 0x102;
         ushort endtoken = 0x1ff;
+        bool isFirst = true;
 
         void WriteBits(ushort val)
         {
@@ -40,8 +41,6 @@ namespace SCI_Translator.Compression
         {
             writer = new BitWriterMSB(_stream);
             BitWriterMSB.DEBUG = DEBUG;
-
-            bool isFirst = true;
 
             while (pos < _data.Length)
             {
@@ -92,24 +91,42 @@ namespace SCI_Translator.Compression
                     AddToken(val, lastBits);
                     WriteBits(bestToken.token);
                 }
-                else if (curtoken < endtoken && val == lastBits && pos < _data.Length && _data[pos] == val)
-                {
-                    if (DEBUG) Console.WriteLine($"Repeat last char. Skip 1");
-                    var token = curtoken;
-                    AddToken(val, lastBits);
-                    WriteBits(token);
-                    pos++;
-                }
                 else
                 {
-                    AddToken(val, lastBits);
-                    WriteBits(val);
+                    if (curtoken >= endtoken)
+                    {
+                        Reset();
+                    }
+
+                    if (curtoken < endtoken && val == lastBits && pos < _data.Length && _data[pos] == val)
+                    {
+                        if (DEBUG) Console.WriteLine($"Repeat last char. Skip 1");
+                        var token = curtoken;
+                        AddToken(val, lastBits);
+                        WriteBits(token);
+                        pos++;
+                    }
+                    else
+                    {
+                        AddToken(val, lastBits);
+                        WriteBits(val);
+                    }
                 }
 
                 lastVal = val;
             }
             WriteBits(0x101);
             writer.Flush();
+        }
+
+        private void Reset()
+        {
+            if (DEBUG) Console.WriteLine("Reset");
+            WriteBits(0x100);
+            numbits = 9;
+            curtoken = 0x102;
+            endtoken = 0x1ff;
+            isFirst = true;
         }
 
         private bool IsNextBytes(byte[] data)

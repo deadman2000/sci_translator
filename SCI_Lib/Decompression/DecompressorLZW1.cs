@@ -55,8 +55,6 @@ namespace SCI_Translator.Decompression
             {
                 if (DEBUG) Console.WriteLine();
                 if (DEBUG) Console.WriteLine(_dwWrote);
-                if (_dwWrote == 1639) Debugger.Break();
-                //if (BytesRead >= 7039) Debugger.Break();
 
                 bitstring = (ushort)reader.GetBits(numbits);
 
