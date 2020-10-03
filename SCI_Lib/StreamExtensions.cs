@@ -11,9 +11,21 @@ namespace SCI_Translator
             return (ushort)(stream.ReadByte() | (stream.ReadByte() << 8));
         }
 
+        public static void WriteUShortBE(this Stream stream, ushort val)
+        {
+            stream.WriteByte((byte)val);
+            stream.WriteByte((byte)(val >> 8));
+        }
+
         public static ushort ReadUShortLE(this Stream stream)
         {
             return (ushort)((stream.ReadByte() << 8) | stream.ReadByte());
+        }
+
+        public static void WriteUShortLE(this Stream stream, ushort val)
+        {
+            stream.WriteByte((byte)(val >> 8));
+            stream.WriteByte((byte)val);
         }
 
         public static int Read3ByteBE(this Stream stream)
@@ -26,9 +38,25 @@ namespace SCI_Translator
             return stream.ReadByte() | (stream.ReadByte() << 8) | (stream.ReadByte() << 16) | (stream.ReadByte() << 24);
         }
 
+        public static void WriteIntBE(this Stream stream, int val)
+        {
+            stream.WriteByte((byte)val);
+            stream.WriteByte((byte)(val >> 8));
+            stream.WriteByte((byte)(val >> 16));
+            stream.WriteByte((byte)(val >> 24));
+        }
+
         public static uint ReadUIntBE(this Stream stream)
         {
             return (uint)(stream.ReadByte() | (stream.ReadByte() << 8) | (stream.ReadByte() << 16) | (stream.ReadByte() << 24));
+        }
+
+        public static void WriteUIntBE(this Stream stream, uint val)
+        {
+            stream.WriteByte((byte)val);
+            stream.WriteByte((byte)(val >> 8));
+            stream.WriteByte((byte)(val >> 16));
+            stream.WriteByte((byte)(val >> 24));
         }
 
         public static uint ReadUIntLE(this Stream stream)

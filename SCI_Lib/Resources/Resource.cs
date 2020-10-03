@@ -1,6 +1,7 @@
 ﻿using SCI_Translator.Compression;
 using SCI_Translator.Decompression;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SCI_Translator.Resources
@@ -14,8 +15,16 @@ namespace SCI_Translator.Resources
             Package = package;
             Type = type;
             Number = number;
-            ResourceFileNumber = resNum;
-            Offset = offset;
+            Resources.Add(new ResOffset { Num = resNum, Offset = offset });
+        }
+
+        public void Init(SCIPackage package, ResType type, ushort number, byte resNum, ResourceFileInfo info)
+        {
+            Package = package;
+            Type = type;
+            Number = number;
+            Resources.Add(new ResOffset { Num = resNum, Offset = -1 });
+            _info = info;
         }
 
         public SCIPackage Package { get; private set; }
@@ -26,17 +35,21 @@ namespace SCI_Translator.Resources
 
         public ushort Number { get; private set; }
 
-        public byte ResourceFileNumber { get; private set; }
+        public struct ResOffset
+        {
+            public byte Num;
+            public int Offset;
 
-        public int Offset { get; private set; }
+            public string FileName => $"RESOURCE.{Num:D3}";
+        }
 
-        public string ResourceFileName => $"RESOURCE.{ResourceFileNumber:D3}";
+        public List<ResOffset> Resources { get; } = new List<ResOffset>();
 
         public string FileName => Package.GetResFileName(this);
 
         public string TranslateDir => Package.TranslateDirectory;
 
-        public ResourceFileInfo GetInfo() => _info ?? (_info = Package.LoadResourceInfo(ResourceFileName, Offset));
+        public ResourceFileInfo GetInfo() => _info ?? (_info = Package.LoadResourceInfo(Resources[0].FileName, Resources[0].Offset));
 
         public override string ToString() => FileName;
 
@@ -61,40 +74,68 @@ namespace SCI_Translator.Resources
             {
                 using (FileStream fs = File.OpenRead(path))
                 {
-                    byte[] data = new byte[fs.Length - 2];
-                    fs.Position = 2;
+                    fs.Seek(1, SeekOrigin.Current);
+                    var second = fs.ReadB();
+                    int offset = GetResourceOffsetInFile(second);
+                    fs.Seek(offset, SeekOrigin.Current);
+
+                    byte[] data = new byte[fs.Length - fs.Position];
                     fs.Read(data, 0, data.Length);
                     return data;
                 }
             }
 
-            if (info.Method == 0) // Uncompressed
-            {
-                byte[] data = new byte[info.DecompSize];
-                using (FileStream fs = File.OpenRead(Path.Combine(dir, ResourceFileName)))
-                {
-                    fs.Position = Offset + info.HeadSize;
-                    fs.Read(data, 0, data.Length);
-                }
-                return data;
-            }
+            var resOff = Resources[0];
 
-            Decompressor decomp = info.GetDecompressor();
-            using (FileStream fs = File.OpenRead(Path.Combine(dir, ResourceFileName)))
+            using (FileStream fs = File.OpenRead(Path.Combine(dir, resOff.FileName)))
             {
-                fs.Position = Offset + info.HeadSize;
-                return decomp.Unpack(fs, info.CompSize, info.DecompSize);
+                fs.Position = resOff.Offset + info.HeadSize;
+
+                if (info.Method == 0) // Uncompressed
+                {
+                    byte[] data = new byte[info.DecompSize];
+                    fs.Read(data, 0, data.Length);
+                    return data;
+                }
+                else
+                {
+                    Decompressor decomp = info.GetDecompressor();
+                    return decomp.Unpack(fs, info.CompSize, info.DecompSize);
+                }
             }
+        }
+
+        public static int GetResourceOffsetInFile(byte secondHeaderByte)
+        {
+            // The upper byte appears to indicate where the data starts.
+            // Some isolated resource files have random data stuffed at the beginning (e.g. name and such)
+
+            // In SQ5 though, we need to special case:
+            if ((secondHeaderByte & 0x80) != 0)
+            {
+                switch (secondHeaderByte & 0x7f)
+                {
+                    case 0:
+                        return 24;
+                    case 1:
+                        return 2;
+                    case 4:
+                        return 8;
+                }
+            }
+            return secondHeaderByte;
         }
 
         public byte[] GetCompressed()
         {
             var info = GetInfo();
 
+            var resOff = Resources[0];
+
             byte[] data = new byte[info.CompSize];
-            using (FileStream fs = File.OpenRead(Path.Combine(Package.GameDirectory, ResourceFileName)))
+            using (FileStream fs = File.OpenRead(Path.Combine(Package.GameDirectory, resOff.FileName)))
             {
-                fs.Position = Offset + info.HeadSize;
+                fs.Position = resOff.Offset + info.HeadSize;
                 fs.Read(data, 0, data.Length);
             }
             return data;
@@ -127,10 +168,24 @@ namespace SCI_Translator.Resources
 
             using (FileStream fs = File.Create(Path.Combine(TranslateDir, FileName)))
             {
-                fs.WriteByte((byte)Type);
-                fs.WriteByte(0);
-                fs.Write(data, 0, data.Length);
+                Save(fs, data);
             }
+        }
+
+        public byte[] Export(bool translate = false)
+        {
+            var data = GetContent(translate);
+
+            MemoryStream mem = new MemoryStream();
+            Save(mem, data);
+            return mem.ToArray();
+        }
+
+        private void Save(Stream stream, byte[] data)
+        {
+            stream.WriteByte((byte)Type);
+            stream.WriteByte(0);
+            stream.Write(data, 0, data.Length);
         }
 
         public virtual string[] GetStrings(bool translate)
@@ -143,32 +198,46 @@ namespace SCI_Translator.Resources
             throw new NotImplementedException();
         }
 
-        public void Pack(Stream stream)
+        public void Pack(Stream stream, byte resNum)
         {
             var info = GetInfo();
-            var path = Path.Combine(TranslateDir, FileName);
+            var path = Path.Combine(Package.GameDirectory, FileName);
+
+            var begin = stream.Position;
+            stream.Seek(info.HeadSize, SeekOrigin.Current);
+
+            var ri = Resources.FindIndex(r => r.Num == resNum);
+            var res = Resources[ri];
+
             if (!File.Exists(path)) // Файл не был распакован, считываем запакованный и так же складываем
             {
-                using (FileStream fs = File.OpenRead(Path.Combine(TranslateDir, ResourceFileName)))
-                {
-                    fs.Position = Offset + info.HeadSize;
-
-                    byte[] buff = new byte[info.CompSize];
-                    fs.Read(buff, 0, buff.Length);
-
-                    stream.Write(buff, 0, buff.Length);
-                }
+                var data = GetCompressed();
+                stream.Write(data, 0, data.Length);
             }
             else
             {
-                byte[] data = ReadContent(TranslateDir);
+                byte[] data = ReadContent(Package.GameDirectory);
 
-                Compressor comp = info.GetCompressor();
-                int size = comp.Pack(data, stream);
+                if (info.Method != 0)
+                {
+                    Compressor comp = info.GetCompressor();
+                    int size = comp.Pack(data, stream);
 
-                info.DecompSize = data.Length;
-                info.CompSize = size;
+                    info.DecompSize = (ushort)data.Length;
+                    info.CompSize = (ushort)size;
+                }
+                else
+                {
+                    stream.Write(data, 0, data.Length);
+                }
             }
+
+            Resources[ri] = new ResOffset { Num = resNum, Offset = (int)begin };
+
+            var end = stream.Position;
+            stream.Seek(begin, SeekOrigin.Begin);
+            info.Write(stream);
+            stream.Seek(end, SeekOrigin.Begin);
         }
     }
 }

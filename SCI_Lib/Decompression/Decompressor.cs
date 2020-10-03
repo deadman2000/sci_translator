@@ -26,6 +26,7 @@ namespace SCI_Translator.Decompression
 
             _dest = new byte[nUnpacked];
             GoUnpack();
+
             return _dest;
         }
 

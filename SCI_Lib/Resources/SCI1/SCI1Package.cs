@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace SCI_Translator.Resources.SCI1
@@ -78,11 +79,94 @@ namespace SCI_Translator.Resources.SCI1
                         offset = address & 0x0FFFFFFF;
                     }
 
-                    Resource res = CreateRes(offsets[i].Type);
-                    res.Init(this, offsets[i].Type, num, resNum, offset);
-                    Resources.Add(res);
+                    var ex = Resources.Find(r => r.Type == offsets[i].Type && r.Number == num);
+                    if (ex != null)
+                    {
+                        ex.Resources.Add(new Resource.ResOffset { Num = resNum, Offset = offset });
+                    }
+                    else
+                    {
+                        Resource res = CreateRes(offsets[i].Type);
+                        res.Init(this, offsets[i].Type, num, resNum, offset);
+                        Resources.Add(res);
+                    }
                 }
             }
+
+            var allFiles = Directory.GetFiles(GameDirectory).Select(f => Path.GetFileName(f)).Select(f => f.ToUpper());
+            foreach (ResType rt in Enum.GetValues(typeof(ResType)))
+            {
+                if ((byte)rt < 0x80 || (byte)rt > 0x91)
+                    continue;
+
+                var ext = GetExtension(rt);
+
+                foreach (var f in allFiles.Where(f => f.EndsWith("." + ext)))
+                {
+                    if (!ushort.TryParse(Path.GetFileNameWithoutExtension(f), out var num))
+                        continue;
+
+                    if (GetResouce(f) == null)
+                    {
+                        ushort method = 0;
+                        byte resNum = 0;
+
+                        var first = Resources.FirstOrDefault(r => r.Type == rt);
+                        if (first != null)
+                        {
+                            method = first.GetInfo().Method;
+                            resNum = first.Resources[0].Num;
+                        }
+
+                        var info = new ResourceFileInfo1((byte)rt, num, method);
+                        var res = CreateRes(rt);
+                        res.Init(this, rt, num, resNum, info);
+                        Resources.Add(res);
+                    }
+                }
+            }
+        }
+
+        protected override void SaveMap(FileStream fs)
+        {
+            var byType = Resources.GroupBy(r => r.Type);
+
+            fs.Seek((byType.Count() + 1) * 3, SeekOrigin.Begin);
+
+            ushort offset;
+            int i = 0;
+            foreach (var gr in byType)
+            {
+                offset = (ushort)fs.Position;
+                //Console.WriteLine($"{gr.Key} {(byte)gr.Key:X2} {gr.Count()}");
+
+                foreach (var r in gr)
+                {
+                    foreach (var resOffset in r.Resources)
+                    {
+                        //Console.WriteLine($"{fs.Position:X4} > {r}  {r.Number} {r.Offset:X4} {rn::X1}");
+                        fs.WriteUShortBE(r.Number);
+                        fs.WriteUIntBE((uint)(resOffset.Offset | (resOffset.Num << 28)));
+                    }
+                }
+
+                var pos = fs.Position;
+
+                fs.Seek(i * 3, SeekOrigin.Begin);
+                //Console.WriteLine($"{fs.Position:X4} > {(byte)gr.Key:X2}  {offset:X4}");
+
+                fs.WriteByte((byte)gr.Key);
+                fs.WriteUShortBE(offset);
+
+                fs.Seek(pos, SeekOrigin.Begin);
+                i++;
+            }
+            offset = (ushort)fs.Position;
+
+            fs.Seek(i * 3, SeekOrigin.Begin);
+            //Console.WriteLine($"{fs.Position:X4} > 0xff  {offset:X4}");
+            fs.WriteByte(0xff);
+            fs.WriteUShortBE(offset);
         }
 
         public override ResourceFileInfo LoadResourceInfo(string resourceFileName, int offset)
@@ -92,7 +176,7 @@ namespace SCI_Translator.Resources.SCI1
 
         public override string GetResFileName(Resource resource) => $"{resource.Number}.{GetExtension(resource.Type)}";
 
-        private string GetExtension(ResType type)
+        private static string GetExtension(ResType type)
         {
             switch (type)
             {
@@ -113,9 +197,10 @@ namespace SCI_Translator.Resources.SCI1
                 case ResType.Message: return "MSG";
                 case ResType.Map: return "MAP";
                 case ResType.Heap: return "HEP";
-                case ResType.Patch: return "PAT";
+                //case ResType.Patch: return "PAT";
                 default: throw new NotImplementedException();
             }
         }
+
     }
 }

@@ -34,6 +34,7 @@ namespace SCI_Translator.Resources
             }
         }
 
+
         public abstract string GetResFileName(Resource resource);
 
         public SCIPackage(string directory, string translate, Encoding enc)
@@ -50,20 +51,21 @@ namespace SCI_Translator.Resources
             GameDirectory = directory;
             TranslateDirectory = translate ?? Path.Combine(GameDirectory, "TRANSLATE");
 
-            string mapFile = Path.Combine(GameDirectory, "RESOURCE.MAP");
-
-            using (FileStream fs = File.OpenRead(mapFile))
+            using (FileStream fs = File.OpenRead(Path.Combine(GameDirectory, "RESOURCE.MAP")))
             {
                 ReadMap(fs);
             }
 
             Resources = Resources.OrderBy(r => r.Type).ThenBy(r => r.Number).ToList();
+
             SeparateHeapResources = Resources.Any(r => r.Type == ResType.Heap);
         }
 
         public abstract ResourceFileInfo LoadResourceInfo(string resourceFileName, int offset);
 
         protected abstract void ReadMap(FileStream fs);
+
+        protected abstract void SaveMap(FileStream fs);
 
         protected virtual Resource CreateRes(ResType type)
         {
@@ -180,24 +182,31 @@ namespace SCI_Translator.Resources
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
-            var byResNum = Resources.GroupBy(r => r.ResourceFileNumber);
-            foreach (var gr in byResNum)
+            var resFiles = Resources.SelectMany(r => r.Resources).Select(r => r.Num).Distinct().OrderBy(r => r);
+            var all = Resources.SelectMany(r => r.Resources.Select(rf => new { res = r, num = rf.Num, off = rf.Offset }));
+
+            foreach (var num in resFiles)
             {
-                var num = gr.Key;
+                var resName = $"RESOURCE.{num:D3}";
+                Console.WriteLine(resName);
 
-                var resources = gr.OrderBy(r => r.Offset);
+                var resources = all.Where(r => r.num == num).OrderBy(r => r.off);
 
-                var filePath = Path.Combine(directory, $"RESOURCE.{num:D3}");
+                var filePath = Path.Combine(directory, resName);
                 using (var fs = File.OpenWrite(filePath))
                 {
                     foreach (var r in resources)
                     {
-                        r.Pack(fs);
+                        r.res.Pack(fs, r.num);
                     }
                 }
             }
 
-            // TODO RESOURCE.MAP saving
+            Console.WriteLine("RESOURCE.MAP");
+            using (FileStream fs = File.OpenWrite(Path.Combine(directory, "RESOURCE.MAP")))
+            {
+                SaveMap(fs);
+            }
         }
     }
 }

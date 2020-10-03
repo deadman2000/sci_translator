@@ -145,6 +145,10 @@ namespace Notabenoid
                     if (tr.Equals(ru)) // Пропускаем старый перевод
                         continue;
 
+                    Console.WriteLine(ru);
+                    Console.WriteLine(tr);
+                    Console.WriteLine();
+
                     hasTranslate = true;
 
                     ruLines[i] = tr;

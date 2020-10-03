@@ -13,7 +13,7 @@ namespace Tests
         [Test]
         public async Task DecompressQG_VGA()
         {
-            await CheckDecompress($"{ASSETS}/QG_VGA/", Path.Combine(ASSETS, "QG_VGA_res"));
+            await CheckDecompress(Path.Combine(ASSETS, "QG_VGA"), Path.Combine(ASSETS, "QG_VGA_res"));
         }
 
         [Test]
@@ -27,16 +27,20 @@ namespace Tests
             var package = SCIPackage.Load(mapPath);
             foreach (var r in package.Resources)
             {
-                if (r.Type == ResType.View || r.Type == ResType.Picture) continue; // Unsupported
+                if (r.Type == ResType.Picture) continue; // Unsupported
 
                 var unpack = r.GetContent(false);
 
                 var filePath = Path.Combine(uncompDir, r.FileName);
                 var target = await File.ReadAllBytesAsync(filePath);
-                var trimmed = new byte[target.Length - 2];
-                Array.Copy(target, 2, trimmed, 0, trimmed.Length);
 
-                Assert.AreEqual(unpack, trimmed, $"Decompress error in {r.FileName}");
+                int offset = Resource.GetResourceOffsetInFile(target[1]);
+
+                // Первые 2 байта - тип ресурса
+                var trimmed = new byte[target.Length - 2 - offset];
+                Array.Copy(target, 2 + offset, trimmed, 0, trimmed.Length);
+
+                Assert.AreEqual(trimmed, unpack, $"Decompress error in {r.FileName}");
             }
         }
     }

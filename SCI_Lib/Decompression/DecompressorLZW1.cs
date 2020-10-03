@@ -1,7 +1,6 @@
 ﻿using SCI_Translator.Utils;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace SCI_Translator.Decompression
@@ -24,7 +23,7 @@ namespace SCI_Translator.Decompression
                     break;
                 case LZWCompression.CompLZW1View:
                     UnpackLZW1();
-                    reorderView();
+                    _dest = ViewReorder.ReorderView(_dest);
                     break;
                 case LZWCompression.CompLZW1Pic:
                     UnpackLZW1();
@@ -132,10 +131,6 @@ namespace SCI_Translator.Decompression
                 if (_dwWrote == _szUnpacked)
                     return;
             }
-        }
-
-        private void reorderView()
-        {
         }
 
         private void reorderPic()

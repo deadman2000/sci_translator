@@ -1,12 +1,11 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
 using SCI_Translator.Resources;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace SCI_Tools
 {
-    abstract class PackageCommand
+    abstract class PackageCommand : BaseCommand
     {
         [Option(Description = "Original game directory", ShortName = "d", LongName = "dir")]
         [Required]
@@ -15,22 +14,13 @@ namespace SCI_Tools
         [Option(Description = "Translated game directory", ShortName = "t", LongName = "trans")]
         public string TranslateDir { get; set; }
 
-        [Option(Description = "Disable read key pause", LongName = "no-wait", ShortName = "w")]
-        public bool NoWait { get; set; }
-
         protected SCIPackage package;
 
-        protected async Task OnExecute()
+        protected override async Task Execute()
         {
             package = SCIPackage.Load(GameDir, TranslateDir);
 
             await Do();
-
-            if (!NoWait)
-            {
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
         }
 
         protected abstract Task Do();

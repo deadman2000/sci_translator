@@ -13,8 +13,8 @@ namespace SCI_Translator.Resources.SCI0
             {
                 fs.Position = offset;
                 var id = fs.ReadUShortBE();
-                ResT = id >> 11;
-                ResNr = id & 0x7ff;
+                ResT = (byte)(id >> 11);
+                ResNr = (ushort)(id & 0x7ff);
                 CompSize = fs.ReadUShortBE();
                 DecompSize = fs.ReadUShortBE();
                 Method = fs.ReadUShortBE();
@@ -41,6 +41,11 @@ namespace SCI_Translator.Resources.SCI0
                 case 2: return new CompressorHuffman();
                 default: throw new NotImplementedException();
             }
+        }
+
+        public override void Write(Stream stream)
+        {
+            throw new NotImplementedException();
         }
     }
 }

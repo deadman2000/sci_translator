@@ -20,6 +20,24 @@ namespace SCI_Translator.Resources.SCI1
             }
         }
 
+        public ResourceFileInfo1(byte resT, ushort resNum, ushort method)
+        {
+            ResT = resT;
+            ResNr = resNum;
+            CompSize = 0;
+            DecompSize = 0;
+            Method = method;
+        }
+
+        public override void Write(Stream stream)
+        {
+            stream.WriteByte(ResT);
+            stream.WriteUShortBE(ResNr);
+            stream.WriteUShortBE(CompSize);
+            stream.WriteUShortBE(DecompSize);
+            stream.WriteUShortBE(Method);
+        }
+
         public override int HeadSize => 9;
 
         public override Compressor GetCompressor()
@@ -28,7 +46,7 @@ namespace SCI_Translator.Resources.SCI1
             {
                 case 2: return new CompressorLZW1(LZWCompression.CompLZW1);
                 case 3: return new CompressorLZW1(LZWCompression.CompLZW1View);
-                case 4: return new CompressorLZW1(LZWCompression.CompLZW1Pic); ;
+                case 4: return new CompressorLZW1(LZWCompression.CompLZW1Pic);
                 case 18:
                 case 19:
                 case 20: return new CompressorDCL();
@@ -42,7 +60,7 @@ namespace SCI_Translator.Resources.SCI1
             {
                 case 2: return new DecompressorLZW1(LZWCompression.CompLZW1);
                 case 3: return new DecompressorLZW1(LZWCompression.CompLZW1View);
-                case 4: return new DecompressorLZW1(LZWCompression.CompLZW1Pic);;
+                case 4: return new DecompressorLZW1(LZWCompression.CompLZW1Pic);
                 case 18:
                 case 19:
                 case 20: return new DecompressorDCL();

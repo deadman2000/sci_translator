@@ -42,6 +42,11 @@ namespace SCI_Translator.Resources.SCI0
             }
         }
 
+        protected override void SaveMap(FileStream fs)
+        {
+            throw new NotImplementedException();
+        }
+
         public override ResourceFileInfo LoadResourceInfo(string resourceFileName, int offset)
         {
             return new ResourceFileInfo0(Path.Combine(GameDirectory, resourceFileName), offset);

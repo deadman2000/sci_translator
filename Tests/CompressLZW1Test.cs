@@ -10,14 +10,14 @@ namespace Tests
         [Test]
         public void SuccessUncompress()
         {
-            var package = SCIPackage.Load(Utils.ConquestPath);
+            var package = Utils.LoadPackage();
 
             //var r = package.GetResouce("95.p56");
             foreach (var r in package.Resources)
             {
                 var info = r.GetInfo();
 
-                if (info.Method != 2) continue;
+                if (info.Method != 2 && info.Method != 3 && info.Method != 4) continue;
 
                 var unpack = r.GetContent(false);
 
@@ -34,14 +34,14 @@ namespace Tests
         //[Test]
         public void CompressedEqual()
         {
-            var package = SCIPackage.Load(Utils.ConquestPath);
+            var package = Utils.LoadPackage();
 
             //var r = package.GetResouce("95.p56");
             foreach (var r in package.Resources)
             {
                 var info = r.GetInfo();
 
-                if (info.Method != 2) continue;
+                if (info.Method != 2 && info.Method != 3 && info.Method != 4) continue;
 
                 var orig = r.GetCompressed();
 

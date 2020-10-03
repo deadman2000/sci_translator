@@ -14,7 +14,8 @@ namespace SCI_Tools
         typeof(ElasticExport),
         typeof(FontExport),
         typeof(ReplacePic),
-        typeof(ExtractPic)
+        typeof(ExtractPic),
+        typeof(Pack)
     )]
     partial class Program
     {

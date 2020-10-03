@@ -110,7 +110,7 @@ namespace SCI_Translator
         private void ShowResource(Resource res, bool translated)
         {
             var info = res.GetInfo();
-            tsslResourceInfo.Text = String.Format("{0}  {1} ({2:X8}h)  {3}", res.Type, res.ResourceFileName, res.Offset, info);
+            tsslResourceInfo.Text = String.Format("{0}  {1} ({2:X8}h)  {3}", res.Type, res.Resources[0].FileName, res.Resources[0].Offset, info);
 
             _currentViewer = GetViewer(res);
             _currentViewer.Activate(res, translated);

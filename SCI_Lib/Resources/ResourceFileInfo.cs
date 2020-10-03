@@ -1,20 +1,21 @@
 ﻿using SCI_Translator.Compression;
 using SCI_Translator.Decompression;
 using System;
+using System.IO;
 
 namespace SCI_Translator.Resources
 {
     public abstract class ResourceFileInfo
     {
-        public int ResT { get; protected set; }
+        public byte ResT { get; protected set; }
 
-        public int ResNr { get; protected set; }
+        public ushort ResNr { get; protected set; }
 
-        public int CompSize { get; set; }
+        public ushort CompSize { get; set; }
 
-        public int DecompSize { get; set; }
+        public ushort DecompSize { get; set; }
 
-        public int Method { get; protected set; }
+        public ushort Method { get; protected set; }
 
         public abstract int HeadSize { get; }
 
@@ -23,5 +24,8 @@ namespace SCI_Translator.Resources
         public abstract Decompressor GetDecompressor();
 
         public abstract Compressor GetCompressor();
+
+        public abstract void Write(Stream stream);
+
     }
 }
