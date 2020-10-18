@@ -9,7 +9,7 @@ namespace SCI_Translator.Compression
         protected byte[] _data;
         protected Stream _stream;
 
-        public int Pack(byte[] data, Stream stream)
+        public virtual int Pack(byte[] data, Stream stream)
         {
             var start = stream.Position;
             _data = data;

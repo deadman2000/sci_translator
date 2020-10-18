@@ -8,26 +8,14 @@ namespace Tests
 {
     public class DecompressTest
     {
-        const string ASSETS = "../../../../assets";
+        public const string ASSETS = "../../../../assets";
 
-        [Test]
-        public async Task DecompressQG_VGA()
-        {
-            await CheckDecompress(Path.Combine(ASSETS, "QG_VGA"), Path.Combine(ASSETS, "QG_VGA_res"));
-        }
-
-        [Test]
-        public async Task DecompressConquest()
-        {
-            await CheckDecompress(Utils.ConquestPath, Path.Combine(ASSETS, "Conquest_res"));
-        }
-
-        private async Task CheckDecompress(string mapPath, string uncompDir)
+        protected async Task CheckDecompress(string mapPath, string uncompDir, Func<Resource, bool> match = null)
         {
             var package = SCIPackage.Load(mapPath);
             foreach (var r in package.Resources)
             {
-                if (r.Type == ResType.Picture) continue; // Unsupported
+                if (match != null && !match(r)) continue;
 
                 var unpack = r.GetContent(false);
 
@@ -42,6 +30,35 @@ namespace Tests
 
                 Assert.AreEqual(trimmed, unpack, $"Decompress error in {r.FileName}");
             }
+        }
+    }
+
+    public class DecompressConquestTest : DecompressTest
+    {
+        readonly string UNCOMPRESSED = Path.Combine(ASSETS, "Conquest_res");
+
+        [Test]
+        public async Task DecompressConquest()
+        {
+            await CheckDecompress(Utils.ConquestPath, UNCOMPRESSED, r => r.Type != ResType.View && r.Type != ResType.Picture);
+        }
+
+        [Test]
+        public async Task DecompressConquestView()
+        {
+            await CheckDecompress(Utils.ConquestPath, UNCOMPRESSED, r => r.Type == ResType.View);
+        }
+    }
+
+    public class DecompressQGTest : DecompressTest
+    {
+        readonly string MAP_PATH = Path.Combine(ASSETS, "QG_VGA");
+        readonly string UNCOMPRESSED = Path.Combine(ASSETS, "QG_VGA_res");
+
+        [Test]
+        public async Task DecompressQG_VGA()
+        {
+            await CheckDecompress(MAP_PATH, UNCOMPRESSED);
         }
     }
 }

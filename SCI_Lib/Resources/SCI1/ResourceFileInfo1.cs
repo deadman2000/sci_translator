@@ -44,9 +44,9 @@ namespace SCI_Translator.Resources.SCI1
         {
             switch (Method)
             {
-                case 2: return new CompressorLZW1(LZWCompression.CompLZW1);
-                case 3: return new CompressorLZW1(LZWCompression.CompLZW1View);
-                case 4: return new CompressorLZW1(LZWCompression.CompLZW1Pic);
+                case 2: return new CompressorLZW1();
+                case 3: return new CompressorLZW1View();
+                case 4: return new CompressorLZW1Pic();
                 case 18:
                 case 19:
                 case 20: return new CompressorDCL();
@@ -58,9 +58,9 @@ namespace SCI_Translator.Resources.SCI1
         {
             switch (Method)
             {
-                case 2: return new DecompressorLZW1(LZWCompression.CompLZW1);
-                case 3: return new DecompressorLZW1(LZWCompression.CompLZW1View);
-                case 4: return new DecompressorLZW1(LZWCompression.CompLZW1Pic);
+                case 2: return new DecompressorLZW1();
+                case 3: return new DecompressorLZW1View();
+                case 4: return new DecompressorLZW1Pic();
                 case 18:
                 case 19:
                 case 20: return new DecompressorDCL();

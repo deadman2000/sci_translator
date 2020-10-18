@@ -5,7 +5,7 @@ namespace SCI_Translator.Decompression
 {
     static class ViewReorder
     {
-        public static byte[] ReorderView(byte[] data)
+        public static byte[] DecodeView(byte[] data)
         {
             byte[] result = new byte[data.Length];
             MemoryStream writer = new MemoryStream(result);
@@ -18,6 +18,7 @@ namespace SCI_Translator.Decompression
             var unknown = seeker.ReadUShortBE();
             var palOffset = seeker.ReadUShortBE();
             var celTotal = seeker.ReadUShortBE();
+            byte[] celCounts = seeker.ReadBytes(lhPresent);
 
             var cc_pos = new int[celTotal];
 
@@ -36,9 +37,6 @@ namespace SCI_Translator.Decompression
             MemoryStream lh_ptr = new MemoryStream(result);
             lh_ptr.Position = writer.Position;
             writer.Seek(2 * looperheads, SeekOrigin.Current);
-
-            byte[] celCounts = new byte[lhPresent];
-            seeker.Read(celCounts, 0, lhPresent);
 
             int lb = 1;
             int celindex = 0;
@@ -83,8 +81,6 @@ namespace SCI_Translator.Decompression
                 lb <<= 1;
             }
 
-            //var wpos = writer.Position;
-
             MemoryStream pix_ptr = new MemoryStream(data, false);
             pix_ptr.Position = lenOffset + 2 + 2 * celTotal;
             for (var c = 0; c < celTotal; c++)
@@ -109,8 +105,7 @@ namespace SCI_Translator.Decompression
                     writer.WriteByte((byte)c);
 
                 seeker.Seek(-4, SeekOrigin.Current);
-                var buff = new byte[4 * 256 + 4];
-                seeker.Read(buff, 0, buff.Length);
+                var buff = seeker.ReadBytes(4 * 256 + 4);
                 writer.Write(buff, 0, buff.Length);
             }
 
@@ -186,5 +181,9 @@ namespace SCI_Translator.Decompression
             }
         }
 
+        public static byte[] EncodeView(byte[] data)
+        {
+            return data;
+        }
     }
 }

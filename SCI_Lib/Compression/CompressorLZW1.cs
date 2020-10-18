@@ -7,18 +7,6 @@ namespace SCI_Translator.Compression
 {
     class CompressorLZW1 : Compressor
     {
-        private readonly LZWCompression _compression;
-
-        public CompressorLZW1(LZWCompression compression)
-        {
-            _compression = compression;
-        }
-
-        protected override void GoPack()
-        {
-            PackLZW1();
-        }
-
         BitWriterMSB writer;
         ushort numbits = 9;
         ushort lastBits = 0;
@@ -30,14 +18,7 @@ namespace SCI_Translator.Compression
         ushort endtoken = 0x1ff;
         bool isFirst = true;
 
-        void WriteBits(ushort val)
-        {
-            if (val == 0x1000) throw new InvalidOperationException();
-            writer.WriteBits(val, numbits);
-            lastBits = val;
-        }
-
-        private void PackLZW1()
+        protected override void GoPack()
         {
             writer = new BitWriterMSB(_stream);
             BitWriterMSB.DEBUG = DEBUG;
@@ -117,6 +98,13 @@ namespace SCI_Translator.Compression
             }
             WriteBits(0x101);
             writer.Flush();
+        }
+
+        void WriteBits(ushort val)
+        {
+            if (val == 0x1000) throw new InvalidOperationException();
+            writer.WriteBits(val, numbits);
+            lastBits = val;
         }
 
         private void Reset()

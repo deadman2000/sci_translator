@@ -7,35 +7,10 @@ namespace SCI_Translator.Decompression
 {
     class DecompressorLZW1 : Decompressor
     {
-        LZWCompression _compression;
-
-        public DecompressorLZW1(LZWCompression compression)
-        {
-            _compression = compression;
-        }
-
-        protected override void GoUnpack()
-        {
-            switch (_compression)
-            {
-                case LZWCompression.CompLZW1: // SCI01/1 LZW compression
-                    UnpackLZW1();
-                    break;
-                case LZWCompression.CompLZW1View:
-                    UnpackLZW1();
-                    _dest = ViewReorder.ReorderView(_dest);
-                    break;
-                case LZWCompression.CompLZW1Pic:
-                    UnpackLZW1();
-                    reorderPic();
-                    break;
-            }
-        }
-
         Stack<byte> stack = new Stack<byte>();
         LZWToken[] tokens = new LZWToken[0x1004];
 
-        private void UnpackLZW1()
+        protected override void GoUnpack()
         {
             var reader = new BitReaderMSB(_stream);
             BitReaderMSB.DEBUG = DEBUG;
@@ -132,18 +107,6 @@ namespace SCI_Translator.Decompression
                     return;
             }
         }
-
-        private void reorderPic()
-        {
-        }
-
-    }
-
-    public enum LZWCompression
-    {
-        CompLZW1,
-        CompLZW1View,
-        CompLZW1Pic
     }
 
     struct LZWToken
