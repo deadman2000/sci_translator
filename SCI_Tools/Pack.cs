@@ -21,20 +21,6 @@ namespace SCI_Tools
         {
             var package = SCIPackage.Load(SourceDir);
             package.Pack(DestDir);
-
-            /*package = SCIPackage.Load(SourceDir);
-            var packed = SCIPackage.Load(DestDir);
-
-            foreach (var r in package.Resources)
-            {
-                var r2 = packed.GetResouce(r.FileName);
-
-                var data = r.GetContent(false);
-                var data2 = r2.GetContent(false);
-
-                System.Console.WriteLine($"{data[0]} {data2[1]}");
-            }*/
-
             return Task.CompletedTask;
         }
     }

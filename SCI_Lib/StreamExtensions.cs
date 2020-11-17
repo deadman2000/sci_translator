@@ -59,6 +59,11 @@ namespace SCI_Translator
             stream.WriteByte((byte)(val >> 24));
         }
 
+        public static void Write(this Stream stream, byte[] buffer)
+        {
+            stream.Write(buffer, 0, buffer.Length);
+        }
+
         public static uint ReadUIntLE(this Stream stream)
         {
             return (uint)((stream.ReadByte() << 24) | (stream.ReadByte() << 16) | (stream.ReadByte() << 8) | stream.ReadByte());

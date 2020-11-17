@@ -77,6 +77,7 @@ namespace SCI_Translator.Resources
                 case ResType.Font: return new ResFont();
                 case ResType.Message: return new ResMessage();
                 case ResType.Picture: return new ResPicture();
+                case ResType.View: return new ResView();
                 default: return new Resource();
             }
         }
@@ -182,10 +183,10 @@ namespace SCI_Translator.Resources
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 
-            var resFiles = Resources.SelectMany(r => r.Resources).Select(r => r.Num).Distinct().OrderBy(r => r);
-            var all = Resources.SelectMany(r => r.Resources.Select(rf => new { res = r, num = rf.Num, off = rf.Offset }));
+            var volumes = Resources.SelectMany(r => r.Volumes).Select(r => r.Num).Distinct().OrderBy(r => r);
+            var all = Resources.SelectMany(r => r.Volumes.Select(rf => new { res = r, num = rf.Num, off = rf.Offset }));
 
-            foreach (var num in resFiles)
+            foreach (var num in volumes)
             {
                 var resName = $"RESOURCE.{num:D3}";
                 Console.WriteLine(resName);
@@ -193,12 +194,11 @@ namespace SCI_Translator.Resources
                 var resources = all.Where(r => r.num == num).OrderBy(r => r.off);
 
                 var filePath = Path.Combine(directory, resName);
-                using (var fs = File.OpenWrite(filePath))
+                using var fs = File.OpenWrite(filePath);
+
+                foreach (var r in resources)
                 {
-                    foreach (var r in resources)
-                    {
-                        r.res.Pack(fs, r.num);
-                    }
+                    r.res.Pack(fs, r.num);
                 }
             }
 

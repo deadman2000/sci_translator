@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using SCI_Translator.Resources;
+using System.IO;
 
 namespace SCI_Translator.Compression
 {
@@ -9,15 +10,26 @@ namespace SCI_Translator.Compression
         protected byte[] _data;
         protected Stream _stream;
 
-        public virtual int Pack(byte[] data, Stream stream)
+        public byte[] Pack(byte[] data)
+        {
+            var mem = new MemoryStream();
+            Pack(data, mem);
+            return mem.ToArray();
+        }
+
+        public virtual void Pack(byte[] data, Stream stream)
         {
             var start = stream.Position;
             _data = data;
             _stream = stream;
             GoPack();
 
-            return (int)(stream.Position - start);
+            CompSize = (int)(stream.Position - start);
         }
+
+        public int DecompSize => _data.Length;
+
+        public int CompSize { get; set; }
 
         protected abstract void GoPack();
     }

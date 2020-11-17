@@ -1,9 +1,4 @@
 ﻿using McMaster.Extensions.CommandLineUtils;
-using SCI_Translator.Resources;
-using SCI_Translator.Resources.SCI1;
-using System;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SCI_Tools
@@ -14,7 +9,6 @@ namespace SCI_Tools
     {
         protected override Task Do()
         {
-            var data = package.GetResouce("0.V56").GetContent(false);
             return Task.CompletedTask;
         }
 

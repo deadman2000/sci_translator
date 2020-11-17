@@ -15,7 +15,7 @@ namespace SCI_Translator.Resources
             Package = package;
             Type = type;
             Number = number;
-            Resources.Add(new ResOffset { Num = resNum, Offset = offset });
+            Volumes.Add(new VolumeOffset { Num = resNum, Offset = offset });
         }
 
         public void Init(SCIPackage package, ResType type, ushort number, byte resNum, ResourceFileInfo info)
@@ -23,7 +23,7 @@ namespace SCI_Translator.Resources
             Package = package;
             Type = type;
             Number = number;
-            Resources.Add(new ResOffset { Num = resNum, Offset = -1 });
+            Volumes.Add(new VolumeOffset { Num = resNum, Offset = -1 });
             _info = info;
         }
 
@@ -35,7 +35,7 @@ namespace SCI_Translator.Resources
 
         public ushort Number { get; private set; }
 
-        public struct ResOffset
+        public struct VolumeOffset
         {
             public byte Num;
             public int Offset;
@@ -43,59 +43,56 @@ namespace SCI_Translator.Resources
             public string FileName => $"RESOURCE.{Num:D3}";
         }
 
-        public List<ResOffset> Resources { get; } = new List<ResOffset>();
+        public List<VolumeOffset> Volumes { get; } = new List<VolumeOffset>();
 
         public string FileName => Package.GetResFileName(this);
 
         public string TranslateDir => Package.TranslateDirectory;
 
-        public ResourceFileInfo GetInfo() => _info ?? (_info = Package.LoadResourceInfo(Resources[0].FileName, Resources[0].Offset));
+        public ResourceFileInfo GetInfo() => _info ?? (_info = Package.LoadResourceInfo(Volumes[0].FileName, Volumes[0].Offset));
 
         public override string ToString() => FileName;
 
-        public byte[] GetContent(bool translated)
+        public byte[] GetContent(bool translated, int volume = 0)
         {
             if (translated)
             {
-                return ReadContent(TranslateDir);
+                return ReadContent(TranslateDir, volume);
             }
             else
             {
-                return ReadContent(Package.GameDirectory);
+                return ReadContent(Package.GameDirectory, volume);
             }
         }
 
 
-        private byte[] ReadContent(string dir)
+        private byte[] ReadContent(string dir, int volume = 0)
         {
+            var vol = Volumes[volume];
+
             var info = GetInfo();
+
             var path = Path.Combine(dir, FileName);
             if (File.Exists(path)) // Если есть внешний файл, используем его
             {
-                using (FileStream fs = File.OpenRead(path))
-                {
-                    fs.Seek(1, SeekOrigin.Current);
-                    var second = fs.ReadB();
-                    int offset = GetResourceOffsetInFile(second);
-                    fs.Seek(offset, SeekOrigin.Current);
+                using FileStream fs = File.OpenRead(path);
 
-                    byte[] data = new byte[fs.Length - fs.Position];
-                    fs.Read(data, 0, data.Length);
-                    return data;
-                }
+                fs.Seek(1, SeekOrigin.Current);
+                var second = fs.ReadB();
+                int offset = GetResourceOffsetInFile(second);
+                fs.Seek(offset, SeekOrigin.Current);
+
+                return fs.ReadBytes((int)(fs.Length - fs.Position));
             }
 
-            var resOff = Resources[0];
 
-            using (FileStream fs = File.OpenRead(Path.Combine(dir, resOff.FileName)))
+            using (FileStream fs = File.OpenRead(Path.Combine(dir, vol.FileName)))
             {
-                fs.Position = resOff.Offset + info.HeadSize;
+                fs.Position = vol.Offset + info.HeadSize;
 
                 if (info.Method == 0) // Uncompressed
                 {
-                    byte[] data = new byte[info.DecompSize];
-                    fs.Read(data, 0, data.Length);
-                    return data;
+                    return fs.ReadBytes(info.DecompSize);
                 }
                 else
                 {
@@ -126,19 +123,20 @@ namespace SCI_Translator.Resources
             return secondHeaderByte;
         }
 
-        public byte[] GetCompressed()
+        byte[] _compressed = null;
+
+        public byte[] GetCompressed(int volume = 0)
         {
-            var info = GetInfo();
+            if (_compressed != null) return _compressed;
 
-            var resOff = Resources[0];
+            var resOff = Volumes[volume];
 
-            byte[] data = new byte[info.CompSize];
-            using (FileStream fs = File.OpenRead(Path.Combine(Package.GameDirectory, resOff.FileName)))
-            {
-                fs.Position = resOff.Offset + info.HeadSize;
-                fs.Read(data, 0, data.Length);
-            }
-            return data;
+            var info = volume == 0 ? GetInfo() : Package.LoadResourceInfo(resOff.FileName, resOff.Offset);
+
+            using FileStream fs = File.OpenRead(Path.Combine(Package.GameDirectory, resOff.FileName));
+
+            fs.Position = resOff.Offset + info.HeadSize;
+            return _compressed = fs.ReadBytes(info.CompSize);
         }
 
         public void Translate(string en, string tr)
@@ -198,7 +196,7 @@ namespace SCI_Translator.Resources
             throw new NotImplementedException();
         }
 
-        public void Pack(Stream stream, byte resNum)
+        public void Pack(Stream stream, byte volNum)
         {
             var info = GetInfo();
             var path = Path.Combine(Package.GameDirectory, FileName);
@@ -206,33 +204,34 @@ namespace SCI_Translator.Resources
             var begin = stream.Position;
             stream.Seek(info.HeadSize, SeekOrigin.Current);
 
-            var ri = Resources.FindIndex(r => r.Num == resNum);
-            var res = Resources[ri];
+            var ri = Volumes.FindIndex(r => r.Num == volNum);
+            var res = Volumes[ri];
 
             if (!File.Exists(path)) // Файл не был распакован, считываем запакованный и так же складываем
             {
                 var data = GetCompressed();
-                stream.Write(data, 0, data.Length);
+                stream.Write(data);
             }
             else
             {
                 byte[] data = ReadContent(Package.GameDirectory);
+                info.DecompSize = (ushort)data.Length;
 
                 if (info.Method != 0)
                 {
                     Compressor comp = info.GetCompressor();
-                    int size = comp.Pack(data, stream);
-
-                    info.DecompSize = (ushort)data.Length;
-                    info.CompSize = (ushort)size;
+                    comp.Pack(data, stream);
+                    info.CompSize = (ushort)comp.CompSize;
+                    info.DecompSize = (ushort)comp.DecompSize;
                 }
                 else
                 {
-                    stream.Write(data, 0, data.Length);
+                    stream.Write(data);
+                    info.CompSize = (ushort)data.Length;
                 }
             }
 
-            Resources[ri] = new ResOffset { Num = resNum, Offset = (int)begin };
+            Volumes[ri] = new VolumeOffset { Num = volNum, Offset = (int)begin };
 
             var end = stream.Position;
             stream.Seek(begin, SeekOrigin.Begin);

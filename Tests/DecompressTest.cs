@@ -42,12 +42,6 @@ namespace Tests
         {
             await CheckDecompress(Utils.ConquestPath, UNCOMPRESSED, r => r.Type != ResType.View && r.Type != ResType.Picture);
         }
-
-        [Test]
-        public async Task DecompressConquestView()
-        {
-            await CheckDecompress(Utils.ConquestPath, UNCOMPRESSED, r => r.Type == ResType.View);
-        }
     }
 
     public class DecompressQGTest : DecompressTest

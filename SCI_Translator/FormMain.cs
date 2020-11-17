@@ -110,7 +110,7 @@ namespace SCI_Translator
         private void ShowResource(Resource res, bool translated)
         {
             var info = res.GetInfo();
-            tsslResourceInfo.Text = String.Format("{0}  {1} ({2:X8}h)  {3}", res.Type, res.Resources[0].FileName, res.Resources[0].Offset, info);
+            tsslResourceInfo.Text = String.Format("{0}  {1} ({2:X8}h)  {3}", res.Type, res.Volumes[0].FileName, res.Volumes[0].Offset, info);
 
             _currentViewer = GetViewer(res);
             _currentViewer.Activate(res, translated);
@@ -193,7 +193,7 @@ namespace SCI_Translator
             if (tv.SelectedNode == null) return;
             Resource res = tv.SelectedNode.Tag as Resource;
             var bytes = res.GetContent(false);
-            File.WriteAllBytes("D:/" + res.FileName, bytes);
+            File.WriteAllBytes(res.FileName, bytes);
         }
 
         private void tv_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

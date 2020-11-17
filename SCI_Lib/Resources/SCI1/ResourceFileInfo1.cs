@@ -14,7 +14,7 @@ namespace SCI_Translator.Resources.SCI1
                 fs.Position = offset;
                 ResT = (byte)fs.ReadByte();
                 ResNr = fs.ReadUShortBE();
-                CompSize = fs.ReadUShortBE();
+                CompSize = (ushort)(fs.ReadUShortBE() - 4);
                 DecompSize = fs.ReadUShortBE();
                 Method = fs.ReadUShortBE();
             }
@@ -33,7 +33,7 @@ namespace SCI_Translator.Resources.SCI1
         {
             stream.WriteByte(ResT);
             stream.WriteUShortBE(ResNr);
-            stream.WriteUShortBE(CompSize);
+            stream.WriteUShortBE((ushort)(CompSize + 4));
             stream.WriteUShortBE(DecompSize);
             stream.WriteUShortBE(Method);
         }

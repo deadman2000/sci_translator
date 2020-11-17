@@ -18,37 +18,15 @@ namespace Tests
 
                 if (info.Method != 2) continue;
 
-                var unpack = r.GetContent(false);
-
-                var mem = new MemoryStream();
-                info.GetCompressor().Pack(unpack, mem);
-                var compressed = mem.ToArray();
-
-                var uncompressed = info.GetDecompressor().Unpack(new MemoryStream(compressed), compressed.Length, unpack.Length);
-
-                Assert.AreEqual(unpack, uncompressed, $"Decompress error in {r.FileName}");
-            }
-        }
-
-        [Test]
-        public void SuccessUncompressView()
-        {
-            var package = Utils.LoadPackage();
-
-            //var r = package.GetResouce("95.p56");
-            foreach (var r in package.Resources)
-            {
-                var info = r.GetInfo();
-
-                if (info.Method != 3) continue;
+                var comp = info.GetCompressor();
+                var decomp = info.GetDecompressor();
 
                 var unpack = r.GetContent(false);
 
-                var mem = new MemoryStream();
-                info.GetCompressor().Pack(unpack, mem);
-                var compressed = mem.ToArray();
+                var compressed = comp.Pack(unpack);
 
-                var uncompressed = info.GetDecompressor().Unpack(new MemoryStream(compressed), compressed.Length, unpack.Length);
+                var ms = new MemoryStream(compressed);
+                var uncompressed = decomp.Unpack(ms, compressed.Length, unpack.Length);
 
                 Assert.AreEqual(unpack, uncompressed, $"Decompress error in {r.FileName}");
             }

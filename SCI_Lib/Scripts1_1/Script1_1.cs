@@ -35,7 +35,7 @@ namespace SCI_Translator.Scripts1_1
             // https://github.com/icefallgames/SCICompanion/blob/master/SCICompanionLib/Src/Compile/CompiledScript.cpp#L226
             List<ushort> exportsTO = new List<ushort>();
             List<ushort> exportedObjInst = new List<ushort>();
-            var heapRes = Package.GetResouce(ResType.Heap, Resource.Resources[0].Num);
+            var heapRes = Package.GetResouce(ResType.Heap, Resource.Volumes[0].Num);
 
             using (var stream = new MemoryStream(SourceData.Length))
             {

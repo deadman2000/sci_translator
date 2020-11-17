@@ -79,10 +79,12 @@ namespace SCI_Translator.Resources.SCI1
                         offset = address & 0x0FFFFFFF;
                     }
 
+                    //Console.WriteLine($"{num} {offset:X4} {offsets[i].Type} {resNum}");
+
                     var ex = Resources.Find(r => r.Type == offsets[i].Type && r.Number == num);
                     if (ex != null)
                     {
-                        ex.Resources.Add(new Resource.ResOffset { Num = resNum, Offset = offset });
+                        ex.Volumes.Add(new Resource.VolumeOffset { Num = resNum, Offset = offset });
                     }
                     else
                     {
@@ -115,7 +117,7 @@ namespace SCI_Translator.Resources.SCI1
                         if (first != null)
                         {
                             method = first.GetInfo().Method;
-                            resNum = first.Resources[0].Num;
+                            resNum = first.Volumes[0].Num;
                         }
 
                         var info = new ResourceFileInfo1((byte)rt, num, method);
@@ -126,6 +128,8 @@ namespace SCI_Translator.Resources.SCI1
                 }
             }
         }
+
+        const bool SAVE_MAP_DEBUG = false;
 
         protected override void SaveMap(FileStream fs)
         {
@@ -138,13 +142,13 @@ namespace SCI_Translator.Resources.SCI1
             foreach (var gr in byType)
             {
                 offset = (ushort)fs.Position;
-                //Console.WriteLine($"{gr.Key} {(byte)gr.Key:X2} {gr.Count()}");
+                if (SAVE_MAP_DEBUG) Console.WriteLine($"{gr.Key} {(byte)gr.Key:X2} {gr.Count()}");
 
                 foreach (var r in gr)
                 {
-                    foreach (var resOffset in r.Resources)
+                    foreach (var resOffset in r.Volumes)
                     {
-                        //Console.WriteLine($"{fs.Position:X4} > {r}  {r.Number} {r.Offset:X4} {rn::X1}");
+                        if (SAVE_MAP_DEBUG) Console.WriteLine($"{fs.Position:X4} > {r}  {r.Number} {resOffset.Offset:X4} {resOffset.Num}");
                         fs.WriteUShortBE(r.Number);
                         fs.WriteUIntBE((uint)(resOffset.Offset | (resOffset.Num << 28)));
                     }
@@ -153,7 +157,7 @@ namespace SCI_Translator.Resources.SCI1
                 var pos = fs.Position;
 
                 fs.Seek(i * 3, SeekOrigin.Begin);
-                //Console.WriteLine($"{fs.Position:X4} > {(byte)gr.Key:X2}  {offset:X4}");
+                if (SAVE_MAP_DEBUG) Console.WriteLine($"{fs.Position:X4} > {(byte)gr.Key:X2}  {offset:X4}");
 
                 fs.WriteByte((byte)gr.Key);
                 fs.WriteUShortBE(offset);
@@ -164,7 +168,7 @@ namespace SCI_Translator.Resources.SCI1
             offset = (ushort)fs.Position;
 
             fs.Seek(i * 3, SeekOrigin.Begin);
-            //Console.WriteLine($"{fs.Position:X4} > 0xff  {offset:X4}");
+            if (SAVE_MAP_DEBUG) Console.WriteLine($"{fs.Position:X4} > 0xff  {offset:X4}");
             fs.WriteByte(0xff);
             fs.WriteUShortBE(offset);
         }
