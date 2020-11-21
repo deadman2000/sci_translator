@@ -7,7 +7,7 @@ namespace SCI_Tools
 {
     // Экспорт оригинальных строк в Elasticsearch
     // to_elastic -d D:\Projects\SCI_Translator\Conquest\
-    [Command("to_elastic", Description = "Find translate dublicates")]
+    [Command("to_elastic", Description = "Export text resources to Elasticsearch")]
     class ElasticExport : PackageCommand
     {
         class ElasticText
