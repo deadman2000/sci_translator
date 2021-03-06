@@ -28,7 +28,7 @@ namespace SCI_Translator.ResView
             ResText txt = (ResText)res;
             var en = txt.GetText(false);
 
-            if (res.Package.HasTranslate())
+            if (res.Package.HasTranslate)
             {
                 var ru = txt.GetText(true);
                 for (int i = 0; i < en.Length; i++)

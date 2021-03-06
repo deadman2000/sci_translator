@@ -67,7 +67,7 @@ namespace SCI_Translator
         {
             var lines = txt.GetText(false);
             string[] tr = null;
-            if (_package.HasTranslate())
+            if (_package.HasTranslate)
                 tr = txt.GetText(true);
             for (int i = 0; i < lines.Length; i++)
             {
@@ -84,7 +84,7 @@ namespace SCI_Translator
             var sections = script.Get<StringSection>();
 
             List<StringSection> trSections = null;
-            if (_package.HasTranslate())
+            if (_package.HasTranslate)
             {
                 var tr = res.GetScript(true);
                 trSections = tr.Get<StringSection>();
@@ -108,7 +108,7 @@ namespace SCI_Translator
         {
             var messages = msg.GetMessages(false);
             List<MessageRecord> tr = null;
-            if (_package.HasTranslate())
+            if (_package.HasTranslate)
                 tr = msg.GetMessages(true);
 
             for (int i = 0; i < messages.Count; i++)

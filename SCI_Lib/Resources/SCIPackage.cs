@@ -24,14 +24,12 @@ namespace SCI_Translator.Resources
 
         private static bool IsSCI0(string mapFile)
         {
-            using (FileStream fs = File.OpenRead(mapFile))
-            {
-                var test = new byte[6];
-                fs.Seek(-6, SeekOrigin.End);
-                fs.Read(test, 0, 6);
-                fs.Seek(0, SeekOrigin.Begin);
-                return test.All(b => b == 0xff);
-            }
+            using FileStream fs = File.OpenRead(mapFile);
+            var test = new byte[6];
+            fs.Seek(-6, SeekOrigin.End);
+            fs.Read(test, 0, 6);
+            fs.Seek(0, SeekOrigin.Begin);
+            return test.All(b => b == 0xff);
         }
 
 
@@ -51,9 +49,12 @@ namespace SCI_Translator.Resources
             GameDirectory = directory;
             TranslateDirectory = translate ?? Path.Combine(GameDirectory, "TRANSLATE");
 
-            using (FileStream fs = File.OpenRead(Path.Combine(GameDirectory, "RESOURCE.MAP")))
+            ReadMap(Path.Combine(GameDirectory, "RESOURCE.MAP"));
+
+            var messagesPath = Path.Combine(GameDirectory, "MESSAGE.MAP");
+            if (File.Exists(messagesPath))
             {
-                ReadMap(fs);
+                ReadMap(messagesPath);
             }
 
             Resources = Resources.OrderBy(r => r.Type).ThenBy(r => r.Number).ToList();
@@ -62,6 +63,12 @@ namespace SCI_Translator.Resources
         }
 
         public abstract ResourceFileInfo LoadResourceInfo(string resourceFileName, int offset);
+
+        private void ReadMap(string mapPath)
+        {
+            using FileStream fs = File.OpenRead(mapPath);
+            ReadMap(fs);
+        }
 
         protected abstract void ReadMap(FileStream fs);
 
@@ -83,11 +90,14 @@ namespace SCI_Translator.Resources
         }
 
         private bool? _hasTranslate;
-        public bool HasTranslate()
+        public bool HasTranslate
         {
-            if (!_hasTranslate.HasValue)
-                _hasTranslate = Directory.Exists(TranslateDirectory);
-            return _hasTranslate.Value;
+            get
+            {
+                if (!_hasTranslate.HasValue)
+                    _hasTranslate = Directory.Exists(TranslateDirectory);
+                return _hasTranslate.Value;
+            }
         }
 
         private IEnumerable<Script> _scriptsCache;

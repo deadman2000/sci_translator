@@ -14,21 +14,15 @@ namespace SCI_Translator.Resources
             var data = GetContent(translate);
             List<MessageRecord> records;
 
-            using (var stream = new MemoryStream(data.Length))
+            using (var stream = new MemoryStream(data))
             {
-                stream.Write(data, 0, data.Length);
-                stream.Seek(0, SeekOrigin.Begin);
-
                 var ver = stream.ReadUIntBE() / 1000;
 
-                switch (ver)
+                records = ver switch
                 {
-                    case 3:
-                        records = ReadV3(stream);
-                        break;
-                    default:
-                        throw new NotImplementedException();
-                }
+                    3 => ReadV3(stream),
+                    _ => throw new NotImplementedException(),
+                };
             }
             foreach (var r in records)
             {

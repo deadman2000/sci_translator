@@ -57,7 +57,7 @@ namespace SCI_Translator
                 }
             }
 
-            if (!_package.HasTranslate())
+            if (!_package.HasTranslate)
             {
                 tsbTranslated.Checked = false;
                 tsbTranslated.Visible = false;
