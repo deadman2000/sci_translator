@@ -83,7 +83,7 @@ spec:
         - name: web
           containerPort: 80
         volumeMounts:
-        - mountPath: /data/
+        - mountPath: /app/media/
           name: static
           subPath: static
       volumes:
@@ -232,12 +232,17 @@ spec:
               key: password
         - name: FRAMES_DIR
           value: /data/frames
+        - name: DOWNLOAD_DIR
+          value: /download
         volumeMounts:
         - mountPath: /data/
-          name: static
+          name: translate-volume
           subPath: static
+        - mountPath: /download/
+          name: translate-volume
+          subPath: download
       volumes:
-      - name: static
+      - name: translate-volume
         persistentVolumeClaim:
           claimName: translate-data
 ---
