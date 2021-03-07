@@ -9,6 +9,8 @@ namespace SCI_Translator.Resources
 {
     public class ResMessage : Resource
     {
+        private uint header;
+
         public List<MessageRecord> GetMessages(bool translate)
         {
             var data = GetContent(translate);
@@ -16,18 +18,19 @@ namespace SCI_Translator.Resources
 
             using (var stream = new MemoryStream(data))
             {
-                var ver = stream.ReadUIntBE() / 1000;
-
+                header = stream.ReadUIntBE();
+                var ver = header / 1000;
                 records = ver switch
                 {
                     3 => ReadV3(stream),
+                    4 => ReadV4(stream),
                     _ => throw new NotImplementedException(),
                 };
             }
+
             foreach (var r in records)
-            {
                 r.ReadText(data, GameEncoding);
-            }
+
             return records;
         }
 
@@ -48,38 +51,22 @@ namespace SCI_Translator.Resources
                     messages[i].Text = strings[i];
             }
 
-            throw new NotImplementedException();
-            //SaveTranslate()
+            SetMessages(messages);
         }
 
-        class RecordV3 : MessageRecord
+        public void SetMessages(List<MessageRecord> messages)
         {
-            public byte Noun { get; set; }
+            ByteBuilder bb = new ByteBuilder();
 
-            public byte Verb { get; set; }
+            if (messages[0] is MessageRecordV3)
+                SaveV3(messages, bb);
+            else if (messages[0] is MessageRecordV4)
+                SaveV4(messages, bb);
+            else
+                throw new NotImplementedException();
 
-            public byte Cond { get; set; }
-
-            public byte Seq { get; set; }
-
-            public byte Talker { get; set; }
-
-            public int Unknown { get; set; }
-
-            public RecordV3(Stream stream)
-            {
-                Noun = (byte)stream.ReadByte();
-                Verb = (byte)stream.ReadByte();
-                Cond = (byte)stream.ReadByte();
-                Seq = (byte)stream.ReadByte();
-                Talker = (byte)stream.ReadByte();
-                TextOffset = stream.ReadUShortBE();
-                Unknown = stream.Read3ByteBE();
-            }
-
-            public override string ToString() => $"noun: {Noun} verb:{Verb} cond:{Cond} seq:{Seq} talker:{Talker} unknown:{Unknown} text: {Text}";
+            SaveTranslate(bb.GetArray());
         }
-
 
         private List<MessageRecord> ReadV3(Stream stream)
         {
@@ -88,12 +75,65 @@ namespace SCI_Translator.Resources
 
             List<MessageRecord> records = new List<MessageRecord>();
             for (int i = 0; i < count; i++)
-                records.Add(new RecordV3(stream));
+                records.Add(new MessageRecordV3(stream));
             return records;
         }
 
-        public void SetMessages(List<MessageRecord> tr)
+        private void SaveV3(List<MessageRecord> messages, ByteBuilder bb)
         {
+            bb.AddIntBE(header);
+            int endOffset = bb.Position;
+            bb.AddShortBE(0);
+            bb.AddShortBE((ushort)messages.Count);
+
+            object[] extra = new object[messages.Count];
+
+            for (int i = 0; i < messages.Count; i++)
+            {
+                extra[i] = messages[i].WriteHeader(bb);
+            }
+
+            for (int i = 0; i < messages.Count; i++)
+            {
+                messages[i].WriteText(bb, extra[i], GameEncoding);
+            }
+
+            bb.SetShortBE(endOffset, (ushort)(bb.Position - endOffset));
+        }
+
+        private List<MessageRecord> ReadV4(MemoryStream stream)
+        {
+            ushort end = stream.ReadUShortBE();
+            ushort count = stream.ReadUShortBE();
+            ushort unknown = stream.ReadUShortBE();
+
+            List<MessageRecord> records = new List<MessageRecord>();
+            for (int i = 0; i < count; i++)
+                records.Add(new MessageRecordV4(stream));
+            return records;
+        }
+
+        private void SaveV4(List<MessageRecord> messages, ByteBuilder bb)
+        {
+            bb.AddIntBE(header);
+            int endOffset = bb.Position;
+            bb.AddShortBE(0);
+            bb.AddShortBE((ushort)messages.Count);
+            bb.AddShortBE((ushort)messages.Count);
+
+            object[] extra = new object[messages.Count];
+
+            for (int i = 0; i < messages.Count; i++)
+            {
+                extra[i] = messages[i].WriteHeader(bb);
+            }
+
+            for (int i = 0; i < messages.Count; i++)
+            {
+                messages[i].WriteText(bb, extra[i], GameEncoding);
+            }
+
+            bb.SetShortBE(endOffset, (ushort)(bb.Position - endOffset));
         }
     }
 }

@@ -81,6 +81,8 @@ namespace SCI_Translator
         private void FindScript(ResScript res)
         {
             var script = res.GetScript(false);
+            if (script == null) return;
+
             var sections = script.Get<StringSection>();
 
             List<StringSection> trSections = null;

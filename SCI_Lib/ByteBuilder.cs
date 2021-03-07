@@ -43,7 +43,7 @@ namespace SCI_Translator
             _bytes.Add((byte)(val >> 8));
         }
 
-        internal void AddIntBE(int val)
+        public void AddIntBE(int val)
         {
             _bytes.Add((byte)(val & 0xFF));
             _bytes.Add((byte)(val >> 8));
@@ -51,6 +51,20 @@ namespace SCI_Translator
             _bytes.Add((byte)(val >> 24));
         }
 
+        public void AddIntBE(uint val)
+        {
+            _bytes.Add((byte)(val & 0xFF));
+            _bytes.Add((byte)(val >> 8));
+            _bytes.Add((byte)(val >> 16));
+            _bytes.Add((byte)(val >> 24));
+        }
+
+        public void AddThreeBytesBE(int val)
+        {
+            _bytes.Add((byte)(val & 0xFF));
+            _bytes.Add((byte)(val >> 8));
+            _bytes.Add((byte)(val >> 16));
+        }
 
         public void SetByte(int offset, byte val)
         {
@@ -74,5 +88,6 @@ namespace SCI_Translator
             AddByte((byte)(p.X & 0xff));
             AddByte((byte)(p.Y & 0xff));
         }
+
     }
 }

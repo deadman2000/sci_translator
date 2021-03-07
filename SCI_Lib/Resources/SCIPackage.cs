@@ -54,6 +54,7 @@ namespace SCI_Translator.Resources
             var messagesPath = Path.Combine(GameDirectory, "MESSAGE.MAP");
             if (File.Exists(messagesPath))
             {
+                ExternalMessages = true;
                 ReadMap(messagesPath);
             }
 
@@ -76,17 +77,17 @@ namespace SCI_Translator.Resources
 
         protected virtual Resource CreateRes(ResType type)
         {
-            switch (type)
+            return type switch
             {
-                case ResType.Text: return new ResText();
-                case ResType.Vocabulary: return new ResVocab();
-                case ResType.Script: return new ResScript();
-                case ResType.Font: return new ResFont();
-                case ResType.Message: return new ResMessage();
-                case ResType.Picture: return new ResPicture();
-                case ResType.View: return new ResView();
-                default: return new Resource();
-            }
+                ResType.Text => new ResText(),
+                ResType.Vocabulary => new ResVocab(),
+                ResType.Script => new ResScript(),
+                ResType.Font => new ResFont(),
+                ResType.Message => new ResMessage(),
+                ResType.Picture => new ResPicture(),
+                ResType.View => new ResView(),
+                _ => new Resource(),
+            };
         }
 
         private bool? _hasTranslate;
@@ -130,6 +131,8 @@ namespace SCI_Translator.Resources
         public IEnumerable<ResMessage> Messages => GetResouces<ResMessage>();
 
         public bool SeparateHeapResources { get; set; }
+
+        public bool ExternalMessages { get; set; }
 
         public IEnumerable<Resource> GetResouces(ResType resType) => Resources.FindAll(r => r.Type == resType);
 

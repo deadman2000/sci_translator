@@ -44,8 +44,6 @@ namespace SCI_Translator.ResView
 
         protected override void SaveContent()
         {
-            MessageBox.Show("Не реализовано");
-
             dgvText.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
             var tr = ((ResMessage)_res).GetMessages(true);

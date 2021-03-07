@@ -15,7 +15,10 @@ namespace SCI_Translator.Resources
             Package = package;
             Type = type;
             Number = number;
-            Volumes.Add(new VolumeOffset { Num = resNum, Offset = offset });
+            if (type == ResType.Message && package.ExternalMessages)
+                Volumes.Add(new VolumeOffset(resNum, offset, "RESOURCE.MSG"));
+            else
+                Volumes.Add(new VolumeOffset(resNum, offset));
         }
 
         public void Init(SCIPackage package, ResType type, ushort number, byte resNum, ResourceFileInfo info)
@@ -23,7 +26,10 @@ namespace SCI_Translator.Resources
             Package = package;
             Type = type;
             Number = number;
-            Volumes.Add(new VolumeOffset { Num = resNum, Offset = -1 });
+            if (type == ResType.Message && package.ExternalMessages)
+                Volumes.Add(new VolumeOffset(resNum, -1, "RESOURCE.MSG"));
+            else
+                Volumes.Add(new VolumeOffset(resNum, -1));
             _info = info;
         }
 
@@ -39,8 +45,21 @@ namespace SCI_Translator.Resources
         {
             public byte Num;
             public int Offset;
+            public string FileName;
 
-            public string FileName => $"RESOURCE.{Num:D3}";
+            public VolumeOffset(byte num, int offset)
+            {
+                Num = num;
+                Offset = offset;
+                FileName = $"RESOURCE.{Num:D3}";
+            }
+
+            public VolumeOffset(byte num, int offset, string fileName)
+            {
+                Num = num;
+                Offset = offset;
+                FileName = fileName;
+            }
         }
 
         public List<VolumeOffset> Volumes { get; } = new List<VolumeOffset>();
@@ -49,7 +68,7 @@ namespace SCI_Translator.Resources
 
         public string TranslateDir => Package.TranslateDirectory;
 
-        public ResourceFileInfo GetInfo() => _info ?? (_info = Package.LoadResourceInfo(Volumes[0].FileName, Volumes[0].Offset));
+        public ResourceFileInfo GetInfo() => _info ??= Package.LoadResourceInfo(Volumes[0].FileName, Volumes[0].Offset);
 
         public override string ToString() => FileName;
 

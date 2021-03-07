@@ -34,8 +34,8 @@ namespace SCI_Translator.Resources
                 {
                     stream.Seek(offsets[i], SeekOrigin.Begin);
 
-                    byte w = (byte)stream.ReadByte();
-                    byte h = (byte)stream.ReadByte();
+                    byte w = stream.ReadB();
+                    byte h = stream.ReadB();
 
                     SpriteFrame frm = new SpriteFrame(w, h);
                     var val = stream.ReadByte();

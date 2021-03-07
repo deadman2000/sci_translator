@@ -19,7 +19,7 @@ namespace SCI_Translator.Resources
 
         public abstract int HeadSize { get; }
 
-        public override string ToString() => String.Format("res_t:{0:X2} res_nr:{1} comp_size:{2} decomp_size:{3} method:{4}", ResT, ResNr, CompSize, DecompSize, Method);
+        public override string ToString() => $"res_t:{ResT:X2} res_nr:{ResNr} comp_size:{CompSize} decomp_size:{DecompSize} method:{Method}";
 
         public abstract Decompressor GetDecompressor();
 

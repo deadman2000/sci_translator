@@ -29,26 +29,31 @@ namespace SCI_Translator.Resources.SCI1
             public int RecordsCount { get; set; }
         }
 
+        bool? _isSCI_11;
 
-        const bool SCI_11 = false;
-        int EntriesSize = SCI_11 ? 5 : 6;
 
         // https://wiki.scummvm.org/index.php?title=SCI/Specifications/Resource_files/SCI1_resources
         // http://sci.sierrahelp.com/Documentation/SCISpecifications/09-SCI1Resources.html
         protected override void ReadMap(FileStream fs)
         {
+            if (!_isSCI_11.HasValue)
+                DetectVersion(fs);
+
+            fs.Position = 0;
+
             List<ResMapOffset> offsets = new List<ResMapOffset>();
+            int entriesSize = _isSCI_11.Value ? 5 : 6;
 
             ResMapOffset off = null;
             while (true)
             {
                 int t = fs.ReadByte();
                 if ((t < 0x80 || t > 0x91) && t != 0xff)
-                    throw new Exception("Wrong format");
+                    throw new FormatException("Wrong format");
 
                 ResType type = (ResType)t;
                 ushort offset = fs.ReadUShortBE();
-                if (off != null) off.RecordsCount = (offset - off.Offset) / EntriesSize; // Высчитываем количество записей исходя из границ блоков
+                if (off != null) off.RecordsCount = (offset - off.Offset) / entriesSize; // Высчитываем количество записей исходя из границ блоков
 
                 if (type == ResType.End) break;
 
@@ -66,7 +71,7 @@ namespace SCI_Translator.Resources.SCI1
                     int offset;
                     byte resNum = 0;
 
-                    if (SCI_11)
+                    if (_isSCI_11.Value)
                     {
                         offset = fs.ReadUShortBE();
                         offset |= fs.ReadByte() << 16;
@@ -79,7 +84,7 @@ namespace SCI_Translator.Resources.SCI1
                         offset = address & 0x0FFFFFFF;
                     }
 
-                    //Console.WriteLine($"{num} {offset:X4} {offsets[i].Type} {resNum}");
+                    //Console.WriteLine($"{num,6} {offset:X08} {offsets[i].Type} {resNum}");
 
                     var ex = Resources.Find(r => r.Type == offsets[i].Type && r.Number == num);
                     if (ex != null)
@@ -127,6 +132,37 @@ namespace SCI_Translator.Resources.SCI1
                     }
                 }
             }
+        }
+
+        private void DetectVersion(FileStream fs)
+        {
+            int t = fs.ReadByte();
+            if ((t < 0x80 || t > 0x91) && t != 0xff)
+                throw new FormatException("Wrong format");
+
+            var offset = fs.ReadUShortBE();
+
+            fs.Position = offset;
+
+            var num1 = fs.ReadUShortBE();
+            fs.Position += 3;
+            var num2 = fs.ReadUShortBE();
+
+            if (num1 == num2 - 1)
+            {
+                _isSCI_11 = true;
+                return;
+            }
+
+            fs.Position = offset + 6;
+            num2 = fs.ReadUShortBE();
+            if (num1 == num2 - 1)
+            {
+                _isSCI_11 = false;
+                return;
+            }
+
+            throw new FormatException("Unknown format");
         }
 
         const bool SAVE_MAP_DEBUG = false;
