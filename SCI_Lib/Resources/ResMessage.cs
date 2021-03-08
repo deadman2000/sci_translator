@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SCI_Translator.Resources
 {
@@ -104,8 +102,8 @@ namespace SCI_Translator.Resources
         private List<MessageRecord> ReadV4(MemoryStream stream)
         {
             ushort end = stream.ReadUShortBE();
-            ushort count = stream.ReadUShortBE();
             ushort unknown = stream.ReadUShortBE();
+            ushort count = stream.ReadUShortBE();
 
             List<MessageRecord> records = new List<MessageRecord>();
             for (int i = 0; i < count; i++)
