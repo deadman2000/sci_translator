@@ -1,3 +1,7 @@
+# Migrated
+
+This project migrated to https://github.com/deadman2000/sci_tools
+
 ## Инструментарий для перевода игры Conquests of the Longbow
 
 **SCI_Lib** - библиотека для работы с форматом SCI. 
